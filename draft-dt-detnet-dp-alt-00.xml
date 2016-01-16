@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc2119 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY rfc5086 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5086.xml">
+<!ENTITY rfc5087 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5087.xml">
+<!ENTITY rfc3031 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3031.xml">
+<!ENTITY rfc3985 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3985.xml">
+<!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
+<!ENTITY rfc4446 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4446.xml">
+<!ENTITY rfc4447 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4447.xml">
+<!ENTITY rfc4448 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4448.xml">
+<!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
+<!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
+<!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
+
+<!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-03.xml">
+<!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-01.xml">
+
+]>
+
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc toc="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc iprnotified="no"?>
+<?rfc strict="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="yes"?>
+<rfc category="info"
+     docName="draft-dt-detnet-dp-alt-00"
+	 ipr="trust200902"
+	 submissionType="IETF">
+  <front>
+    <title abbrev="DetNet data plane alternatives">
+     DetNet data Plane protocol and solution alternatives</title>
+
+  <author fullname="Janos Farkas" initials="J." surname="Farkas">
+   <organization abbrev="Ericsson">Ericsson</organization>
+   <address>
+    <email>janos.farkas@ericsson.com</email>
+   </address>
+  </author>
+  
+  <author fullname="Norman Finn" initials="N." surname="Finn">
+   <organization abbrev="Cisco">Cisco</organization>
+   <address>
+    <email>nfinn@cisco.com</email>
+   </address>
+  </author>
+  
+  <author role="editor" fullname="Jouni Korhonen" initials="J." surname="Korhonen">
+   <organization abbrev="Broadcom">Broadcom</organization>
+   <address>
+    <postal>
+     <street>3151 Zanker Road</street>
+     <city>San Jose</city>
+     <code>95134</code>
+     <region>CA</region>
+     <country>USA</country>
+    </postal>
+    <email>jouni.nospam@gmail.com</email>
+   </address>
+  </author>
+
+  <author fullname="Olivier Marce" initials="O." surname="Marce">
+   <organization abbrev="Alcatel-Lucent">Alcatel-Lucent</organization>
+   <address>
+    <email>Olivier.Marce@alcatel-lucent.com</email>
+   </address>
+  </author>
+  
+  <author fullname="Gregory Mirsky" initials="G." surname="Mirsky">
+   <organization abbrev="Ericsson">Ericsson</organization>
+   <address>
+    <email>gregory.mirsky@ericsson.com</email>
+   </address>
+  </author>
+  
+  <author fullname="Pascal Thubert" initials="P." surname="Thubert">
+   <organization abbrev="Cisco">Cisco</organization>
+   <address>
+    <email>pthubert@cisco.com</email>
+   </address>
+  </author>
+  
+  <author fullname="Zhuangyan Zhuang" initials="Z." surname="Zhuan">
+   <organization abbrev="Huawei">Huawei</organization>
+   <address>
+    <email>zhuangyan.zhuang@huawei.com</email>
+   </address>
+  </author>
+  
+  <date />
+  <workgroup>DetNet</workgroup>
+
+  <abstract>
+  <t>This document identifies existing IP and MPLS, and layer-2 encapsulations
+   that run over IP and/or MPLS data plane technologies that could be considered
+   as the base line solution alternatives for deterministic networking data plane
+   definition.
+  </t>
+  </abstract>
+
+  
+  </front>
+
+ <middle>
+ <section anchor="intro" title="Introduction">
+  <t>Deterministic networking (DetNet) <xref target="I-D.finn-detnet-problem-statement"/>
+     provides a capability to carry unicast or multicast data streams for real-time applications
+     with extremely low data loss rates and known upper bound maximum latency
+     <xref target="I-D.finn-detnet-architecture"/>. The deterministic networking Quality of
+     Service (QoS) is expressed as 1) the minimum and maximum end-to-end latency from sender
+     (talker) to receiver (listener), 2) probability of loss of a packet, 3) probability of
+     loss of a packet in the event of the failure of a relay system or link. Only the
+     worst-case values for the mentioned parameters are concerned.
+  </t>
+  <t>There are three techniques to achieve the QoS required by deterministic networks:
+   <list style="symbols">
+    <t>zero congestion loss,</t>
+    <t>pinned-down paths,</t>
+    <t>packet replications and deletion.</t>
+   </list>
+   This document identifies existing IP and MPLS, and layer-2 encapsulations
+   that run over IP and/or MPLS data plane technologies that could be considered
+   as the base line solution alternatives for deterministic networking data plane
+   definition. The full scope of the deterministic networking data plane solution
+   is considered including, as appropriate, quality of service (QoS), operations 
+   and management (OAM), and time synchronization.
+  </t>
+ </section>
+
+ <!--section title="Terminology">
+  <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in <xref
+   target="RFC2119"></xref>.</t>
+ </section-->
+
+
+<section title="Requirement for data plane solution alternatives">
+
+  <section title="Zero congestion loss">
+    <t>TBD.
+    </t>
+  </section>
+  <section title="Pinned-down paths">
+    <t>TBD.
+    </t>
+  </section>
+
+  <section title="Packet replication and deletion">
+    <t>TBD.
+    </t>
+
+
+
+ <figure title="Seamless redundancy and networking example" anchor="CBex">
+ <artwork><![CDATA[
+                          +-----+       +-----+
+                          |Relay|       |Relay|
+                          | sys |_______| sys |______
+                         /| tem |       | tem |      \
++-----+   +-----+       / |     |\      |     |       \
+| End |   |Relay|      /  |  C  | \     |  E  |        \+-----+   +-----+
+| sys |   | sys |_____/   +-----+  \  15+-----+         |Relay|   | End |
+| tem |___| tem |        _ _ _ _ _ _\ _ _ _ _ _ _ _ _   | sys |   | sys |
+|     |   |     |_____  /         \  \             15\  | tem |___| tem |
+|  A  |   |  B  |     \   +-----+  \  \ +-----+       \ |     |   |     |
++-----+   +-----+      \  |Relay| 26\  \|Relay|        /|  G  |   |  H  |
+                  31 /  \ | sys |    V  | sys |       / +-----+   +-----+
+     _ _ _ _ _ _ _ _/    \| tem |_______| tem |______/   \_ _ _ _ 
+                    \     |     |       |     |          / 
+                     \    |  D  |       |  F  |         /
+                   26 \   +-----+       +-----+        / 26
+                       \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ /
+                                      26               
+ ]]></artwork>
+ </figure>
+
+  </section>
+
+  <section title="Operations and management">
+    <t>TBD.
+    </t>
+  </section>
+
+  <section title="Time synchronization">
+    <t>TBD.
+    </t>
+  </section>
+
+</section>
+
+
+<section title="Data plane solution alternatives">
+  <section title="Native IPv4 transport">
+  </section>
+
+  <section title="Native IPv6 transport">
+  </section>
+
+  <section title="Layer-2 tunneling over IP">
+    <section title="GRE">
+    </section>
+    
+    <section title="L2TP">
+    </section>
+
+  </section>
+  
+  <section title="IP/MPLS">
+  </section>
+  
+  <section title="PseudoWires">
+  </section>
+
+  <section title="Bit Indexed Explicit Replication">
+  </section>
+
+
+</section>
+
+<section title="Security considerations">
+  <t>TBD. Analysis per solution alternative.
+  </t>
+</section>
+
+
+<section anchor="iana" title="IANA Considerations">
+  <t>This document has no IANA considerations.
+  </t>
+</section>
+
+<section anchor="acks" title="Acknowledgements">
+  <t>The author(s) ACK and NACK.
+  </t>
+</section>
+</middle>
+
+<back>
+  <references title="Normative References">
+   &rfc2119;
+   &rfc3985;
+   &rfc4448;
+   &rfc6073;
+   &rfc6658;
+  </references>
+  <references title="Informative References">
+   &I-D.finn-detnet-problem-statement;
+   &I-D.finn-detnet-architecture;
+   &rfc3031;
+   &rfc4446;
+   &rfc4447;
+   &rfc7167;
+   &rfc6718;
+
+      <reference anchor="TSNTG"
+       target="http://www.IEEE802.org/1/pages/avbridges.html">
+        <front>
+          <title>IEEE 802.1 Time-Sensitive Networks Task Group</title>
+          <author>
+            <organization>IEEE Standards Association</organization>
+          </author>
+          <date year="2013" />
+        </front>
+      </reference>
+   <reference anchor="IEEE8021CB"
+     target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-0.pdf">
+    <front>
+     <title>Draft Standard for Local and metropolitan area networks - Seamless Redundancy</title>
+     <author initials="N. F." surname="Finn" fullname="Norman Finn">
+      <organization>IEEE 802.1</organization>
+     </author>
+     <date month="March" year="2015"/>
+    </front>
+    <seriesInfo name="IEEE P802.1CB /D2.0" value="P802.1CB"/>
+    <format type="PDF" target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-0.pdf"/>
+   </reference>
+
+  </references>
+ </back>
+</rfc>
+
