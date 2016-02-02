@@ -16,6 +16,9 @@
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-03.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-01.xml">
 
+<!ENTITY I-D.draft-ietf-isis-pcr PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-isis-pcr-04.xml">
+
+
 ]>
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -121,12 +124,13 @@
     <t>explicit routes,</t>
     <t>packet replications and deletion.</t>
    </list>
-   This document identifies existing IP and MPLS, and layer-2 encapsulations
+   This document identifies existing IP and Multiprotocol Label Switching Architecture
+   (MPLS) <xref target="RFC3031"/>, and layer-2 encapsulations
    that run over IP and/or MPLS data plane technologies that could be considered
    as the base line solution alternatives for deterministic networking data plane
    definition. The full scope of the deterministic networking data plane solution
    is considered including, as appropriate, quality of service (QoS), operations 
-   and management (OAM), and time synchronization.
+   and management (O&amp;M), and time synchronization.
   </t>
  </section>
 
@@ -160,7 +164,7 @@
      This criteria concerns what is the encapsulation method the solution
      alternative support: tunneling like encasulation, protocol translation or
      native layer-3 transport. In addition to the encapsulation mechanism this
-     criteria is also concerned about the processing and specifically the 
+     criteria is also concerned of the processing and specifically the 
      encapsulate header overhead.
     </t>
   </section>
@@ -177,13 +181,13 @@
 
   <section title="Packet sequencing">
     <t>
-     The solution alternative has to provide means to sequence packets in a
-     deterministic flow and transfer that sequencing information
-     along the sent packets. In addition to reordering packets one of the
+     The solution alternative has to provide means for end systems to number packets
+     sequentially and transport that sequencing information
+     along with the sent packets. In addition to possible reordering packets one of the
      important uses for sequencing is detecting duplicates. In a case of intentional
      packet duplication a combination of stream identification and packet
      sequencing allows for detecting and discarding duplicates at the 
-     receiver (see <xref target="repdup"/> for details). 
+     receiver (see <xref target="repdup"/> for more details). 
     </t>
   </section>
   
@@ -191,16 +195,18 @@
   <section title="Explicit routes">
     <t>
      The solution alternative has to provide a mechanism(s) for establishing
-     explicit routes that all packets belonging to a deterministic flow will follow.
-     The explicit route can be seen as a form of source routing or a pre-allocated
-     path e.g., using some network management procedure. It should be noted
-     that the explicit route does not need to be detailed to a level where 
-     every possible intermediate node along the path is specifically part of the
-     explicit route.
+     explicit routes that all packets belonging to a deterministic flow / stream
+     will follow. The explicit route can be seen as a form of source routing or a
+     pre-reserved path e.g., using some network management procedure. It should be
+     noted that the explicit route does not need to be detailed to a level where 
+     every possible intermediate node along the path is part of the named
+     explicit route. The IEEE 802.1Qca [ref here] specification defines how to 
+     do explicit path control under IEEE 802 family of protocols and its IETF 
+     counter part defined in <xref traget="I-D.ietf-isis-pcr"/>.
     </t>
   </section>
 
-  <section title="Packet replication and deletion" andcor="repdup">
+  <section title="Packet replication and deletion" anchor="repdup">
     <t>
        End systems and/or relay systems can number packets sequentially,
        replicate them, and later eliminate all but one of the replicants, at
@@ -217,10 +223,11 @@
   </section>
 
   <section title="Operations and management">
-    <t>There should be appropriate O&amp;M tools
-      available for the solution alternative. Basically stating that if
-      the solution has no existing standardized management hooks available,
-      it is not really a viable solution.
+    <t>The solution alternative should demonstrate an availability of appropriate
+     standardized O&amp;M tools or control/management plane that can be extended for
+     deterministic networking purposes with a reasonable effort, when required. The
+     O&amp;M tools do not necessarily need to be specific to the data plane
+     protocol as it could be the case, for example, with MPLS-based data planes.
     </t>
   </section>
 
@@ -315,6 +322,7 @@
   <references title="Informative References">
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
+   &I-D.draft-ietf-isis-pcr;
    &rfc3031;
    &rfc4446;
    &rfc4447;
