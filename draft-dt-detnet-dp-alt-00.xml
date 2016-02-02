@@ -12,6 +12,7 @@
 <!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
 <!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
 <!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
+<!ENTITY rfc3550 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3550.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-03.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-01.xml">
@@ -144,25 +145,25 @@
 
 <section title="Criteria for data plane solution alternatives">
   <t>
-   Each deterministic networking data plane solution alternative is 
-   described and evaluated using the criteria
-   describe in this section. The used criteria is selected so that it
-   highlights the existence or lack of features that are expected and
-   seen important to solution alternative for the data plane solution. 
+   Each deterministic networking data plane solution alternative is described
+   and evaluated using the criteria describe in this section. The used criteria
+   enumerated in this section is selected so that it highlights the existence
+   or lack of features that are expected or seen important to a solution
+   alternative for the data plane solution. 
   </t>
  
 
   <section title="Encapsulation and overhead">
     <t>
-     In several cases a deterministic flow has to be encapsulated inside
+     In several cases a deterministic flow/strem has to be encapsulated inside
      other protocols, for example, when transporting a layer-2 Ethernet
-     frame over an IP transport network. In some cases former tunneling like
+     frame over an IP transport network. In some cases a former tunneling like
      encapsulation can be avoided by underlying transport protocol translation,
      for example, translating layer-2 Ethernet frame including addressing and
      stream identification into native IP traffic. Last it is possible that
-     talkers and listeners handle determenistic flows natively in a layer-3.
+     talkers and listeners handle deterministic flows natively in a layer-3.
      This criteria concerns what is the encapsulation method the solution
-     alternative support: tunneling like encasulation, protocol translation or
+     alternative support: tunneling like encapsulation, protocol translation or
      native layer-3 transport. In addition to the encapsulation mechanism this
      criteria is also concerned of the processing and specifically the 
      encapsulate header overhead.
@@ -172,22 +173,25 @@
   <section title="Stream identification">
     <t>
      The solution alternative has to provide means to identify specific
-     deterministic flows / streams. The stream identification can, for
-     example, be explicit field in the data plane encapsulation header or
-     implicitly encoded into the addressing scheme of the used data plane
-     protocol. 
+     deterministic flows / streams. The stream identification can, for example,
+     be explicit field in the data plane encapsulation header or implicitly
+     encoded into the addressing scheme of the used data plane protocol. This
+     criteria concerns the availability and details of deterministic flow /
+     stream  identification the data plane protocol alternative has.
     </t>
   </section>
 
   <section title="Packet sequencing">
     <t>
-     The solution alternative has to provide means for end systems to number packets
-     sequentially and transport that sequencing information
-     along with the sent packets. In addition to possible reordering packets one of the
-     important uses for sequencing is detecting duplicates. In a case of intentional
-     packet duplication a combination of stream identification and packet
-     sequencing allows for detecting and discarding duplicates at the 
-     receiver (see <xref target="repdup"/> for more details). 
+     The solution alternative has to provide means for end systems to number
+     packets sequentially and transport that sequencing information along with
+     the sent packets. In addition to possible reordering packets one of the
+     important uses for sequencing is detecting duplicates. In a case of
+     intentional packet duplication a combination of stream identification and
+     packet sequencing allows for detecting and discarding duplicates at the
+     receiver (see <xref target="repdup"/> for more details).  This criteria
+     concerns the availability and details of the packet sequencing
+     capabilities the data plane protocol alternative has.
     </t>
   </section>
   
@@ -195,67 +199,81 @@
   <section title="Explicit routes">
     <t>
      The solution alternative has to provide a mechanism(s) for establishing
-     explicit routes that all packets belonging to a deterministic flow / stream
-     will follow. The explicit route can be seen as a form of source routing or a
-     pre-reserved path e.g., using some network management procedure. It should be
-     noted that the explicit route does not need to be detailed to a level where 
-     every possible intermediate node along the path is part of the named
-     explicit route. The IEEE 802.1Qca [ref here] specification defines how to 
-     do explicit path control under IEEE 802 family of protocols and its IETF 
-     counter part defined in <xref traget="I-D.ietf-isis-pcr"/>.
+     explicit routes that all packets belonging to a deterministic flow /
+     stream will follow. The explicit route can be seen as a form of source
+     routing or a pre-reserved path e.g., using some network management
+     procedure. It should be noted that the explicit route does not need to be
+     detailed to a level where every possible intermediate node along the path
+     is part of the named explicit route. The IEEE 802.1Qca <xref
+     target="IEEE8021Qca"/> specification defines how to do explicit path
+     control under IEEE 802 family of protocols and its IETF counter part
+     defined in <xref target="I-D.ietf-isis-pcr"/>. This criteria concerns the
+     available mechanisms for explicit routes for the data plane protocol
+     alternative.
     </t>
   </section>
 
   <section title="Packet replication and deletion" anchor="repdup">
     <t>
-       End systems and/or relay systems can number packets sequentially,
-       replicate them, and later eliminate all but one of the replicants, at
-       multiple points in the network in order to ensure that one (or more)
-       equipment failure events still leave at least one path intact for a
-       deterministic networking stream.
-    </t>
-    <t>The IEEE 802.1CB <xref target="IEEE8021CB"/> specification defines
-       packet sequence numbering, packet replication, and duplicate packet 
-       identification and deletion for IEEE 802 family of protocols. The
-       deterministic networking data plane solution alternative at layer-3
-       has provide equivalent functionality.
+     End systems and/or relay systems can number packets sequentially,
+     replicate them, and later eliminate all but one of the replicas, at
+     multiple points in the network in order to ensure that one (or more)
+     equipment failure events still leave at least one path intact for a
+     deterministic networking stream.  The IEEE 802.1CB <xref
+     target="IEEE8021CB"/> specification defines packet sequence numbering,
+     packet replication, and duplicate packet identification and deletion for
+     IEEE 802 family of protocols. The deterministic networking data plane
+     solution alternative at layer-3 has provide equivalent functionality. This
+     criteria concerns the available mechanisms for packet replication and
+     duplicate deletion the data plane protocol alternative has.
     </t>
   </section>
 
   <section title="Operations and management">
-    <t>The solution alternative should demonstrate an availability of appropriate
-     standardized O&amp;M tools or control/management plane that can be extended for
-     deterministic networking purposes with a reasonable effort, when required. The
-     O&amp;M tools do not necessarily need to be specific to the data plane
-     protocol as it could be the case, for example, with MPLS-based data planes.
+    <t>
+     The solution alternative should demonstrate an availability of appropriate
+     standardized O&amp;M tools or control/management plane that can be
+     extended for deterministic networking purposes with a reasonable effort,
+     when required. The O&amp;M tools do not necessarily need to be specific to
+     the data plane protocol as it could be the case, for example, with
+     MPLS-based data planes.
     </t>
   </section>
 
   <section title="Time synchronization">
-    <t>Write here that it would be desirable if the 
-      solution alternative has a sense of time or at least the associated
-      O&amp;M protocols had time synchronization enhancements. One example could
-      RTP, which carries timestamps in the protocol, has well specified
-      algorithms for e.g., handling jitter, and the associated RCTP control
-      channel. Another example could be
-      residence time measurement support for MPLS network domain
-      using Generic Associated Channel extensions. Other examples include
-      IEEE 1588 extensions for MPLS.
+    <t>
+     The solution alternative may benefit from having a sense of time or at
+     least that the associated O&amp;M protocols had time synchronization
+     properties. One concrete example is Realtime Transport Protocol (RTP)
+     <xref target="RFC3550"/>, which carries timestamps in the protocol header
+     in addition to sequence numbers, has a  well specified algorithms, for
+     example, for jitter calculations, and also has an associated control
+     channel, the Realtime Transport Control Protocol (RTCP). Another example
+     could be residence time measurement support for MPLS network domain using
+     Generic Associated Channel (G-ACh) extensions. This criteria concerns the
+     available mechanisms for time synchronization in the context of the
+     data plane protocol alternative.
     </t>
   </section>
 
   <section title="Class and quality of service capabilities">
-    <t>Describe here whether the solution alternative
-      has means for distinquishing between service/quality classes and/or
-      signal service quality changes in the network. The information can
-      be in-band (e.g., bits in the encapsulation header) or out-of-band
-      (e.g., auxillary control protocol).
+    <t>
+     Some protocols or encapsulation headers that may be viable as a solution
+     alternative for the deterministic networking data plane may also have a
+     capability to distinguishing between different classes of service (CoS) and/or
+     the quality of service (QoS) for the payload flows / streams they transport.
+     Furthermore, this Criteria concerns the availability and mechanism for the CoS
+     and QoS signaling as a part of the data plane protocol alternative.
+
     </t>
   </section>
   <section title="Packet traceability">
-    <t>Describe whether the solution alternative provides
-      any means for finding out whether a packet is a replication and
-      which node performed replication and for what reason.
+    <t>
+     For the network management and specifically for tracing down
+     implementation or network configuration errors any means to find out
+     whether a packet is a replica, and which node performed replication can be
+     very useful. This criteria concerns the availability of solutions for
+     tracing packets in the context of data plane protocol alternative.
     </t>
     
   </section>
@@ -314,12 +332,12 @@
 <back>
   <references title="Normative References">
    &rfc2119;
+  </references>
+  <references title="Informative References">
    &rfc3985;
    &rfc4448;
    &rfc6073;
    &rfc6658;
-  </references>
-  <references title="Informative References">
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
    &I-D.draft-ietf-isis-pcr;
@@ -328,6 +346,7 @@
    &rfc4447;
    &rfc7167;
    &rfc6718;
+   &rfc3550;
 
       <reference anchor="TSNTG"
        target="http://www.IEEE802.org/1/pages/avbridges.html">
@@ -339,6 +358,7 @@
           <date year="2013" />
         </front>
       </reference>
+  
    <reference anchor="IEEE8021CB"
      target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-1.pdf">
     <front>
@@ -352,6 +372,21 @@
     <format type="PDF" target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-1.pdf"/>
    </reference>
 
+   <reference anchor="IEEE8021Qca"
+     target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf">
+    <front>
+     <title>Draft Standard for Local and metropolitan area networks - Bridges and Bridged Networks - 
+       Amendment: Path Control and Reservation</title>
+     <author initials="J." surname="Farkas" fullname="Janos Farkas">
+      <organization>IEEE 802.1</organization>
+     </author>
+     <date month="June" year="2015"/>
+    </front>
+    <seriesInfo name="IEEE P802.1Qca/D2.1" value="P802.1Qca"/>
+    <format type="PDF" target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf"/>
+   </reference>
+  
+  
   </references>
  </back>
 </rfc>

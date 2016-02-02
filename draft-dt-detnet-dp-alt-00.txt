@@ -5,18 +5,18 @@
 DetNet                                                         J. Farkas
 Internet-Draft                                                  Ericsson
 Intended status: Informational                                   N. Finn
-Expires: July 18, 2016                                             Cisco
+Expires: August 5, 2016                                            Cisco
                                                         J. Korhonen, Ed.
                                                                 Broadcom
                                                                 O. Marce
-                                                          Alcatel-Lucent
+                                                         Nokia Bell Labs
                                                                G. Mirsky
                                                                 Ericsson
                                                               P. Thubert
                                                                    Cisco
                                                                 Z. Zhuan
                                                                   Huawei
-                                                        January 15, 2016
+                                                        February 2, 2016
 
 
           DetNet data Plane protocol and solution alternatives
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on July 18, 2016.
+   This Internet-Draft will expire on August 5, 2016.
 
 
 
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Farkas, et al.            Expires July 18, 2016                 [Page 1]
+Farkas, et al.           Expires August 5, 2016                 [Page 1]
 
-Internet-Draft       DetNet data plane alternatives         January 2016
+Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 Copyright Notice
@@ -75,29 +75,44 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Requirement for data plane solution alternatives  . . . . . .   3
-     2.1.  Zero congestion loss  . . . . . . . . . . . . . . . . . .   3
-     2.2.  Pinned-down paths . . . . . . . . . . . . . . . . . . . .   3
-     2.3.  Packet replication and deletion . . . . . . . . . . . . .   3
-     2.4.  Operations and management . . . . . . . . . . . . . . . .   4
-     2.5.  Time synchronization  . . . . . . . . . . . . . . . . . .   4
-   3.  Data plane solution alternatives  . . . . . . . . . . . . . .   4
-     3.1.  Native IPv4 transport . . . . . . . . . . . . . . . . . .   4
-     3.2.  Native IPv6 transport . . . . . . . . . . . . . . . . . .   4
-     3.3.  Layer-2 tunneling over IP . . . . . . . . . . . . . . . .   4
-       3.3.1.  GRE . . . . . . . . . . . . . . . . . . . . . . . . .   4
-       3.3.2.  L2TP  . . . . . . . . . . . . . . . . . . . . . . . .   4
-     3.4.  IP/MPLS . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     3.5.  PseudoWires . . . . . . . . . . . . . . . . . . . . . . .   4
-     3.6.  Bit Indexed Explicit Replication  . . . . . . . . . . . .   5
-   4.  Security considerations . . . . . . . . . . . . . . . . . . .   5
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
-   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   5
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   5
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  Criteria for data plane solution alternatives . . . . . . . .   3
+     2.1.  Encapsulation and overhead  . . . . . . . . . . . . . . .   3
+     2.2.  Stream identification . . . . . . . . . . . . . . . . . .   4
+     2.3.  Packet sequencing . . . . . . . . . . . . . . . . . . . .   4
+     2.4.  Explicit routes . . . . . . . . . . . . . . . . . . . . .   4
+     2.5.  Packet replication and deletion . . . . . . . . . . . . .   4
+     2.6.  Operations and management . . . . . . . . . . . . . . . .   5
+     2.7.  Time synchronization  . . . . . . . . . . . . . . . . . .   5
+     2.8.  Class and quality of service capabilities . . . . . . . .   5
+     2.9.  Packet traceability . . . . . . . . . . . . . . . . . . .   5
+   3.  Data plane solution alternatives  . . . . . . . . . . . . . .   6
+     3.1.  Native IPv4 transport . . . . . . . . . . . . . . . . . .   6
+     3.2.  Native IPv6 transport . . . . . . . . . . . . . . . . . .   6
+     3.3.  Layer-2 tunneling over IP . . . . . . . . . . . . . . . .   6
+       3.3.1.  GRE . . . . . . . . . . . . . . . . . . . . . . . . .   6
+       3.3.2.  L2TP  . . . . . . . . . . . . . . . . . . . . . . . .   6
+     3.4.  IP/MPLS . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     3.5.  PseudoWires . . . . . . . . . . . . . . . . . . . . . . .   6
+     3.6.  Bit Indexed Explicit Replication  . . . . . . . . . . . .   6
+   4.  Security considerations . . . . . . . . . . . . . . . . . . .   6
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
+   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   6
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .   6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+
+
+
+
+
+
+
+Farkas, et al.           Expires August 5, 2016                 [Page 2]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
 
 1.  Introduction
 
@@ -106,14 +121,6 @@ Table of Contents
    real-time applications with extremely low data loss rates and known
    upper bound maximum latency [I-D.finn-detnet-architecture].  The
    deterministic networking Quality of Service (QoS) is expressed as 1)
-
-
-
-Farkas, et al.            Expires July 18, 2016                 [Page 2]
-
-Internet-Draft       DetNet data plane alternatives         January 2016
-
-
    the minimum and maximum end-to-end latency from sender (talker) to
    receiver (listener), 2) probability of loss of a packet, 3)
    probability of loss of a packet in the event of the failure of a
@@ -124,80 +131,159 @@ Internet-Draft       DetNet data plane alternatives         January 2016
    deterministic networks:
 
    o  zero congestion loss,
-   o  pinned-down paths,
+   o  explicit routes,
    o  packet replications and deletion.
 
-   This document identifies existing IP and MPLS, and layer-2
-   encapsulations that run over IP and/or MPLS data plane technologies
-   that could be considered as the base line solution alternatives for
-   deterministic networking data plane definition.  The full scope of
-   the deterministic networking data plane solution is considered
-   including, as appropriate, quality of service (QoS), operations and
-   management (OAM), and time synchronization.
+   This document identifies existing IP and Multiprotocol Label
+   Switching Architecture (MPLS) [RFC3031], and layer-2 encapsulations
+   that run over IP and/or MPLS data plane technologies that could be
+   considered as the base line solution alternatives for deterministic
+   networking data plane definition.  The full scope of the
+   deterministic networking data plane solution is considered including,
+   as appropriate, quality of service (QoS), operations and management
+   (O&M), and time synchronization.
 
-2.  Requirement for data plane solution alternatives
+2.  Criteria for data plane solution alternatives
 
-2.1.  Zero congestion loss
+   Each deterministic networking data plane solution alternative is
+   described and evaluated using the criteria describe in this section.
+   The used criteria enumerated in this section is selected so that it
+   highlights the existence or lack of features that are expected or
+   seen important to a solution alternative for the data plane solution.
 
-   TBD.
+2.1.  Encapsulation and overhead
 
-2.2.  Pinned-down paths
-
-   TBD.
-
-2.3.  Packet replication and deletion
-
-   TBD.
-
-
-
-
-
-
-
-
-
+   In several cases a deterministic flow/strem has to be encapsulated
+   inside other protocols, for example, when transporting a layer-2
+   Ethernet frame over an IP transport network.  In some cases a former
+   tunneling like encapsulation can be avoided by underlying transport
+   protocol translation, for example, translating layer-2 Ethernet frame
+   including addressing and stream identification into native IP
+   traffic.  Last it is possible that talkers and listeners handle
+   deterministic flows natively in a layer-3.  This criteria concerns
+   what is the encapsulation method the solution alternative support:
 
 
 
-
-
-
-
-
-Farkas, et al.            Expires July 18, 2016                 [Page 3]
+Farkas, et al.           Expires August 5, 2016                 [Page 3]
 
-Internet-Draft       DetNet data plane alternatives         January 2016
+Internet-Draft       DetNet data plane alternatives        February 2016
 
 
-                          +-----+       +-----+
-                          |Relay|       |Relay|
-                          | sys |_______| sys |______
-                         /| tem |       | tem |      \
-+-----+   +-----+       / |     |\      |     |       \
-| End |   |Relay|      /  |  C  | \     |  E  |        \+-----+   +-----+
-| sys |   | sys |_____/   +-----+  \  15+-----+         |Relay|   | End |
-| tem |___| tem |        _ _ _ _ _ _\ _ _ _ _ _ _ _ _   | sys |   | sys |
-|     |   |     |_____  /         \  \             15\  | tem |___| tem |
-|  A  |   |  B  |     \   +-----+  \  \ +-----+       \ |     |   |     |
-+-----+   +-----+      \  |Relay| 26\  \|Relay|        /|  G  |   |  H  |
-                  31 /  \ | sys |    V  | sys |       / +-----+   +-----+
-     _ _ _ _ _ _ _ _/    \| tem |_______| tem |______/   \_ _ _ _
-                    \     |     |       |     |          /
-                     \    |  D  |       |  F  |         /
-                   26 \   +-----+       +-----+        / 26
-                       \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ /
-                                      26
+   tunneling like encapsulation, protocol translation or native layer-3
+   transport.  In addition to the encapsulation mechanism this criteria
+   is also concerned of the processing and specifically the encapsulate
+   header overhead.
 
-           Figure 1: Seamless redundancy and networking example
+2.2.  Stream identification
 
-2.4.  Operations and management
+   The solution alternative has to provide means to identify specific
+   deterministic flows / streams.  The stream identification can, for
+   example, be explicit field in the data plane encapsulation header or
+   implicitly encoded into the addressing scheme of the used data plane
+   protocol.  This criteria concerns the availability and details of
+   deterministic flow / stream identification the data plane protocol
+   alternative has.
 
-   TBD.
+2.3.  Packet sequencing
 
-2.5.  Time synchronization
+   The solution alternative has to provide means for end systems to
+   number packets sequentially and transport that sequencing information
+   along with the sent packets.  In addition to possible reordering
+   packets one of the important uses for sequencing is detecting
+   duplicates.  In a case of intentional packet duplication a
+   combination of stream identification and packet sequencing allows for
+   detecting and discarding duplicates at the receiver (see Section 2.5
+   for more details).  This criteria concerns the availability and
+   details of the packet sequencing capabilities the data plane protocol
+   alternative has.
 
-   TBD.
+2.4.  Explicit routes
+
+   The solution alternative has to provide a mechanism(s) for
+   establishing explicit routes that all packets belonging to a
+   deterministic flow / stream will follow.  The explicit route can be
+   seen as a form of source routing or a pre-reserved path e.g., using
+   some network management procedure.  It should be noted that the
+   explicit route does not need to be detailed to a level where every
+   possible intermediate node along the path is part of the named
+   explicit route.  The IEEE 802.1Qca [IEEE8021Qca] specification
+   defines how to do explicit path control under IEEE 802 family of
+   protocols and its IETF counter part defined in [I-D.ietf-isis-pcr].
+   This criteria concerns the available mechanisms for explicit routes
+   for the data plane protocol alternative.
+
+2.5.  Packet replication and deletion
+
+   End systems and/or relay systems can number packets sequentially,
+   replicate them, and later eliminate all but one of the replicas, at
+   multiple points in the network in order to ensure that one (or more)
+
+
+
+Farkas, et al.           Expires August 5, 2016                 [Page 4]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+   equipment failure events still leave at least one path intact for a
+   deterministic networking stream.  The IEEE 802.1CB [IEEE8021CB]
+   specification defines packet sequence numbering, packet replication,
+   and duplicate packet identification and deletion for IEEE 802 family
+   of protocols.  The deterministic networking data plane solution
+   alternative at layer-3 has provide equivalent functionality.  This
+   criteria concerns the available mechanisms for packet replication and
+   duplicate deletion the data plane protocol alternative has.
+
+2.6.  Operations and management
+
+   The solution alternative should demonstrate an availability of
+   appropriate standardized O&M tools or control/management plane that
+   can be extended for deterministic networking purposes with a
+   reasonable effort, when required.  The O&M tools do not necessarily
+   need to be specific to the data plane protocol as it could be the
+   case, for example, with MPLS-based data planes.
+
+2.7.  Time synchronization
+
+   The solution alternative may benefit from having a sense of time or
+   at least that the associated O&M protocols had time synchronization
+   properties.  One concrete example is Realtime Transport Protocol
+   (RTP) [RFC3550], which carries timestamps in the protocol header in
+   addition to sequence numbers, has a well specified algorithms, for
+   example, for jitter calculations, and also has an associated control
+   channel, the Realtime Transport Control Protocol (RTCP).  Another
+   example could be residence time measurement support for MPLS network
+   domain using Generic Associated Channel (G-ACh) extensions.  This
+   criteria concerns the available mechanisms for time synchronization
+   in the context of the data plane protocol alternative.
+
+2.8.  Class and quality of service capabilities
+
+   Some protocols or encapsulation headers that may be viable as a
+   solution alternative for the deterministic networking data plane may
+   also have a capability to distinguishing between different classes of
+   service (CoS) and/or the quality of service (QoS) for the payload
+   flows / streams they transport.  Furthermore, this Criteria concerns
+   the availability and mechanism for the CoS and QoS signaling as a
+   part of the data plane protocol alternative.
+
+2.9.  Packet traceability
+
+   For the network management and specifically for tracing down
+   implementation or network configuration errors any means to find out
+   whether a packet is a replica, and which node performed replication
+   can be very useful.  This criteria concerns the availability of
+
+
+
+Farkas, et al.           Expires August 5, 2016                 [Page 5]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+   solutions for tracing packets in the context of data plane protocol
+   alternative.
 
 3.  Data plane solution alternatives
 
@@ -214,17 +300,6 @@ Internet-Draft       DetNet data plane alternatives         January 2016
 3.4.  IP/MPLS
 
 3.5.  PseudoWires
-
-
-
-
-
-
-
-Farkas, et al.            Expires July 18, 2016                 [Page 4]
-
-Internet-Draft       DetNet data plane alternatives         January 2016
-
 
 3.6.  Bit Indexed Explicit Replication
 
@@ -249,10 +324,81 @@ Internet-Draft       DetNet data plane alternatives         January 2016
               DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
+7.2.  Informative References
+
+   [I-D.finn-detnet-architecture]
+              Finn, N., Thubert, P., and M. Teener, "Deterministic
+              Networking Architecture", draft-finn-detnet-
+              architecture-01 (work in progress), March 2015.
+
+
+
+Farkas, et al.           Expires August 5, 2016                 [Page 6]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+   [I-D.finn-detnet-problem-statement]
+              Finn, N. and P. Thubert, "Deterministic Networking Problem
+              Statement", draft-finn-detnet-problem-statement-03 (work
+              in progress), June 2015.
+
+   [I-D.ietf-isis-pcr]
+              Farkas, J., Bragg, N., Unbehagen, P., Parsons, G.,
+              Ashwood-Smith, P., and C. Bowers, "IS-IS Path Computation
+              and Reservation", draft-ietf-isis-pcr-04 (work in
+              progress), December 2015.
+
+   [IEEE8021CB]
+              Finn, N., "Draft Standard for Local and metropolitan area
+              networks - Seamless Redundancy", IEEE P802.1CB
+              /D2.1 P802.1CB, December 2015,
+              <http://www.ieee802.org/1/files/private/cb-drafts/
+              d2/802-1CB-d2-1.pdf>.
+
+   [IEEE8021Qca]
+              Farkas, J., "Draft Standard for Local and metropolitan
+              area networks - Bridges and Bridged Networks - Amendment:
+              Path Control and Reservation", IEEE P802.1Qca/
+              D2.1 P802.1Qca, June 2015,
+              <http://www.ieee802.org/1/files/private/ca-drafts/
+              d2/802-1Qca-d2-1.pdf>.
+
+   [RFC3031]  Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
+              Label Switching Architecture", RFC 3031,
+              DOI 10.17487/RFC3031, January 2001,
+              <http://www.rfc-editor.org/info/rfc3031>.
+
+   [RFC3550]  Schulzrinne, H., Casner, S., Frederick, R., and V.
+              Jacobson, "RTP: A Transport Protocol for Real-Time
+              Applications", STD 64, RFC 3550, DOI 10.17487/RFC3550,
+              July 2003, <http://www.rfc-editor.org/info/rfc3550>.
+
    [RFC3985]  Bryant, S., Ed. and P. Pate, Ed., "Pseudo Wire Emulation
               Edge-to-Edge (PWE3) Architecture", RFC 3985,
               DOI 10.17487/RFC3985, March 2005,
               <http://www.rfc-editor.org/info/rfc3985>.
+
+   [RFC4446]  Martini, L., "IANA Allocations for Pseudowire Edge to Edge
+              Emulation (PWE3)", BCP 116, RFC 4446,
+              DOI 10.17487/RFC4446, April 2006,
+              <http://www.rfc-editor.org/info/rfc4446>.
+
+
+
+
+
+
+Farkas, et al.           Expires August 5, 2016                 [Page 7]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+   [RFC4447]  Martini, L., Ed., Rosen, E., El-Aawar, N., Smith, T., and
+              G. Heron, "Pseudowire Setup and Maintenance Using the
+              Label Distribution Protocol (LDP)", RFC 4447,
+              DOI 10.17487/RFC4447, April 2006,
+              <http://www.rfc-editor.org/info/rfc4447>.
 
    [RFC4448]  Martini, L., Ed., Rosen, E., El-Aawar, N., and G. Heron,
               "Encapsulation Methods for Transport of Ethernet over MPLS
@@ -269,52 +415,6 @@ Internet-Draft       DetNet data plane alternatives         January 2016
               RFC 6658, DOI 10.17487/RFC6658, July 2012,
               <http://www.rfc-editor.org/info/rfc6658>.
 
-7.2.  Informative References
-
-
-
-
-
-
-
-Farkas, et al.            Expires July 18, 2016                 [Page 5]
-
-Internet-Draft       DetNet data plane alternatives         January 2016
-
-
-   [I-D.finn-detnet-architecture]
-              Finn, N., Thubert, P., and M. Teener, "Deterministic
-              Networking Architecture", draft-finn-detnet-
-              architecture-01 (work in progress), March 2015.
-
-   [I-D.finn-detnet-problem-statement]
-              Finn, N. and P. Thubert, "Deterministic Networking Problem
-              Statement", draft-finn-detnet-problem-statement-03 (work
-              in progress), June 2015.
-
-   [IEEE8021CB]
-              Finn, N., "Draft Standard for Local and metropolitan area
-              networks - Seamless Redundancy", IEEE P802.1CB
-              /D2.0 P802.1CB, March 2015,
-              <http://www.ieee802.org/1/files/private/cb-drafts/
-              d2/802-1CB-d2-0.pdf>.
-
-   [RFC3031]  Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
-              Label Switching Architecture", RFC 3031,
-              DOI 10.17487/RFC3031, January 2001,
-              <http://www.rfc-editor.org/info/rfc3031>.
-
-   [RFC4446]  Martini, L., "IANA Allocations for Pseudowire Edge to Edge
-              Emulation (PWE3)", BCP 116, RFC 4446,
-              DOI 10.17487/RFC4446, April 2006,
-              <http://www.rfc-editor.org/info/rfc4446>.
-
-   [RFC4447]  Martini, L., Ed., Rosen, E., El-Aawar, N., Smith, T., and
-              G. Heron, "Pseudowire Setup and Maintenance Using the
-              Label Distribution Protocol (LDP)", RFC 4447,
-              DOI 10.17487/RFC4447, April 2006,
-              <http://www.rfc-editor.org/info/rfc4447>.
-
    [RFC6718]  Muley, P., Aissaoui, M., and M. Bocci, "Pseudowire
               Redundancy", RFC 6718, DOI 10.17487/RFC6718, August 2012,
               <http://www.rfc-editor.org/info/rfc6718>.
@@ -327,16 +427,6 @@ Internet-Draft       DetNet data plane alternatives         January 2016
    [TSNTG]    IEEE Standards Association, "IEEE 802.1 Time-Sensitive
               Networks Task Group", 2013,
               <http://www.IEEE802.org/1/pages/avbridges.html>.
-
-
-
-
-
-
-Farkas, et al.            Expires July 18, 2016                 [Page 6]
-
-Internet-Draft       DetNet data plane alternatives         January 2016
-
 
 Authors' Addresses
 
@@ -352,6 +442,14 @@ Authors' Addresses
    Email: nfinn@cisco.com
 
 
+
+
+
+Farkas, et al.           Expires August 5, 2016                 [Page 8]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    Jouni Korhonen (editor)
    Broadcom
    3151 Zanker Road
@@ -362,9 +460,9 @@ Authors' Addresses
 
 
    Olivier Marce
-   Alcatel-Lucent
+   Nokia Bell Labs
 
-   Email: Olivier.Marce@alcatel-lucent.com
+   Email: Olivier.Marce@nokia.com
 
 
    Gregory Mirsky
@@ -389,4 +487,18 @@ Authors' Addresses
 
 
 
-Farkas, et al.            Expires July 18, 2016                 [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Farkas, et al.           Expires August 5, 2016                 [Page 9]
