@@ -16,9 +16,8 @@
 <!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
 <!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
 
-<!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-03.xml">
-<!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-01.xml">
-
+<!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
+<!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
 <!ENTITY I-D.ietf-isis-pcr SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-isis-pcr.xml">
 <!ENTITY I-D.ietf-6man-segment-routing-header SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-segment-routing-header.xml">
 <!ENTITY I-D.ietf-spring-segment-routing SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-spring-segment-routing.xml">
@@ -119,14 +118,17 @@
 
  <middle>
  <section title="Introduction">
-  <t>Deterministic networking (DetNet) <xref target="I-D.finn-detnet-problem-statement"/>
-     provides a capability to carry unicast or multicast data streams for real-time applications
-     with extremely low data loss rates and known upper bound maximum latency
-     <xref target="I-D.finn-detnet-architecture"/>. The deterministic networking Quality of
-     Service (QoS) is expressed as 1) the minimum and maximum end-to-end latency from sender
-     (talker) to receiver (listener), 2) probability of loss of a packet, 3) probability of
-     loss of a packet in the event of the failure of a relay system or link. Only the
-     worst-case values for the mentioned parameters are concerned.
+  <t>
+    Deterministic networking (DetNet) <xref
+    target="I-D.finn-detnet-problem-statement"/> provides a capability to carry
+    unicast or multicast data streams for real-time applications with extremely
+    low data loss rates and known upper bound maximum latency <xref
+    target="I-D.finn-detnet-architecture"/>. The deterministic networking
+    Quality of Service (QoS) is expressed as 1) the minimum and maximum
+    end-to-end latency from sender (talker) to receiver (listener), 2)
+    probability of loss of a packet as a result of congestion, 3) probability
+    of loss of a packet in the event of the failure of a relay system or link.
+    Only the worst-case values for the mentioned parameters are concerned.
   </t>
   <t>There are three techniques to achieve the QoS required by deterministic networks:
    <list style="symbols">
@@ -228,13 +230,19 @@
      replicate them, and later eliminate all but one of the replicas, at
      multiple points in the network in order to ensure that one (or more)
      equipment failure events still leave at least one path intact for a
-     deterministic networking stream.  The IEEE 802.1CB <xref
-     target="IEEE8021CB"/> specification defines packet sequence numbering,
-     packet replication, and duplicate packet identification and deletion for
-     IEEE 802 family of protocols. The deterministic networking data plane
-     solution alternative at layer-3 has provide equivalent functionality. This
-     criteria concerns the available mechanisms for packet replication and
-     duplicate deletion the data plane protocol alternative has.
+     deterministic networking stream. The goal is to enable seamless
+     "protection switching" in a way that no packet gets lost or there is
+     no ramp up time when either one of the paths fails for one reason or
+     another.
+    </t>
+    <t>
+     The IEEE 802.1CB <xref target="IEEE8021CB"/> is an example of
+     Ethernet-based solution that defines packet sequence numbering, packet
+     replication, and duplicate packet identification and deletion. The
+     deterministic networking data plane solution alternative at layer-3 has to
+     provide equivalent functionality. This criteria concerns the available
+     mechanisms for packet replication and duplicate deletion the data plane
+     protocol alternative has.
     </t>
   </section>
 
@@ -273,7 +281,10 @@
      the quality of service (QoS) for the payload flows / streams they transport.
      Furthermore, this Criteria concerns the availability and mechanism for the CoS
      and QoS signaling as a part of the data plane protocol alternative.
-
+    </t>
+    <t>[Editor's note] add more text here to make the difference between CoS and QoS
+     clear. CoS would be layer-2 mechanism and QoS layer-3 mechanism. Sometimes the
+     difference is not that clear, though.
     </t>
   </section>
   <section title="Packet traceability" anchor="sec_crit_trace">
@@ -284,7 +295,18 @@
      very useful. This criteria concerns the availability of solutions for
      tracing packets in the context of data plane protocol alternative.
     </t>
-    
+  </section>
+  <section title="Technical maturity" anchor="sec_crit_matu">
+    <t>
+     The technical maturity of the data plane solution alternative is crucial,
+     since it  basically defines the effort, time line and risks involved for
+     the use of the solution in deployments. For example, the maturity level
+     can be categorised as available immediately, available with small
+     extensions, available with repurposing/redefining portions of the protocol
+     or its header fields.  Yet another imporatant measure for maturity is the
+     deployment experience. This criteria concerns the maturity of the data
+     plane protocol alternative as the solution alternative.
+    </t>
   </section>
 </section>
 
@@ -296,6 +318,9 @@
   </section>
 
   <section title="Native IPv6 transport">
+    <t>
+     *Janos to write the initial text*
+    </t>
     <t>This section investigates the application of native IPv6 <xref target="RFC2460"/> 
      as the data plane for DetNet along the criteria collected in <xref target="sec_crit"/>.
     </t>
@@ -346,9 +371,15 @@
   </section>
   
   <section title="PseudoWires">
+   <t>
+    *Jouni to write the initial text*
+   </t>
   </section>
 
   <section title="Bit Indexed Explicit Replication">
+   <t>
+    *Greg to write the initial text*
+   </t>
   </section>
 
 
