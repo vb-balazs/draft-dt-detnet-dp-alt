@@ -164,7 +164,7 @@
   </t>
  
 
-  <section title="Encapsulation and overhead" anchor="sec_crit_encap">
+  <section title="#1 Encapsulation and overhead" anchor="sec_crit_encap">
     <t>
      In several cases a deterministic flow/strem has to be encapsulated inside
      other protocols, for example, when transporting a layer-2 Ethernet
@@ -181,7 +181,7 @@
     </t>
   </section>
 
-  <section title="Stream identification" anchor="sec_crit_streamid">
+  <section title="#2 Stream identification" anchor="sec_crit_streamid">
     <t>
      The solution alternative has to provide means to identify specific
      deterministic flows / streams. The stream identification can, for example,
@@ -192,7 +192,7 @@
     </t>
   </section>
 
-  <section title="Packet sequencing" anchor="sec_crit_seq">
+  <section title="#3 Packet sequencing" anchor="sec_crit_seq">
     <t>
      The solution alternative has to provide means for end systems to number
      packets sequentially and transport that sequencing information along with
@@ -207,7 +207,7 @@
   </section>
   
   
-  <section title="Explicit routes" anchor="sec_crit_explicit">
+  <section title="#4 Explicit routes" anchor="sec_crit_explicit">
     <t>
      The solution alternative has to provide a mechanism(s) for establishing
      explicit routes that all packets belonging to a deterministic flow /
@@ -224,7 +224,7 @@
     </t>
   </section>
 
-  <section title="Packet replication and deletion" anchor="sec_crit_repdup">
+  <section title="#5 Packet replication and deletion" anchor="sec_crit_repdup">
     <t>
      End systems and/or relay systems can number packets sequentially,
      replicate them, and later eliminate all but one of the replicas, at
@@ -246,7 +246,7 @@
     </t>
   </section>
 
-  <section title="Operations and management" anchor="sec_crit_oam" >
+  <section title="#6 Operations and management" anchor="sec_crit_oam" >
     <t>
      The solution alternative should demonstrate an availability of appropriate
      standardized O&amp;M tools or control/management plane that can be
@@ -257,7 +257,7 @@
     </t>
   </section>
 
-  <section title="Time synchronization" anchor="sec_crit_sync">
+  <section title="#7 Time synchronization" anchor="sec_crit_sync">
     <t>
      The solution alternative may benefit from having a sense of time or at
      least that the associated O&amp;M protocols had time synchronization
@@ -273,7 +273,7 @@
     </t>
   </section>
 
-  <section title="Class and quality of service capabilities" anchor="sec_crit_qos">
+  <section title="#8 Class and quality of service capabilities" anchor="sec_crit_qos">
     <t>
      Some protocols or encapsulation headers that may be viable as a solution
      alternative for the deterministic networking data plane may also have a
@@ -287,7 +287,7 @@
      difference is not that clear, though.
     </t>
   </section>
-  <section title="Packet traceability" anchor="sec_crit_trace">
+  <section title="#9 Packet traceability" anchor="sec_crit_trace">
     <t>
      For the network management and specifically for tracing down
      implementation or network configuration errors any means to find out
@@ -296,7 +296,7 @@
      tracing packets in the context of data plane protocol alternative.
     </t>
   </section>
-  <section title="Technical maturity" anchor="sec_crit_matu">
+  <section title="#10 Technical maturity" anchor="sec_crit_matu">
     <t>
      The technical maturity of the data plane solution alternative is crucial,
      since it  basically defines the effort, time line and risks involved for
@@ -312,78 +312,213 @@
 
 
 <section title="Data plane solution alternatives">
-  <section title="Native IPv4 transport">
-    <t>
-    </t>
+ <t>
+  The following sections describe and rate deterministic data plane solution
+  alternatives. In "Analysis and Discussion" section each alternative is
+  evaluated against the criteria given in <xref target="sec_crit"/> and rated
+  using the following: (M)eets the criterisa, (W)ork needed, and (N)ot suitable
+  or too much work envisioned.
+ </t>
+
+ <section title="Native IPv4 transport" anchor="sec_alt_ipv4">
+  <section title="Solution description">
   </section>
 
-  <section title="Native IPv6 transport">
-    <t>
-     *Janos to write the initial text*
-    </t>
-    <t>This section investigates the application of native IPv6 <xref target="RFC2460"/> 
-     as the data plane for DetNet along the criteria collected in <xref target="sec_crit"/>.
-    </t>
+  <section title="Analysis and Discussion">
+  </section>
+
+  <section title="Summary">
+  </section>
+ </section>
+
+ <section title="Native IPv6 transport" anchor="sec_alt_ipv6">
+  <t>
+   *Janos to write the initial text*
+  </t>
+  
+  <section title="Solution description">
+   <t>
+    This section investigates the application of native IPv6 <xref
+    target="RFC2460"/> as the data plane for DetNet along the criteria
+    collected in <xref target="sec_crit"/>.
+   </t>
 	
-	<t>Deterministic flows are assumed to be handled natively at layer-3 by
-     IPv6 at the first place. The fixed header of an IPv6 packet is 40 bytes <xref target="RFC2460"/>.
-     The overhead is bigger if any extension header is used. However, the exact
-     overhead (<xref target="sec_crit_encap"/>) depends on what solution is
-     actually used to provide DetNet features, e.g., explicit routing or seamless
-     redundancy if any of these is applied.
-	</t>
+   <t>
+    Deterministic flows are assumed to be handled natively at layer-3 by IPv6
+    at the first place. The fixed header of an IPv6 packet is 40 bytes <xref
+    target="RFC2460"/>.  The overhead is bigger if any extension header is
+    used. However, the exact overhead (<xref target="sec_crit_encap"/>)
+    depends on what solution is actually used to provide DetNet features,
+    e.g., explicit routing or seamless redundancy if any of these is applied.
+   </t>
     
-	<t>The 20-bit flow label field of the fixed IPv6 header is suitable to
-     identify deterministic flows / streams (<xref target="sec_crit_streamid"/>).
-     Guidance on the use of the flow label is provided by <xref target="RFC6437"/>.
- 	</t>
+   <t>
+    The 20-bit flow label field of the fixed IPv6 header is suitable to
+    identify deterministic flows / streams (<xref
+    target="sec_crit_streamid"/>).  Guidance on the use of the flow label is
+    provided by <xref target="RFC6437"/>.
+   </t>
     
-    <t>Packet replication and elimination of duplicates (<xref target="sec_crit_repdup"/>) 
-     is the core of seamless redundancy. The implementation of this
-     functionality largely depends on the packet sequencing (<xref target="sec_crit_seq"/>)
-     approach used. Correspondingly, the traceability (<xref target="sec_crit_trace"/>)
-     of replicated packets also depends on the sequencing mechanism. Currently, 
-     there is no support for packet sequencing in native IPv6. That is, there is
-     no header field whose application would be straightforward as a field for
-     packet sequencing.
-    </t>
+   <t>
+    Packet replication and elimination of duplicates (<xref
+    target="sec_crit_repdup"/>) is the core of seamless redundancy. The
+    implementation of this functionality largely depends on the packet
+    sequencing (<xref target="sec_crit_seq"/>) approach used. Correspondingly,
+    the traceability (<xref target="sec_crit_trace"/>) of replicated packets
+    also depends on the sequencing mechanism. Currently, there is no support
+    for packet sequencing in native IPv6. That is, there is no header field
+    whose application would be straightforward as a field for packet
+    sequencing.
+   </t>
     
-    <t>There is an initiative to equip IPv6 with explicit routing (<xref target="sec_crit_explicit"/>)
-     capabilities. The idea is to apply Segment Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> 
-     to IPv6 via the addition of a new type of routing extension header <xref target="I-D.ietf-6man-segment-routing-header"/>.  
-    </t>  
+   <t>
+    There is an initiative to equip IPv6 with explicit routing (<xref
+    target="sec_crit_explicit"/>) capabilities. The idea is to apply Segment
+    Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> to IPv6 via
+    the addition of a new type of routing extension header <xref
+    target="I-D.ietf-6man-segment-routing-header"/>.  
+   </t>  
 
-    <t>IPv6 supports QoS (<xref target="sec_crit_qos"/>). The traffic class
-     field of the fixed IPv6 header is designed for this purpose.
-    </t>    
-  </section>
-
-  <section title="Layer-2 tunneling over IP">
-    <section title="GRE">
-    </section>
-    
-    <section title="L2TP">
-    </section>
-
+   <t>
+    IPv6 supports QoS (<xref target="sec_crit_qos"/>). The traffic class field
+    of the fixed IPv6 header is designed for this purpose.
+   </t>    
   </section>
   
-  <section title="IP/MPLS">
-  </section>
-  
-  <section title="PseudoWires">
-   <t>
-    *Jouni to write the initial text*
-   </t>
+  <section title="Analysis and Discussion">
   </section>
 
-  <section title="Bit Indexed Explicit Replication">
-   <t>
-    *Greg to write the initial text*
-   </t>
+  <section title="Summary">
   </section>
+ </section>
+
+ <section title="Layer-2 tunneling over IP">
+  <section title="GRE" anchor="sec_alt_gre">
+   <section title="Solution description">
+   </section>
+
+   <section title="Analysis and Discussion">
+   </section>
+
+   <section title="Summary">
+   </section>
+  </section>
+    
+  <section title="L2TP" anchor="sec_alt_l2tp">
+   <section title="Solution description">
+   </section>
+
+   <section title="Analysis and Discussion">
+   </section>
+
+   <section title="Summary">
+   </section>
+  </section>
+
+ </section>
+  
+ <section title="IP/MPLS">
+  <section title="Solution description">
+  </section>
+
+  <section title="Analysis and Discussion">
+  </section>
+
+  <section title="Summary">
+  </section>
+ </section>
+  
+ <section title="PseudoWires" anchor="sec_alt_pwe">
+  <t>
+   *Jouni to write the initial text*
+  </t>
+  <section title="Solution description">
+  </section>
+
+  <section title="Analysis and Discussion">
+   <t><list style="hanging">
+    <t hangText="Encapsulation and overhead (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Stream identification (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Packet sequencing (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Explicit routes (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Packet replication and deletion (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Operations and management (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Time synchronization (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Class and quality of service capabilities (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Packet traceability (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+    <t hangText="Technical maturity (M/W/N)">
+     Bla bla..
+    <vspace blankLines="1"/></t>
+   </list></t>
+  </section>
+
+  <section title="Summary">
+   <t>
+    One sentence/paragraph summary how good alternative this technology is.
+   </t>
+
+  </section>
+ </section>
+
+ <section title="Bit Indexed Explicit Replication" anchor="sec_alt_bier">
+  <t>
+   *Greg to write the initial text*
+  </t>
+  <section title="Solution description">
+  </section>
+
+  <section title="Analysis and Discussion">
+  </section>
+
+  <section title="Summary">
+  </section>
+ </section>
 
 
 </section>
+
+<section title="Summary of data plane alternatives">
+  <t>TBD. A condenced summary of all solution alternative.
+  </t>
+   
+  <texttable anchor="tab_all_summary" title="PseudoWire criteria summary">
+   <ttcol align="left">Alternative</ttcol>
+   <ttcol align="left">Comments</ttcol>
+   <c>Native IPv4</c>
+   <c>..</c>
+   <c>Native IPv6</c>
+   <c>..</c>
+   <c>GRE</c>
+   <c>..</c>
+   <c>L2TP</c>
+   <c>..</c>
+   <c>IP/MPLS</c>
+   <c>..</c>
+   <c>PWE</c>
+   <c>..</c>
+   <c>BIER</c>
+   <c>..</c>
+  </texttable>
+</section>
+
 
 <section title="Security considerations">
   <t>TBD. Analysis per solution alternative.
