@@ -2,8 +2,12 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc2119 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc2460 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
+<!ENTITY rfc2474 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2474.xml">
 <!ENTITY rfc2702 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2702.xml">
 <!ENTITY rfc3031 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3031.xml">
+<!ENTITY rfc3168 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3168.xml">
+<!ENTITY rfc3209 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3209.xml">
+<!ENTITY rfc3270 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3270.xml">
 <!ENTITY rfc3550 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3550.xml">
 <!ENTITY rfc3985 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3985.xml">
 <!ENTITY rfc4446 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4446.xml">
@@ -11,6 +15,8 @@
 <!ENTITY rfc4448 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4448.xml">
 <!ENTITY rfc5086 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5086.xml">
 <!ENTITY rfc5087 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5087.xml">
+<!ENTITY rfc5129 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5129.xml">
+<!ENTITY rfc5462 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5462.xml">
 <!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
 <!ENTITY rfc6437 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6437.xml">
 <!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
@@ -305,7 +311,7 @@
      the use of the solution in deployments. For example, the maturity level
      can be categorised as available immediately, available with small
      extensions, available with repurposing/redefining portions of the protocol
-     or its header fields.  Yet another imporatant measure for maturity is the
+     or its header fields.  Yet another important measure for maturity is the
      deployment experience. This criteria concerns the maturity of the data
      plane protocol alternative as the solution alternative.
     </t>
@@ -318,7 +324,7 @@
   The following sections describe and rate deterministic data plane solution
   alternatives. In "Analysis and Discussion" section each alternative is
   evaluated against the criteria given in <xref target="sec_crit"/> and rated
-  using the following: (M)eets the criterisa, (W)ork needed, and (N)ot suitable
+  using the following: (M)eets the criteria, (W)ork needed, and (N)ot suitable
   or too much work envisioned.
  </t>
 
@@ -342,57 +348,95 @@
     target="RFC2460"/> as the data plane for DetNet along the criteria
     collected in <xref target="sec_crit"/>.
    </t>
-	
-   <t>
-    Deterministic flows are assumed to be handled natively at layer-3 by IPv6
-    at the first place. The fixed header of an IPv6 packet is 40 bytes <xref
-    target="RFC2460"/>.  The overhead is bigger if any extension header is
-    used. However, the exact overhead (<xref target="sec_crit_encap"/>)
-    depends on what solution is actually used to provide DetNet features,
-    e.g., explicit routing or seamless redundancy if any of these is applied.
-   </t>
-    
-   <t>
-    The 20-bit flow label field of the fixed IPv6 header is suitable to
-    distinguish different deterministic flows / streams (<xref
-    target="sec_crit_streamid"/>). But guidance on the use of the flow label
-    provided by <xref target="RFC6437"/> places restrictions on how
-    the flow label can be used. In particular, labels should chosen from
-    an approximation to a discrete uniform distribution. Additionally,
-    existing implementationz generally do not open APIs to control the 
-    flow label from the upper layers.
-   </t>
-    
-   <t>
-    Packet replication and elimination of duplicates (<xref
-    target="sec_crit_repdup"/>) is the core of seamless redundancy. The
-    implementation of this functionality largely depends on the packet
-    sequencing (<xref target="sec_crit_seq"/>) approach used. Correspondingly,
-    the traceability (<xref target="sec_crit_trace"/>) of replicated packets
-    also depends on the sequencing mechanism. Currently, there is no support
-    for packet sequencing in native IPv6. That is, there is no header field
-    whose application would be straightforward as a field for packet
-    sequencing.
-   </t>
-    
-   <t>
-    There is an initiative to equip IPv6 with explicit routing (<xref
-    target="sec_crit_explicit"/>) capabilities. The idea is to apply Segment
-    Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> to IPv6 via
-    the addition of a new type of routing extension header <xref
-    target="I-D.ietf-6man-segment-routing-header"/>.  
-   </t>  
-
-   <t>
-    IPv6 supports QoS (<xref target="sec_crit_qos"/>). The traffic class field
-    of the fixed IPv6 header is designed for this purpose.
-   </t>    
   </section>
   
   <section title="Analysis and Discussion">
+   <t><list style="hanging">
+    <t hangText="Encapsulation and overhead (W)">
+     <vspace blankLines="1"/>
+     Deterministic flows are assumed to be handled natively at layer-3 by IPv6
+     at the first place. The fixed header of an IPv6 packet is 40 bytes <xref
+     target="RFC2460"/>.  The overhead is bigger if any extension header is
+     used. However, the exact overhead (<xref target="sec_crit_encap"/>)
+     depends on what solution is actually used to provide DetNet features,
+     e.g., explicit routing or seamless redundancy if any of these is applied.
+     <vspace blankLines="1"/></t>
+    
+    <t hangText="Stream identification (M/W)">
+     The 20-bit flow label field of the fixed IPv6 header is suitable to
+     distinguish different deterministic flows / streams (<xref
+     target="sec_crit_streamid"/>). But guidance on the use of the flow label
+     provided by <xref target="RFC6437"/> places restrictions on how
+     the flow label can be used. In particular, labels should be chosen from
+     an approximation to a discrete uniform distribution. Additionally,
+     existing implementations generally do not open APIs to control the 
+     flow label from the upper layers.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Packet sequencing (W/N)">
+     <vspace blankLines="1"/>
+     TBD. [Editor's note: packet sequencing would require a new extension
+     header - a destination option most likely - to add sequence numbers.]
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Explicit routes (W)">
+     <vspace blankLines="1"/>
+     There is an initiative to equip IPv6 with explicit routing (<xref
+     target="sec_crit_explicit"/>) capabilities. The idea is to apply Segment
+     Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> to IPv6 via
+     the addition of a new type of routing extension header <xref
+     target="I-D.ietf-6man-segment-routing-header"/>.  
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Packet replication and deletion (W)">
+     <vspace blankLines="1"/>
+     Packet replication and elimination of duplicates (<xref
+     target="sec_crit_repdup"/>) is the core of seamless redundancy. The
+     implementation of this functionality largely depends on the packet
+     sequencing (<xref target="sec_crit_seq"/>) approach used. Correspondingly,
+     the traceability (<xref target="sec_crit_trace"/>) of replicated packets
+     also depends on the sequencing mechanism. Currently, there is no support
+     for packet sequencing in native IPv6. That is, there is no header field
+     whose application would be straightforward as a field for packet
+     sequencing.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Operations and management (M/W)">
+     <vspace blankLines="1"/>
+     TBD.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Time synchronization (W/N)">
+     <vspace blankLines="1"/>
+     TBD. [Editor's note: most likely a new extension header is required
+     for this purpose.]
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Class and quality of service capabilities (M)">
+     <vspace blankLines="1"/>
+     IPv6 supports QoS (<xref target="sec_crit_qos"/>). The traffic class field
+     of the fixed IPv6 header is designed for this purpose.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Packet traceability (M/W/N)">
+     <vspace blankLines="1"/>
+     TBD..
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Technical maturity (M)">
+     <vspace blankLines="1"/>
+     TBD. [Editor's note: IPv6 is getting serious deployments globally.
+     However, as seen from the number of basic IPv6 related documents in both
+     IETF V6OPS and V6MAN WGs indicate there are still a lot of small,
+     specifically operational, details to iron out.]
+    <vspace blankLines="1"/></t>
+   </list></t>
   </section>
 
   <section title="Summary">
+   <t>
+    TBD.
+   </t>
   </section>
  </section>
 
@@ -457,6 +501,7 @@
   <section title="Analysis and Discussion">
    <t><list style="hanging">
     <t hangText="Encapsulation and overhead (M)">
+     <vspace blankLines="1"/>
      PWs offer encapsulation services practically for any types of payloads
      over any PSN.  New PW types need a code point allocation <xref
      target="RFC4446"/> and in some cases an emulated service specific
@@ -469,27 +514,35 @@
      processing (NSP) / forwarder function. These optimizations could be used,
      for example, to reduce header overhead.
     <vspace blankLines="1"/></t>
+    
     <t hangText="Stream identification (M)">
+     <vspace blankLines="1"/>
      PWs provide multiple layers of stream identification, especially in the case
      of the MPLS PSN. The PWs are typically prepended with a PW label that can be
-     used to identitify a specific PW. Furthermore, the PSN also uses one or more
-     labels to transport packets over a specific label swithed paths (that then'
+     used to identify a specific PW. Furthermore, the PSN also uses one or more
+     labels to transport packets over a specific label switched paths (that then'
      would carry PWs).
     <vspace blankLines="1"/></t>
+    
     <t hangText="Packet sequencing (M)">
+     <vspace blankLines="1"/>
      As mentioned earlier PWs may contain an optional CW that is able to provide
      sequencing services. The size of the sequence number in the generic CW is
      16 bits, which might be, depending on the used link speed be too little.
     <vspace blankLines="1"/></t>
+    
     <t hangText="Explicit routes (M)">
+     <vspace blankLines="1"/>
      In a case of the MPLS PSN the traffic engineering toolbox developed for
      MPLS can be used to signal explicit label switched paths (LSP) <xref
-     target="RFC2702"/>.  Furthermore, the PSN may also use segment routing
-     (SR) to provide explicit routes <xref
+     target="RFC2702"/><xref target="RFC3209"/>.  Furthermore, the PSN may also
+     use segment routing (SR) to provide explicit routes <xref
      target="I-D.ietf-spring-segment-routing"/> <xref
      target="I-D.ietf-6man-segment-routing-header"/>.
     <vspace blankLines="1"/></t>
+    
     <t hangText="Packet replication and deletion (W)">
+     <vspace blankLines="1"/>
      The 1+1 PW/LSP protection / redundancy mechanisms  <xref
      target="RFC6718"/> could provide tools for packet replication. However,
      these solutions are not really intended for sourcing multiple simultaneous
@@ -497,26 +550,47 @@
      The PW duplicate detection mechanism also exists in theory <xref
      target="RFC3985"/> but no emulated service makes use of it currently.
     <vspace blankLines="1"/></t>
+    
     <t hangText="Operations and management (M/W)">
+     <vspace blankLines="1"/>
      PWs have rich control plane for O&amp; and in a case of the MPLS PSN enjoy
      the full control plane toolbox developed for MPLS network O&amp;M. There
      could be, however, need for deterministic networking specific extensions
      for the mentioned control planes.
     <vspace blankLines="1"/></t>
+    
     <t hangText="Time synchronization (M)">
+     <vspace blankLines="1"/>
      It is possible to carry time synchronization information as part of the PW
      encapsulation layer (see for example <xref target="RFC5087"/>). Whether
-     the timing precision is enough for all determistic networking use cases
+     the timing precision is enough for all deterministic networking use cases
      vary, and it is possible existing mechanisms are not adequate for all use
      cases.
     <vspace blankLines="1"/></t>
+    
     <t hangText="Class and quality of service capabilities (M)">
-     TBD... MPLS TC bits..
+     <vspace blankLines="1"/>
+     In a case of IP PSN the 6-bit differentiated services code point (DSCP)
+     field can be used for indicating the class of service <xref
+     target="RFC2474"/> and 2-bit field reserved fir the explicit congestion
+     notification (ECN) <xref target="RFC3168"/>. Similarly, in a case of MPLS
+     PSN, there are 3-bit traffic class field (TC) <xref target="RFC5462"/> in
+     the label reserved for for both  Explicitly TC-encoded-PSC LSPs (E-LSP)
+     <xref target="RFC3270"/> and ECN <xref target="RFC5129"/>.  Due to the
+     limited number of bits in the TC field, their use for QoS and ECN
+     functions restricted and intended to be flexible. Although the Qos/CoS
+     mechanism is already in place some clarifications may be required in the
+     context of deterministic networking flows/streams, for example, if some
+     specific mapping between bit fields have to be done.
     <vspace blankLines="1"/></t>
+    
     <t hangText="Packet traceability (M/W/N)">
+     <vspace blankLines="1"/>
      TBD..
     <vspace blankLines="1"/></t>
+    
     <t hangText="Technical maturity (M)">
+     <vspace blankLines="1"/>
      PWs and MPLS are both proved technologies with wide variety of deployments
      and years of operational experience. Furthermore, the estimated work for
      missing functionality (packet replication and deletion) does not appear to
@@ -534,7 +608,7 @@
     MPLS-based PSN.
    </t>
    <t>
-    Extentions are required to realize the packet replication and duplicate detection.
+    Extensions are required to realize the packet replication and duplicate detection.
     feature of the deterministic networking data plane.
    </t>
   </section>
@@ -609,11 +683,17 @@
    &rfc3985;
    &rfc3550;
    
+   &rfc2474;
    &rfc2702;
+   &rfc3168;
+   &rfc3209;
+   &rfc3270;
    &rfc4446;
    &rfc4447;
    &rfc4448;
    &rfc5087;
+   &rfc5129;
+   &rfc5462;
    &rfc6658;
    &rfc6073;
    &rfc6437;

@@ -5,7 +5,7 @@
 DetNet                                                  J. Korhonen, Ed.
 Internet-Draft                                                  Broadcom
 Intended status: Informational                                 J. Farkas
-Expires: August 6, 2016                                         Ericsson
+Expires: August 13, 2016                                        Ericsson
                                                                  N. Finn
                                                                    Cisco
                                                                 O. Marce
@@ -16,7 +16,7 @@ Expires: August 6, 2016                                         Ericsson
                                                                    Cisco
                                                                 Z. Zhuan
                                                                   Huawei
-                                                        February 3, 2016
+                                                       February 10, 2016
 
 
           DetNet Data Plane Protocol and Solution Alternatives
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 6, 2016.
+   This Internet-Draft will expire on August 13, 2016.
 
 
 
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Korhonen, et al.         Expires August 6, 2016                 [Page 1]
+Korhonen, et al.         Expires August 13, 2016                [Page 1]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
@@ -77,42 +77,56 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Criteria for data plane solution alternatives . . . . . . . .   3
-     2.1.  Encapsulation and overhead  . . . . . . . . . . . . . . .   3
-     2.2.  Stream identification . . . . . . . . . . . . . . . . . .   4
-     2.3.  Packet sequencing . . . . . . . . . . . . . . . . . . . .   4
-     2.4.  Explicit routes . . . . . . . . . . . . . . . . . . . . .   4
-     2.5.  Packet replication and deletion . . . . . . . . . . . . .   4
-     2.6.  Operations and management . . . . . . . . . . . . . . . .   5
-     2.7.  Time synchronization  . . . . . . . . . . . . . . . . . .   5
-     2.8.  Class and quality of service capabilities . . . . . . . .   5
-     2.9.  Packet traceability . . . . . . . . . . . . . . . . . . .   5
+     2.1.  #1 Encapsulation and overhead . . . . . . . . . . . . . .   4
+     2.2.  #2 Stream identification  . . . . . . . . . . . . . . . .   4
+     2.3.  #3 Packet sequencing  . . . . . . . . . . . . . . . . . .   4
+     2.4.  #4 Explicit routes  . . . . . . . . . . . . . . . . . . .   4
+     2.5.  #5 Packet replication and deletion  . . . . . . . . . . .   5
+     2.6.  #6 Operations and management  . . . . . . . . . . . . . .   5
+     2.7.  #7 Time synchronization . . . . . . . . . . . . . . . . .   5
+     2.8.  #8 Class and quality of service capabilities  . . . . . .   6
+     2.9.  #9 Packet traceability  . . . . . . . . . . . . . . . . .   6
+     2.10. #10 Technical maturity  . . . . . . . . . . . . . . . . .   6
    3.  Data plane solution alternatives  . . . . . . . . . . . . . .   6
-     3.1.  Native IPv4 transport . . . . . . . . . . . . . . . . . .   6
-     3.2.  Native IPv6 transport . . . . . . . . . . . . . . . . . .   6
-     3.3.  Layer-2 tunneling over IP . . . . . . . . . . . . . . . .   6
-       3.3.1.  GRE . . . . . . . . . . . . . . . . . . . . . . . . .   6
-       3.3.2.  L2TP  . . . . . . . . . . . . . . . . . . . . . . . .   7
-     3.4.  IP/MPLS . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     3.5.  PseudoWires . . . . . . . . . . . . . . . . . . . . . . .   7
-     3.6.  Bit Indexed Explicit Replication  . . . . . . . . . . . .   7
-   4.  Security considerations . . . . . . . . . . . . . . . . . . .   7
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   7
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+     3.1.  Native IPv4 transport . . . . . . . . . . . . . . . . . .   7
+       3.1.1.  Solution description  . . . . . . . . . . . . . . . .   7
+       3.1.2.  Analysis and Discussion . . . . . . . . . . . . . . .   7
+       3.1.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .   7
+     3.2.  Native IPv6 transport . . . . . . . . . . . . . . . . . .   7
+       3.2.1.  Solution description  . . . . . . . . . . . . . . . .   7
+       3.2.2.  Analysis and Discussion . . . . . . . . . . . . . . .   7
+       3.2.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .   8
+     3.3.  Layer-2 tunneling over IP . . . . . . . . . . . . . . . .   9
+       3.3.1.  GRE . . . . . . . . . . . . . . . . . . . . . . . . .   9
+       3.3.2.  L2TP  . . . . . . . . . . . . . . . . . . . . . . . .   9
+     3.4.  IP/MPLS . . . . . . . . . . . . . . . . . . . . . . . . .   9
+       3.4.1.  Solution description  . . . . . . . . . . . . . . . .   9
+       3.4.2.  Analysis and Discussion . . . . . . . . . . . . . . .   9
+       3.4.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .   9
+     3.5.  PseudoWires . . . . . . . . . . . . . . . . . . . . . . .   9
+       3.5.1.  Solution description  . . . . . . . . . . . . . . . .   9
+       3.5.2.  Analysis and Discussion . . . . . . . . . . . . . . .  10
 
 
 
-
-
-
-
-Korhonen, et al.         Expires August 6, 2016                 [Page 2]
+Korhonen, et al.         Expires August 13, 2016                [Page 2]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
+
+       3.5.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  12
+     3.6.  Bit Indexed Explicit Replication  . . . . . . . . . . . .  12
+       3.6.1.  Solution description  . . . . . . . . . . . . . . . .  12
+       3.6.2.  Analysis and Discussion . . . . . . . . . . . . . . .  12
+       3.6.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  12
+   4.  Summary of data plane alternatives  . . . . . . . . . . . . .  12
+   5.  Security considerations . . . . . . . . . . . . . . . . . . .  12
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  13
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  13
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  13
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  16
 
 1.  Introduction
 
@@ -122,10 +136,10 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    upper bound maximum latency [I-D.finn-detnet-architecture].  The
    deterministic networking Quality of Service (QoS) is expressed as 1)
    the minimum and maximum end-to-end latency from sender (talker) to
-   receiver (listener), 2) probability of loss of a packet, 3)
-   probability of loss of a packet in the event of the failure of a
-   relay system or link.  Only the worst-case values for the mentioned
-   parameters are concerned.
+   receiver (listener), 2) probability of loss of a packet as a result
+   of congestion, 3) probability of loss of a packet in the event of the
+   failure of a relay system or link.  Only the worst-case values for
+   the mentioned parameters are concerned.
 
    There are three techniques to achieve the QoS required by
    deterministic networks:
@@ -148,10 +162,18 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    Each deterministic networking data plane solution alternative is
    described and evaluated using the criteria describe in this section.
    The used criteria enumerated in this section is selected so that it
+
+
+
+Korhonen, et al.         Expires August 13, 2016                [Page 3]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    highlights the existence or lack of features that are expected or
    seen important to a solution alternative for the data plane solution.
 
-2.1.  Encapsulation and overhead
+2.1.  #1 Encapsulation and overhead
 
    In several cases a deterministic flow/strem has to be encapsulated
    inside other protocols, for example, when transporting a layer-2
@@ -162,20 +184,12 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    traffic.  Last it is possible that talkers and listeners handle
    deterministic flows natively in a layer-3.  This criteria concerns
    what is the encapsulation method the solution alternative support:
-
-
-
-Korhonen, et al.         Expires August 6, 2016                 [Page 3]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
-
    tunneling like encapsulation, protocol translation or native layer-3
    transport.  In addition to the encapsulation mechanism this criteria
    is also concerned of the processing and specifically the encapsulate
    header overhead.
 
-2.2.  Stream identification
+2.2.  #2 Stream identification
 
    The solution alternative has to provide means to identify specific
    deterministic flows / streams.  The stream identification can, for
@@ -185,7 +199,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    deterministic flow / stream identification the data plane protocol
    alternative has.
 
-2.3.  Packet sequencing
+2.3.  #3 Packet sequencing
 
    The solution alternative has to provide means for end systems to
    number packets sequentially and transport that sequencing information
@@ -198,12 +212,20 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    details of the packet sequencing capabilities the data plane protocol
    alternative has.
 
-2.4.  Explicit routes
+2.4.  #4 Explicit routes
 
    The solution alternative has to provide a mechanism(s) for
    establishing explicit routes that all packets belonging to a
    deterministic flow / stream will follow.  The explicit route can be
    seen as a form of source routing or a pre-reserved path e.g., using
+
+
+
+Korhonen, et al.         Expires August 13, 2016                [Page 4]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    some network management procedure.  It should be noted that the
    explicit route does not need to be detailed to a level where every
    possible intermediate node along the path is part of the named
@@ -213,29 +235,26 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    concerns the available mechanisms for explicit routes for the data
    plane protocol alternative.
 
-2.5.  Packet replication and deletion
+2.5.  #5 Packet replication and deletion
 
    End systems and/or relay systems can number packets sequentially,
    replicate them, and later eliminate all but one of the replicas, at
    multiple points in the network in order to ensure that one (or more)
-
-
-
-Korhonen, et al.         Expires August 6, 2016                 [Page 4]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
-
    equipment failure events still leave at least one path intact for a
-   deterministic networking stream.  The IEEE 802.1CB [IEEE8021CB]
-   specification defines packet sequence numbering, packet replication,
-   and duplicate packet identification and deletion for IEEE 802 family
-   of protocols.  The deterministic networking data plane solution
-   alternative at layer-3 has provide equivalent functionality.  This
-   criteria concerns the available mechanisms for packet replication and
-   duplicate deletion the data plane protocol alternative has.
+   deterministic networking stream.  The goal is to enable seamless
+   "protection switching" in a way that no packet gets lost or there is
+   no ramp up time when either one of the paths fails for one reason or
+   another.
 
-2.6.  Operations and management
+   The IEEE 802.1CB [IEEE8021CB] is an example of Ethernet-based
+   solution that defines packet sequence numbering, packet replication,
+   and duplicate packet identification and deletion.  The deterministic
+   networking data plane solution alternative at layer-3 has to provide
+   equivalent functionality.  This criteria concerns the available
+   mechanisms for packet replication and duplicate deletion the data
+   plane protocol alternative has.
+
+2.6.  #6 Operations and management
 
    The solution alternative should demonstrate an availability of
    appropriate standardized O&M tools or control/management plane that
@@ -244,7 +263,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    need to be specific to the data plane protocol as it could be the
    case, for example, with MPLS-based data planes.
 
-2.7.  Time synchronization
+2.7.  #7 Time synchronization
 
    The solution alternative may benefit from having a sense of time or
    at least that the associated O&M protocols had time synchronization
@@ -255,10 +274,18 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    channel, the Realtime Transport Control Protocol (RTCP).  Another
    example could be residence time measurement support for MPLS network
    domain using Generic Associated Channel (G-ACh) extensions.  This
+
+
+
+Korhonen, et al.         Expires August 13, 2016                [Page 5]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    criteria concerns the available mechanisms for time synchronization
    in the context of the data plane protocol alternative.
 
-2.8.  Class and quality of service capabilities
+2.8.  #8 Class and quality of service capabilities
 
    Some protocols or encapsulation headers that may be viable as a
    solution alternative for the deterministic networking data plane may
@@ -268,131 +295,415 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    the availability and mechanism for the CoS and QoS signaling as a
    part of the data plane protocol alternative.
 
-2.9.  Packet traceability
+   [Editor's note] add more text here to make the difference between CoS
+   and QoS clear.  CoS would be layer-2 mechanism and QoS layer-3
+   mechanism.  Sometimes the difference is not that clear, though.
+
+2.9.  #9 Packet traceability
 
    For the network management and specifically for tracing down
    implementation or network configuration errors any means to find out
-   whether a packet is a replica, and which node performed replication
-   can be very useful.  This criteria concerns the availability of
+   whether a packet is a replica, which node performed replication, and
+   which path was intended for the replica, can be very useful.  This
+   criteria concerns the availability of solutions for tracing packets
+   in the context of data plane protocol alternative.
+
+2.10.  #10 Technical maturity
+
+   The technical maturity of the data plane solution alternative is
+   crucial, since it basically defines the effort, time line and risks
+   involved for the use of the solution in deployments.  For example,
+   the maturity level can be categorised as available immediately,
+   available with small extensions, available with repurposing/
+   redefining portions of the protocol or its header fields.  Yet
+   another important measure for maturity is the deployment experience.
+   This criteria concerns the maturity of the data plane protocol
+   alternative as the solution alternative.
+
+3.  Data plane solution alternatives
+
+   The following sections describe and rate deterministic data plane
+   solution alternatives.  In "Analysis and Discussion" section each
+   alternative is evaluated against the criteria given in Section 2 and
+   rated using the following: (M)eets the criteria, (W)ork needed, and
+   (N)ot suitable or too much work envisioned.
 
 
 
-Korhonen, et al.         Expires August 6, 2016                 [Page 5]
+
+
+
+Korhonen, et al.         Expires August 13, 2016                [Page 6]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
-   solutions for tracing packets in the context of data plane protocol
-   alternative.
-
-3.  Data plane solution alternatives
-
 3.1.  Native IPv4 transport
 
+3.1.1.  Solution description
+
+3.1.2.  Analysis and Discussion
+
+3.1.3.  Summary
+
 3.2.  Native IPv6 transport
+
+3.2.1.  Solution description
 
    This section investigates the application of native IPv6 [RFC2460] as
    the data plane for DetNet along the criteria collected in Section 2.
 
-   Deterministic flows are assumed to be handled natively at layer-3 by
-   IPv6 at the first place.  The fixed header of an IPv6 packet is 40
-   bytes [RFC2460].  The overhead is bigger if any extension header is
-   used.  However, the exact overhead (Section 2.1) depends on what
-   solution is actually used to provide DetNet features, e.g., explicit
-   routing or seamless redundancy if any of these is applied.
+3.2.2.  Analysis and Discussion
 
-   The 20-bit flow label field of the fixed IPv6 header is suitable to
-   identify deterministic flows / streams (Section 2.2).  Guidance on
-   the use of the flow label is provided by [RFC6437].
+   Encapsulation and overhead (W)
 
-   Packet replication and elimination of duplicates (Section 2.5) is the
-   core of seamless redundancy.  The implementation of this
-   functionality largely depends on the packet sequencing (Section 2.3)
-   approach used.  Correspondingly, the traceability (Section 2.9) of
-   replicated packets also depends on the sequencing mechanism.
-   Currently, there is no support for packet sequencing in native IPv6.
-   That is, there is no header field whose application would be
-   straightforward as a field for packet sequencing.
+      Deterministic flows are assumed to be handled natively at layer-3
+      by IPv6 at the first place.  The fixed header of an IPv6 packet is
+      40 bytes [RFC2460].  The overhead is bigger if any extension
+      header is used.  However, the exact overhead (Section 2.1) depends
+      on what solution is actually used to provide DetNet features,
+      e.g., explicit routing or seamless redundancy if any of these is
+      applied.
 
-   There is an initiative to equip IPv6 with explicit routing
-   (Section 2.4) capabilities.  The idea is to apply Segment Routing
-   (SR) [I-D.ietf-spring-segment-routing] to IPv6 via the addition of a
-   new type of routing extension header
-   [I-D.ietf-6man-segment-routing-header].
+   Stream identification (M/W)  The 20-bit flow label field of the fixed
+      IPv6 header is suitable to distinguish different deterministic
+      flows / streams (Section 2.2).  But guidance on the use of the
+      flow label provided by [RFC6437] places restrictions on how the
+      flow label can be used.  In particular, labels should be chosen
+      from an approximation to a discrete uniform distribution.
+      Additionally, existing implementations generally do not open APIs
+      to control the flow label from the upper layers.
 
-   IPv6 supports QoS (Section 2.8).  The traffic class field of the
-   fixed IPv6 header is designed for this purpose.
+   Packet sequencing (W/N)
+
+      TBD.  [Editor's note: packet sequencing would require a new
+      extension header - a destination option most likely - to add
+      sequence numbers.]
+
+   Explicit routes (W)
+
+      There is an initiative to equip IPv6 with explicit routing
+      (Section 2.4) capabilities.  The idea is to apply Segment Routing
+      (SR) [I-D.ietf-spring-segment-routing] to IPv6 via the addition of
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016                [Page 7]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+      a new type of routing extension header
+      [I-D.ietf-6man-segment-routing-header].
+
+   Packet replication and deletion (W)
+
+      Packet replication and elimination of duplicates (Section 2.5) is
+      the core of seamless redundancy.  The implementation of this
+      functionality largely depends on the packet sequencing
+      (Section 2.3) approach used.  Correspondingly, the traceability
+      (Section 2.9) of replicated packets also depends on the sequencing
+      mechanism.  Currently, there is no support for packet sequencing
+      in native IPv6.  That is, there is no header field whose
+      application would be straightforward as a field for packet
+      sequencing.
+
+   Operations and management (M/W)
+
+      TBD.
+
+   Time synchronization (W/N)
+
+      TBD.  [Editor's note: most likely a new extension header is
+      required for this purpose.]
+
+   Class and quality of service capabilities (M)
+
+      IPv6 supports QoS (Section 2.8).  The traffic class field of the
+      fixed IPv6 header is designed for this purpose.
+
+   Packet traceability (M/W/N)
+
+      TBD..
+
+   Technical maturity (M)
+
+      TBD.  [Editor's note: IPv6 is getting serious deployments
+      globally.  However, as seen from the number of basic IPv6 related
+      documents in both IETF V6OPS and V6MAN WGs indicate there are
+      still a lot of small, specifically operational, details to iron
+      out.]
+
+
+3.2.3.  Summary
+
+   TBD.
+
+
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016                [Page 8]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
 
 3.3.  Layer-2 tunneling over IP
 
 3.3.1.  GRE
 
+3.3.1.1.  Solution description
+
+3.3.1.2.  Analysis and Discussion
+
+3.3.1.3.  Summary
+
+3.3.2.  L2TP
+
+3.3.2.1.  Solution description
+
+3.3.2.2.  Analysis and Discussion
+
+3.3.2.3.  Summary
+
+3.4.  IP/MPLS
+
+3.4.1.  Solution description
+
+3.4.2.  Analysis and Discussion
+
+3.4.3.  Summary
+
+3.5.  PseudoWires
+
+3.5.1.  Solution description
+
+   PSeudo Wire Emulation (PWE) [RFC3985] or PseudoWires (PW) provide
+   means of emulating the essential attributes and behaviour of a
+   telecommunications service over a packet switched network (PSN) using
+   IP or MPLS transport.  In addition to traditional telecommunications
+   services such as T1 line or Frame Relay, PWs also provide transport
+   for Ethernet service [RFC4448] and for generic packet service
+   [RFC6658].
+
+   PWs appear as a good data plane solution alternative for a number of
+   reasons.  PWs are a proven and deployed technology with a rich O&M
+   control plane [RFC4447], and enjoy the toolbox developed for MPLS
+   networks.  Furthermore, PWs may have an optional Control Word (CW) as
+   part of the payload encapsulation between the PSN and the emulated
+   service that is, for example, capable of frame sequencing and
+   duplicate detection.  The encapsulation layer may also provide timing
+   [RFC5087].
 
 
 
 
 
-
-Korhonen, et al.         Expires August 6, 2016                 [Page 6]
+Korhonen, et al.         Expires August 13, 2016                [Page 9]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
-3.3.2.  L2TP
+3.5.2.  Analysis and Discussion
 
-3.4.  IP/MPLS
+   Encapsulation and overhead (M)
 
-3.5.  PseudoWires
+      PWs offer encapsulation services practically for any types of
+      payloads over any PSN.  New PW types need a code point allocation
+      [RFC4446] and in some cases an emulated service specific document.
+
+      Specifically in the case of the MPLS PSN the PW encapsulation
+      overhead is minimal.  Typically minimum two labels and a CW is
+      needed, which totals to 12 octets.  PW type specific handling
+      might, however, allow optimizations on the emulated service in the
+      provider edge (PE) device's native service processing (NSP) /
+      forwarder function.  These optimizations could be used, for
+      example, to reduce header overhead.
+
+   Stream identification (M)
+
+      PWs provide multiple layers of stream identification, especially
+      in the case of the MPLS PSN.  The PWs are typically prepended with
+      a PW label that can be used to identify a specific PW.
+      Furthermore, the PSN also uses one or more labels to transport
+      packets over a specific label switched paths (that then' would
+      carry PWs).
+
+   Packet sequencing (M)
+
+      As mentioned earlier PWs may contain an optional CW that is able
+      to provide sequencing services.  The size of the sequence number
+      in the generic CW is 16 bits, which might be, depending on the
+      used link speed be too little.
+
+   Explicit routes (M)
+
+      In a case of the MPLS PSN the traffic engineering toolbox
+      developed for MPLS can be used to signal explicit label switched
+      paths (LSP) [RFC2702][RFC3209].  Furthermore, the PSN may also use
+      segment routing (SR) to provide explicit routes
+      [I-D.ietf-spring-segment-routing]
+      [I-D.ietf-6man-segment-routing-header].
+
+   Packet replication and deletion (W)
+
+      The 1+1 PW/LSP protection / redundancy mechanisms [RFC6718] could
+      provide tools for packet replication.  However, these solutions
+      are not really intended for sourcing multiple simultaneous packet
+      streams.  The solutions have one active and other standby stream.
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 10]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+      The PW duplicate detection mechanism also exists in theory
+      [RFC3985] but no emulated service makes use of it currently.
+
+   Operations and management (M/W)
+
+      PWs have rich control plane for O& and in a case of the MPLS PSN
+      enjoy the full control plane toolbox developed for MPLS network
+      O&M.  There could be, however, need for deterministic networking
+      specific extensions for the mentioned control planes.
+
+   Time synchronization (M)
+
+      It is possible to carry time synchronization information as part
+      of the PW encapsulation layer (see for example [RFC5087]).
+      Whether the timing precision is enough for all deterministic
+      networking use cases vary, and it is possible existing mechanisms
+      are not adequate for all use cases.
+
+   Class and quality of service capabilities (M)
+
+      In a case of IP PSN the 6-bit differentiated services code point
+      (DSCP) field can be used for indicating the class of service
+      [RFC2474] and 2-bit field reserved fir the explicit congestion
+      notification (ECN) [RFC3168].  Similarly, in a case of MPLS PSN,
+      there are 3-bit traffic class field (TC) [RFC5462] in the label
+      reserved for for both Explicitly TC-encoded-PSC LSPs (E-LSP)
+      [RFC3270] and ECN [RFC5129].  Due to the limited number of bits in
+      the TC field, their use for QoS and ECN functions restricted and
+      intended to be flexible.  Although the Qos/CoS mechanism is
+      already in place some clarifications may be required in the
+      context of deterministic networking flows/streams, for example, if
+      some specific mapping between bit fields have to be done.
+
+   Packet traceability (M/W/N)
+
+      TBD..
+
+   Technical maturity (M)
+
+      PWs and MPLS are both proved technologies with wide variety of
+      deployments and years of operational experience.  Furthermore, the
+      estimated work for missing functionality (packet replication and
+      deletion) does not appear to be extensive, since the existing
+      protection mechanism already get close to what is needed from the
+      deterministic networking data plane solution.
+
+
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 11]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+3.5.3.  Summary
+
+   PseudoWires appear to be a strong candidate as the deterministic
+   networking data plane solution alternative.  The strong points are
+   the technical maturity and the extensive control plane for O&M.  This
+   holds specifically for MPLS-based PSN.
+
+   Extensions are required to realize the packet replication and
+   duplicate detection.  feature of the deterministic networking data
+   plane.
 
 3.6.  Bit Indexed Explicit Replication
 
-4.  Security considerations
+   *Greg to write the initial text*
+
+3.6.1.  Solution description
+
+3.6.2.  Analysis and Discussion
+
+3.6.3.  Summary
+
+4.  Summary of data plane alternatives
+
+   TBD.  A condenced summary of all solution alternative.
+
+                        +-------------+----------+
+                        | Alternative | Comments |
+                        +-------------+----------+
+                        | Native IPv4 | ..       |
+                        | Native IPv6 | ..       |
+                        | GRE         | ..       |
+                        | L2TP        | ..       |
+                        | IP/MPLS     | ..       |
+                        | PWE         | ..       |
+                        | BIER        | ..       |
+                        +-------------+----------+
+
+                   Table 1: PseudoWire criteria summary
+
+5.  Security considerations
 
    TBD.  Analysis per solution alternative.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA considerations.
 
-6.  Acknowledgements
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 12]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+7.  Acknowledgements
 
    The author(s) ACK and NACK.
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
-7.2.  Informative References
+8.2.  Informative References
 
    [I-D.finn-detnet-architecture]
               Finn, N., Thubert, P., and M. Teener, "Deterministic
               Networking Architecture", draft-finn-detnet-
-              architecture-01 (work in progress), March 2015.
+              architecture-02 (work in progress), November 2015.
 
    [I-D.finn-detnet-problem-statement]
               Finn, N. and P. Thubert, "Deterministic Networking Problem
-              Statement", draft-finn-detnet-problem-statement-03 (work
-              in progress), June 2015.
+              Statement", draft-finn-detnet-problem-statement-04 (work
+              in progress), October 2015.
 
    [I-D.ietf-6man-segment-routing-header]
               Previdi, S., Filsfils, C., Field, B., Leung, I., Linkova,
               J., Kosugi, T., Vyncke, E., and D. Lebrun, "IPv6 Segment
               Routing Header (SRH)", draft-ietf-6man-segment-routing-
               header-00 (work in progress), December 2015.
-
-
-
-
-
-Korhonen, et al.         Expires August 6, 2016                 [Page 7]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
 
    [I-D.ietf-isis-pcr]
               Farkas, J., Bragg, N., Unbehagen, P., Parsons, G.,
@@ -405,6 +716,19 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               and r. rjs@rob.sh, "Segment Routing Architecture", draft-
               ietf-spring-segment-routing-07 (work in progress),
               December 2015.
+
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 13]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
 
    [IEEE8021CB]
               Finn, N., "Draft Standard for Local and metropolitan area
@@ -424,10 +748,49 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               (IPv6) Specification", RFC 2460, DOI 10.17487/RFC2460,
               December 1998, <http://www.rfc-editor.org/info/rfc2460>.
 
+   [RFC2474]  Nichols, K., Blake, S., Baker, F., and D. Black,
+              "Definition of the Differentiated Services Field (DS
+              Field) in the IPv4 and IPv6 Headers", RFC 2474,
+              DOI 10.17487/RFC2474, December 1998,
+              <http://www.rfc-editor.org/info/rfc2474>.
+
+   [RFC2702]  Awduche, D., Malcolm, J., Agogbua, J., O'Dell, M., and J.
+              McManus, "Requirements for Traffic Engineering Over MPLS",
+              RFC 2702, DOI 10.17487/RFC2702, September 1999,
+              <http://www.rfc-editor.org/info/rfc2702>.
+
    [RFC3031]  Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
               Label Switching Architecture", RFC 3031,
               DOI 10.17487/RFC3031, January 2001,
               <http://www.rfc-editor.org/info/rfc3031>.
+
+   [RFC3168]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+              of Explicit Congestion Notification (ECN) to IP",
+              RFC 3168, DOI 10.17487/RFC3168, September 2001,
+              <http://www.rfc-editor.org/info/rfc3168>.
+
+   [RFC3209]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
+              and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
+              Tunnels", RFC 3209, DOI 10.17487/RFC3209, December 2001,
+              <http://www.rfc-editor.org/info/rfc3209>.
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 14]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+   [RFC3270]  Le Faucheur, F., Wu, L., Davie, B., Davari, S., Vaananen,
+              P., Krishnan, R., Cheval, P., and J. Heinanen, "Multi-
+              Protocol Label Switching (MPLS) Support of Differentiated
+              Services", RFC 3270, DOI 10.17487/RFC3270, May 2002,
+              <http://www.rfc-editor.org/info/rfc3270>.
 
    [RFC3550]  Schulzrinne, H., Casner, S., Frederick, R., and V.
               Jacobson, "RTP: A Transport Protocol for Real-Time
@@ -438,17 +801,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               Edge-to-Edge (PWE3) Architecture", RFC 3985,
               DOI 10.17487/RFC3985, March 2005,
               <http://www.rfc-editor.org/info/rfc3985>.
-
-
-
-
-
-
-
-Korhonen, et al.         Expires August 6, 2016                 [Page 8]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
 
    [RFC4446]  Martini, L., "IANA Allocations for Pseudowire Edge to Edge
               Emulation (PWE3)", BCP 116, RFC 4446,
@@ -465,6 +817,30 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               "Encapsulation Methods for Transport of Ethernet over MPLS
               Networks", RFC 4448, DOI 10.17487/RFC4448, April 2006,
               <http://www.rfc-editor.org/info/rfc4448>.
+
+   [RFC5087]  Stein, Y(J)., Shashoua, R., Insler, R., and M. Anavi,
+              "Time Division Multiplexing over IP (TDMoIP)", RFC 5087,
+              DOI 10.17487/RFC5087, December 2007,
+              <http://www.rfc-editor.org/info/rfc5087>.
+
+   [RFC5129]  Davie, B., Briscoe, B., and J. Tay, "Explicit Congestion
+              Marking in MPLS", RFC 5129, DOI 10.17487/RFC5129, January
+              2008, <http://www.rfc-editor.org/info/rfc5129>.
+
+   [RFC5462]  Andersson, L. and R. Asati, "Multiprotocol Label Switching
+              (MPLS) Label Stack Entry: "EXP" Field Renamed to "Traffic
+              Class" Field", RFC 5462, DOI 10.17487/RFC5462, February
+              2009, <http://www.rfc-editor.org/info/rfc5462>.
+
+
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 15]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
 
    [RFC6073]  Martini, L., Metz, C., Nadeau, T., Bocci, M., and M.
               Aissaoui, "Segmented Pseudowire", RFC 6073,
@@ -494,18 +870,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               Networks Task Group", 2013,
               <http://www.IEEE802.org/1/pages/avbridges.html>.
 
-
-
-
-
-
-
-
-Korhonen, et al.         Expires August 6, 2016                 [Page 9]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
-
 Authors' Addresses
 
    Jouni Korhonen (editor)
@@ -524,6 +888,14 @@ Authors' Addresses
    Hungary
 
    Email: janos.farkas@ericsson.com
+
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 16]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
 
 
    Norman Finn
@@ -557,4 +929,24 @@ Authors' Addresses
 
 
 
-Korhonen, et al.         Expires August 6, 2016                [Page 10]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 13, 2016               [Page 17]
