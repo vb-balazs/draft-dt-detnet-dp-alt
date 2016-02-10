@@ -2,6 +2,7 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc2119 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc2460 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
+<!ENTITY rfc2702 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2702.xml">
 <!ENTITY rfc3031 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3031.xml">
 <!ENTITY rfc3550 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3550.xml">
 <!ENTITY rfc3985 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3985.xml">
@@ -429,52 +430,110 @@
  </section>
   
  <section title="PseudoWires" anchor="sec_alt_pwe">
-  <t>
-   *Jouni to write the initial text*
-  </t>
   <section title="Solution description">
+   <t>
+    PSeudo Wire Emulation (PWE)  <xref target="RFC3985"/> or PseudoWires (PW)
+    provide means of emulating the essential attributes and behaviour of a
+    telecommunications service over a packet switched network (PSN) using IP or
+    MPLS transport.  In addition to traditional telecommunications services
+    such as T1 line or Frame Relay, PWs also provide transport for Ethernet
+    service <xref target="RFC4448"/> and for generic packet service <xref
+    target="RFC6658"/>.
+   </t>
+   <t>
+    PWs appear as a good data plane solution alternative for a number of
+    reasons. PWs are a proven and deployed technology with a rich O&amp;M
+    control plane <xref target="RFC4447"/>, and enjoy the toolbox developed for
+    MPLS networks. Furthermore, PWs may have an optional Control Word (CW) as
+    part of the payload encapsulation between the PSN and the emulated service
+    that is, for example, capable of frame sequencing and duplicate detection.
+    The encapsulation layer may also provide timing  <xref target="RFC5087"/>.
+   </t>
   </section>
 
   <section title="Analysis and Discussion">
    <t><list style="hanging">
-    <t hangText="Encapsulation and overhead (M/W/N)">
-     Bla bla..
+    <t hangText="Encapsulation and overhead (M)">
+     PWs offer encapsulation services practically for any types of payloads
+     over any PSN.  New PW types need a code point allocation <xref
+     target="RFC4446"/> and in some cases an emulated service specific
+     document.
+     <vspace blankLines="1"/>
+     Specifically in the case of the MPLS PSN the PW encapsulation overhead is
+     minimal. Typically minimum two labels and a CW is needed, which totals to
+     12 octets. PW type specific handling might, however, allow optimizations
+     on the emulated service in the provider edge (PE) device's native service
+     processing (NSP) / forwarder function. These optimizations could be used,
+     for example, to reduce header overhead.
     <vspace blankLines="1"/></t>
-    <t hangText="Stream identification (M/W/N)">
-     Bla bla..
+    <t hangText="Stream identification (M)">
+     PWs provide multiple layers of stream identification, especially in the case
+     of the MPLS PSN. The PWs are typically prepended with a PW label that can be
+     used to identitify a specific PW. Furthermore, the PSN also uses one or more
+     labels to transport packets over a specific label swithed paths (that then'
+     would carry PWs).
     <vspace blankLines="1"/></t>
-    <t hangText="Packet sequencing (M/W/N)">
-     Bla bla..
+    <t hangText="Packet sequencing (M)">
+     As mentioned earlier PWs may contain an optional CW that is able to provide
+     sequencing services. The size of the sequence number in the generic CW is
+     16 bits, which might be, depending on the used link speed be too little.
     <vspace blankLines="1"/></t>
-    <t hangText="Explicit routes (M/W/N)">
-     Bla bla..
+    <t hangText="Explicit routes (M)">
+     In a case of the MPLS PSN the traffic engineering toolbox developed for
+     MPLS can be used to signal explicit label switched paths (LSP) <xref
+     target="RFC2702"/>.  Furthermore, the PSN may also use segment routing
+     (SR) to provide explicit routes <xref
+     target="I-D.ietf-spring-segment-routing"/> <xref
+     target="I-D.ietf-6man-segment-routing-header"/>.
     <vspace blankLines="1"/></t>
-    <t hangText="Packet replication and deletion (M/W/N)">
-     Bla bla..
+    <t hangText="Packet replication and deletion (W)">
+     The 1+1 PW/LSP protection / redundancy mechanisms  <xref
+     target="RFC6718"/> could provide tools for packet replication. However,
+     these solutions are not really intended for sourcing multiple simultaneous
+     packet streams. The solutions have one active and other standby stream.
+     The PW duplicate detection mechanism also exists in theory <xref
+     target="RFC3985"/> but no emulated service makes use of it currently.
     <vspace blankLines="1"/></t>
-    <t hangText="Operations and management (M/W/N)">
-     Bla bla..
+    <t hangText="Operations and management (M/W)">
+     PWs have rich control plane for O&amp; and in a case of the MPLS PSN enjoy
+     the full control plane toolbox developed for MPLS network O&amp;M. There
+     could be, however, need for deterministic networking specific extensions
+     for the mentioned control planes.
     <vspace blankLines="1"/></t>
-    <t hangText="Time synchronization (M/W/N)">
-     Bla bla..
+    <t hangText="Time synchronization (M)">
+     It is possible to carry time synchronization information as part of the PW
+     encapsulation layer (see for example <xref target="RFC5087"/>). Whether
+     the timing precision is enough for all determistic networking use cases
+     vary, and it is possible existing mechanisms are not adequate for all use
+     cases.
     <vspace blankLines="1"/></t>
-    <t hangText="Class and quality of service capabilities (M/W/N)">
-     Bla bla..
+    <t hangText="Class and quality of service capabilities (M)">
+     TBD... MPLS TC bits..
     <vspace blankLines="1"/></t>
     <t hangText="Packet traceability (M/W/N)">
-     Bla bla..
+     TBD..
     <vspace blankLines="1"/></t>
-    <t hangText="Technical maturity (M/W/N)">
-     Bla bla..
+    <t hangText="Technical maturity (M)">
+     PWs and MPLS are both proved technologies with wide variety of deployments
+     and years of operational experience. Furthermore, the estimated work for
+     missing functionality (packet replication and deletion) does not appear to
+     be extensive, since the existing protection mechanism already get close to
+     what is needed from the deterministic networking data plane solution.
     <vspace blankLines="1"/></t>
    </list></t>
   </section>
 
   <section title="Summary">
    <t>
-    One sentence/paragraph summary how good alternative this technology is.
+    PseudoWires appear to be a strong candidate as the deterministic networking
+    data plane solution alternative. The strong points are the technical maturity
+    and the extensive control plane for O&amp;M. This holds specifically for 
+    MPLS-based PSN.
    </t>
-
+   <t>
+    Extentions are required to realize the packet replication and duplicate detection.
+    feature of the deterministic networking data plane.
+   </t>
   </section>
  </section>
 
@@ -546,12 +605,15 @@
    &rfc3031;
    &rfc3985;
    &rfc3550;
+   
+   &rfc2702;
    &rfc4446;
    &rfc4447;
    &rfc4448;
+   &rfc5087;
+   &rfc6658;
    &rfc6073;
    &rfc6437;
-   &rfc6658;
    &rfc6718;
    &rfc7167;
    &I-D.finn-detnet-problem-statement;
