@@ -292,8 +292,9 @@
     <t>
      For the network management and specifically for tracing down
      implementation or network configuration errors any means to find out
-     whether a packet is a replica, and which node performed replication can be
-     very useful. This criteria concerns the availability of solutions for
+     whether a packet is a replica, which node performed replication, and
+     which path was intended for the replica, can be very useful.
+     This criteria concerns the availability of solutions for
      tracing packets in the context of data plane protocol alternative.
     </t>
   </section>
@@ -333,9 +334,7 @@
  </section>
 
  <section title="Native IPv6 transport" anchor="sec_alt_ipv6">
-  <t>
-   *Janos to write the initial text*
-  </t>
+
   
   <section title="Solution description">
    <t>
@@ -355,9 +354,13 @@
     
    <t>
     The 20-bit flow label field of the fixed IPv6 header is suitable to
-    identify deterministic flows / streams (<xref
-    target="sec_crit_streamid"/>).  Guidance on the use of the flow label is
-    provided by <xref target="RFC6437"/>.
+    distinguish different deterministic flows / streams (<xref
+    target="sec_crit_streamid"/>). But guidance on the use of the flow label
+    provided by <xref target="RFC6437"/> places restrictions on how
+    the flow label can be used. In particular, labels should chosen from
+    an approximation to a discrete uniform distribution. Additionally,
+    existing implementationz generally do not open APIs to control the 
+    flow label from the upper layers.
    </t>
     
    <t>
