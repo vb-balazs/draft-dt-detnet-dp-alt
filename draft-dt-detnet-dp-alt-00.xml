@@ -375,13 +375,12 @@
     <t hangText="Stream identification (M/W)">
      <vspace blankLines="1"/>
      The 20-bit flow label field of the fixed IPv6 header is suitable to
-     distinguish different deterministic flows / streams (<xref
-     target="sec_crit_streamid"/>). But guidance on the use of the flow label
-     provided by <xref target="RFC6437"/> places restrictions on how
-     the flow label can be used. In particular, labels should be chosen from
-     an approximation to a discrete uniform distribution. Additionally,
-     existing implementations generally do not open APIs to control the 
-     flow label from the upper layers.
+     distinguish different deterministic flows/streams. But guidance on the use
+     of the flow label provided by <xref target="RFC6437"/> places restrictions
+     on how the flow label can be used. In particular, labels should be chosen
+     from an approximation to a discrete uniform distribution. Additionally,
+     existing implementations generally do not open APIs to control the flow
+     label from the upper layers.
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet sequencing (W/N)">
@@ -392,54 +391,69 @@
     
     <t hangText="Explicit routes (W)">
      <vspace blankLines="1"/>
-     There is an initiative to equip IPv6 with explicit routing (<xref
-     target="sec_crit_explicit"/>) capabilities. The idea is to apply Segment
-     Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> to IPv6 via
-     the addition of a new type of routing extension header <xref
+     There is an initiative to equip IPv6 with explicit routing capabilities.
+     The idea is to apply Segment Routing (SR) <xref
+     target="I-D.ietf-spring-segment-routing"/> to IPv6 via the addition of a
+     new type of routing extension header <xref
      target="I-D.ietf-6man-segment-routing-header"/>.  
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet replication and deletion (W)">
      <vspace blankLines="1"/>
-     Packet replication and elimination of duplicates (<xref
-     target="sec_crit_repdup"/>) is the core of seamless redundancy. The
-     implementation of this functionality largely depends on the packet
-     sequencing (<xref target="sec_crit_seq"/>) approach used. Correspondingly,
-     the traceability (<xref target="sec_crit_trace"/>) of replicated packets
-     also depends on the sequencing mechanism. Currently, there is no support
-     for packet sequencing in native IPv6. That is, there is no header field
-     whose application would be straightforward as a field for packet
-     sequencing.
+     The implementation of this functionality largely depends on the packet
+     sequencing and flow/stream identification approaches used. Specifically in
+     a case of packet replication the replicated packets are likely to be
+     sourced from a different IPv6 address than the original packets, thus the
+     flow/stream identification that is independent of the addressing becomes
+     important. At present sequencing and flow/stream identification beyond IPv6
+     flow label would require new IPv6 extension headers. Also, there is no
+     specification for the duplicate packet deletion functionality at merging
+     points.
     <vspace blankLines="1"/></t>
     
     <t hangText="Operations and management (M/W)">
      <vspace blankLines="1"/>
-     TBD.
-    <vspace blankLines="1"/></t>
+     IPv6 enjoys the existing toolbox for generic IP network management.
+     However, IPv6 specific management features are still not at the level of
+     that IPv4 has. This specifically concerns the areas that are IPv6 specific,
+     for example, related to neighbor discovery protocol (ND), stateless address
+     autoconfiguration (SLAAC), subscriber identification, and security.
+     While the standards are already mostly in place the implementations in
+     deployed equipment can be lacking or inadequate for commercial
+     deployments. This is largely only an issue with old existing equipment.
+   <vspace blankLines="1"/></t>
     
     <t hangText="Time synchronization (W/N)">
      <vspace blankLines="1"/>
-     TBD. [Editor's note: most likely a new extension header is required
-     for this purpose.]
+     IPv6 has no existing supporting mechanisms for anything time
+     synchronization. A new extension header would be needed for this purpose,
+     if such functionality is required.
     <vspace blankLines="1"/></t>
     
     <t hangText="Class and quality of service capabilities (M)">
      <vspace blankLines="1"/>
-     IPv6 supports QoS (<xref target="sec_crit_qos"/>). The traffic class field
-     of the fixed IPv6 header is designed for this purpose.
+     The traffic class field of the fixed IPv6 header is designed for this purpose.
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet traceability (M/W/N)">
      <vspace blankLines="1"/>
-     TBD..
-    <vspace blankLines="1"/></t>
+     The traceability of replicated packets also depends on the sequencing
+     mechanism. As noted earlier, there is no header field whose application
+     would be straightforward as a field for packet sequencing.  Furthermore,
+     traceability would need a mechanism to trace back the reverse route the
+     packet took in some cases. While IPv6 as such has no support for this, it
+     appears source route extensions such as the one defined for segment routing
+     could be used for tracing purposes.
+     <vspace blankLines="1"/></t>
     
-    <t hangText="Technical maturity (M)">
+    <t hangText="Technical maturity (M/W)">
      <vspace blankLines="1"/>
-     TBD. [Editor's note: IPv6 is getting serious deployments globally.
-     However, as seen from the number of basic IPv6 related documents in both
-     IETF V6OPS and V6MAN WGs indicate there are still a lot of small,
-     specifically operational, details to iron out.]
+     IPv6 has been around about 20 years. However, large scale global and
+     commercial IPv6 deployments are rather new dating only few years back to
+     around 2012. While IPv6 has proven itself there are number of small issues
+     to work on as they show up once operations experience grows. A good meter
+     is the number of basic IPv6 related documents in IETF V6OPS, V6MAN and
+     other use case specific working groups.
     <vspace blankLines="1"/></t>
    </list></t>
   </section>
