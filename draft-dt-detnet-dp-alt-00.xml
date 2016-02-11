@@ -22,6 +22,8 @@
 <!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
 <!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
 <!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
+<!ENTITY rfc6733 PUBLIC ""
+"http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6733.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -282,16 +284,24 @@
 
   <section title="#8 Class and quality of service capabilities" anchor="sec_crit_qos">
     <t>
-     Some protocols or encapsulation headers that may be viable as a solution
-     alternative for the deterministic networking data plane may also have a
-     capability to distinguishing between different classes of service (CoS) and/or
-     the quality of service (QoS) for the payload flows / streams they transport.
-     Furthermore, this Criteria concerns the availability and mechanism for the CoS
-     and QoS signaling as a part of the data plane protocol alternative.
+     The data plane solution alternative should provide means for class of
+     service (Cos) based traffic classification, for example, for queuing
+     discipline.  Existing CoS traffic classification enablers include but are
+     not limited to IP header differentiated services code point (DSCP) field
+     <xref target="RFC2474"/>, MPLS label traffic class field <xref
+     target="RFC5462"/>, and IEEE 803.1p priority code point (PCP) field to name
+     few.
     </t>
-    <t>[Editor's note] add more text here to make the difference between CoS and QoS
-     clear. CoS would be layer-2 mechanism and QoS layer-3 mechanism. Sometimes the
-     difference is not that clear, though.
+    <t>
+     Quality of Service (QoS) is a mechanism for flow/stream specific traffic
+     treatment and include a quarantee/agreement for the service.  In the
+     context of the data plane solution alternative there should be means for
+     flow/stream identification, which then can be used to map a flow/stream
+     against specific resources and and treatment in a node enforcing the QoS.
+    </t>
+    <t> 
+     This Criteria concerns the availability and mechanisms for the CoS and QoS
+     marking and signaling as a part of the data plane protocol solution alternative.
     </t>
   </section>
   <section title="#9 Packet traceability" anchor="sec_crit_trace">
@@ -363,6 +373,7 @@
      <vspace blankLines="1"/></t>
     
     <t hangText="Stream identification (M/W)">
+     <vspace blankLines="1"/>
      The 20-bit flow label field of the fixed IPv6 header is suitable to
      distinguish different deterministic flows / streams (<xref
      target="sec_crit_streamid"/>). But guidance on the use of the flow label
@@ -584,9 +595,16 @@
      specific mapping between bit fields have to be done.
     <vspace blankLines="1"/></t>
     
-    <t hangText="Packet traceability (M/W/N)">
+    <t hangText="Packet traceability (M/W)">
      <vspace blankLines="1"/>
-     TBD..
+     In a case of MPLS PSN and an approach where PWs are prepended with a PSN
+     layer outer label (or more labels in a stack) help tracing the explicit
+     reverse path of the packet using the outer label(s) as the key. Even if the
+     PW labels of the duplicated packets were the same the outer labels should
+     be different. However, even this approach is not "perfect" since the
+     intermediate node identities are not recorded into the packet hop-by-hop
+     basis as some protocol do (for example, Diameter protocol loop detection
+     <xref target="RFC6733"/>).
     <vspace blankLines="1"/></t>
     
     <t hangText="Technical maturity (M)">
@@ -699,6 +717,7 @@
    &rfc6437;
    &rfc6718;
    &rfc7167;
+   &rfc6733;
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
    &I-D.ietf-isis-pcr;
