@@ -400,15 +400,19 @@
     
     <t hangText="Packet replication and deletion (W)">
      <vspace blankLines="1"/>
-     The implementation of this functionality largely depends on the packet
-     sequencing and flow/stream identification approaches used. Specifically in
-     a case of packet replication the replicated packets are likely to be
-     sourced from a different IPv6 address than the original packets, thus the
+     The implementation of this functionality largely depends on used the packet
+     sequencing and flow/stream identification approaches. Specifically in a
+     case of packet replication the replicated packets are likely to be sourced
+     from a different IPv6 address than the original packets, thus the
      flow/stream identification that is independent of the addressing becomes
      important. At present sequencing and flow/stream identification beyond IPv6
-     flow label would require new IPv6 extension headers. Also, there is no
-     specification for the duplicate packet deletion functionality at merging
-     points.
+     flow label would require new IPv6 extension headers. Another concern
+     regarding packet replication is how to enforce replicated packets to take
+     different route while the final destination still remains the same. With
+     IPv6 and using layer-3 mechanisms this cannot be done without form of
+     source routing encoded into the packet, for example, in form of source
+     routing extension  headers.  Also, there is currently no specification for
+     the duplicate packet deletion functionality at merging points.
     <vspace blankLines="1"/></t>
     
     <t hangText="Operations and management (M/W)">
@@ -537,7 +541,10 @@
      12 octets. PW type specific handling might, however, allow optimizations
      on the emulated service in the provider edge (PE) device's native service
      processing (NSP) / forwarder function. These optimizations could be used,
-     for example, to reduce header overhead.
+     for example, to reduce header overhead. Ethernet PWs already have rather
+     low overhead <xref target="RFC4448"/>. Without a CW and VLAN tags the
+     Ethernet header gets reduced to 14 octets (minimum Ethernet header overhead
+     is 26).
     <vspace blankLines="1"/></t>
     
     <t hangText="Stream identification (M)">
