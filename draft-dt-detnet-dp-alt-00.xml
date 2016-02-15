@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc0791 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.0791.xml">
+<!ENTITY rfc1122 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1122.xml">
+<!ENTITY rfc1393 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1393.xml">
 <!ENTITY rfc2119 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc2460 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
 <!ENTITY rfc2474 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2474.xml">
@@ -22,14 +25,21 @@
 <!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
 <!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
 <!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
-<!ENTITY rfc6733 PUBLIC ""
-"http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6733.xml">
+<!ENTITY rfc6733 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6733.xml">
+<!ENTITY rfc6864 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6864.xml">
+<!ENTITY rfc6621 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6621.xml">
+<!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
+<!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
 <!ENTITY I-D.ietf-isis-pcr SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-isis-pcr.xml">
 <!ENTITY I-D.ietf-6man-segment-routing-header SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-segment-routing-header.xml">
 <!ENTITY I-D.ietf-spring-segment-routing SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-spring-segment-routing.xml">
+<!ENTITY I-D.ietf-v6ops-ipv6-ehs-in-real-world SYSTEM
+"http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-v6ops-ipv6-ehs-in-real-world.xml">
+<!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM
+"http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
 
 ]>
 
@@ -76,26 +86,26 @@
    </address>
   </author>
   
-  <author fullname="Norman Finn" initials="N." surname="Finn">
+  <!-- author fullname="Norman Finn" initials="N." surname="Finn">
    <organization abbrev="Cisco">Cisco</organization>
    <address>
     <email>nfinn@cisco.com</email>
    </address>
-  </author>
+  </author -->
   
-  <author fullname="Olivier Marce" initials="O." surname="Marce">
+  <!-- author fullname="Olivier Marce" initials="O." surname="Marce">
    <organization abbrev="Nokia Bell Labs">Nokia Bell Labs</organization>
    <address>
     <email>Olivier.Marce@nokia.com</email>
    </address>
-  </author>
+  </author -->
   
-  <author fullname="Gregory Mirsky" initials="G." surname="Mirsky">
+  <!-- author fullname="Gregory Mirsky" initials="G." surname="Mirsky">
    <organization abbrev="Ericsson">Ericsson</organization>
    <address>
     <email>gregory.mirsky@ericsson.com</email>
    </address>
-  </author>
+  </author -->
   
   <author fullname="Pascal Thubert" initials="P." surname="Thubert">
    <organization abbrev="Cisco">Cisco</organization>
@@ -104,12 +114,12 @@
    </address>
   </author>
   
-  <author fullname="Zhuangyan Zhuang" initials="Z." surname="Zhuan">
+  <!-- author fullname="Zhuangyan Zhuang" initials="Z." surname="Zhuan">
    <organization abbrev="Huawei">Huawei</organization>
    <address>
     <email>zhuangyan.zhuang@huawei.com</email>
    </address>
-  </author>
+  </author -->
   
   <date />
   <workgroup>DetNet</workgroup>
@@ -338,25 +348,12 @@
   or too much work envisioned.
  </t>
 
- <section title="Native IPv4 transport" anchor="sec_alt_ipv4">
-  <section title="Solution description">
-  </section>
-
-  <section title="Analysis and Discussion">
-  </section>
-
-  <section title="Summary">
-  </section>
- </section>
-
  <section title="Native IPv6 transport" anchor="sec_alt_ipv6">
-
-  
   <section title="Solution description">
    <t>
     This section investigates the application of native IPv6 <xref
-    target="RFC2460"/> as the data plane for DetNet along the criteria
-    collected in <xref target="sec_crit"/>.
+    target="RFC2460"/> as the data plane for deterministic networking along the
+    criteria collected in <xref target="sec_crit"/>.
    </t>
   </section>
   
@@ -469,6 +466,119 @@
   </section>
  </section>
 
+ <section title="Native IPv4 transport" anchor="sec_alt_ipv4">
+  <section title="Solution description">
+   <t>
+    IPv4 <xref target="RFC0791"/> is in principle the same as IPv6, except that
+    it has a smaller address space. However, IPv6 was designed around the fact
+    that extension headers are an integral part of the protocol and operation
+    from the beginning, although the practise may some times prove differently
+    <xref target="I-D.ietf-v6ops-ipv6-ehs-in-real-world"/>. IPv4 never really
+    needed any extension headers to work properly, thus support for IPv4 options
+    outside closed networks cannot typically be guaranteed. In the context of
+    deterministic networking data plane solutions the major difference between
+    IPv4 and IPv6 seems to be the practical support for header extensibility.
+    Anything below and above the IP header independent of the verion is
+    practically the same. 
+   </t>
+  </section>
+
+  <section title="Analysis and Discussion">
+   <t><list style="hanging">
+    <t hangText="Encapsulation and overhead (M)">
+     <vspace blankLines="1"/> The fixed header of an IPv6 packet is 20 bytes
+     <xref target="RFC0791"/>. IP options add overhead and the maximum IPv4
+     header size if 60 octets leaving only 40 octets for possible options.
+     <vspace blankLines="1"/></t>
+    
+    <t hangText="Stream identification (W/N)">
+     <vspace blankLines="1"/>
+     The IPv4 header has a 16-bit identification field that was originally
+     intended for assisting fragmentation and reassembly of IPv4 packets as
+     described in <xref target="RFC0791"/>. The identification field has also
+     been proposed to be used for actually identifying flows/streams between two
+     IP addresses and a given protocol for detecting and removing duplicate
+     packets <xref target="RFC1122"/>. However, recent update <xref
+     target="RFC6864"/> to both <xref target="RFC0791"/> and <xref
+     target="RFC1122"/> restricts the use of IPv4 identification field only to
+     fragmentation purposes. Duplicate packet detection for IPv4 is studied in
+     <xref target="RFC6621"/> to a great detail in the context of simplified
+     multicast forwarding. 
+     <vspace blankLines="1"/>
+     The IPv4 also has a stream identifier option <xref target="RFC0791"/>,
+     which contains a 16-bit SATNET stream identifier. However, the option has
+     been deprecated <xref target="RFC6814"/>.  The conclusion is that stream
+     identification does not work nicely with IPv4 header alone and a
+     traditional 5-tuple identification might not also be enough in a case of a
+     flow/stream duplication. For a working solution upper layer protocol
+     headers such as the RTP are required for unambiguous flow/stream
+     identification.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Packet sequencing (W/N)">
+     <vspace blankLines="1"/>
+     IPv4 has no inbuilt support for packet sequencing. Upper layer protocol
+     header support such as the RTP is required.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Explicit routes (M/W)">
+     <vspace blankLines="1"/>
+     IPv4 has two source routing option specified: the loose source and record
+     route option (LSRR), and the strict source and record route option (SSRR)
+     <xref target="RFC0791"/>. The support of these options in the Internet is
+     questionable but within a closed network the support may be assumed.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Packet replication and deletion (W/N)">
+     <vspace blankLines="1"/>
+     Currently there is no native mechamism for IPv4 to support packet
+     replication and deletion. In general the issue The regarding the IPv6
+     packet replication and deletion also apply to IPv4.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Operations and management (M)">
+     <vspace blankLines="1"/>
+     IPv4 enjoys the extensive and "complete" existing toolbox for generic IP
+     network management.
+   <vspace blankLines="1"/></t>
+    
+    <t hangText="Time synchronization (W/N)">
+     <vspace blankLines="1"/>
+     IPv4 has an existing option for transporting "Internet Timestamp" <xref
+     target="RFC0791"/> with the accuracy of 1ms. The support and usability of
+     this option is unknown in the context of determnistic networking data
+     plane. Similarly to IPv6 new work would be needed to introduce sense of
+     time to IPv4 or rely on upper layer protocol such as the RTP to provide the
+     required functionality.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Class and quality of service capabilities (M)">
+     <vspace blankLines="1"/>
+     The type of service (TOS) field of the fixed IPv4 header is designed for this purpose.
+    <vspace blankLines="1"/></t>
+    
+    <t hangText="Packet traceability (W/N)">
+     <vspace blankLines="1"/>
+     The IPv4 has a traceroute option <xref target="RFC1393"/> that could be used
+     to record the route the packet took. However, the option has been
+     deprecated <xref target="RFC6814"/>. Similarly to IPv6 new work would be
+     needed to allow better traceability of IPv4 packets.
+     <vspace blankLines="1"/></t>
+    
+    <t hangText="Technical maturity (M/W)">
+     <vspace blankLines="1"/>
+     IPv4 can be considered mature technology with over 30 years of
+     implementation, deployment and operations experience. However, no new IPv4
+     standards development is "allowed" anymore <xref target="RFC6540"/><xref
+     target="I-D.ietf-sunset4-gapanalysis"/>.
+    <vspace blankLines="1"/></t>
+   </list></t>
+  </section>
+
+  <section title="Summary">
+  </section>
+ </section>
+ 
  <section title="Layer-2 tunneling over IP">
   <section title="GRE" anchor="sec_alt_gre">
    <section title="Solution description">
@@ -709,6 +819,16 @@
 <section anchor="acks" title="Acknowledgements">
   <t>The author(s) ACK and NACK.
   </t>
+  <t> The following people were part of the DetNet Data Plane Design Team:
+  <list style="bullets">
+   <t>Jouni Korhonen</t>
+   <t>J&aacute;nos Farkas</t>
+   <t>Norman Finn</t>
+   <t>Olivier Marce</t>
+   <t>Gregory Mirsky</t>
+   <t>Pascal Thubert</t>
+   <t>Zhuangyan Zhuang</t>
+  </list></t>
 </section>
 </middle>
 
@@ -717,10 +837,17 @@
    &rfc2119;
   </references>
   <references title="Informative References">
+   &rfc0791;
+   &rfc1122;
    &rfc2460;
    &rfc3031;
    &rfc3985;
    &rfc3550;
+   &rfc6864;
+   &rfc6621;
+   &rfc6814;
+   &rfc1393;
+   &rfc6540;
    
    &rfc2474;
    &rfc2702;
@@ -744,17 +871,31 @@
    &I-D.ietf-isis-pcr;
    &I-D.ietf-spring-segment-routing;
    &I-D.ietf-6man-segment-routing-header;
+   &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
+   &I-D.ietf-sunset4-gapanalysis;
 
-      <reference anchor="TSNTG"
-       target="http://www.IEEE802.org/1/pages/avbridges.html">
-        <front>
-          <title>IEEE 802.1 Time-Sensitive Networks Task Group</title>
-          <author>
-            <organization>IEEE Standards Association</organization>
-          </author>
-          <date year="2013" />
-        </front>
-      </reference>
+   <reference anchor="ST20227"
+     target="https://www.smpte.org/digital-library">
+    <front>
+     <title>Seamless Protection Switching of SMPTE ST 2022 IP Datagrams</title>
+     <author>
+      <organization>SMPTE 2022</organization>
+     </author>
+     <date year="2013"/>
+    </front>
+    <seriesInfo name="ST" value="2022-7:2013"/>
+   </reference>
+      
+   <reference anchor="TSNTG"
+    target="http://www.IEEE802.org/1/pages/avbridges.html">
+    <front>
+     <title>IEEE 802.1 Time-Sensitive Networks Task Group</title>
+     <author>
+      <organization>IEEE Standards Association</organization>
+     </author>
+     <date year="2013" />
+    </front>
+   </reference>
   
    <reference anchor="IEEE8021CB"
      target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-1.pdf">
