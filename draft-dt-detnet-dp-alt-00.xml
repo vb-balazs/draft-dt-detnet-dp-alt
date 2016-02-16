@@ -30,6 +30,7 @@
 <!ENTITY rfc6621 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6621.xml">
 <!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
 <!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
+<!ENTITY rfc5921 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5921.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -736,10 +737,9 @@
      <vspace blankLines="1"/>
      In a case of the MPLS PSN the traffic engineering toolbox developed for
      MPLS can be used to signal explicit label switched paths (LSP) <xref
-     target="RFC2702"/><xref target="RFC3209"/>.  Furthermore, the PSN may also
-     use segment routing (SR) to provide explicit routes <xref
-     target="I-D.ietf-spring-segment-routing"/> <xref
-     target="I-D.ietf-6man-segment-routing-header"/>.
+     target="RFC5921"/> <xref target="RFC2702"/><xref target="RFC3209"/>.
+     Furthermore, the PSN may also use segment routing (SR) to provide explicit
+     routes <xref target="I-D.ietf-spring-segment-routing"/>.
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet replication and deletion (W)">
@@ -993,6 +993,7 @@ title="DetNet in BIER domain">
    &rfc6814;
    &rfc1393;
    &rfc6540;
+   &rfc5921;
    
    &rfc2474;
    &rfc2702;
