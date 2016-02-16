@@ -355,6 +355,14 @@
     target="RFC2460"/> as the data plane for deterministic networking along the
     criteria collected in <xref target="sec_crit"/>.
    </t>
+   <t>
+    The application of higher OSI layer headers, i.e., headers deeper in the
+    packet, can be considered. Two aspects have to be taken into account for
+    such solutions. (i) Those header fields can be encrypted. (ii) Those
+    header fields are deeper in the packet, therefore, routers have to apply
+    deep packet inspection. See further details in
+    <xref target="sec_alt_ipv6_higher"/>.
+   </t>
   </section>
   
   <section title="Analysis and Discussion">
@@ -392,7 +400,8 @@
      The idea is to apply Segment Routing (SR) <xref
      target="I-D.ietf-spring-segment-routing"/> to IPv6 via the addition of a
      new type of routing extension header <xref
-     target="I-D.ietf-6man-segment-routing-header"/>.  
+     target="I-D.ietf-6man-segment-routing-header"/>. Alternatively, and SDN
+     or management based approach can be applied for explicit routes. 
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet replication and deletion (W)">
@@ -458,6 +467,38 @@
     <vspace blankLines="1"/></t>
    </list></t>
   </section>
+
+  <section title="Higher layer header fields" anchor="sec_alt_ipv6_higher">
+   <t>
+     Fields of headers belonging to higher OSI layers, e.g., transport  
+     layer, can be used to implement functionality that is not provided by the 
+     IPv6 header fields. However, this approach cannot be always applied, e.g.,
+     due to encryption. Furthermore, even if this approach is applicable, it
+     requires deep packet inspection from the routers. Various higher layer
+     protocols can be applied. Some examples are provided here for the sequence
+     numbering feature (<xref target="sec_crit_seq"/>).
+   </t>
+   
+   <section title="TCP">
+   <t>
+     The TCP header includes a sequence number parameter, which can be applied
+     to detect and eliminate duplicate packets if seamless redundancy is used.
+     As the TCP header is right after the IP header, it does not require very 
+     deep packet inspection; the 4-byte sequence number is conveyed by bits 32
+     through 63 of the TCP header. 
+   </t>
+   </section> 
+   
+   <section title="RTP">
+   <t>
+     RTP is often used to deliver time critical traffic in IP networks. RTP is
+     is carried on top of IP and UDP <xref target="RFC3550"/>. The RTP header
+     includes a 2-byte sequence number, which can be used to detect and
+     eliminate duplicate packets if seamless redundancy is used. The sequence
+     number is conveyed by bits 16 through 31 of the RTP header.
+   </t>
+   </section>
+  </section> 
 
   <section title="Summary">
    <t>
@@ -913,7 +954,7 @@
    <reference anchor="IEEE8021Qca"
      target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf">
     <front>
-     <title>IEEE 802.1Qca Bridges and Bridged Networks - Amendment: Path Control and Reservation</title>
+     <title>IEEE 802.1Qca Bridges and Bridged Networks - Amendment 24: Path Control and Reservation</title>
      <author>
       <organization>IEEE 802.1</organization>
      </author>
