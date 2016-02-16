@@ -5,7 +5,8 @@
 DetNet                                                  J. Korhonen, Ed.
 Internet-Draft                                                  Broadcom
 Intended status: Informational                                 J. Farkas
-Expires: August 19, 2016                                        Ericsson
+Expires: August 19, 2016                                       G. Mirsky
+                                                                Ericsson
                                                               P. Thubert
                                                                    Cisco
                                                        February 16, 2016
@@ -49,7 +50,6 @@ Copyright Notice
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
 
 
 
@@ -58,6 +58,7 @@ Korhonen, et al.         Expires August 19, 2016                [Page 1]
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
+   include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
 
@@ -97,15 +98,14 @@ Table of Contents
        3.5.2.  Analysis and Discussion . . . . . . . . . . . . . . .  13
        3.5.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  15
      3.6.  Bit Indexed Explicit Replication  . . . . . . . . . . . .  15
-       3.6.1.  Solution description  . . . . . . . . . . . . . . . .  15
-       3.6.2.  Analysis and Discussion . . . . . . . . . . . . . . .  15
-       3.6.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  15
-   4.  Summary of data plane alternatives  . . . . . . . . . . . . .  15
-   5.  Security considerations . . . . . . . . . . . . . . . . . . .  16
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  16
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  16
+       3.6.1.  Solution description  . . . . . . . . . . . . . . . .  16
+       3.6.2.  Analysis and Discussion . . . . . . . . . . . . . . .  17
+       3.6.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  17
+   4.  Summary of data plane alternatives  . . . . . . . . . . . . .  17
+   5.  Security considerations . . . . . . . . . . . . . . . . . . .  18
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  18
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  18
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  18
 
 
 
@@ -114,8 +114,9 @@ Korhonen, et al.         Expires August 19, 2016                [Page 2]
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  17
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  21
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  18
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  19
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  23
 
 1.  Introduction
 
@@ -161,7 +162,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    Ethernet frame over an IP transport network.  In some cases a former
    tunneling like encapsulation can be avoided by underlying transport
    protocol translation, for example, translating layer-2 Ethernet frame
-   including addressing and stream identification into native IP
 
 
 
@@ -170,6 +170,7 @@ Korhonen, et al.         Expires August 19, 2016                [Page 3]
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
+   including addressing and stream identification into native IP
    traffic.  Last it is possible that talkers and listeners handle
    deterministic flows natively in a layer-3.  This criteria concerns
    what is the encapsulation method the solution alternative support:
@@ -215,7 +216,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    IETF counter part is defined in [I-D.ietf-isis-pcr].  This criteria
    concerns the available mechanisms for explicit routes for the data
    plane protocol alternative.
-
 
 
 
@@ -816,9 +816,119 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 3.6.  Bit Indexed Explicit Replication
 
-   *Greg to write the initial text*
+   Bit-Indexed Explicit Replication (BIER) layer may be considered to be
+   included into Deterministic Networking data plane solution.
+   Encapsulation of a BIER packet in MPLS network presented in Figure 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 19, 2016               [Page 15]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                   Label Stack Element                         |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                   Label Stack Element                         |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |              BIER-MPLS label          |     |1|               |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |0 1 0 1|  Ver  |  Len  |              Entropy                  |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                BitString  (first 32 bits)                     ~
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     ~                                                               ~
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     ~                BitString  (last 32 bits)                      |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |OAM|     Reserved      | Proto |            BFIR-id            |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+                Figure 1: BIER packet in MPLS encapsulation
 
 3.6.1.  Solution description
+
+   The DetNet may be presented in BIER as distinctive payload type with
+   its own Proto(col) ID.  Then it is likely that DetNet will have the
+   header that would identify:
+
+   o  Version;
+   o  Sequence Number;
+   o  Timestamp;
+   o  Payload type, e.g. data vs. OAM.
+
+   DetNet node, collocated with BFIR, may use multiple BIER sub-domains
+   to create replicated flows.  Downstream DetNet nodes, collocated with
+   BFER, would terminate redundant flows based on Sequence Number and/or
+   Timestamp information.  Such DetNet may be BFER in one BIER sub-
+   domain and BFIR in another.  Thus DetNet flow would traverse several
+   BIER sub-domains.
+
+
+
+
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 19, 2016               [Page 16]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+                                          +-----+
+                                          |     |
+                                          |  A  |
+                                          |     |
+                                          +-----+
+
+
+
+                               +-----+              +-----+
+                               |     |              |     |
+                               |  B  |              |  C  |
+                               |     |              |     |
+                               +-----+              +-----+
+
+
+
+                      Figure 2: DetNet in BIER domain
+
+   Consider DetNet flow that must traverse BIER enabled domain from A to
+   G and H.  DetNet may use three BIER subdomains:
+
+   o  A-B-D-E-G (red): A is BFIR, E and G are BFERs,
+   o  A-C-E-F-H (purple): A is BFIR, E and H are BFERs,
+   o  E-G-H (green): E is BFIR, G and H are BFERs.
+
+   DetNet node A sends DetNet into red and purple BIER sub-domains.
+   DettNet node E receives DetNet packet and sends into green sub-domain
+   while terminating duplicates and those that deemed too-late.
+
+   DetNet nodes G and H receive DetNet flows, terminate duplicates and
+   those that are too-late.
 
 3.6.2.  Analysis and Discussion
 
@@ -837,7 +947,9 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 
-Korhonen, et al.         Expires August 19, 2016               [Page 15]
+
+
+Korhonen, et al.         Expires August 19, 2016               [Page 17]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
@@ -893,7 +1005,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 
-Korhonen, et al.         Expires August 19, 2016               [Page 16]
+Korhonen, et al.         Expires August 19, 2016               [Page 18]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
@@ -949,7 +1061,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 
-Korhonen, et al.         Expires August 19, 2016               [Page 17]
+Korhonen, et al.         Expires August 19, 2016               [Page 19]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
@@ -1005,7 +1117,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 
-Korhonen, et al.         Expires August 19, 2016               [Page 18]
+Korhonen, et al.         Expires August 19, 2016               [Page 20]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
@@ -1061,7 +1173,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 
-Korhonen, et al.         Expires August 19, 2016               [Page 19]
+Korhonen, et al.         Expires August 19, 2016               [Page 21]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
@@ -1117,7 +1229,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 
-Korhonen, et al.         Expires August 19, 2016               [Page 20]
+Korhonen, et al.         Expires August 19, 2016               [Page 22]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
@@ -1155,6 +1267,12 @@ Authors' Addresses
    Email: janos.farkas@ericsson.com
 
 
+   Gregory Mirsky
+   Ericsson
+
+   Email: gregory.mirsky@ericsson.com
+
+
    Pascal Thubert
    Cisco
 
@@ -1167,10 +1285,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-Korhonen, et al.         Expires August 19, 2016               [Page 21]
+Korhonen, et al.         Expires August 19, 2016               [Page 23]
