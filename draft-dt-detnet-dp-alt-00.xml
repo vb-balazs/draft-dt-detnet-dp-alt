@@ -36,10 +36,8 @@
 <!ENTITY I-D.ietf-isis-pcr SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-isis-pcr.xml">
 <!ENTITY I-D.ietf-6man-segment-routing-header SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-segment-routing-header.xml">
 <!ENTITY I-D.ietf-spring-segment-routing SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-spring-segment-routing.xml">
-<!ENTITY I-D.ietf-v6ops-ipv6-ehs-in-real-world SYSTEM
-"http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-v6ops-ipv6-ehs-in-real-world.xml">
-<!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM
-"http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
+<!ENTITY I-D.ietf-v6ops-ipv6-ehs-in-real-world SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-v6ops-ipv6-ehs-in-real-world.xml">
+<!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
 
 ]>
 
@@ -470,13 +468,16 @@
 
   <section title="Higher layer header fields" anchor="sec_alt_ipv6_higher">
    <t>
-     Fields of headers belonging to higher OSI layers, e.g., transport  
-     layer, can be used to implement functionality that is not provided by the 
-     IPv6 header fields. However, this approach cannot be always applied, e.g.,
-     due to encryption. Furthermore, even if this approach is applicable, it
-     requires deep packet inspection from the routers. Various higher layer
-     protocols can be applied. Some examples are provided here for the sequence
-     numbering feature (<xref target="sec_crit_seq"/>).
+     Fields of headers belonging to higher OSI layers, e.g., transport  layer,
+     can be used to implement functionality that is not provided by the IPv6
+     header fields. However, this approach cannot be always applied, e.g., due
+     to encryption. Furthermore, even if this approach is applicable, it
+     requires deep packet inspection from the routers and switches. There are
+     implementation dependent limits how far into the packet the lookup can be
+     done efficiently in the fast path. In general a safe bet is between 128 and
+     256 octets for the maximum lookup depth. Various higher layer protocols can
+     be applied. Some examples are provided here for the sequence numbering
+     feature (<xref target="sec_crit_seq"/>).
    </t>
    
    <section title="TCP">
@@ -485,7 +486,9 @@
      to detect and eliminate duplicate packets if seamless redundancy is used.
      As the TCP header is right after the IP header, it does not require very 
      deep packet inspection; the 4-byte sequence number is conveyed by bits 32
-     through 63 of the TCP header. 
+     through 63 of the TCP header.  In addition to sequencing, the TCP header
+     also contain source and destination port information that can be used for
+     assisting the flow/stream identification.
    </t>
    </section> 
    
@@ -495,7 +498,13 @@
      is carried on top of IP and UDP <xref target="RFC3550"/>. The RTP header
      includes a 2-byte sequence number, which can be used to detect and
      eliminate duplicate packets if seamless redundancy is used. The sequence
-     number is conveyed by bits 16 through 31 of the RTP header.
+     number is conveyed by bits 16 through 31 of the RTP header. In addition to
+     the sequence number the RTP header has also timestamp field (bits 32
+     through 63) that can be useful for time synchronization purposes.
+     Furthermore, the RTP header has also one or more synchronization sources
+     (bits starting from 64) that can potentially be useful for flow/stream
+     identification purposes.
+     also co
    </t>
    </section>
   </section> 
@@ -615,6 +624,15 @@
     <vspace blankLines="1"/></t>
    </list></t>
   </section>
+
+  <section title="Higher layer header fields" anchor="sec_alt_ipv4_higher">
+   <t>
+     Fields of headers belonging to higher OSI layers, e.g., transport  layer,
+     can be used to implement functionality that is not provided by the IPv4
+     header fields. See the discussion in <xref target="sec_alt_ipv6_higher"/>,
+     which is directly applicable for IPv4 as well.
+   </t>
+  </section> 
 
   <section title="Summary">
   </section>
