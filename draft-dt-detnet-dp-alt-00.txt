@@ -756,10 +756,9 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
       In a case of the MPLS PSN the traffic engineering toolbox
       developed for MPLS can be used to signal explicit label switched
-      paths (LSP) [RFC2702][RFC3209].  Furthermore, the PSN may also use
-      segment routing (SR) to provide explicit routes
-      [I-D.ietf-spring-segment-routing]
-      [I-D.ietf-6man-segment-routing-header].
+      paths (LSP) [RFC5921] [RFC2702][RFC3209].  Furthermore, the PSN
+      may also use segment routing (SR) to provide explicit routes
+      [I-D.ietf-spring-segment-routing].
 
    Packet replication and deletion (W)
 
@@ -778,6 +777,7 @@ Internet-Draft       DetNet data plane alternatives        February 2016
       specific extensions for the mentioned control planes.
 
    Time synchronization (M)
+
 
 
 
@@ -1183,6 +1183,11 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               Class" Field", RFC 5462, DOI 10.17487/RFC5462, February
               2009, <http://www.rfc-editor.org/info/rfc5462>.
 
+   [RFC5921]  Bocci, M., Ed., Bryant, S., Ed., Frost, D., Ed., Levrau,
+              L., and L. Berger, "A Framework for MPLS in Transport
+              Networks", RFC 5921, DOI 10.17487/RFC5921, July 2010,
+              <http://www.rfc-editor.org/info/rfc5921>.
+
    [RFC6073]  Martini, L., Metz, C., Nadeau, T., Bocci, M., and M.
               Aissaoui, "Segmented Pseudowire", RFC 6073,
               DOI 10.17487/RFC6073, January 2011,
@@ -1220,11 +1225,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               Options", RFC 6814, DOI 10.17487/RFC6814, November 2012,
               <http://www.rfc-editor.org/info/rfc6814>.
 
-   [RFC6864]  Touch, J., "Updated Specification of the IPv4 ID Field",
-              RFC 6864, DOI 10.17487/RFC6864, February 2013,
-              <http://www.rfc-editor.org/info/rfc6864>.
-
-
 
 
 
@@ -1233,6 +1233,10 @@ Korhonen, et al.         Expires August 19, 2016               [Page 22]
 
 Internet-Draft       DetNet data plane alternatives        February 2016
 
+
+   [RFC6864]  Touch, J., "Updated Specification of the IPv4 ID Field",
+              RFC 6864, DOI 10.17487/RFC6864, February 2013,
+              <http://www.rfc-editor.org/info/rfc6864>.
 
    [RFC7167]  Frost, D., Bryant, S., Bocci, M., and L. Berger, "A
               Framework for Point-to-Multipoint MPLS in Transport
@@ -1277,10 +1281,6 @@ Authors' Addresses
    Cisco
 
    Email: pthubert@cisco.com
-
-
-
-
 
 
 
