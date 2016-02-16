@@ -100,12 +100,12 @@
    </address>
   </author -->
   
-  <!-- author fullname="Gregory Mirsky" initials="G." surname="Mirsky">
+  <author fullname="Gregory Mirsky" initials="G." surname="Mirsky">
    <organization abbrev="Ericsson">Ericsson</organization>
    <address>
     <email>gregory.mirsky@ericsson.com</email>
    </address>
-  </author -->
+  </author>
   
   <author fullname="Pascal Thubert" initials="P." surname="Thubert">
    <organization abbrev="Cisco">Cisco</organization>
@@ -806,9 +806,95 @@
 
  <section title="Bit Indexed Explicit Replication" anchor="sec_alt_bier">
   <t>
-   *Greg to write the initial text*
+   Bit-Indexed Explicit Replication (BIER) layer may be considered to be
+   included into Deterministic Networking data plane solution. Encapsulation of
+   a BIER packet in MPLS network presented in <xref target="fig_BIER_MPLS"/>
   </t>
+  
+<figure anchor="fig_BIER_MPLS" align="center"
+title="BIER packet in MPLS encapsulation">
+<artwork align="center"><![CDATA[
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Label Stack Element                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Label Stack Element                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|              BIER-MPLS label          |     |1|               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|0 1 0 1|  Ver  |  Len  |              Entropy                  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                BitString  (first 32 bits)                     ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~                                                               ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~                BitString  (last 32 bits)                      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|OAM|     Reserved      | Proto |            BFIR-id            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+]]></artwork>
+</figure>
+
   <section title="Solution description">
+  <t>  
+   The DetNet may be presented in BIER as distinctive payload type with its own 
+   Proto(col) ID. Then it is likely that DetNet will have the header that would 
+   identify:
+   <list style="symbols">
+    <t>Version;</t>
+    <t>Sequence Number;</t>
+    <t>Timestamp;</t>
+    <t>Payload type, e.g. data vs. OAM.</t>
+   </list>
+   DetNet node, collocated with BFIR, may use multiple BIER sub-domains to
+   create replicated flows. Downstream DetNet nodes, collocated with BFER, would
+   terminate redundant flows based on Sequence Number and/or Timestamp
+   information. Such DetNet may be BFER in one BIER sub-domain and BFIR in
+   another. Thus DetNet flow would traverse several BIER sub-domains.
+  </t>
+   
+<figure anchor="fig_BIER_DetNet" align="center"
+title="DetNet in BIER domain">
+<artwork align="center"><![CDATA[
+                          +-----+
+                          |     |
+                          |  A  |
+                          |     |
+                          +-----+
+
+
+
+               +-----+              +-----+
+               |     |              |     |
+               |  B  |              |  C  |
+               |     |              |     |
+               +-----+              +-----+
+
+
+]]></artwork>
+</figure>
+
+  <t>
+   Consider DetNet flow that must traverse BIER enabled domain from A to G and H.
+   DetNet may use three BIER subdomains:
+   <list style="symbols">
+    <t>A-B-D-E-G (red): A is BFIR, E and G are BFERs,</t>
+    <t>A-C-E-F-H (purple): A is BFIR, E and H are BFERs,</t>
+    <t>E-G-H (green): E is BFIR, G and H are BFERs.</t>
+   </list>
+  </t>
+
+  <t>
+   DetNet node A sends DetNet into red and purple BIER sub-domains. DettNet node
+   E receives DetNet packet and sends into green sub-domain while terminating
+   duplicates and those that deemed too-late.
+  </t>
+
+  <t>
+   DetNet nodes G and H receive DetNet flows, terminate duplicates and those
+   that are too-late.
+  </t>
   </section>
 
   <section title="Analysis and Discussion">
