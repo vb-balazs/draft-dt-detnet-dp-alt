@@ -137,7 +137,7 @@
  <middle>
  <section title="Introduction">
   <t>
-    Deterministic networking (DetNet) <xref
+    Deterministic Networking (DetNet) <xref
     target="I-D.finn-detnet-problem-statement"/> provides a capability to carry
     unicast or multicast data streams for real-time applications with extremely
     low data loss rates and known upper bound maximum latency <xref
@@ -175,8 +175,8 @@
 <section title="Criteria for data plane solution alternatives" anchor="sec_crit">
   <t>
    Each deterministic networking data plane solution alternative is described
-   and evaluated using the criteria describe in this section. The used criteria
-   enumerated in this section is selected so that it highlights the existence
+   and evaluated using the criteria described in this section. The used criteria
+   enumerated in this section are selected so that they highlight the existence
    or lack of features that are expected or seen important to a solution
    alternative for the data plane solution. 
   </t>
@@ -190,7 +190,7 @@
      encapsulation can be avoided by underlying transport protocol translation,
      for example, translating layer-2 Ethernet frame including addressing and
      stream identification into native IP traffic. Last it is possible that
-     talkers and listeners handle deterministic flows natively in a layer-3.
+     talkers and listeners handle deterministic flows natively in layer-3.
      This criteria concerns what is the encapsulation method the solution
      alternative support: tunneling like encapsulation, protocol translation or
      native layer-3 transport. In addition to the encapsulation mechanism this
@@ -294,7 +294,7 @@
   <section title="#8 Class and quality of service capabilities" anchor="sec_crit_qos">
     <t>
      The data plane solution alternative should provide means for class of
-     service (Cos) based traffic classification, for example, for queuing
+     service (CoS) based traffic classification, for example, for queuing
      discipline.  Existing CoS traffic classification enablers include but are
      not limited to IP header differentiated services code point (DSCP) field
      <xref target="RFC2474"/>, MPLS label traffic class field <xref
@@ -306,7 +306,7 @@
      treatment and include a quarantee/agreement for the service.  In the
      context of the data plane solution alternative there should be means for
      flow/stream identification, which then can be used to map a flow/stream
-     against specific resources and and treatment in a node enforcing the QoS.
+     against specific resources and treatment in a node enforcing the QoS.
     </t>
     <t> 
      This Criteria concerns the availability and mechanisms for the CoS and QoS
@@ -399,8 +399,8 @@
      The idea is to apply Segment Routing (SR) <xref
      target="I-D.ietf-spring-segment-routing"/> to IPv6 via the addition of a
      new type of routing extension header <xref
-     target="I-D.ietf-6man-segment-routing-header"/>. Alternatively, and SDN
-     or management based approach can be applied for explicit routes. 
+     target="I-D.ietf-6man-segment-routing-header"/>. Alternatively, an SDN
+     or a management based approach can be applied for explicit routes. 
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet replication and deletion (W)">
@@ -537,7 +537,7 @@
   <section title="Analysis and Discussion">
    <t><list style="hanging">
     <t hangText="Encapsulation and overhead (M)">
-     <vspace blankLines="1"/> The fixed header of an IPv6 packet is 20 bytes
+     <vspace blankLines="1"/> The fixed header of an IPv4 packet is 20 bytes
      <xref target="RFC0791"/>. IP options add overhead and the maximum IPv4
      header size if 60 octets leaving only 40 octets for possible options.
      <vspace blankLines="1"/></t>
@@ -583,8 +583,8 @@
     <t hangText="Packet replication and deletion (W/N)">
      <vspace blankLines="1"/>
      Currently there is no native mechamism for IPv4 to support packet
-     replication and deletion. In general the issue The regarding the IPv6
-     packet replication and deletion also apply to IPv4.
+     replication and deletion. In general the issue regarding the IPv6
+     packet replication and deletion also applies to IPv4.
     <vspace blankLines="1"/></t>
     
     <t hangText="Operations and management (M)">
