@@ -40,6 +40,7 @@
 <!ENTITY I-D.ietf-spring-segment-routing SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-spring-segment-routing.xml">
 <!ENTITY I-D.ietf-v6ops-ipv6-ehs-in-real-world SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-v6ops-ipv6-ehs-in-real-world.xml">
 <!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
+<!ENTITY I-D.eckert-bier-te-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.eckert-bier-te-arch.xml">
 
 ]>
 
@@ -933,6 +934,175 @@ title="DetNet in BIER domain">
 
 </section>
 
+
+
+ <section title="Bit Indexed Explicit Replication - Traffic Engineering"
+          anchor="sec_alt_bier_te">
+  <t>
+   An alternate use of Bit-Indexed Explicit Replication (BIER) uses bits in the
+   BitString to represent adjacencies as opposed to destinations, as discussed in
+   <xref target="I-D.eckert-bier-te-arch"> BIER Traffic Engineering (TE)</xref>.
+     </t><t>
+   The proposed function of BIER-TE in the DetNet dataplane is to control the
+   process of replication and elimination, as opposed to the identification of
+   the flows or and the sequencing of packets within a flow.
+     </t><t>
+   At the path ingress, BIER-TE identifies the adjacencies that are activated for
+   this packet (under the rule of the controller). At the egress, BIER-TE is 
+   used to identify the adjacencies where transmission failed. This information
+   can be passed to the controller, which in turn can modify the active adjacencies
+   for the next packets.
+     </t><t>
+   The value is that the replication can be controlled and monitored with the
+   granularity of a packet and a adjacency in a control loops that involves an
+   external controller.
+
+  </t>
+  <section title="On BIER-TE">
+  <t>
+   BIER-TE supports traffic engineering by explicit hop-by-hop forwarding
+   and loose hop forwarding of packets. 
+     </t><t>
+      From the BIER-TE architecture, the key differences over BIER are:
+      <list style="symbols">
+      <t>BIER-TE replaces in-network autonomous path calculation by
+         explicit paths calculated offpath by the BIER-TE controller host.
+      </t>
+      <t>In BIER-TE every BitPosition of the BitString of a BIER-TE packet
+         indicates one or more adjacencies - instead of a BFER as in BIER.
+      </t>
+      <t>BIER-TE in each BFR has no routing table but only a BIER-TE
+         Forwarding Table (BIFT) indexed by SI:BitPosition and populated
+         with only those adjacencies to which the BFR should replicate
+         packets to.
+      </t>
+      </list>        
+   The generic view of an adjacency can be over a link, a tunnel or along a
+   path segment. 
+  </t><t>
+   With <xref target="I-D.ietf-spring-segment-routing">Segment Routing</xref>
+   a segment can be signaled as an MPLS label, or an IPv6 routing header .
+   A segment may be loosely of strictly source routed, depending on the need for
+   full non-congruence and the confidence that loose routing may still achieve 
+   that need. 
+
+  </t>
+ </section>
+  <section title="Solution description">
+  <t>
+   BIER-TE enables to activate the replication and elimination functions in a
+   manner that is abstract to the data plane forwarding information.
+   An adjacency, which is represented by a bit in the BIER header, can
+   correspond in the data plane to an Ethernet hop, a Label Switched Path, or it
+   can correspond to an IPv6 loose or strict source routed path. 
+     </t><t>
+   In summary, BIER-TE is used as follows:
+     <list style="symbols">
+     <t>
+     A controller computes a complex path called a track with the general form
+     of a ladder.
+     The steps and the side rails between the steps are the adjacencies that can
+     be activated on demand on a per-packet basis     
+     </t><t> 
+     The controller activates the replication by deciding the setting of the
+     bits associated with the adjacencies
+     </t><t> 
+     The BIER BitString is injected in the packet by the ingress node of the
+     deterministic path. That node may act as a replication point, in which case
+     it may issue multiple copies of the packet     
+     </t><t> 
+     For each of its bits that is set in the BIER header, the owner replication
+     point resets the bit and transmits towards the associated adjacency;
+     to achieve this, the replication point copies the packet and inserts the
+     relevant dataplane information, such as a source route header, towards the
+     adjacency that corresponds to the bit
+     </t><t> 
+     Adversely, an elimination node on the way strips the dataplane information
+     and performs a bitwise AND on the BitStrings from the various copies of the
+     packet that it has received, before it forwards the packet with the
+     resulting BitString. 
+     </t>
+     </list>     
+    As a result, BIER-TE enables to trace a packet to the replication points
+    that made this particular copy, to detect the failing segments along the
+    path, to enable additional replications to counter balance detected
+    failures, and to avoid replication in both directions along crossing
+    adjacencies.
+  </t><t>In more details:   
+  </t><t>   
+   The BIER header is of variable size, and a DetNet network of a limited size
+   can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
+   deployment may be able to signal up to 256 adjacencies for use 
+   in very complex paths.
+  </t>
+<figure anchor="fig_BIER_bitsagain" align="center"
+title="BIER-TE Header">
+<artwork align="center"><![CDATA[
+ 
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |0 1 0 1|  Ver  |  Len  |              Entropy                  |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                BitString  (first 32 bits)                     ~
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     ~                                                               ~
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     ~                BitString  (last 32 bits)                      |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |OAM|     Reserved      | Proto |            BFIR-id            |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 
+]]></artwork>
+</figure>
+ <t>
+   For the DetNet data plane, a replication point is an ingress point for more
+   than one adjacency, and an elimination point is an egress point for more than
+   one adjacency.
+   </t><t>   
+   A pre-populated state in a replication node indicates which bits are
+   served by this node and to which adjacency each of these bits corresponds.
+   The way the adjacency is signaled in the packet is fully abstracted in the
+   bit representation and must be obtained at the replication nodes from a local
+   state, together with the timing or shaping information for the associated
+   flow.
+  </t><t>
+   The DetNet data plane uses BIER-TE to control which adjacencies will be used
+   for a given packet. This is signaled from the path ingress, which sets the
+   appropriate bits in the BIER BitString to indicate which replications must
+   happen.
+  </t><t>
+   The replication point clears the bit associated to the adjacency where the
+   replica is placed, and the elimination points perform a logical AND of the
+   BitStrings of the copies that it gets before forwarding.   
+  </t><t>
+   This way, the DetNet data plane marks, along the way, which replication point
+   effectively made a replication, and it is always possible to trace down to
+   the replication point that made a particular copy based on the setting of the
+   bits in the BIER header. 
+   
+  </t>
+<figure anchor="fig_track" align="center"
+title="Setting Bits">
+<artwork align="center"><![CDATA[
+ 
+                 ===>(E,R)====>(E,R)==== 
+               // 1   ^ |  4    ^ |   7 \\
+   ingress (R)        |2|       |6|       (E) egress
+               \\ 3   | v  5    | v   8 //  
+                 ===>(R,E)====>(R,E)===
+ 
+]]></artwork>
+</figure><t>
+   At the path egress, the bits that are still set indicate which adjacency failed
+   on a per packet basis. This information can be used by the control plane to
+   de/reactivate replication points (by setting the bits). 
+
+  </t>
+
+</section>
+</section>
+
 <section title="Summary of data plane alternatives">
   <t>TBD. A condenced summary of all solution alternative.
   </t>
@@ -1027,6 +1197,7 @@ title="DetNet in BIER domain">
    &I-D.ietf-6man-segment-routing-header;
    &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
    &I-D.ietf-sunset4-gapanalysis;
+   &I-D.eckert-bier-te-arch;
 
    <reference anchor="ST20227"
      target="https://www.smpte.org/digital-library">

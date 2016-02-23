@@ -102,10 +102,10 @@ Table of Contents
        3.6.1.  Solution description  . . . . . . . . . . . . . . . .  16
        3.6.2.  Analysis and Discussion . . . . . . . . . . . . . . .  17
        3.6.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  17
-   4.  Summary of data plane alternatives  . . . . . . . . . . . . .  18
-   5.  Security considerations . . . . . . . . . . . . . . . . . . .  18
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  18
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  18
+   4.  Bit Indexed Explicit Replication - Traffic Engineering  . . .  18
+     4.1.  On BIER-TE  . . . . . . . . . . . . . . . . . . . . . . .  18
+     4.2.  Solution description  . . . . . . . . . . . . . . . . . .  19
+   5.  Summary of data plane alternatives  . . . . . . . . . . . . .  21
 
 
 
@@ -114,10 +114,13 @@ Korhonen, et al.         Expires August 26, 2016                [Page 2]
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  18
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  18
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  19
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  23
+   6.  Security considerations . . . . . . . . . . . . . . . . . . .  21
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  21
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  22
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  22
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  22
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 1.  Introduction
 
@@ -159,9 +162,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    In several cases a deterministic flow/strem has to be encapsulated
    inside other protocols, for example, when transporting a layer-2
    Ethernet frame over an IP transport network.  In some cases a former
-   tunneling like encapsulation can be avoided by underlying transport
-   protocol translation, for example, translating layer-2 Ethernet frame
-   including addressing and stream identification into native IP
 
 
 
@@ -170,6 +170,9 @@ Korhonen, et al.         Expires August 26, 2016                [Page 3]
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
+   tunneling like encapsulation can be avoided by underlying transport
+   protocol translation, for example, translating layer-2 Ethernet frame
+   including addressing and stream identification into native IP
    traffic.  Last it is possible that talkers and listeners handle
    deterministic flows natively in layer-3.  This criteria concerns what
    is the encapsulation method the solution alternative support:
@@ -215,9 +218,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    IETF counter part is defined in [I-D.ietf-isis-pcr].  This criteria
    concerns the available mechanisms for explicit routes for the data
    plane protocol alternative.
-
-
-
 
 
 
@@ -954,7 +954,189 @@ Korhonen, et al.         Expires August 26, 2016               [Page 17]
 Internet-Draft       DetNet data plane alternatives        February 2016
 
 
-4.  Summary of data plane alternatives
+4.  Bit Indexed Explicit Replication - Traffic Engineering
+
+   An alternate use of Bit-Indexed Explicit Replication (BIER) uses bits
+   in the BitString to represent adjacencies as opposed to destinations,
+   as discussed in BIER Traffic Engineering (TE)
+   [I-D.eckert-bier-te-arch].
+
+   The proposed function of BIER-TE in the DetNet dataplane is to
+   control the process of replication and elimination, as opposed to the
+   identification of the flows or and the sequencing of packets within a
+   flow.
+
+   At the path ingress, BIER-TE identifies the adjacencies that are
+   activated for this packet (under the rule of the controller).  At the
+   egress, BIER-TE is used to identify the adjacencies where
+   transmission failed.  This information can be passed to the
+   controller, which in turn can modify the active adjacencies for the
+   next packets.
+
+   The value is that the replication can be controlled and monitored
+   with the granularity of a packet and a adjacency in a control loops
+   that involves an external controller.
+
+4.1.  On BIER-TE
+
+   BIER-TE supports traffic engineering by explicit hop-by-hop
+   forwarding and loose hop forwarding of packets.
+
+   From the BIER-TE architecture, the key differences over BIER are:
+
+   o  BIER-TE replaces in-network autonomous path calculation by
+      explicit paths calculated offpath by the BIER-TE controller host.
+   o  In BIER-TE every BitPosition of the BitString of a BIER-TE packet
+      indicates one or more adjacencies - instead of a BFER as in BIER.
+   o  BIER-TE in each BFR has no routing table but only a BIER-TE
+      Forwarding Table (BIFT) indexed by SI:BitPosition and populated
+      with only those adjacencies to which the BFR should replicate
+      packets to.
+
+   The generic view of an adjacency can be over a link, a tunnel or
+   along a path segment.
+
+   With Segment Routing [I-D.ietf-spring-segment-routing] a segment can
+   be signaled as an MPLS label, or an IPv6 routing header .  A segment
+   may be loosely of strictly source routed, depending on the need for
+   full non-congruence and the confidence that loose routing may still
+   achieve that need.
+
+
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 18]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+4.2.  Solution description
+
+   BIER-TE enables to activate the replication and elimination functions
+   in a manner that is abstract to the data plane forwarding
+   information.  An adjacency, which is represented by a bit in the BIER
+   header, can correspond in the data plane to an Ethernet hop, a Label
+   Switched Path, or it can correspond to an IPv6 loose or strict source
+   routed path.
+
+   In summary, BIER-TE is used as follows:
+
+   o  A controller computes a complex path called a track with the
+      general form of a ladder.  The steps and the side rails between
+      the steps are the adjacencies that can be activated on demand on a
+      per-packet basis
+   o  The controller activates the replication by deciding the setting
+      of the bits associated with the adjacencies
+   o  The BIER BitString is injected in the packet by the ingress node
+      of the deterministic path.  That node may act as a replication
+      point, in which case it may issue multiple copies of the packet
+   o  For each of its bits that is set in the BIER header, the owner
+      replication point resets the bit and transmits towards the
+      associated adjacency; to achieve this, the replication point
+      copies the packet and inserts the relevant dataplane information,
+      such as a source route header, towards the adjacency that
+      corresponds to the bit
+   o  Adversely, an elimination node on the way strips the dataplane
+      information and performs a bitwise AND on the BitStrings from the
+      various copies of the packet that it has received, before it
+      forwards the packet with the resulting BitString.
+
+   As a result, BIER-TE enables to trace a packet to the replication
+   points that made this particular copy, to detect the failing segments
+   along the path, to enable additional replications to counter balance
+   detected failures, and to avoid replication in both directions along
+   crossing adjacencies.
+
+   In more details:
+
+   The BIER header is of variable size, and a DetNet network of a
+   limited size can use a model with 64 bits if 64 adjacencies are
+   enough, whereas a larger deployment may be able to signal up to 256
+   adjacencies for use in very complex paths.
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 19]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+        0                   1                   2                   3
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |0 1 0 1|  Ver  |  Len  |              Entropy                  |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |                BitString  (first 32 bits)                     ~
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       ~                                                               ~
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       ~                BitString  (last 32 bits)                      |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |OAM|     Reserved      | Proto |            BFIR-id            |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+                         Figure 3: BIER-TE Header
+
+   For the DetNet data plane, a replication point is an ingress point
+   for more than one adjacency, and an elimination point is an egress
+   point for more than one adjacency.
+
+   A pre-populated state in a replication node indicates which bits are
+   served by this node and to which adjacency each of these bits
+   corresponds.  The way the adjacency is signaled in the packet is
+   fully abstracted in the bit representation and must be obtained at
+   the replication nodes from a local state, together with the timing or
+   shaping information for the associated flow.
+
+   The DetNet data plane uses BIER-TE to control which adjacencies will
+   be used for a given packet.  This is signaled from the path ingress,
+   which sets the appropriate bits in the BIER BitString to indicate
+   which replications must happen.
+
+   The replication point clears the bit associated to the adjacency
+   where the replica is placed, and the elimination points perform a
+   logical AND of the BitStrings of the copies that it gets before
+   forwarding.
+
+   This way, the DetNet data plane marks, along the way, which
+   replication point effectively made a replication, and it is always
+   possible to trace down to the replication point that made a
+   particular copy based on the setting of the bits in the BIER header.
+
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 20]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
+                            ===>(E,R)====>(E,R)====
+                          // 1   ^ |  4    ^ |   7 \\
+              ingress (R)        |2|       |6|       (E) egress
+                          \\ 3   | v  5    | v   8 //
+                            ===>(R,E)====>(R,E)===
+
+
+                          Figure 4: Setting Bits
+
+   At the path egress, the bits that are still set indicate which
+   adjacency failed on a per packet basis.  This information can be used
+   by the control plane to de/reactivate replication points (by setting
+   the bits).
+
+5.  Summary of data plane alternatives
 
    TBD.  A condenced summary of all solution alternative.
 
@@ -972,15 +1154,15 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
                    Table 1: PseudoWire criteria summary
 
-5.  Security considerations
+6.  Security considerations
 
    TBD.  Analysis per solution alternative.
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA considerations.
 
-7.  Acknowledgements
+8.  Acknowledgements
 
    The author(s) ACK and NACK.
 
@@ -988,29 +1170,35 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
       Jouni Korhonen
       Janos Farkas
+
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 21]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
       Norman Finn
       Olivier Marce
       Gregory Mirsky
       Pascal Thubert
       Zhuangyan Zhuang
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
+9.2.  Informative References
 
-
-Korhonen, et al.         Expires August 26, 2016               [Page 18]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
-
-8.2.  Informative References
+   [I-D.eckert-bier-te-arch]
+              Eckert, T. and G. Cauchie, "Traffic Enginering for Bit
+              Index Explicit Replication BIER-TE", draft-eckert-bier-te-
+              arch-02 (work in progress), October 2015.
 
    [I-D.finn-detnet-architecture]
               Finn, N., Thubert, P., and M. Teener, "Deterministic
@@ -1033,6 +1221,18 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               Ashwood-Smith, P., and C. Bowers, "IS-IS Path Computation
               and Reservation", draft-ietf-isis-pcr-05 (work in
               progress), February 2016.
+
+
+
+
+
+
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 22]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
 
    [I-D.ietf-spring-segment-routing]
               Filsfils, C., Previdi, S., Decraene, B., Litkowski, S.,
@@ -1059,13 +1259,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               <http://www.ieee802.org/1/files/private/cb-drafts/
               d2/802-1CB-d2-1.pdf>.
 
-
-
-Korhonen, et al.         Expires August 26, 2016               [Page 19]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
-
    [IEEE8021Qca]
               IEEE 802.1, "IEEE 802.1Qca Bridges and Bridged Networks -
               Amendment 24: Path Control and Reservation", IEEE
@@ -1090,6 +1283,13 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               (IPv6) Specification", RFC 2460, DOI 10.17487/RFC2460,
               December 1998, <http://www.rfc-editor.org/info/rfc2460>.
 
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 23]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    [RFC2474]  Nichols, K., Blake, S., Baker, F., and D. Black,
               "Definition of the Differentiated Services Field (DS
               Field) in the IPv4 and IPv6 Headers", RFC 2474,
@@ -1110,17 +1310,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               of Explicit Congestion Notification (ECN) to IP",
               RFC 3168, DOI 10.17487/RFC3168, September 2001,
               <http://www.rfc-editor.org/info/rfc3168>.
-
-
-
-
-
-
-
-Korhonen, et al.         Expires August 26, 2016               [Page 20]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
 
    [RFC3209]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
               and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
@@ -1148,6 +1337,15 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               DOI 10.17487/RFC4446, April 2006,
               <http://www.rfc-editor.org/info/rfc4446>.
 
+
+
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 24]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    [RFC4447]  Martini, L., Ed., Rosen, E., El-Aawar, N., Smith, T., and
               G. Heron, "Pseudowire Setup and Maintenance Using the
               Label Distribution Protocol (LDP)", RFC 4447,
@@ -1167,16 +1365,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
    [RFC5129]  Davie, B., Briscoe, B., and J. Tay, "Explicit Congestion
               Marking in MPLS", RFC 5129, DOI 10.17487/RFC5129, January
               2008, <http://www.rfc-editor.org/info/rfc5129>.
-
-
-
-
-
-
-Korhonen, et al.         Expires August 26, 2016               [Page 21]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
 
    [RFC5462]  Andersson, L. and R. Asati, "Multiprotocol Label Switching
               (MPLS) Label Stack Entry: "EXP" Field Renamed to "Traffic
@@ -1207,6 +1395,13 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               RFC 6540, DOI 10.17487/RFC6540, April 2012,
               <http://www.rfc-editor.org/info/rfc6540>.
 
+
+
+Korhonen, et al.         Expires August 26, 2016               [Page 25]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    [RFC6621]  Macker, J., Ed., "Simplified Multicast Forwarding",
               RFC 6621, DOI 10.17487/RFC6621, May 2012,
               <http://www.rfc-editor.org/info/rfc6621>.
@@ -1224,15 +1419,6 @@ Internet-Draft       DetNet data plane alternatives        February 2016
               Ed., "Diameter Base Protocol", RFC 6733,
               DOI 10.17487/RFC6733, October 2012,
               <http://www.rfc-editor.org/info/rfc6733>.
-
-
-
-
-
-Korhonen, et al.         Expires August 26, 2016               [Page 22]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
-
 
    [RFC6814]  Pignataro, C. and F. Gont, "Formally Deprecating Some IPv4
               Options", RFC 6814, DOI 10.17487/RFC6814, November 2012,
@@ -1266,6 +1452,12 @@ Authors' Addresses
    Email: jouni.nospam@gmail.com
 
 
+
+Korhonen, et al.         Expires August 26, 2016               [Page 26]
+
+Internet-Draft       DetNet data plane alternatives        February 2016
+
+
    Janos Farkas
    Ericsson
    Konyves Kalman krt. 11/B
@@ -1279,15 +1471,6 @@ Authors' Addresses
    Ericsson
 
    Email: gregory.mirsky@ericsson.com
-
-
-
-
-
-
-Korhonen, et al.         Expires August 26, 2016               [Page 23]
-
-Internet-Draft       DetNet data plane alternatives        February 2016
 
 
    Pascal Thubert
@@ -1326,19 +1509,4 @@ Internet-Draft       DetNet data plane alternatives        February 2016
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Korhonen, et al.         Expires August 26, 2016               [Page 24]
+Korhonen, et al.         Expires August 26, 2016               [Page 27]
