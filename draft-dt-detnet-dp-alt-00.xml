@@ -31,6 +31,7 @@
 <!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
 <!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
 <!ENTITY rfc5921 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5921.xml">
+<!ENTITY rfc6275 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6275.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -124,10 +125,11 @@
   <workgroup>DetNet</workgroup>
 
   <abstract>
-  <t>This document identifies existing IP and MPLS, and layer-2 encapsulations
+  <t>
+   This document identifies existing IP and MPLS, and layer-2 encapsulations
    that run over IP and/or MPLS data plane technologies that could be considered
-   as the base line solution alternatives for deterministic networking data plane
-   definition.
+   as the base line solution alternatives for deterministic networking data
+   plane definition.
   </t>
   </abstract>
 
@@ -142,25 +144,26 @@
     unicast or multicast data streams for real-time applications with extremely
     low data loss rates and known upper bound maximum latency <xref
     target="I-D.finn-detnet-architecture"/>. The deterministic networking
-    Quality of Service (QoS) is expressed as 1) the minimum and maximum
-    end-to-end latency from sender (talker) to receiver (listener), 2)
-    probability of loss of a packet as a result of congestion, 3) probability
-    of loss of a packet in the event of the failure of a relay system or link.
-    Only the worst-case values for the mentioned parameters are concerned.
+    Quality of Service (QoS) is expressed as 1) the maximum end-to-end latency
+    from sender (talker) to receiver (listener), 2) probability of loss of a
+    packet.  Only the worst-case values for the mentioned parameters are
+    concerned.
   </t>
-  <t>There are three techniques to achieve the QoS required by deterministic networks:
-   <list style="symbols">
-    <t>zero congestion loss,</t>
-    <t>explicit routes,</t>
-    <t>packet replications and deletion.</t>
-   </list>
-   This document identifies existing IP and Multiprotocol Label Switching Architecture
-   (MPLS) <xref target="RFC3031"/>, and layer-2 encapsulations
-   that run over IP and/or MPLS data plane technologies that could be considered
-   as the base line solution alternatives for deterministic networking data plane
-   definition. The full scope of the deterministic networking data plane solution
-   is considered including, as appropriate, quality of service (QoS), operations 
-   and management (O&amp;M), and time synchronization.
+  <t>
+    There are three techniques to achieve the QoS required by deterministic
+    networks:
+     <list style="symbols">
+      <t>zero congestion loss,</t>
+      <t>explicit routes,</t>
+      <t>packet replications and deletion.</t>
+     </list>
+   This document identifies existing IP and Multiprotocol Label Switching
+   Architecture (MPLS) <xref target="RFC3031"/>, and layer-2 encapsulations that
+   run over IP and/or MPLS data plane technologies that could be considered as
+   the base line solution alternatives for deterministic networking data plane
+   definition. The full scope of the deterministic networking data plane
+   solution is considered including, as appropriate, quality of service (QoS),
+   operations and management (O&amp;M), and time synchronization.
   </t>
  </section>
 
@@ -410,7 +413,12 @@
      case of packet replication the replicated packets are likely to be sourced
      from a different IPv6 address than the original packets, thus the
      flow/stream identification that is independent of the addressing becomes
-     important. At present sequencing and flow/stream identification beyond IPv6
+     important. Actually, Mobile IPv6 <xref target="RFC6275"/> had a similar
+     issue in case of route optimization. Sourcing packets with the home address
+     that is not topologically correct in the visited network was solved using a
+     specific Home Address option.
+     <vspace blankLines="1"/>
+     At present sequencing and flow/stream identification beyond IPv6
      flow label would require new IPv6 extension headers. Another concern
      regarding packet replication is how to enforce replicated packets to take
      different route while the final destination still remains the same. With
@@ -994,7 +1002,7 @@ title="DetNet in BIER domain">
    &rfc1393;
    &rfc6540;
    &rfc5921;
-   
+   &rfc6275;
    &rfc2474;
    &rfc2702;
    &rfc3168;
