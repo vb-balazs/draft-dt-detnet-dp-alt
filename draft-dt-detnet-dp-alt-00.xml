@@ -942,21 +942,20 @@ title="DetNet in BIER domain">
    An alternate use of Bit-Indexed Explicit Replication (BIER) uses bits in the
    BitString to represent adjacencies as opposed to destinations, as discussed in
    <xref target="I-D.eckert-bier-te-arch"> BIER Traffic Engineering (TE)</xref>.
-     </t><t>
-   The proposed function of BIER-TE in the DetNet dataplane is to control the
+   </t><t>
+   The proposed function of BIER-TE in the DetNet data plane is to control the
    process of replication and elimination, as opposed to the identification of
    the flows or and the sequencing of packets within a flow.
-     </t><t>
-   At the path ingress, BIER-TE identifies the adjacencies that are activated for
-   this packet (under the rule of the controller). At the egress, BIER-TE is 
+   </t><t>
+   At the path ingress, BIER-TE identifies the adjacencies that are activated
+   for this packet (under the rule of the controller). At the egress, BIER-TE is 
    used to identify the adjacencies where transmission failed. This information
-   can be passed to the controller, which in turn can modify the active adjacencies
+   is passed to the controller, which in turn can modify the active adjacencies
    for the next packets.
-     </t><t>
+   </t><t>
    The value is that the replication can be controlled and monitored with the
    granularity of a packet and a adjacency in a control loops that involves an
    external controller.
-
   </t>
   <section title="On BIER-TE">
   <t>
@@ -1007,7 +1006,7 @@ title="DetNet in BIER domain">
      </list>
      </t>
 <figure anchor="fig_ladder" align="center"
-title="Ladder shape with replication adn elimination points">
+title="Ladder Shape with Replication and Elimination Points">
 <artwork align="center"><![CDATA[
  
                  ===> (A) ====> (C) ==== 
@@ -1169,9 +1168,53 @@ title="Assigning Bits">
     <c> </c>
     <c>C->E</c>
     <c>00000000</c>
-    <postamble>BitString processing at Elimination Point C</postamble>
+    <postamble>BitString Processing at Elimination Point C</postamble>
 </texttable>
-
+     <t>
+     <list style="symbols">
+     <t> 
+     In this example, all the transmissions succeeded and the BitString at
+     arrival has all the bits reset - note that the egress may be an Elimination
+     Point in which case this is evaluated after this node has performed its AND
+     operation on the received BitStrings).
+     </t>
+     </list>
+     </t>
+<texttable anchor="table_bit4" title="BIER-TE in Action (cont.)">
+    <ttcol align='center'>Failing Adjacency</ttcol>
+    <ttcol align='center'>Egress BIER BitString</ttcol>
+    <c>I->A</c>
+    <c>Frame Lost</c>
+    <c>I->B</c>
+    <c>Not Tried</c>
+    <c>A->C</c>
+    <c>00010000</c>
+    <c>A->B</c>
+    <c>01001100</c>
+    <c>B->D</c>
+    <c>01001100</c>
+    <c>D->C</c>
+    <c>01001100</c>
+    <c>C->E</c>
+    <c>Frame Lost</c>
+    <c>D->E</c>
+    <c>Not Tried</c>
+    <postamble>BitString indicating failures</postamble>
+</texttable>
+     <t>
+     <list style="symbols">
+     <t> 
+     But if a transmission failed along the way, one (or more) bit is never
+     cleared. <xref target="table_bit4"/> provides the possible outcomes of a 
+     transmission. If the frame is lost, then it is probably due to a failure in
+     either I->A or C->E, and the controller should enable I->B and D->E to
+     find out. A BitString of 00010000 indicates unequivocally a transmission
+     error on the A->C adjacency, and a BitString of 01001100 indicates a loss
+     in either A->B, B->D or D->C; enabling D->E on the next packets may provide
+     more information to sort things out.
+     </t>
+     </list>
+     </t>
 <t>In more details:   
   </t><t>   
    The BIER header is of variable size, and a DetNet network of a limited size
@@ -1183,19 +1226,19 @@ title="Assigning Bits">
 title="BIER-TE Header">
 <artwork align="center"><![CDATA[
  
-      0                   1                   2                   3
-      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     |0 1 0 1|  Ver  |  Len  |              Entropy                  |
-     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     |                BitString  (first 32 bits)                     ~
-     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     ~                                                               ~
-     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     ~                BitString  (last 32 bits)                      |
-     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     |OAM|     Reserved      | Proto |            BFIR-id            |
-     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |0 1 0 1|  Ver  |  Len  |              Entropy                  |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                BitString  (first 32 bits)                     ~
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   ~                                                               ~
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   ~                BitString  (last 32 bits)                      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |OAM|     Reserved      | Proto |            BFIR-id            |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  
 ]]></artwork>
 </figure>
