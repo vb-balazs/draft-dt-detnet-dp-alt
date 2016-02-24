@@ -996,39 +996,183 @@ title="DetNet in BIER domain">
    correspond in the data plane to an Ethernet hop, a Label Switched Path, or it
    can correspond to an IPv6 loose or strict source routed path. 
      </t><t>
-   In summary, BIER-TE is used as follows:
+   In a nutshell, BIER-TE is used as follows:
      <list style="symbols">
      <t>
-     A controller computes a complex path called a track with the general form
-     of a ladder.
-     The steps and the side rails between the steps are the adjacencies that can
-     be activated on demand on a per-packet basis     
-     </t><t> 
+     A controller computes a complex path, sometimes called a track, which takes
+     the general form of a ladder. The steps and the side rails between them
+     are the adjacencies that can be activated on demand on a per-packet basis
+     using bits in the BIER header. 
+     </t>
+     </list>
+     </t>
+<figure anchor="fig_ladder" align="center"
+title="Ladder shape with replication adn elimination points">
+<artwork align="center"><![CDATA[
+ 
+                 ===> (A) ====> (C) ==== 
+               //     ^ |       ^ |     \\
+   ingress (I)        | |       | |       (E) egress
+               \\     | v       | v     //
+                 ===> (B) ====> (D) ==== 
+ 
+]]></artwork>
+</figure>
+     <t>      
+     <list style="symbols">
+     <t>      
+     The controller assigns a BIER domain, and inside that domain, assigns bits
+     to the adjacencies. The controller assigns each bit to a replication node
+     that sends towards the adjacency, for instance the ingress router into a
+     segment that will insert a routing header in the packet. A single bit may
+     be used for a step in the ladder, indicating the other end of the step in
+     both directions.
+     </t>
+     </list>
+     </t>
+<figure anchor="fig_track" align="center"
+title="Assigning Bits">
+<artwork align="center"><![CDATA[
+ 
+                 ===> (A) ====> (C) ==== 
+               // 1   ^ |  4    ^ |   7 \\
+   ingress (I)        |2|       |6|       (E) egress
+               \\ 3   | v  5    | v   8 //    
+                 ===> (B) ====> (D) ==== 
+ 
+]]></artwork>
+</figure>
+     <t>      
+     <list style="symbols">
+     <t>     
      The controller activates the replication by deciding the setting of the
-     bits associated with the adjacencies
-     </t><t> 
-     The BIER BitString is injected in the packet by the ingress node of the
-     deterministic path. That node may act as a replication point, in which case
-     it may issue multiple copies of the packet     
+     bits associated with the adjacencies. This decision can be modified at any
+     time, but takes the latency of a controller round trip to effectively take
+     place
+     </t>
+     </list>
+     </t>
+      
+<texttable anchor="table_bit" title="Controlling Replication">
+    <ttcol align='center'>Bit #</ttcol>
+    <ttcol align='center'>Adjacency</ttcol>
+    <ttcol align='center'>Owner</ttcol>
+    <ttcol align='center'>Bit Setting</ttcol>
+    
+    <c>1</c>
+    <c>I->A</c>
+    <c>I</c>
+    <c>1</c>
+    
+    <c>2</c>
+    <c>A->B</c>
+    <c>A</c>
+    <c>1</c>
+    
+    <c></c>
+    <c>B->A</c>
+    <c>B</c>
+    <c></c>
+    
+    <c>3</c>
+    <c>I->C</c>
+    <c>I</c>
+    <c>0</c>
+    
+    <c>4</c>
+    <c>A->C</c>
+    <c>A</c>
+    <c>1</c>
+    
+    <c>5</c>
+    <c>B->D</c>
+    <c>B</c>
+    <c>1</c>
+    
+    <c>6</c>
+    <c>C->D</c>
+    <c>C</c>
+    <c>1</c>
+    
+    <c></c>
+    <c>D->C</c>
+    <c>D</c>
+    <c></c>
+    
+    <c>7</c>
+    <c>C->E</c>
+    <c>C</c>
+    <c>1</c>
+    
+    <c>8</c>
+    <c>D->E</c>
+    <c>D</c>
+    <c>0</c>
+    
+    <postamble>Replication and Elimination Protecting Segment A===>C</postamble>
+</texttable>
+
+     <t>
+     <list style="symbols">
+     <t> 
+     The BIER header with the controlling BitString is injected in the packet by
+     the ingress node of the deterministic path. That node may act as a
+     replication point, in which case it may issue multiple copies of the packet     
      </t><t> 
      For each of its bits that is set in the BIER header, the owner replication
      point resets the bit and transmits towards the associated adjacency;
      to achieve this, the replication point copies the packet and inserts the
      relevant dataplane information, such as a source route header, towards the
-     adjacency that corresponds to the bit
-     </t><t> 
+     adjacency that corresponds to the bit 
+     </t>
+     </list>
+     </t>
+<texttable anchor="table_bit2" title="BIER-TE in Action">
+    <ttcol align='center'>Adjacency</ttcol>
+    <ttcol align='center'>BIER BitString</ttcol>
+    
+    <c>I->A</c>
+    <c>01011110</c>
+    <c>A->B</c>
+    <c>00011110</c>
+    <c>B->D</c>
+    <c>00010110</c>
+    <c>D->C</c>
+    <c>00010010</c>
+    <c>A->C</c>
+    <c>01001110</c>
+    <postamble>BitString in BIER Header as Packet Progresses</postamble>
+</texttable>
+
+     <t>
+     <list style="symbols">
+     <t> 
      Adversely, an elimination node on the way strips the dataplane information
      and performs a bitwise AND on the BitStrings from the various copies of the
      packet that it has received, before it forwards the packet with the
      resulting BitString. 
      </t>
-     </list>     
-    As a result, BIER-TE enables to trace a packet to the replication points
-    that made this particular copy, to detect the failing segments along the
-    path, to enable additional replications to counter balance detected
-    failures, and to avoid replication in both directions along crossing
-    adjacencies.
-  </t><t>In more details:   
+     </list>
+     </t>
+<texttable anchor="table_bit3" title="BIER-TE in Action (cont.)">
+    <ttcol align='center'>Operation</ttcol>
+    <ttcol align='center'>BIER BitString</ttcol>
+    <c>D->C</c>
+    <c>00010010</c>
+    <c>A->C</c>
+    <c>01001110</c>
+    <c> </c>
+    <c>--------</c>
+    <c>AND in C</c>
+    <c>00000010</c>
+    <c> </c>
+    <c> </c>
+    <c>C->E</c>
+    <c>00000000</c>
+    <postamble>BitString processing at Elimination Point C</postamble>
+</texttable>
+
+<t>In more details:   
   </t><t>   
    The BIER header is of variable size, and a DetNet network of a limited size
    can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
@@ -1062,12 +1206,14 @@ title="BIER-TE Header">
    </t><t>   
    A pre-populated state in a replication node indicates which bits are
    served by this node and to which adjacency each of these bits corresponds.
+   With DetNet, the state is typically installed by a controller entity such as
+   a PCE. 
    The way the adjacency is signaled in the packet is fully abstracted in the
-   bit representation and must be obtained at the replication nodes from a local
-   state, together with the timing or shaping information for the associated
-   flow.
+   bit representation and must be provisioned to the replication nodes and 
+   maintained as a local state, together with the timing or shaping information
+   for the associated flow.
   </t><t>
-   The DetNet data plane uses BIER-TE to control which adjacencies will be used
+   The DetNet data plane uses BIER-TE to control which adjacencies are used
    for a given packet. This is signaled from the path ingress, which sets the
    appropriate bits in the BIER BitString to indicate which replications must
    happen.
@@ -1075,36 +1221,25 @@ title="BIER-TE Header">
    The replication point clears the bit associated to the adjacency where the
    replica is placed, and the elimination points perform a logical AND of the
    BitStrings of the copies that it gets before forwarding.   
-  </t><t>
-   This way, the DetNet data plane marks, along the way, which replication point
-   effectively made a replication, and it is always possible to trace down to
-   the replication point that made a particular copy based on the setting of the
-   bits in the BIER header. 
-   
-  </t>
-<figure anchor="fig_track" align="center"
-title="Setting Bits">
-<artwork align="center"><![CDATA[
- 
-                 ===>(E,R)====>(E,R)==== 
-               // 1   ^ |  4    ^ |   7 \\
-   ingress (R)        |2|       |6|       (E) egress
-               \\ 3   | v  5    | v   8 //  
-                 ===>(R,E)====>(R,E)===
- 
-]]></artwork>
-</figure><t>
-   At the path egress, the bits that are still set indicate which adjacency failed
-   on a per packet basis. This information can be used by the control plane to
-   de/reactivate replication points (by setting the bits). 
-
+  </t><t>     
+   As is apparent in the examples above, clearing the bits enables to trace a
+   packet to the replication points that made any particular copy. BIER-TE also
+   enables to detect the failing adjacencies or sequences of adjacencies along a
+   path and to activate additional replications to counter balance the failures.
+    </t><t>
+   Finally, using the same BIER-TE bit for both directions of the steps of the
+   ladder enables to avoid replication in both directions along the crossing
+   adjacencies. At the time of sending along the step of the ladder, the bit may
+   have been already reset by performing the AND operation with the copy from
+   the other side, in which case the transmission is not needed and does not
+   occur (since the control bit is now off).
   </t>
 
 </section>
 </section>
 
 <section title="Summary of data plane alternatives">
-  <t>TBD. A condenced summary of all solution alternative.
+  <t>TBD. A condensed summary of all solution alternative.
   </t>
    
   <texttable anchor="tab_all_summary" title="PseudoWire criteria summary">
