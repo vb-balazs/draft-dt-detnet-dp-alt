@@ -1047,7 +1047,8 @@ title="Assigning Bits">
      The controller activates the replication by deciding the setting of the
      bits associated with the adjacencies. This decision can be modified at any
      time, but takes the latency of a controller round trip to effectively take
-     place
+     place. Below is an example that uses Replication and Elimination to protect
+     the A->C adjacency.
      </t>
      </list>
      </t>
@@ -1056,7 +1057,7 @@ title="Assigning Bits">
     <ttcol align='center'>Bit #</ttcol>
     <ttcol align='center'>Adjacency</ttcol>
     <ttcol align='center'>Owner</ttcol>
-    <ttcol align='center'>Bit Setting</ttcol>
+    <ttcol align='center'>Example Bit Setting</ttcol>
     
     <c>1</c>
     <c>I->A</c>
@@ -1108,7 +1109,7 @@ title="Assigning Bits">
     <c>D</c>
     <c>0</c>
     
-    <postamble>Replication and Elimination Protecting Segment A===>C</postamble>
+    <postamble>Replication and Elimination Protecting A->C</postamble>
 </texttable>
 
      <t>
@@ -1116,12 +1117,29 @@ title="Assigning Bits">
      <t> 
      The BIER header with the controlling BitString is injected in the packet by
      the ingress node of the deterministic path. That node may act as a
-     replication point, in which case it may issue multiple copies of the packet     
-     </t><t> 
+     replication point, in which case it may issue multiple copies of the packet
+     </t>
+     </list>
+     </t>
+<figure anchor="fig_track_prot" align="center"
+title="Enabled Adjancecies">
+<artwork align="center"><![CDATA[
+ 
+              ====>  Repl ===> Elim ==== 
+           //         |         ^        \\
+   ingress            |         |           egress
+                      v         |             
+                     Fwd ====> Fwd      
+ 
+]]></artwork>
+</figure>
+     <t>      
+     <list style="symbols">
+     <t>
      For each of its bits that is set in the BIER header, the owner replication
      point resets the bit and transmits towards the associated adjacency;
      to achieve this, the replication point copies the packet and inserts the
-     relevant dataplane information, such as a source route header, towards the
+     relevant data plane information, such as a source route header, towards the
      adjacency that corresponds to the bit 
      </t>
      </list>
@@ -1146,7 +1164,7 @@ title="Assigning Bits">
      <t>
      <list style="symbols">
      <t> 
-     Adversely, an elimination node on the way strips the dataplane information
+     Adversely, an elimination node on the way strips the data plane information
      and performs a bitwise AND on the BitStrings from the various copies of the
      packet that it has received, before it forwards the packet with the
      resulting BitString. 
