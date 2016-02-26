@@ -34,6 +34,8 @@
 <!ENTITY rfc6275 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6275.xml">
 <!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
 <!ENTITY rfc2890 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2890.xml">
+<!ENTITY rfc7637 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7637.xml">
+<!ENTITY rfc1700 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1700.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -43,6 +45,7 @@
 <!ENTITY I-D.ietf-v6ops-ipv6-ehs-in-real-world SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-v6ops-ipv6-ehs-in-real-world.xml">
 <!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
 <!ENTITY I-D.eckert-bier-te-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.eckert-bier-te-arch.xml">
+<!ENTITY I-D.ietf-intarea-gre-ipv6 SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-intarea-gre-ipv6.xml">
 
 ]>
 
@@ -704,7 +707,7 @@
         Encapsulation and overhead (M)
         GRE provides encapsulation for a network layer protocol over anther
         network layer protocol. A new protocol type for Detnet traffics should
-        be allocated as an "Ether Type" in [RFC1700] and in [ETYPES]. The fixed
+        be allocated as an "Ether Type" in <xref target="RFC1700"/> and in [ETYPES]. The fixed
         header of a GRE packet is 4 octets while the maximum header is 16 octets
         with optional fields in <xref target="fig_gre_hdr"/>.
         Stream identification (W)
@@ -739,9 +742,9 @@
         Technical maturity
         GRE has been developed over 20 years. The delivery protocol mostly used
         is IPv4, while the IPv6 support for GRE is to be standardized now in
-        IETF as [draft-ietf-intarea-gre-ipv6-14]. Due to its good extensibility,
+        IETF as <xref target="I-D.ietf-intarea-gre-ipv6"/>. Due to its good extensibility,
         GRE is also extended to support network virtualization in Data Center,
-        which is NVGRE [RFC7637].
+        which is NVGRE <xref target="RFC7637"/>.
        </t>
    </section>
 
@@ -1477,6 +1480,9 @@ title="BIER-TE Header">
    &rfc6733;
    &rfc2784;
    &rfc2890;
+   &rfc7637;
+   &rfc1700;
+   &I-D.ietf-intarea-gre-ipv6;
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
    &I-D.ietf-isis-pcr;
