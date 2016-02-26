@@ -373,7 +373,7 @@
    </t>
   </section>
   
-  <section title="Analysis and Discussion">
+  <section title="Analysis and Discussion" anchor="sec_alt_ipv6_ana">
    <t><list style="hanging">
     <t hangText="Encapsulation and overhead (W)">
      <vspace blankLines="1"/>
@@ -548,7 +548,7 @@
    </t>
   </section>
 
-  <section title="Analysis and Discussion">
+  <section title="Analysis and Discussion" anchor="sec_alt_ipv4_ana">
    <t><list style="hanging">
     <t hangText="Encapsulation and overhead (M)">
      <vspace blankLines="1"/> The fixed header of an IPv4 packet is 20 bytes
@@ -666,16 +666,13 @@
     <artwork align="center"><![CDATA[
 +-------------------------------+
 |                               |
-|                               |
 |        Delivery Header        |
 |                               |
 +-------------------------------+
 |                               |
-|                               |
 |          GRE Header           |
 |                               |
 +-------------------------------+
-|                               |
 |                               |
 |         Payload packet        |
 |                               |
@@ -811,14 +808,36 @@
  <section title="PseudoWires" anchor="sec_alt_pwe">
   <section title="Solution description">
    <t>
-    PSeudo Wire Emulation (PWE)  <xref target="RFC3985"/> or PseudoWires (PW)
-    provide means of emulating the essential attributes and behaviour of a
-    telecommunications service over a packet switched network (PSN) using IP or
-    MPLS transport.  In addition to traditional telecommunications services
-    such as T1 line or Frame Relay, PWs also provide transport for Ethernet
-    service <xref target="RFC4448"/> and for generic packet service <xref
-    target="RFC6658"/>.
+    PSeudo Wire Emulation Edge-to-Edge (PWE3) <xref target="RFC3985"/> or
+    simply PseudoWires (PW) provide means of emulating the essential attributes
+    and behaviour of a telecommunications service over a packet switched
+    network (PSN) using IP or MPLS transport.  In addition to traditional
+    telecommunications services such as T1 line or Frame Relay, PWs also
+    provide transport for Ethernet service <xref target="RFC4448"/> and for
+    generic packet service <xref target="RFC6658"/>.  <xref target="fig_pwe3_stack"/>
+    illustrate the reference PWE3 stack model.
    </t>
+   <figure title="PWE3 protocol stack reference model" anchor="fig_pwe3_stack">
+   <artwork align="center"><![CDATA[
++----------------+                      +----------------+
+|Emulated Service|                      |Emulated Service|
+|(e.g., Eth, ...)|<= Emulated Service =>|(e.g., Eth, ...)|
++----------------+                      +----------------+
+|    Payload     |                      |    Payload     | CW,
+|  Encapsulation |<=== Pseudo Wire ====>|  Encapsulation | Timing,
+|                |                      |                | Seq., ..
++----------------+                      +----------------+
+|PW Demultiplexer|                      |PW Demultiplexer|
+|   PSN Tunnel,  |<==== PSN Tunnel ====>|  PSN Tunnel,   | MPLS.
+| PSN & Physical |                      | PSN & Physical | L2TP,
+|     Layers     |                      |    Layers      | IP, ..
++-------+--------+     ___________      +---------+------+
+        |             /           \               |
+        +============/     PSN     \==============+
+                     \             /
+                      \___________/
+   ]]>
+   </artwork></figure>
    <t>
     PWs appear as a good data plane solution alternative for a number of
     reasons. PWs are a proven and deployed technology with a rich O&amp;M
@@ -846,8 +865,10 @@
      processing (NSP) / forwarder function. These optimizations could be used,
      for example, to reduce header overhead. Ethernet PWs already have rather
      low overhead <xref target="RFC4448"/>. Without a CW and VLAN tags the
-     Ethernet header gets reduced to 14 octets (minimum Ethernet header overhead
-     is 26).
+     Ethernet header gets reduced to 14 octets (minimum Ethernet header
+     overhead is 26). IP PSN, on the other hand, would have at least 20
+     (IPv4) or 40 (IPv6) octets of overhead excluding the PW payload
+     encapsulation.
     <vspace blankLines="1"/></t>
     
     <t hangText="Stream identification (M)">
@@ -855,8 +876,10 @@
      PWs provide multiple layers of stream identification, especially in the case
      of the MPLS PSN. The PWs are typically prepended with a PW label that can be
      used to identify a specific PW. Furthermore, the PSN also uses one or more
-     labels to transport packets over a specific label switched paths (that then'
-     would carry PWs).
+     labels to transport packets over a specific label switched paths (that then
+     would carry PWs). IP (and other) PSNs would need other mechanisms, such as, 
+     UDP port numbers, upper layer protocol header (like TRP) or some IP extension
+     header to provide required stream identification.
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet sequencing (M)">
@@ -872,7 +895,9 @@
      MPLS can be used to signal explicit label switched paths (LSP) <xref
      target="RFC5921"/> <xref target="RFC2702"/><xref target="RFC3209"/>.
      Furthermore, the PSN may also use segment routing (SR) to provide explicit
-     routes <xref target="I-D.ietf-spring-segment-routing"/>.
+     routes <xref target="I-D.ietf-spring-segment-routing"/>. Segmement routing
+     based solution would also be available for IPv6 PSN <xref
+     target="I-D.ietf-6man-segment-routing-header"/>.
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet replication and deletion (W)">
@@ -882,15 +907,18 @@
      these solutions are not really intended for sourcing multiple simultaneous
      packet streams. The solutions have one active and other standby stream.
      The PW duplicate detection mechanism also exists in theory <xref
-     target="RFC3985"/> but no emulated service makes use of it currently.
+     target="RFC3985"/> but no emulated service makes use of it currently.  For
+     IP PSN refer to the discussion in  <xref target="sec_alt_ipv6_ana"/> and
+     <xref target="sec_alt_ipv4_ana"/>. 
     <vspace blankLines="1"/></t>
     
     <t hangText="Operations and management (M/W)">
      <vspace blankLines="1"/>
      PWs have rich control plane for O&amp; and in a case of the MPLS PSN enjoy
-     the full control plane toolbox developed for MPLS network O&amp;M. There
-     could be, however, need for deterministic networking specific extensions
-     for the mentioned control planes.
+     the full control plane toolbox developed for MPLS network O&amp;M likewise
+     IP PSN have the full toolbox of IP network  O&amp;M tools. There could be,
+     however, need for deterministic networking specific extensions for the
+     mentioned control planes.
     <vspace blankLines="1"/></t>
     
     <t hangText="Time synchronization (M)">
@@ -899,7 +927,8 @@
      encapsulation layer (see for example <xref target="RFC5087"/>). Whether
      the timing precision is enough for all deterministic networking use cases
      vary, and it is possible existing mechanisms are not adequate for all use
-     cases.
+     cases. IP PSNs have already demonstarted the use of time synchronization 
+     as a part of PWE3  <xref target="RFC5086"/>.
     <vspace blankLines="1"/></t>
     
     <t hangText="Class and quality of service capabilities (M)">
@@ -932,7 +961,7 @@
     
     <t hangText="Technical maturity (M)">
      <vspace blankLines="1"/>
-     PWs and MPLS are both proved technologies with wide variety of deployments
+     PWs, IP and MPLS are proven technologies with wide variety of deployments
      and years of operational experience. Furthermore, the estimated work for
      missing functionality (packet replication and deletion) does not appear to
      be extensive, since the existing protection mechanism already get close to
@@ -1514,6 +1543,7 @@ title="BIER-TE Header">
    &rfc2890;
    &rfc7637;
    &rfc1700;
+   &rfc5086;
    &I-D.ietf-intarea-gre-ipv6;
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
