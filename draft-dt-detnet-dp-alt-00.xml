@@ -32,6 +32,8 @@
 <!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
 <!ENTITY rfc5921 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5921.xml">
 <!ENTITY rfc6275 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6275.xml">
+<!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
+<!ENTITY rfc2890 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2890.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -649,11 +651,98 @@
  </section>
  
  <section title="Layer-2 tunneling over IP">
-  <section title="GRE" anchor="sec_alt_gre">
+  <section title="Generic Routing Encapsulation (GRE)" anchor="sec_alt_gre">
    <section title="Solution description">
-   </section>
+    <t>
+     Generic Routing Encapsulation (GRE) <xref target="RFC2784"/> provides an
+     encapsulation of an arbitrary network layer protocol over another arbitrary
+     network layer protocol. The encapsulation of a GRE packet can be found in
+     <xref target="fig_gre_encap"/>. 
+    </t>
+    <figure anchor="fig_gre_encap" title="Encapsulation of a GRE packet">
+    <artwork align="center"><![CDATA[
++-------------------------------+
+|                               |
+|                               |
+|        Delivery Header        |
+|                               |
++-------------------------------+
+|                               |
+|                               |
+|          GRE Header           |
+|                               |
++-------------------------------+
+|                               |
+|                               |
+|         Payload packet        |
+|                               |
++-------------------------------+
+    ]]></artwork></figure>
 
+    <t>
+     Based on RFC2784, <xref target="RFC2890"/> further includes sequencing
+     number and Key in optional fields of the GRE header, which may help to
+     transport Detnet traffic flows over IP networks. The format of a GRE header
+     is presented in <xref target="fig_gre_hdr"/>.
+    </t>
+    <figure title="Format of a GRE header" anchor="fig_gre_hdr">
+    <artwork align="center"><![CDATA[
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |C| |K|S|  Reserved0      | Ver |          Protocol Type          |
+ +-----------------------------------------------------------------+
+ |      Checksum (optional)      |        Reserved1 (Optional)     |
+ +-----------------------------------------------------------------+
+ |                        Key (optional)                           |
+ +-----------------------------------------------------------------+
+ |                  Sequence Number (optional)                     |
+ +-----------------------------------------------------------------+
+ ]]></artwork></figure>
+   </section>
    <section title="Analysis and Discussion">
+    <t>
+        Encapsulation and overhead (M)
+        GRE provides encapsulation for a network layer protocol over anther
+        network layer protocol. A new protocol type for Detnet traffics should
+        be allocated as an "Ether Type" in [RFC1700] and in [ETYPES]. The fixed
+        header of a GRE packet is 4 octets while the maximum header is 16 octets
+        with optional fields in <xref target="fig_gre_hdr"/>.
+        Stream identification (W)
+        There is no stream identification field in GRE header. However, it can
+        rely on the flow identification mechanism applied in the delivery
+        protocols, such as stream identification stated in IP section 3.2.1 and
+        3.2.2 when the delivery protocol are IPv6 and IPv4 respectively.
+        Alternatively, the Key field can also be extended to carry the stream
+        identification. The size of Key field is 4 octets.
+        Packet sequencing [M]
+        As stated in section 3.x.1, GRE provides an optional sequencing number
+        in its header to provide sequencing services for packets. The size of
+        the sequencing number is 32 bits.
+        Explicit routes [W/N] 
+        GRE has no packet replication and deletion currently in its header and
+        should be extended or rely on delivery protocols.
+        Operations and management [W/N][note: rely on the delivery protocol]
+        GRE has no packet replication and deletion currently and should be
+        relied on delivery protocols.
+        Time synchronization [W/N][note: rely on the delivery protocol]
+        GRE has no packet replication and deletion currently and should be
+        relied on delivery protocols.
+        Class and quality of service capabilities [W/N][note: rely on the
+        delivery protocol]
+        GRE has no packet replication and deletion currently and should be
+        relied on delivery protocols. For the class of service capability, an
+        optional code point field to indicate CoS of a traffic can be extended
+        in GRE header.
+        Packet traceability [W/N][note: rely on the delivery protocol]
+        GRE has no packet replication and deletion currently and should be
+        relied on delivery protocols.
+        Technical maturity
+        GRE has been developed over 20 years. The delivery protocol mostly used
+        is IPv4, while the IPv6 support for GRE is to be standardized now in
+        IETF as [draft-ietf-intarea-gre-ipv6-14]. Due to its good extensibility,
+        GRE is also extended to support network virtualization in Data Center,
+        which is NVGRE [RFC7637].
+       </t>
    </section>
 
    <section title="Summary">
@@ -1386,6 +1475,8 @@ title="BIER-TE Header">
    &rfc6718;
    &rfc7167;
    &rfc6733;
+   &rfc2784;
+   &rfc2890;
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
    &I-D.ietf-isis-pcr;
