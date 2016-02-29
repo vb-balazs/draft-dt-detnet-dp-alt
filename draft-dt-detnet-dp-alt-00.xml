@@ -8,6 +8,7 @@
 <!ENTITY rfc2474 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2474.xml">
 <!ENTITY rfc2702 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2702.xml">
 <!ENTITY rfc3031 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3031.xml">
+<!ENTITY rfc3032 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3032.xml">
 <!ENTITY rfc3168 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3168.xml">
 <!ENTITY rfc3209 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3209.xml">
 <!ENTITY rfc3270 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3270.xml">
@@ -653,7 +654,7 @@
   </section>
  </section>
  
- <section title="Layer-2 tunneling over IP">
+ <!--section title="Layer-2 tunneling over IP"-->
   <section title="Generic Routing Encapsulation (GRE)" anchor="sec_alt_gre">
    <section title="Solution description">
     <t>
@@ -792,18 +793,8 @@
    </section>
   </section>
 
- </section>
+ <!--/section-->
   
- <section title="IP/MPLS">
-  <section title="Solution description">
-  </section>
-
-  <section title="Analysis and Discussion">
-  </section>
-
-  <section title="Summary">
-  </section>
- </section>
   
  <section title="PseudoWires" anchor="sec_alt_pwe">
   <section title="Solution description">
@@ -973,16 +964,39 @@
   <section title="Summary">
    <t>
     PseudoWires appear to be a strong candidate as the deterministic networking
-    data plane solution alternative. The strong points are the technical maturity
-    and the extensive control plane for O&amp;M. This holds specifically for 
-    MPLS-based PSN.
+    data plane solution alternative. The strong points are the technical
+    maturity and the extensive control plane for O&amp;M. This holds
+    specifically for MPLS-based PSN.
    </t>
    <t>
-    Extensions are required to realize the packet replication and duplicate detection.
-    feature of the deterministic networking data plane.
+    Extensions are required to realize the packet replication and duplicate
+    detection.  feature of the deterministic networking data plane.
    </t>
   </section>
  </section>
+
+ <section title="MPLS" anchor="sec_alt_mpls">
+  <section title="Solution description">
+   <t>
+    This section concentrates on MPLS <xref target="RFC3031"/><xref
+    target="RFC3032"/> i.e., to a data plane solutions where a payload traffic
+    is transported directly over MPLS. Basically, MPLS is capable of
+    transporting any traffic payload, not just IP. However, in non-IP transport
+    payload cases the solution quickly starts to resemble PseudoWires (see <xref
+    target="sec_alt_pwe"/>) or other MPLS-based solutions with appropriate
+    shim/adaptation layer between the MPLS label and the transported payload
+    (see Sections <xref format="counter" target="sec_alt_bier"/> and <xref
+    format="counter" target="sec_alt_bier_te"/>).
+   </t>
+  </section>
+
+  <section title="Analysis and Discussion">
+  </section>
+
+  <section title="Summary">
+  </section>
+ </section>
+
 
  <section title="Bit Indexed Explicit Replication" anchor="sec_alt_bier">
   <t>
@@ -1085,7 +1099,6 @@ title="DetNet in BIER domain">
  </section>
 
 
-</section>
 
 
 
@@ -1110,7 +1123,7 @@ title="DetNet in BIER domain">
    granularity of a packet and a adjacency in a control loops that involves an
    external controller.
   </t>
-  <section title="On BIER-TE">
+  <!--section title="On BIER-TE">
   <t>
    BIER-TE supports traffic engineering by explicit hop-by-hop forwarding
    and loose hop forwarding of packets. 
@@ -1132,21 +1145,20 @@ title="DetNet in BIER domain">
    The generic view of an adjacency can be over a link, a tunnel or along a
    path segment. 
   </t><t>
-   With <xref target="I-D.ietf-spring-segment-routing">Segment Routing</xref>
-   a segment can be signaled as an MPLS label, or an IPv6 routing header .
-   A segment may be loosely of strictly source routed, depending on the need for
-   full non-congruence and the confidence that loose routing may still achieve 
+   With <xref target="I-D.ietf-spring-segment-routing">Segment Routing</xref> a
+   segment can be signaled as an MPLS label, or an IPv6 routing header .  A
+   segment may be loosely of strictly source routed, depending on the need for
+   full non-congruence and the confidence that loose routing may still achieve
    that need. 
-
   </t>
- </section>
+ </section-->
   <section title="Solution description">
   <t>
    BIER-TE enables to activate the replication and elimination functions in a
-   manner that is abstract to the data plane forwarding information.
-   An adjacency, which is represented by a bit in the BIER header, can
-   correspond in the data plane to an Ethernet hop, a Label Switched Path, or it
-   can correspond to an IPv6 loose or strict source routed path. 
+   manner that is abstract to the data plane forwarding information.  An
+   adjacency, which is represented by a bit in the BIER header, can correspond
+   in the data plane to an Ethernet hop, a Label Switched Path, or it can
+   correspond to an IPv6 loose or strict source routed path. 
      </t><t>
    In a nutshell, BIER-TE is used as follows:
      <list style="symbols">
@@ -1451,6 +1463,7 @@ title="BIER-TE Header">
 
 </section>
 </section>
+</section>
 
 <section title="Summary of data plane alternatives">
   <t>TBD. A condensed summary of all solution alternative.
@@ -1513,6 +1526,7 @@ title="BIER-TE Header">
    &rfc1122;
    &rfc2460;
    &rfc3031;
+   &rfc3032;
    &rfc3985;
    &rfc3550;
    &rfc6864;
