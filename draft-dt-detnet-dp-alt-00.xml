@@ -886,14 +886,13 @@
      for example, to reduce header overhead. Ethernet PWs already have rather
      low overhead <xref target="RFC4448"/>. Without a CW and VLAN tags the
      Ethernet header gets reduced to 14 octets (minimum Ethernet header
-     overhead is 26). IP PSN, on the other hand, would have at least 20
-     (IPv4) or 40 (IPv6) octets of overhead excluding the PW payload
-     encapsulation.
+     overhead is 26).
      <vspace blankLines="1"/>
      The overhead is somewhat bigger in case of IP PSN if an MPLS over IP 
-     solution is applied to provide PWs. IP adds an overhead to the PW over MPLS
-     overhead; furthermore, the GRE, L2TPv3, or UDP header has to be taken into
-     account if any of these further encapsulations is used.
+     solution is applied to provide PWs. IP adds at least 20 (IPv4) or 40 (IPv6)
+     bytes overhead to the PW over MPLS overhead; furthermore, the GRE, L2TPv3,
+     or UDP header has to be taken into account if any of these further 
+     encapsulations is used.
     <vspace blankLines="1"/></t>
     
     <t hangText="Stream identification (M)">
