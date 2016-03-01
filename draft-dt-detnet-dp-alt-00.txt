@@ -1322,7 +1322,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
                                  Fwd ====> Fwd
 
 
-                       Figure 8: Enabled Adjancecies
+                       Figure 8: Enabled Adjacencies
 
    o  For each of its bits that is set in the BIER header, the owner
       replication point resets the bit and transmits towards the

@@ -1337,7 +1337,7 @@ title="Assigning Bits">
      </list>
      </t>
 <figure anchor="fig_track_prot" align="center"
-title="Enabled Adjancecies">
+title="Enabled Adjacencies">
 <artwork align="center"><![CDATA[
  
               ====>  Repl ===> Elim ==== 
