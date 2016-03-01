@@ -920,15 +920,13 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       example, to reduce header overhead.  Ethernet PWs already have
       rather low overhead [RFC4448].  Without a CW and VLAN tags the
       Ethernet header gets reduced to 14 octets (minimum Ethernet header
-      overhead is 26).  IP PSN, on the other hand, would have at least
-      20 (IPv4) or 40 (IPv6) octets of overhead excluding the PW payload
-      encapsulation.
+      overhead is 26).
 
       The overhead is somewhat bigger in case of IP PSN if an MPLS over
-      IP solution is applied to provide PWs.  IP adds an overhead to the
-      PW over MPLS overhead; furthermore, the GRE, L2TPv3, or UDP header
-      has to be taken into account if any of these further
-      encapsulations is used.
+      IP solution is applied to provide PWs.  IP adds at least 20 (IPv4)
+      or 40 (IPv6) bytes overhead to the PW over MPLS overhead;
+      furthermore, the GRE, L2TPv3, or UDP header has to be taken into
+      account if any of these further encapsulations is used.
 
    Stream identification (M)
 
@@ -946,6 +944,8 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
       As mentioned earlier PWs may contain an optional CW that is able
       to provide sequencing services.  The size of the sequence number
+      in the generic CW is 16 bits, which might be, depending on the
+      used link speed be too little.
 
 
 
@@ -953,9 +953,6 @@ Korhonen, et al.        Expires September 2, 2016              [Page 17]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
-
-      in the generic CW is 16 bits, which might be, depending on the
-      used link speed be too little.
 
    Explicit routes (M)
 
@@ -1002,6 +999,9 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       [RFC2474] and 2-bit field reserved for the explicit congestion
       notification (ECN) [RFC3168].  Similarly, in a case of MPLS PSN,
       there are 3-bit traffic class field (TC) [RFC5462] in the label
+      reserved for for both Explicitly TC-encoded-PSC LSPs (E-LSP)
+      [RFC3270] and ECN [RFC5129].  Due to the limited number of bits in
+      the TC field, their use for QoS and ECN functions restricted and
 
 
 
@@ -1010,9 +1010,6 @@ Korhonen, et al.        Expires September 2, 2016              [Page 18]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
-      reserved for for both Explicitly TC-encoded-PSC LSPs (E-LSP)
-      [RFC3270] and ECN [RFC5129].  Due to the limited number of bits in
-      the TC field, their use for QoS and ECN functions restricted and
       intended to be flexible.  Although the Qos/CoS mechanism is
       already in place some clarifications may be required in the
       context of deterministic networking flows/streams, for example, if
@@ -1058,6 +1055,9 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    plane solutions where a payload traffic is transported directly over
    MPLS.  Basically, MPLS is capable of transporting any traffic
    payload, not just IP.  However, in non-IP transport payload cases the
+   solution quickly starts to resemble PseudoWires (see Section 3.5) or
+   other MPLS-based solutions with appropriate shim/adaptation layer
+
 
 
 
@@ -1066,8 +1066,6 @@ Korhonen, et al.        Expires September 2, 2016              [Page 19]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
-   solution quickly starts to resemble PseudoWires (see Section 3.5) or
-   other MPLS-based solutions with appropriate shim/adaptation layer
    between the MPLS label and the transported payload (see Sections 3.7
    and 3.8).
 
@@ -1114,6 +1112,8 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    o  Timestamp;
    o  Payload type, e.g. data vs. OAM.
 
+   DetNet node, collocated with BFIR, may use multiple BIER sub-domains
+   to create replicated flows.  Downstream DetNet nodes, collocated with
 
 
 
@@ -1122,8 +1122,6 @@ Korhonen, et al.        Expires September 2, 2016              [Page 20]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
-   DetNet node, collocated with BFIR, may use multiple BIER sub-domains
-   to create replicated flows.  Downstream DetNet nodes, collocated with
    BFER, would terminate redundant flows based on Sequence Number and/or
    Timestamp information.  Such DetNet may be BFER in one BIER sub-
    domain and BFIR in another.  Thus DetNet flow would traverse several
@@ -1170,6 +1168,8 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    o  A-B-D-E-G (dash-dot): A is BFIR, E and G are BFERs,
    o  A-C-E-F-H (dash-double-dot): A is BFIR, E and H are BFERs,
+   o  E-G-H (dotted): E is BFIR, G and H are BFERs.
+
 
 
 
@@ -1177,8 +1177,6 @@ Korhonen, et al.        Expires September 2, 2016              [Page 21]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
-
-   o  E-G-H (dotted): E is BFIR, G and H are BFERs.
 
    DetNet node A sends DetNet into red and purple BIER sub-domains.
    DettNet node E receives DetNet packet and sends into green sub-domain
@@ -1226,16 +1224,14 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    o  A controller computes a complex path, sometimes called a track,
       which takes the general form of a ladder.  The steps and the side
+      rails between them are the adjacencies that can be activated on
+      demand on a per-packet basis using bits in the BIER header.
 
 
 
 Korhonen, et al.        Expires September 2, 2016              [Page 22]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
-
-
-      rails between them are the adjacencies that can be activated on
-      demand on a per-packet basis using bits in the BIER header.
 
 
                             ===> (A) ====> (C) ====
@@ -1270,6 +1266,10 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       modified at any time, but takes the latency of a controller round
       trip to effectively take place.  Below is an example that uses
       Replication and Elimination to protect the A->C adjacency.
+
+
+
+
 
 
 
