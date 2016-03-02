@@ -380,7 +380,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       carry optional information to be examined only by a packet's
       destination node(s).  The encoding of the options used in the Hop-
       by-Hop and in the Destination Options Header indicates the
-      expected behavior for a processing IPv6 node does not recognize
+      expected behavior when a processing IPv6 node does not recognize
       the Option Type, e.g. skip or drop; it should be noted that due to
       performance restrictions nodes may ignore the Hop-by-Hop Option
       Header, drop packets containing a Hop-by-Hop Option Header, or
@@ -439,9 +439,9 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       replication the replicated packets are likely to be sourced from a
       different IPv6 address than the original packets, thus the flow/
       stream identification that is independent of the addressing
-      becomes important.  Actually, Mobile IPv6 [RFC6275] had a similar
-      issue in case of route optimization.  Sourcing packets with the
-
+      becomes important.  An alternate to IP-in-IP tunneling along
+      segments would be to protect the original source address in a
+      destination option similar to the Home Address option [RFC6275]
 
 
 
@@ -450,11 +450,11 @@ Korhonen, et al.        Expires September 3, 2016               [Page 8]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
-      home address that is not topologically correct in the visited
-      network was solved using a specific Home Address option.
+      and then use the address of the replication point as source in the
+      IP header.
 
       At present sequencing and flow/stream identification beyond IPv6
-      flow label would require new IPv6 extension headers.  Another
+      flow label would require to define new IPv6 Options.  Another
       concern regarding packet replication is how to enforce replicated
       packets to take different route while the final destination still
       remains the same.  With IPv6 and using layer-3 mechanisms this
