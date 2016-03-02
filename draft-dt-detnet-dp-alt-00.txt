@@ -369,12 +369,12 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       intermediate routers between the source and the final destination
       and may be of interest for the data plane signaling, the Routing
       Header that is used to direct the traffic via intermediate routers
-      in a strict or loose source routing way, and the Hop-by-Hop (HbH)
+      in a strict or loose source routing way, and the Hop-by-Hop
       Options Header that carries optional information that must be
-      examined by every node along a packet's delivery path.  The HbH
-      Options Header, when present, must immediately follow the IPv6
-      Header and it is not possible to limit its processing to the
-      extremities of Source Routed segments.
+      examined by every node along a packet's delivery path.  The Hop-
+      by-Hop Options Header, when present, must immediately follow the
+      IPv6 Header and it is not possible to limit its processing to the
+      end points of Source Routed segments.
 
       IPv6 also provides a Destination Options Header that is used to
       carry optional information to be examined only by a packet's
