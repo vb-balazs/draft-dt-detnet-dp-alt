@@ -51,6 +51,7 @@
 <!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
 <!ENTITY I-D.eckert-bier-te-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.eckert-bier-te-arch.xml">
 <!ENTITY I-D.ietf-intarea-gre-ipv6 SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-intarea-gre-ipv6.xml">
+<!ENTITY I-D.ietf-6man-rfc2460bis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-rfc2460bis.xml">
 
 ]>
 
@@ -384,11 +385,33 @@
      <vspace blankLines="1"/>
      Deterministic flows are assumed to be handled natively at layer-3 by IPv6
      at the first place. The fixed header of an IPv6 packet is 40 bytes <xref
-     target="RFC2460"/>.  The overhead is bigger if any extension header is
+     target="RFC2460"/>.  The overhead is bigger if any Extension Header is
      used. However, the exact overhead (<xref target="sec_crit_encap"/>)
      depends on what solution is actually used to provide DetNet features,
-     e.g., explicit routing or seamless redundancy if any of these is applied.
-     <vspace blankLines="1"/></t>
+     e.g., explicit routing or seamless redundancy if any of these is applied.     
+     <vspace blankLines="1"/>
+     IPv6 has two types of Extension Headers that are processed by intermediate
+     routers between the source and the final destination and may be of interest
+     for the data plane signaling, the Routing Header that is used to direct the
+     traffic via intermediate routers in a strict or loose source routing way,
+     and the Hop-by-Hop (HbH) Options Header that carries optional information
+     that must be examined by every node along a packet's delivery path.
+     The HbH Options Header, when present, must immediately follow the IPv6
+     Header and it is not possible to limit its processing to the extremities of
+     Source Routed segments. 
+     <vspace blankLines="1"/>
+     IPv6 also provides a Destination Options Header that is used to carry
+     optional information to be examined only by a packet's destination node(s).
+     The encoding of the options used in the Hop-by-Hop and in the Destination
+     Options Header indicates the expected behavior for a processing IPv6 node
+     does not recognize the Option Type, e.g. skip or drop; it should be noted
+     that due to performance restrictions nodes may ignore the Hop-by-Hop Option
+     Header, drop packets containing a Hop-by-Hop Option Header, or assign
+     packets containing a Hop-by-Hop Option Header to a slow processing path
+     <xref target="I-D.ietf-6man-rfc2460bis"/> (e.g. punt packets from hardware
+     to software forwarding which is highly detrimental to the performance).
+     <vspace blankLines="1"/>
+     </t>
     
     <t hangText="Stream identification (M/W)">
      <vspace blankLines="1"/>
@@ -398,13 +421,19 @@
      on how the flow label can be used. In particular, labels should be chosen
      from an approximation to a discrete uniform distribution. Additionally,
      existing implementations generally do not open APIs to control the flow
-     label from the upper layers.
+     label from the upper layers. Alternatively, the Stream identification could
+     be transported in a new option in the Hop-by-Hop Options Header. 
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet sequencing (W/N)">
      <vspace blankLines="1"/>
-     TBD. [Editor's note: packet sequencing would require a new extension
-     header - a destination option most likely - to add sequence numbers.]
+     Packet sequencing would require a new Extension Header. One approach could 
+     be to encapsulate the packets in IP tunnels along the segments between the 
+     replication and the elimination points, in which case the sequence number
+     would be placed in a new option in the Destination Options Header. 
+     As above, an alternate could be to define a new option in the Hop-by-Hop 
+     Options Header, which would impact the operation of all the routers on the
+     way. 
     <vspace blankLines="1"/></t>
     
     <t hangText="Explicit routes (W)">
@@ -421,7 +450,9 @@
     <t hangText="Packet replication and deletion (W)">
      <vspace blankLines="1"/>
      The implementation of this functionality largely depends on used the packet
-     sequencing and flow/stream identification approaches. Specifically in a
+     sequencing and flow/stream identification approaches. The above discussion
+     on the potential use of option headers and IP tunnels also applies here.
+     Specifically in a
      case of packet replication the replicated packets are likely to be sourced
      from a different IPv6 address than the original packets, thus the
      flow/stream identification that is independent of the addressing becomes
@@ -1621,6 +1652,7 @@ title="BIER-TE Header">
    &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
    &I-D.ietf-sunset4-gapanalysis;
    &I-D.eckert-bier-te-arch;
+   &I-D.ietf-6man-rfc2460bis;
 
    <reference anchor="ETYPES"
      target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers ">
