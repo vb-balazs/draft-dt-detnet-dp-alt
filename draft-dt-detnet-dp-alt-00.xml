@@ -44,6 +44,7 @@
 <!ENTITY rfc7510 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7510.xml">
 <!ENTITY rfc5305 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5305.xml">
 <!ENTITY rfc5440 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5440.xml">
+<!ENTITY rfc7045 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7045.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -389,8 +390,10 @@
      <vspace blankLines="1"/>
      Deterministic flows are assumed to be handled natively at layer-3 by IPv6
      at the first place. The fixed header of an IPv6 packet is 40 bytes <xref
-     target="RFC2460"/>.  The overhead is bigger if any Extension Header is
-     used. However, the exact overhead (<xref target="sec_crit_encap"/>)
+     target="RFC2460"/>. This overhead is bigger if any Extension Header is
+     used, and a generic behaviour for host and forwarding nodes is specified
+     in  <xref target="RFC7045"/>.
+     However, the exact overhead (<xref target="sec_crit_encap"/>)
      depends on what solution is actually used to provide DetNet features,
      e.g., explicit routing or seamless redundancy if any of these is applied.     
      <vspace blankLines="1"/>
@@ -415,6 +418,8 @@
      <xref target="I-D.ietf-6man-rfc2460bis"/> (e.g. punt packets from hardware
      to software forwarding which is highly detrimental to the performance).
      <vspace blankLines="1"/>
+     The creation of new Extension Headers that would neeed
+     <vspace blankLines="1"/>
      </t>
     
     <t hangText="Stream identification (M/W)">
@@ -431,7 +436,8 @@
     
     <t hangText="Packet sequencing (W/N)">
      <vspace blankLines="1"/>
-     Packet sequencing would require a new Extension Header. One approach could 
+     Packet sequencing would require a new option in an existing Extension Header.
+     or One approach could 
      be to encapsulate the packets in IP tunnels along the segments between the 
      replication and the elimination points, in which case the sequence number
      would be placed in a new option in the Destination Options Header. 
@@ -458,8 +464,12 @@
      path in the data plane between the source and the destination, and/or
      between replication points and elimination points if this functionality
      is used. 
-     In strict source routing, all the intermediate hops are listed and paths
-     can be guaranteed to not overlap at all. Loose source routing only signals
+     <vspace blankLines="1"/>
+     Another concern regarding packet replication is how to enforce 
+     replicated packets to take different route while the final destination 
+     still remains the same.
+     With strict source routing, all the intermediate hops are listed and paths
+     can be guaranteed to be non-overlapping. Loose source routing only signals
      some of the intermediate hops and it takes additional knowledge to ensure
      that there is no single point of failure.
        <vspace blankLines="1"/>    
@@ -551,9 +561,19 @@
      IPv6 has been around about 20 years. However, large scale global and
      commercial IPv6 deployments are rather new dating only few years back to
      around 2012. While IPv6 has proven itself there are number of small issues
-     to work on as they show up once operations experience grows. A good meter
+     to work on as they show up once operations experience grows. 
+     
+    <vspace blankLines="1"/>
+     The <xref target="sixlab">Cisco 6Lab site</xref> provides information on
+     IPv6 deployment per country, indicating figures for prefixes, transit AS,
+     content and users. Per this site, many countries, including Canada, Brazil, 
+     the USA, Germany, France, Japan, Portugal, Sweden, Finland, Norway, Greece, 
+     and Ecuador, achieve a deployment ratio above 30 percent, and the overall 
+     adoption reported by <xref target="googleipv6">Google Statistics</xref> is
+     now above 10 percent.      
+     <!--     A good meter
      is the number of basic IPv6 related documents in IETF V6OPS, V6MAN and
-     other use case specific working groups.
+     other use case specific working groups. -->
     <vspace blankLines="1"/></t>
    </list></t>
   </section>
@@ -1686,6 +1706,7 @@ title="BIER-TE Header">
    &rfc7510;
    &rfc5440;
    &rfc5305;
+   &rfc7045;
    &I-D.ietf-intarea-gre-ipv6;
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
@@ -1758,7 +1779,29 @@ title="BIER-TE Header">
     <format type="PDF" target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf"/>
    </reference>
   
-  
+   <reference anchor="sixlab"
+     target="http://6lab.cisco.com/stats/" >
+    <front>
+     <title>6lab - The place to monitor IPv6 adoption</title>
+     <author>
+      <organization>Cisco</organization>
+     </author>
+     <date />
+    </front>
+   </reference>
+      
+      
+   <reference anchor="googleipv6"
+     target="https://www.google.com/intl/en/ipv6/statistics.html" >
+    <front>
+     <title>Google IPv6 stats</title>
+     <author>
+      <organization>Google</organization>
+     </author>
+     <date />
+    </front>
+   </reference>
+
   </references>
  </back>
 </rfc>
