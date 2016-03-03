@@ -40,7 +40,10 @@
 <!ENTITY rfc7637 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7637.xml">
 <!ENTITY rfc1700 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1700.xml">
 <!ENTITY rfc7426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7426.xml">
+<!ENTITY rfc7399 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7399.xml">
 <!ENTITY rfc7510 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7510.xml">
+<!ENTITY rfc5305 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5305.xml">
+<!ENTITY rfc5440 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5440.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -52,6 +55,7 @@
 <!ENTITY I-D.eckert-bier-te-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.eckert-bier-te-arch.xml">
 <!ENTITY I-D.ietf-intarea-gre-ipv6 SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-intarea-gre-ipv6.xml">
 <!ENTITY I-D.ietf-6man-rfc2460bis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-rfc2460bis.xml">
+<!ENTITY I-D.ietf-idr-ls-distribution SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-idr-ls-distribution.xml">
 
 ]>
 
@@ -439,13 +443,25 @@
     <t hangText="Explicit routes (W)">
      <vspace blankLines="1"/>
      There is an initiative to equip IPv6 with explicit routing capabilities.
-     The idea is to apply Segment Routing (SR) <xref
+     The general assumption is that a Software-Defined Networking (SDN)
+     <xref target="RFC7426"/> based approach is applied to compute, establish
+     and manage the explicit routes, that leverages Traffic Engineering (TE)
+     extensions to routing protocols <xref target="RFC5305"/>
+     <xref target="I-D.ietf-idr-ls-distribution"/> and evolutions to the
+     Path Computation Element (PCE) Architecture <xref target="RFC5440"/>, 
+     <xref target="RFC7399"/>. The idea is to apply Segment Routing (SR) <xref
      target="I-D.ietf-spring-segment-routing"/> to IPv6 via the addition of a
      new type of routing extension header <xref
-     target="I-D.ietf-6man-segment-routing-header"/>. Alternatively, a 
-     management or a Software-Defined Networking (SDN) <xref target="RFC7426"/>
-     based approach can be applied for establishing explicit routes. 
-    <vspace blankLines="1"/></t>
+     target="I-D.ietf-6man-segment-routing-header"/>.  
+     to explicitly signal the path in the data plane
+     between replication points and elimination points. A replication point
+     would insert a routing header in each copy it makes, the routing header 
+     providing explicitly the hops to the elimination point for that particular
+     replica of the packet, in a strict or loose source routing fashion.
+     An elimination point would pop the routing headers from the various copies
+     it gets and forward or receive the packet if it is the final destination.
+       <vspace blankLines="1"/>    
+    </t>
     
     <t hangText="Packet replication and deletion (W)">
      <vspace blankLines="1"/>
@@ -1643,7 +1659,10 @@ title="BIER-TE Header">
    &rfc1700;
    &rfc5086;
    &rfc7426;
+   &rfc7399;
    &rfc7510;
+   &rfc5440;
+   &rfc5305;
    &I-D.ietf-intarea-gre-ipv6;
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
@@ -1654,6 +1673,7 @@ title="BIER-TE Header">
    &I-D.ietf-sunset4-gapanalysis;
    &I-D.eckert-bier-te-arch;
    &I-D.ietf-6man-rfc2460bis;
+   &I-D.ietf-idr-ls-distribution;
 
    <reference anchor="ETYPES"
      target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers ">
