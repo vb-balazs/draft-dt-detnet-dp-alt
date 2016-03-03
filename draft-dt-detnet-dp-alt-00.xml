@@ -444,11 +444,11 @@
      <vspace blankLines="1"/>
       The general assumption is that a Software-Defined Networking (SDN)
      <xref target="RFC7426"/> based approach is applied to compute, establish
-     and manage the explicit routes, that leverages Traffic Engineering (TE)
+     and manage the explicit routes, leveraging Traffic Engineering (TE)
      extensions to routing protocols <xref target="RFC5305"/>
      <xref target="I-D.ietf-idr-ls-distribution"/> and evolutions to the
      Path Computation Element (PCE) Architecture <xref target="RFC5440"/>, 
-     <xref target="RFC7399"/>.
+     though a number of issues remain to be solved <xref target="RFC7399"/>.
      <vspace blankLines="1"/>
      Segment Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> is a
      new initiative to equip IPv6 with explicit routing capabilities.
@@ -496,6 +496,7 @@
      source routing fashion.
      An elimination point would pop the routing headers from the various copies
      it gets and forward or receive the packet if it is the final destination.
+     <vspace blankLines="1"/>
      </t>
     
     <t hangText="Operations and management (M/W)">
