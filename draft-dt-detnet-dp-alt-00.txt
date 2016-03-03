@@ -94,7 +94,7 @@ Table of Contents
        3.3.2.  Analysis and Discussion . . . . . . . . . . . . . . .  15
        3.3.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  16
      3.4.  L2TP  . . . . . . . . . . . . . . . . . . . . . . . . . .  16
-       3.4.1.  Solution description  . . . . . . . . . . . . . . . .  16
+       3.4.1.  Solution description  . . . . . . . . . . . . . . . .  17
        3.4.2.  Analysis and Discussion . . . . . . . . . . . . . . .  17
        3.4.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  17
      3.5.  PseudoWires . . . . . . . . . . . . . . . . . . . . . . .  17
@@ -399,11 +399,11 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       performance).
 
       The creation of new Extension Headers that would need to be
-      processed by intermediate nodes is strongly discouraged.  New IPv6
-      extension header(s) having hop-by-hop behavior MUST NOT be created
-      or specified.  New options for the existing Hop-by-Hop Header
-      SHOULD NOT be created or specified unless no alternative solution
-      is feasible [RFC6564].
+      processed by intermediate nodes is strongly discouraged.  In
+      particular, new Extension Header(s) having hop-by-hop behavior
+      must not be created or specified.  New options for the existing
+      Hop-by-Hop Header should not be created or specified unless no
+      alternative solution is feasible [RFC6564].
 
 
    Stream identification (M/W)
@@ -415,19 +415,22 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       labels should be chosen from an approximation to a discrete
       uniform distribution.  Additionally, existing implementations
       generally do not open APIs to control the flow label from the
-      upper layers.  Alternatively, the Stream identification could be
-      transported in a new option in the Hop-by-Hop Options Header.
+      upper layers.
+
+      Alternatively, the Stream identification could be transported in a
+      new option in the Hop-by-Hop Options Header.
 
    Packet sequencing (W/N)
 
-      Packet sequencing would require a new option in an existing
-      Extension Header.  or One approach could be to encapsulate the
-      packets in IP tunnels along the segments between the replication
-      and the elimination points, in which case the sequence number
-      would be placed in a new option in the Destination Options Header.
-      As above, an alternate could be to define a new option in the Hop-
-      by-Hop Options Header, which would impact the operation of all the
-      routers on the way.
+      Packet sequencing would require a new option in an IPv6 Extension
+      Header.  One approach could be to encapsulate the packets in IP-
+      in-IP tunnels that would terminate at the elimination points.  In
+      that case, the sequence number is only useful to the destination
+      of the outer IPv6 header, and it could be placed in a new option
+      in the Destination Options Header in the encapsulation.
+
+      Alternatively, the sequence number could also be transported in
+      another new option in the Hop-by-Hop Options Header.
 
    Explicit routes (W)
 
@@ -439,9 +442,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       Computation Element (PCE) Architecture [RFC5440], though a number
       of issues remain to be solved [RFC7399].
 
-      Segment Routing (SR) [I-D.ietf-spring-segment-routing] is a new
-      initiative to equip IPv6 with explicit routing capabilities.  The
-      idea for the DetNet data plane would be to apply SR to IPv6 with
 
 
 
@@ -450,6 +450,9 @@ Korhonen, et al.        Expires September 4, 2016               [Page 8]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+      Segment Routing (SR) [I-D.ietf-spring-segment-routing] is a new
+      initiative to equip IPv6 with explicit routing capabilities.  The
+      idea for the DetNet data plane would be to apply SR to IPv6 with
       the addition of a new type of routing extension header
       [I-D.ietf-6man-segment-routing-header] to explicitly signal the
       path in the data plane between the source and the destination,
@@ -494,10 +497,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Operations and management (M/W)
 
-      IPv6 enjoys the existing toolbox for generic IP network
-      management.  However, IPv6 specific management features are still
-      not at the level of that IPv4 has.  This specifically concerns the
-      areas that are IPv6 specific, for example, related to neighbor
+
 
 
 
@@ -506,6 +506,10 @@ Korhonen, et al.        Expires September 4, 2016               [Page 9]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+      IPv6 enjoys the existing toolbox for generic IP network
+      management.  However, IPv6 specific management features are still
+      not at the level of that IPv4 has.  This specifically concerns the
+      areas that are IPv6 specific, for example, related to neighbor
       discovery protocol (ND), stateless address autoconfiguration
       (SLAAC), subscriber identification, and security.  While the
       standards are already mostly in place the implementations in
@@ -550,10 +554,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Technical maturity (M/W)
 
-      IPv6 has been around about 20 years.  However, large scale global
-      and commercial IPv6 deployments are rather new dating only few
-      years back to around 2012.  While IPv6 has proven itself there are
-
 
 
 
@@ -562,6 +562,9 @@ Korhonen, et al.        Expires September 4, 2016              [Page 10]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+      IPv6 has been around about 20 years.  However, large scale global
+      and commercial IPv6 deployments are rather new dating only few
+      years back to around 2012.  While IPv6 has proven itself there are
       number of small issues to work on as they show up once operations
       experience grows.
 
@@ -607,9 +610,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    eliminate duplicate packets if seamless redundancy is used.  The
    sequence number is conveyed by bits 16 through 31 of the RTP header.
    In addition to the sequence number the RTP header has also timestamp
-   field (bits 32 through 63) that can be useful for time
-   synchronization purposes.  Furthermore, the RTP header has also one
-   or more synchronization sources (bits starting from 64) that can
 
 
 
@@ -618,6 +618,9 @@ Korhonen, et al.        Expires September 4, 2016              [Page 11]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+   field (bits 32 through 63) that can be useful for time
+   synchronization purposes.  Furthermore, the RTP header has also one
+   or more synchronization sources (bits starting from 64) that can
    potentially be useful for flow/stream identification purposes.  also
    co
 
@@ -663,9 +666,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       [RFC6621] to a great detail in the context of simplified multicast
       forwarding.
 
-      The IPv4 also has a stream identifier option [RFC0791], which
-      contains a 16-bit SATNET stream identifier.  However, the option
-      has been deprecated [RFC6814].  The conclusion is that stream
 
 
 
@@ -674,6 +674,9 @@ Korhonen, et al.        Expires September 4, 2016              [Page 12]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+      The IPv4 also has a stream identifier option [RFC0791], which
+      contains a 16-bit SATNET stream identifier.  However, the option
+      has been deprecated [RFC6814].  The conclusion is that stream
       identification does not work nicely with IPv4 header alone and a
       traditional 5-tuple identification might not also be enough in a
       case of a flow/stream duplication.  For a working solution upper
@@ -720,9 +723,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Packet traceability (W/N)
 
-      The IPv4 has a traceroute option [RFC1393] that could be used to
-      record the route the packet took.  However, the option has been
-
 
 
 Korhonen, et al.        Expires September 4, 2016              [Page 13]
@@ -730,6 +730,8 @@ Korhonen, et al.        Expires September 4, 2016              [Page 13]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+      The IPv4 has a traceroute option [RFC1393] that could be used to
+      record the route the packet took.  However, the option has been
       deprecated [RFC6814].  Similarly to IPv6 new work would be needed
       to allow better traceability of IPv4 packets.
 
@@ -775,8 +777,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
                   Figure 1: Encapsulation of a GRE packet
 
-   Based on RFC2784, [RFC2890] further includes sequencing number and
-   Key in optional fields of the GRE header, which may help to transport
 
 
 
@@ -786,6 +786,8 @@ Korhonen, et al.        Expires September 4, 2016              [Page 14]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+   Based on RFC2784, [RFC2890] further includes sequencing number and
+   Key in optional fields of the GRE header, which may help to transport
    Detnet traffic flows over IP networks.  The format of a GRE header is
    presented in Figure 2.
 
@@ -833,14 +835,14 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       GRE has no packet replication and deletion currently in its header
       and should be extended or rely on delivery protocols.
 
-   Packet replication and deletion (N)
-
 
 
 Korhonen, et al.        Expires September 4, 2016              [Page 15]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
+
+   Packet replication and deletion (N)
 
       GRE has no packet replication and deletion currently in its header
       and should be extended or rely on delivery protocols.
@@ -884,8 +886,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 3.4.  L2TP
 
-3.4.1.  Solution description
-
 
 
 
@@ -897,6 +897,8 @@ Korhonen, et al.        Expires September 4, 2016              [Page 16]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
+
+3.4.1.  Solution description
 
 3.4.2.  Analysis and Discussion
 
@@ -944,8 +946,6 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    service that is, for example, capable of frame sequencing and
    duplicate detection.  The encapsulation layer may also provide timing
    [RFC5087].
-
-
 
 
 

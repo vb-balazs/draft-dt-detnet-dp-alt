@@ -420,10 +420,10 @@
      to software forwarding which is highly detrimental to the performance).
      <vspace blankLines="1"/>
      The creation of new Extension Headers that would need to be processed by
-     intermediate nodes is strongly discouraged.  New IPv6 extension
-     header(s) having hop-by-hop behavior MUST NOT be created or
-     specified.  New options for the existing Hop-by-Hop Header SHOULD NOT
-     be created or specified unless no alternative solution is feasible
+     intermediate nodes is strongly discouraged. In particular, new Extension
+     Header(s) having hop-by-hop behavior must not be created or specified.
+     New options for the existing Hop-by-Hop Header should not be created or
+     specified unless no alternative solution is feasible
       <xref target="RFC6564"/>.
    
      <vspace blankLines="1"/>
@@ -437,20 +437,23 @@
      on how the flow label can be used. In particular, labels should be chosen
      from an approximation to a discrete uniform distribution. Additionally,
      existing implementations generally do not open APIs to control the flow
-     label from the upper layers. Alternatively, the Stream identification could
+     label from the upper layers.
+     <vspace blankLines="1"/>
+     Alternatively, the Stream identification could
      be transported in a new option in the Hop-by-Hop Options Header. 
     <vspace blankLines="1"/></t>
     
     <t hangText="Packet sequencing (W/N)">
      <vspace blankLines="1"/>
-     Packet sequencing would require a new option in an existing Extension Header.
-     or One approach could 
-     be to encapsulate the packets in IP tunnels along the segments between the 
-     replication and the elimination points, in which case the sequence number
-     would be placed in a new option in the Destination Options Header. 
-     As above, an alternate could be to define a new option in the Hop-by-Hop 
-     Options Header, which would impact the operation of all the routers on the
-     way. 
+     Packet sequencing would require a new option in an IPv6 Extension Header.
+     One approach could  be to encapsulate the packets in IP-in-IP tunnels that
+     would terminate at the elimination points. In that case, the sequence
+     number is only useful to the destination of the outer IPv6 header, and it
+     could be placed in a new option in the Destination Options Header in the
+     encapsulation.
+     <vspace blankLines="1"/>
+     Alternatively, the sequence number could also be transported in another new
+     option in the Hop-by-Hop Options Header. 
     <vspace blankLines="1"/></t>
     
     <t hangText="Explicit routes (W)">
