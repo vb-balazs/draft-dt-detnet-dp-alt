@@ -442,8 +442,7 @@
     
     <t hangText="Explicit routes (W)">
      <vspace blankLines="1"/>
-     There is an initiative to equip IPv6 with explicit routing capabilities.
-     The general assumption is that a Software-Defined Networking (SDN)
+      The general assumption is that a Software-Defined Networking (SDN)
      <xref target="RFC7426"/> based approach is applied to compute, establish
      and manage the explicit routes, that leverages Traffic Engineering (TE)
      extensions to routing protocols <xref target="RFC5305"/>
@@ -451,9 +450,10 @@
      Path Computation Element (PCE) Architecture <xref target="RFC5440"/>, 
      <xref target="RFC7399"/>.
      <vspace blankLines="1"/>
-     The idea would be to apply Segment Routing (SR) <xref
-     target="I-D.ietf-spring-segment-routing"/> to IPv6 via the addition of a
-     new type of routing extension header <xref
+     Segment Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> is a
+     new initiative to equip IPv6 with explicit routing capabilities.
+     The idea for the DetNet data plane would be to apply SR to IPv6 with the
+     addition of a new type of routing extension header <xref
      target="I-D.ietf-6man-segment-routing-header"/> to explicitly signal the
      path in the data plane between the source and the destination, and/or
      between replication points and elimination points if this functionality
