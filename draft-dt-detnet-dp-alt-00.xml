@@ -449,17 +449,19 @@
      extensions to routing protocols <xref target="RFC5305"/>
      <xref target="I-D.ietf-idr-ls-distribution"/> and evolutions to the
      Path Computation Element (PCE) Architecture <xref target="RFC5440"/>, 
-     <xref target="RFC7399"/>. The idea is to apply Segment Routing (SR) <xref
+     <xref target="RFC7399"/>.
+     <vspace blankLines="1"/>
+     The idea would be to apply Segment Routing (SR) <xref
      target="I-D.ietf-spring-segment-routing"/> to IPv6 via the addition of a
      new type of routing extension header <xref
-     target="I-D.ietf-6man-segment-routing-header"/>.  
-     to explicitly signal the path in the data plane
-     between replication points and elimination points. A replication point
-     would insert a routing header in each copy it makes, the routing header 
-     providing explicitly the hops to the elimination point for that particular
-     replica of the packet, in a strict or loose source routing fashion.
-     An elimination point would pop the routing headers from the various copies
-     it gets and forward or receive the packet if it is the final destination.
+     target="I-D.ietf-6man-segment-routing-header"/> to explicitly signal the
+     path in the data plane between the source and the destination, and/or
+     between replication points and elimination points if this functionality
+     is used. 
+     In strict source routing, all the intermediate hops are listed and paths
+     can be guaranteed to not overlap at all. Loose source routing only signals
+     some of the intermediate hops and it takes additional knowledge to ensure
+     that there is no single point of failure.
        <vspace blankLines="1"/>    
     </t>
     
@@ -467,26 +469,34 @@
      <vspace blankLines="1"/>
      The implementation of this functionality largely depends on used the packet
      sequencing and flow/stream identification approaches. The above discussion
-     on the potential use of option headers and IP tunnels also applies here.
-     Specifically in a
-     case of packet replication the replicated packets are likely to be sourced
-     from a different IPv6 address than the original packets, thus the
-     flow/stream identification that is independent of the addressing becomes
-     important. 
-     An alternate to IP-in-IP tunneling along segments would be to protect the
-     original source address in a destination option similar to the Home Address
-     option <xref target="RFC6275"/> and then use the address of the replication
-     point as source in the IP header.
+     on the potential use of new Options for packet sequencing and flow/stream
+     identification approaches, as well as source routing and IP tunnels to 
+     signal explicit paths, also applies here.
      <vspace blankLines="1"/>
-     At present sequencing and flow/stream identification beyond IPv6
+    <!-- At present sequencing and flow/stream identification beyond IPv6
      flow label would require to define new IPv6 Options. Another concern
      regarding packet replication is how to enforce replicated packets to take
      different route while the final destination still remains the same. With
      IPv6 and using layer-3 mechanisms this cannot be done without form of
      source routing encoded into the packet, for example, in form of source
-     routing extension  headers.  Also, there is currently no specification for
-     the duplicate packet deletion functionality at merging points.
-    <vspace blankLines="1"/></t>
+     routing extension  headers.  
+    <vspace blankLines="1"/> -->
+     The functionality of replicating a packet exists in IPv6 but is limited
+     to multicast flows. On the other hand, there is currently no specification
+     for the duplicate packet deletion functionality at the elimination points.
+     The behaviour of keeping a state about received packets exists in Neighbor
+     Discovery during the address resolution process, but it is limited to final
+     delivery and prone to DOS attacks.
+     <vspace blankLines="1"/>
+     As discussed above, IP-in-IP encapsulation and Segment Routing could be 
+     leveraged to signal a segment in a packet. 
+     A replication point would insert a different routing header in each copy it
+     makes, the routing header providing explicitly the hops to the elimination
+     point for that particular replica of the packet, in a strict or in a loose
+     source routing fashion.
+     An elimination point would pop the routing headers from the various copies
+     it gets and forward or receive the packet if it is the final destination.
+     </t>
     
     <t hangText="Operations and management (M/W)">
      <vspace blankLines="1"/>
@@ -514,13 +524,25 @@
     
     <t hangText="Packet traceability (M/W/N)">
      <vspace blankLines="1"/>
-     The traceability of replicated packets also depends on the sequencing
-     mechanism. As noted earlier, there is no header field whose application
-     would be straightforward as a field for packet sequencing.  Furthermore,
-     traceability would need a mechanism to trace back the reverse route the
-     packet took in some cases. While IPv6 as such has no support for this, it
-     appears source route extensions such as the one defined for segment routing
-     could be used for tracing purposes.
+     The traceability of replicated packets involves the capability to resolve
+     which replication point issued a particular copy of a packet, which segment
+     was intended for that replica, and which particular packet of which
+     particular stream this is. sequence also depends on the sequencing
+     mechanism. The replication point may be indicated as the source of the
+     packet if IP-in-IP encapsulation is used to forward along segments.
+     An alternate to IP-in-IP tunneling along segments would be to protect the
+     original source address in a destination option similar to the Home Address
+     option <xref target="RFC6275"/> and then use the address of the replication
+     point as source in the IP header.
+     <vspace blankLines="1"/>
+     The traceability also involves the capability to determine if a particular
+     segment is operational. While IPv6 as such has no support for reversing a
+     path this, it appears source route extensions such as the one defined for
+     segment routing could be used for tracing purposes. Though it is not a 
+     usual practice, IPv6 <xref target="RFC2460"/> expects that a Source Route
+     path may be reversed, and the standard insists that a node must not include
+     the reverse of a Routing Header in the response unless the received Routing
+     Header was authenticated.
      <vspace blankLines="1"/></t>
     
     <t hangText="Technical maturity (M/W)">
