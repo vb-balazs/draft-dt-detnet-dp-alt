@@ -46,6 +46,8 @@
 <!ENTITY rfc5440 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5440.xml">
 <!ENTITY rfc6564 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6564.xml">
 <!ENTITY rfc7045 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7045.xml">
+<!ENTITY rfc7348 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7348.xml">
+<!ENTITY rfc3931 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3931.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -889,6 +891,9 @@
   </section>
     
   <section title="L2TP" anchor="sec_alt_l2tp">
+   <t>
+   [Editor's note: L2TPv3 <xref target="RFC3931"/> content to be provided later, if needed]
+   </t>
    <section title="Solution description">
    </section>
 
@@ -899,6 +904,19 @@
    </section>
   </section>
 
+  <section title="VXLAN" anchor="sec_alt_vxlan">
+   <t>
+   [Editor's note: VXLAN <xref target="RFC7348"/> content to be provided later, if needed]
+   </t>
+   <section title="Solution description">
+   </section>
+
+   <section title="Analysis and Discussion">
+   </section>
+
+   <section title="Summary">
+   </section>
+  </section>
  <!--/section-->
   
   
@@ -1718,6 +1736,8 @@ title="BIER-TE Header">
    &rfc5305;
    &rfc7045;
    &rfc6564;
+   &rfc7348;
+   &rfc3931;
    &I-D.ietf-intarea-gre-ipv6;
    &I-D.finn-detnet-problem-statement;
    &I-D.finn-detnet-architecture;
