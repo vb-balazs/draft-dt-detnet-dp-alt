@@ -184,10 +184,13 @@
    networking data plane solution is considered including, as appropriate,
    quality of service (QoS), operations and management (O&amp;M), and time
    synchronization among other criteria decribed in <xref target="sec_crit"/>.
+  </t>
+  <t>
    This document does not make the deterministic networking data plane protocol
-   selection. It does, however, elaborate what it would require to adapt
-   and use the specific protocol as the deterministic networking data plane
-   solution.  Specifically, the evaluation tries to help to understand the
+   selection. It does, however, elaborate what it would require to adapt and use
+   the specific protocol as the deterministic networking data plane solution,
+   and only as a data plane solution. The control plane will be ignored in most
+   of the cases. Specifically, the evaluation tries to help to understand the
    potential impact of the solution on the deterministic networking aware
    hardware.
   </t>
@@ -1277,6 +1280,12 @@ title="DetNet adaptation to data plane">
     shim/adaptation layer between the MPLS label and the transported payload
     (see Sections <xref format="counter" target="sec_alt_bier"/> and <xref
     format="counter" target="sec_alt_bier_te"/>).
+   </t>
+   <t>
+    In the contex of deterministic networking the MPLS as such is specifically
+    on the "Net" layer. Some additional functionality or a shim layer on a top
+    of the MPLS trasnport is most likely needed on the "Det" layer to enable a
+    complete deterministic networking data plane solution.
    </t>
   </section>
 
