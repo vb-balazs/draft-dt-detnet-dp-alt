@@ -165,7 +165,7 @@
     low data loss rates and known upper bound maximum latency <xref
     target="I-D.finn-detnet-architecture"/>. The deterministic networking
     Quality of Service (QoS) is expressed as 1) the maximum end-to-end latency
-    from sender (talker) to receiver (listener), 2) probability of loss of a
+    from sender (talker) to receiver (listener), and 2) probability of loss of a
     packet.  Only the worst-case values for the mentioned parameters are
     concerned.
   </t>
@@ -177,18 +177,24 @@
       <t>explicit routes,</t>
       <t>packet replications and deletion.</t>
      </list>
-   This document identifies existing IP and Multiprotocol Label Switching
-   Architecture (MPLS) <xref target="RFC3031"/>, and layer-2 encapsulations that
-   run over IP and/or MPLS data plane technologies that could be considered as
-   the base line solution alternatives for deterministic networking data plane
-   definition. The full scope of the deterministic networking data plane
-   solution is considered including, as appropriate, quality of service (QoS),
-   operations and management (O&amp;M), and time synchronization.
+   This document identifies existing IP and Multiprotocol Label Switching (MPLS)
+   <xref target="RFC3031"/>, layer-2 or layer-3 encapsulations and transport
+   protocols  that could be considered as solution alternatives for
+   deterministic networking data plane.  The full scope of the deterministic
+   networking data plane solution is considered including, as appropriate,
+   quality of service (QoS), operations and management (O&amp;M), and time
+   synchronization among other criteria decribed in <xref target="sec_crit"/>.
+   This document does not make the deterministic networking data plane protocol
+   selection. It does, however, elaborate what it would require to adapt
+   and use the specific protocol as the deterministic networking data plane
+   solution.  Specifically, the evaluation tries to help to understand the
+   potential impact of the solution on the deterministic networking aware
+   hardware.
   </t>
-  <t>
+  <!--t>
    [Editor's note: add text to 1) set the context, 2) scope of the document, and 3)
    prepare reader to realize the potential impact on the DetNet aware harware].
-  </t>
+  </t-->
  </section>
 
  <!--section title="Terminology">
