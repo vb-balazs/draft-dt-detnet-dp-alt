@@ -308,13 +308,13 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Each deterministic networking data plane solution alternative is
    described and evaluated using the criteria described in this section.
-   The used criteria enumerated in this section are selected so that
+   They have been selected so that
    they highlight the existence or lack of features that are expected or
    seen important to a solution alternative for the data plane solution.
 
 4.1.  #1 Encapsulation and overhead
 
-   In several cases a deterministic flow/strem has to be encapsulated
+   In several cases a deterministic flow/stream has to be encapsulated
    inside other protocols, for example, when transporting a layer-2
    Ethernet frame over an IP transport network.  In some cases a former
    tunneling like encapsulation can be avoided by underlying transport
@@ -322,7 +322,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    including addressing and stream identification into native IP
    traffic.  Last it is possible that talkers and listeners handle
    deterministic flows natively in layer-3.  This criteria concerns what
-   is the encapsulation method the solution alternative support:
+   is the encapsulation method the solution alternative supports:
    tunneling like encapsulation, protocol translation or native layer-3
    transport.  In addition to the encapsulation mechanism this criteria
    is also concerned of the processing and specifically the encapsulate
@@ -342,7 +342,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    The solution alternative has to provide means to identify specific
    deterministic flows / streams.  The stream identification can, for
-   example, be explicit field in the data plane encapsulation header or
+   example, be an explicit field in the data plane encapsulation header or
    implicitly encoded into the addressing scheme of the used data plane
    protocol.  This criteria concerns the availability and details of
    deterministic flow / stream identification the data plane protocol
@@ -363,7 +363,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 4.4.  #4 Explicit routes
 
-   The solution alternative has to provide a mechanism(s) for
+   The solution alternative has to provide a mechanism for
    establishing explicit routes that all packets belonging to a
    deterministic flow / stream will follow.  The explicit route can be
    seen as a form of source routing or a pre-reserved path e.g., using
@@ -521,7 +521,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
       IPv6 has two types of Extension Headers that are processed by
       intermediate routers between the source and the final destination
-      and may be of interest for the data plane signaling, the Routing
+      and may be of interest for the data plane signaling: the Routing
       Header that is used to direct the traffic via intermediate routers
       in a strict or loose source routing way, and the Hop-by-Hop
       Options Header that carries optional information that must be
@@ -982,7 +982,8 @@ Internet-Draft       DetNet data plane alternatives           March 2016
       There is no stream identification field in GRE header.  However,
       it can rely on the flow identification mechanism applied in the
       delivery protocols, such as stream identification stated in IP
-      section 3.2.1 and 3.2.2 when the delivery protocol are IPv6 and
+      section [IPv6 Stream Identification section] and [IPv4 Stream
+      Identification section] when the delivery protocol are IPv6 and
       IPv4 respectively.  Alternatively, the Key field can also be
       extended to carry the stream identification.  The size of Key
       field is 4 octets.
@@ -1012,29 +1013,22 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Operations and management (W/N)
 
-      [note: rely on the delivery protocol] GRE has no packet
-      replication and deletion currently and should be relied on
-      delivery protocols.
+      [note: rely on the delivery protocol] 
 
    Time synchronization (W/N)
 
-      [note: rely on the delivery protocol] GRE has no packet
-      replication and deletion currently and should be relied on
-      delivery protocols.
+      [note: rely on the delivery protocol] 
 
    Class and quality of service capabilities (W/N)
 
-      [note: rely on the delivery protocol] GRE has no packet
-      replication and deletion currently and should be relied on
-      delivery protocols.  For the class of service capability, an
+      [note: rely on the delivery protocol] 
+      For the class of service capability, an
       optional code point field to indicate CoS of a traffic can be
       extended in GRE header.
 
    Packet traceability (W/N)
 
-      [note: rely on the delivery protocol] GRE has no packet
-      replication and deletion currently and should be relied on
-      delivery protocols.
+      [note: rely on the delivery protocol] 
 
    Technical maturity (M)
 
@@ -1304,7 +1298,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    holds specifically for MPLS-based PSN.
 
    Extensions are required to realize the packet replication and
-   duplicate detection.  feature of the deterministic networking data
+   duplicate detection  feature of the deterministic networking data
    plane.
 
 5.7.  MPLS
@@ -1320,7 +1314,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    between the MPLS label and the transported payload (see Sections 5.8
    and 5.9).
 
-   In the contex of deterministic networking the MPLS as such is
+   In the context of deterministic networking the MPLS as such is
    specifically on the "Net" layer.  Some additional functionality or a
    shim layer on a top of the MPLS trasnport is most likely needed on
    the "Det" layer to enable a complete deterministic networking data
@@ -1334,7 +1328,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Bit-Indexed Explicit Replication (BIER) layer may be considered to be
    included into Deterministic Networking data plane solution.
-   Encapsulation of a BIER packet in MPLS network presented in Figure 5
+   Encapsulation of a BIER packet in MPLS network is presented in Figure 5
 
 
 
@@ -1382,7 +1376,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    DetNet node, collocated with BFIR, may use multiple BIER sub-domains
    to create replicated flows.  Downstream DetNet nodes, collocated with
    BFER, would terminate redundant flows based on Sequence Number and/or
-   Timestamp information.  Such DetNet may be BFER in one BIER sub-
+   Timestamp information.  Such DetNet node may be BFER in one BIER sub-
    domain and BFIR in another.  Thus DetNet flow would traverse several
    BIER sub-domains.
 
