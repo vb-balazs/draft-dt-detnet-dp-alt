@@ -146,9 +146,9 @@
 
   <abstract>
   <t>
-   This document identifies existing IP and MPLS, and layer-2 encapsulations
-   that run over IP and/or MPLS data plane technologies that could be considered
-   as the base line solution alternatives for deterministic networking data
+   This document identifies existing IP and MPLS, and other encapsulations
+   that run over IP and/or MPLS data plane technologies that can be considered
+   as the base line solution for deterministic networking data
    plane definition.
   </t>
   </abstract>
@@ -179,20 +179,21 @@
      </list>
    This document identifies existing IP and Multiprotocol Label Switching (MPLS)
    <xref target="RFC3031"/>, layer-2 or layer-3 encapsulations and transport
-   protocols  that could be considered as solution alternatives for
+   protocols  that could be considered as foundations for a
    deterministic networking data plane.  The full scope of the deterministic
    networking data plane solution is considered including, as appropriate,
    quality of service (QoS), operations and management (O&amp;M), and time
    synchronization among other criteria decribed in <xref target="sec_crit"/>.
   </t>
   <t>
-   This document does not make the deterministic networking data plane protocol
-   selection. It does, however, elaborate what it would require to adapt and use
-   the specific protocol as the deterministic networking data plane solution,
-   and only as a data plane solution. The control plane will be ignored in most
-   of the cases. Specifically, the evaluation tries to help to understand the
-   potential impact of the solution on the deterministic networking aware
-   hardware.
+   This document does not select a deterministic networking data
+   plane protocol.  It does, however, elaborate what it would
+   require to adapt and use a specific protocol as the
+   deterministic networking data plane solution.  This document is
+   only concerned with data plane considerations and,
+   specifically, with topics that potentially impact potential
+   deterministic networking aware data plane hardware.  
+   Control plane considerations are out of scope of this document.
   </t>
   <!--t>
    [Editor's note: add text to 1) set the context, 2) scope of the document, and 3)
@@ -208,30 +209,72 @@
  </section-->
 
 
-<section title="DetNet data plane service model" anchor="sec_model">
+<section title="DetNet Data Plane Overview" anchor="sec_dt_dp">
  <t>
-  [Editor's note: definition of the data plane service model comes here. Intention to 
-  tie the detnet servioce model to the layering discussion in the following section.]
+  [Editor's note: all/portions of the following may be moved to
+  the DetNet Architecture document at some future point.]
  </t>
-</section>
-
-
-<section title="DetNet adaptation to data plane" anchor="sec_adapt">
  <t>
-  This document logically divides the data plane to two layers for the
-  adaptation of DetNet services:
+   A "Deterministic Network" will be composed of DetNet enabled
+   "end systems" and DetNet enabled "network nodes".  DetNet
+   enabled network nodes will provide a DetNet service to attached
+   DetNet end systems.  All DetNet enabled systems and nodes will
+   be interconnected by sub-networks.  These sub-networks will
+   provide DetNet compatible service for support of DetNet
+   traffic.  Examples of sub-networks include 802.1TSN and a
+   point-to-point OTN link.  Of course, multi-layer DetNet systems
+   may be possible too, where one DetNet appears as a sub-network,
+   and provides service to, a higher layer DetNet system. A
+   simple DetNet is shown in <xref target="fig_detnet"/>.
+ </t>
+<figure anchor="fig_detnet" align="center"
+title="A Simple DetNet Enabled Network">
+<artwork align="center"><![CDATA[
+
++------+                                               +------+
+| End  |                                               | End  |
+|System|                                               |System|
++--+---+                                               +---+--+
+   |Link                                                   |
+   |    +-------+     +-------+   ,-'''-.   +-------+   ,-'''-.
+   |    |Network|Link |Network|--[  Sub  ]--|Network|--[  Sub  ]
+   +----|  Node |-----|  Node |  [Network]  |  Node |  [Network]
+        +-------+     +-------+   +-...-'   +-------+   +-...-'
+]]></artwork>
+</figure>
+
+ <t>
+   
+ </t>
+
+
+ <t>
+  This DetNet data plane is logically divided into two layers:
    <list style="symbols">
-    <t>The Det layer is a shim layer to carry DetNet flow specific attributes, 
-     which are needed during forwarding. Edge nodes of a network domain are the
-     peers at the Det layer.</t>
-    <t>The Net layer is below the Det layer. The Net layer provides the
-     networking between the end-points of a DetNet flow. Core nodes of a network
-     domain are involved in the Net layer.</t>
+    <t>The Det layer provides adaptation of DetNet services.  It
+    is composed of a shim layer to carry DetNet flow specific
+    attributes, which are needed during forwarding. End systems
+    originate and terminate the Det layer and are peers at the Det
+    layer.</t>
+    <t>The Net layer is supported by all DetNet aware systems and
+    nodes.  It operates below the Det layer. The Net layer is used
+    to relay traffic end to end across a DetNet domain.</t>
    </list>
-  Distinguishing these two data plane layers helps to explore and evaluate 
-  various combinations of the data plane solutions available.   
+  Distinguishing the function of these two DetNet data plane
+  layers helps to explore and evaluate various combinations of the
+  data plane solutions available.  This separation of DetNet
+  layers, while helpful, should not be considered as formal
+  requirements.  For example, some technologies may violate these
+  strict layers and still be able to deliver a DetNet service.
  </t>
  
+ <t>
+  [Lou's note: I think we're being overly 'cute' in the layer
+  naming here.  I think DetNet 'Service' or 'Client' layer for the
+  'Det' layer, and DetNet 'Transport' or 'Server' layer for the
+  'Net' layer would be better in the long term.]
+ </t>
+
  <t>
   A number of data plane technology candidates are discussed later in this
   document. They can be mapped to the two layers as shown in
@@ -247,7 +290,7 @@ title="DetNet adaptation to data plane">
 +-------+
 |  Det  | PW, RTP, UDP, GRE, L2TP
 ~~~~~~~~~
-|  Net  | IPv6, IPv4, MPLS
+|  Net  | IPv6, IPv4, MPLS LSPs
 +-------+
     .
     .
@@ -265,6 +308,12 @@ title="DetNet adaptation to data plane">
  </t>
   
  <t>
+  [Lou's note: I', not sure if the remainder of this section says
+  anything not present in the next section. Will need to revisit
+  as part of the pre-pub review.]
+ </t>
+
+ <t>
   There are many valid options to create a data plane solution for DetNet
   traffic by selecting a technology approach for the Det layer and also 
   selecting a technology approach for the Net layer. There are a high number of
@@ -273,6 +322,7 @@ title="DetNet adaptation to data plane">
   <xref target="sec_crit"/>. Different criteria apply for the Det layer and the
   Net layer, however, some of the criteria are valid for both layers.
  </t> 
+
 
  <t>
   The criteria for the Det layer:
@@ -339,6 +389,15 @@ title="DetNet adaptation to data plane">
 </section>
 
 <section title="Criteria for data plane solution alternatives" anchor="sec_crit">
+ <t>
+   This section provides criteria to help evaluate potential
+   options.  The criteria can be broken down based on layer.  That
+   is if the criteria is focused on delivering DetNet service
+   adaptation, i.e., is concerned with the Det layer, or if the
+   criteria is focused on transporting flows across an end to end
+   DetNet domain. [LB: this is TBD.]
+ </t>
+  
   <t>
    Each deterministic networking data plane solution alternative is described
    and evaluated using the criteria described in this section. The used criteria
@@ -348,24 +407,42 @@ title="DetNet adaptation to data plane">
   </t>
  
 
+  <section title="#? DetNet Service Interface" anchor="sec_crit_svc">
+    <t>
+      One of the most fundamental differentiators between
+      different potential data plane options is the basic
+      addressing and headers used by DetNet clients.  For example,
+      is the basic service a Layer 2 (e.g., Ethernet) or Layer 3
+      (i.e., IP) service. This decision impacts how DetNet end
+      points are addressed, and the basic forwarding logic of the
+      Det layer.
+    </t>
+  </section>
+
   <section title="#1 Encapsulation and overhead" anchor="sec_crit_encap">
     <t>
-     In several cases a deterministic flow/strem has to be encapsulated inside
-     other protocols, for example, when transporting a layer-2 Ethernet
-     frame over an IP transport network. In some cases a former tunneling like
-     encapsulation can be avoided by underlying transport protocol translation,
-     for example, translating layer-2 Ethernet frame including addressing and
-     stream identification into native IP traffic. Last it is possible that
-     talkers and listeners handle deterministic flows natively in layer-3.
-     This criteria concerns what is the encapsulation method the solution
-     alternative support: tunneling like encapsulation, protocol translation or
-     native layer-3 transport. In addition to the encapsulation mechanism this
-     criteria is also concerned of the processing and specifically the 
-     encapsulate header overhead.
+      Encapsulation and overhead is related to how the Det layer carries DetNet
+      user traffic.  In several cases a deterministic flow/strem has to be
+      encapsulated inside other protocols, for example, when transporting a
+      layer-2 Ethernet frame over an IP transport network. In some cases a
+      former tunneling like encapsulation can be avoided by underlying
+      transport protocol translation, for example, translating layer-2 Ethernet
+      frame including addressing and stream identification into native IP
+      traffic. Last it is possible that talkers and listeners handle
+      deterministic flows natively in layer-3.  This criteria concerns what is
+      the encapsulation method the solution alternative support: tunneling like
+      encapsulation, protocol translation or native layer-3 transport. In
+      addition to the encapsulation mechanism this criteria is also concerned
+      of the processing and specifically the encapsulate header overhead.
     </t>
   </section>
 
   <section title="#2 Stream identification" anchor="sec_crit_streamid">
+    <t>
+      [LB: can we do a global replace of stream with flow?  Stream has a few
+      IP-specific meanings and I'd like to avoid at least one -- if you're
+      really interested look into IPv5.]
+    </t>
     <t>
      The solution alternative has to provide means to identify specific
      deterministic flows / streams. The stream identification can, for example,
@@ -377,6 +454,11 @@ title="DetNet adaptation to data plane">
   </section>
 
   <section title="#3 Packet sequencing" anchor="sec_crit_seq">
+    <t>
+      [LB is in order delivery a strict requirement?  if so, it should be
+      stated as such and separately from any other requirement. There are
+      multiple ways to solve this criteria.]
+    </t>
     <t>
      The solution alternative has to provide means for end systems to number
      packets sequentially and transport that sequencing information along with
@@ -392,6 +474,9 @@ title="DetNet adaptation to data plane">
   
   
   <section title="#4 Explicit routes" anchor="sec_crit_explicit">
+    <t>
+      [LB: isn't this a control plane requirement?]
+    </t>
     <t>
      The solution alternative has to provide a mechanism(s) for establishing
      explicit routes that all packets belonging to a deterministic flow /
@@ -409,6 +494,9 @@ title="DetNet adaptation to data plane">
   </section>
 
   <section title="#5 Packet replication and deletion" anchor="sec_crit_repdup">
+    <t>
+      This should be rephrased into a requirement - namely hitless 1+1 protection.
+    </t>
     <t>
      End systems and/or relay systems can number packets sequentially,
      replicate them, and later eliminate all but one of the replicas, at
@@ -443,17 +531,10 @@ title="DetNet adaptation to data plane">
 
   <section title="#7 Time synchronization" anchor="sec_crit_sync">
     <t>
-     The solution alternative may benefit from having a sense of time or at
-     least that the associated O&amp;M protocols had time synchronization
-     properties. One concrete example is Realtime Transport Protocol (RTP)
-     <xref target="RFC3550"/>, which carries timestamps in the protocol header
-     in addition to sequence numbers, has a  well specified algorithms, for
-     example, for jitter calculations, and also has an associated control
-     channel, the Realtime Transport Control Protocol (RTCP). Another example
-     could be residence time measurement support for MPLS network domain using
-     Generic Associated Channel (G-ACh) extensions. This criteria concerns the
-     available mechanisms for time synchronization in the context of the
-     data plane protocol alternative.
+      Time synchronization between DetNet systems and nodes can be used to
+      enable fine grain scheduling of traffic along an end-to-end data path.
+      Such scheduling can be used to deliver very low jitter and latency.
+      [DetNet-ARCH] refers to a synchronization target of less than 1 microsecond.  
     </t>
   </section>
 
@@ -469,10 +550,13 @@ title="DetNet adaptation to data plane">
     </t>
     <t>
      Quality of Service (QoS) is a mechanism for flow/stream specific traffic
-     treatment and include a quarantee/agreement for the service.  In the
-     context of the data plane solution alternative there should be means for
-     flow/stream identification, which then can be used to map a flow/stream
-     against specific resources and treatment in a node enforcing the QoS.
+     treatment and typically includes a guarantee/agreement for the service.
+     In the context of the data plane solution alternative there should be
+     means for flow/stream identification, which then can be used to map a
+     flow/stream against specific resources and treatment in a node enforcing
+     the QoS.  Example QoS mechanisms include discrete resource allocation,
+     admission control, flow identification and isolation, and sometimes path
+     control, traffic protection, shaping, policing and remarking.
     </t>
     <t> 
      This Criteria concerns the availability and mechanisms for the CoS and QoS
