@@ -715,7 +715,7 @@ title="DetNet adaptation to data plane">
     
     <t hangText="Packet replication and deletion (W)">
      <vspace blankLines="1"/>
-     The implementation of this functionality largely depends on used the packet
+     The implementation of this functionality largely depends on the packet
      sequencing and flow/stream identification approaches. The above discussion
      on the potential use of new Options for packet sequencing and flow/stream
      identification approaches, as well as source routing and IP tunnels to 
