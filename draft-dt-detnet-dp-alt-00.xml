@@ -290,7 +290,7 @@ title="DetNet adaptation to data plane">
 +-------+
 |  Det  | PW, RTP, UDP, GRE, L2TP
 ~~~~~~~~~
-|  Net  | IPv6, IPv4, MPLS LSPs
+|  Net  | IPv6, IPv4, MPLS LSPs, BIER, BIER-TE
 +-------+
     .
     .
