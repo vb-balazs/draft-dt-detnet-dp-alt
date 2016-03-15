@@ -304,7 +304,7 @@ title="DetNet adaptation to data plane">
   technology layers in other solutions in order to provide the capabilities
   needed for DetNet flows. For instance, the Net layer can comprise MPLS-in-GRE 
   (<xref target="sec_alt_pwe"/>) in one solution. In another solution, the Det
-  layer can include, e.g.,  RTP in UDP (<xref target="sec_alt_ipv6_higher"/>).
+  layer can include, e.g.,  RTP in UDP (<xref target="sec_alt_higher"/>).
  </t>
   
  <t>
@@ -352,7 +352,12 @@ title="DetNet adaptation to data plane">
     <t>#8 Class and quality of service capabilities (Net specific)</t>
     <t>#9 Packet traceability (verification purposes)</t>
     <t>#10 Technical maturity</t>
-   </list>  
+   </list> 
+   <list style="nosymbols">
+    <t>
+     [Editor's note: #7 is more of OAM feature.]
+    </t>
+   </list> 
  </t> 
  
  <t>
@@ -583,6 +588,9 @@ title="DetNet adaptation to data plane">
   </section>
 </section>
 
+
+<!-- ================================================================= -->
+
 <section title="Data plane solution alternatives">
  <t>
   The following sections describe and rate deterministic data plane solution
@@ -606,7 +614,7 @@ title="DetNet adaptation to data plane">
      such solutions. (i) Those header fields can be encrypted. (ii) Those
      header fields are deeper in the packet, therefore, routers have to apply
      deep packet inspection. See further details in
-     <xref target="sec_alt_ipv6_higher"/>.
+     <xref target="sec_alt_higher"/>.
     </t>
    </section>
   
@@ -668,7 +676,7 @@ title="DetNet adaptation to data plane">
       be transported in a new option in the Hop-by-Hop Options Header. 
      <vspace blankLines="1"/></t>
      
-     <t hangText="Packet sequencing (W/N)">
+     <!-- t hangText="Packet sequencing (W/N)">
       <vspace blankLines="1"/>
       Packet sequencing would require a new option in an IPv6 Extension Header.
       One approach could  be to encapsulate the packets in IP-in-IP tunnels that
@@ -679,7 +687,7 @@ title="DetNet adaptation to data plane">
       <vspace blankLines="1"/>
       Alternatively, the sequence number could also be transported in another new
       option in the Hop-by-Hop Options Header. 
-     <vspace blankLines="1"/></t>
+     <vspace blankLines="1"/></t -->
      
      <t hangText="Explicit routes (W)">
       <vspace blankLines="1"/>
@@ -710,22 +718,18 @@ title="DetNet adaptation to data plane">
         <vspace blankLines="1"/>    
      </t>
      
-     <t hangText="Packet replication and deletion (W)">
+     <t hangText="Packet replication (W)">
       <vspace blankLines="1"/>
-      The implementation of this functionality largely depends on the packet
-      sequencing and flow/stream identification approaches. The above discussion
-      on the potential use of new Options for packet sequencing and flow/stream
-      identification approaches, as well as source routing and IP tunnels to 
-      signal explicit paths, also applies here.
+      [Editor's note: at the Net layer this criteria does not concern packet
+      deletion, only the packet replication. The packet deletion belongs to 
+      the Det layer] 
+      <!-- vspace blankLines="1"/>
+      The implementation of this functionality largely depends on the
+      packet sequencing and flow/stream identification approaches. The above
+      discussion on the potential use of new Options for packet sequencing and
+      flow/stream identification approaches, as well as source routing and IP
+      tunnels to signal explicit paths, also applies here. -->
       <vspace blankLines="1"/>
-     <!-- At present sequencing and flow/stream identification beyond IPv6
-      flow label would require to define new IPv6 Options. Another concern
-      regarding packet replication is how to enforce replicated packets to take
-      different route while the final destination still remains the same. With
-      IPv6 and using layer-3 mechanisms this cannot be done without form of
-      source routing encoded into the packet, for example, in form of source
-      routing extension  headers.  
-     <vspace blankLines="1"/> -->
       The functionality of replicating a packet exists in IPv6 but is limited
       to multicast flows. On the other hand, there is currently no specification
       for the duplicate packet deletion functionality at the elimination points.
@@ -756,12 +760,12 @@ title="DetNet adaptation to data plane">
       deployments. This is largely only an issue with old existing equipment.
     <vspace blankLines="1"/></t>
     
-     <t hangText="Time synchronization (W/N)">
+     <!-- t hangText="Time synchronization (W/N)">
       <vspace blankLines="1"/>
       IPv6 has no existing supporting mechanisms for anything time
       synchronization. A new extension header would be needed for this purpose,
       if such functionality is required.
-     <vspace blankLines="1"/></t>
+     <vspace blankLines="1"/></t -->
     
      <t hangText="Class and quality of service capabilities (M)">
       <vspace blankLines="1"/>
@@ -813,47 +817,6 @@ title="DetNet adaptation to data plane">
     </list></t>
    </section>
 
-   <section title="Higher layer header fields" anchor="sec_alt_ipv6_higher">
-    <t>
-      Fields of headers belonging to higher OSI layers, e.g., transport  layer,
-      can be used to implement functionality that is not provided by the IPv6
-      header fields. However, this approach cannot be always applied, e.g., due
-      to encryption. Furthermore, even if this approach is applicable, it
-      requires deep packet inspection from the routers and switches. There are
-      implementation dependent limits how far into the packet the lookup can be
-      done efficiently in the fast path. In general a safe bet is between 128 and
-      256 octets for the maximum lookup depth. Various higher layer protocols can
-      be applied. Some examples are provided here for the sequence numbering
-      feature (<xref target="sec_crit_seq"/>).
-    </t>
-    
-    <section title="TCP">
-    <t>
-      The TCP header includes a sequence number parameter, which can be applied
-      to detect and eliminate duplicate packets if seamless redundancy is used.
-      As the TCP header is right after the IP header, it does not require very 
-      deep packet inspection; the 4-byte sequence number is conveyed by bits 32
-      through 63 of the TCP header.  In addition to sequencing, the TCP header
-      also contain source and destination port information that can be used for
-      assisting the flow/stream identification.
-    </t>
-    </section> 
-    
-    <section title="RTP">
-    <t>
-      RTP is often used to deliver time critical traffic in IP networks. RTP is
-      is carried on top of IP and UDP <xref target="RFC3550"/>. The RTP header
-      includes a 2-byte sequence number, which can be used to detect and
-      eliminate duplicate packets if seamless redundancy is used. The sequence
-      number is conveyed by bits 16 through 31 of the RTP header. In addition to
-      the sequence number the RTP header has also timestamp field (bits 32
-      through 63) that can be useful for time synchronization purposes.
-      Furthermore, the RTP header has also one or more synchronization sources
-      (bits starting from 64) that can potentially be useful for flow/stream
-      identification purposes.
-      also co
-    </t>
-    </section>
    </section> 
  
    <section title="Summary">
@@ -865,6 +828,10 @@ title="DetNet adaptation to data plane">
  
   <section title="Native IPv4 transport" anchor="sec_alt_ipv4">
    <section title="Solution description">
+    <t>
+     [Editor's note: this section has not been cleaned yet for the new
+      division of criteria.]
+    </t>
     <t>
      IPv4 <xref target="RFC0791"/> is in principle the same as IPv6, except that
      it has a smaller address space. However, IPv6 was designed around the fact
@@ -972,14 +939,14 @@ title="DetNet adaptation to data plane">
     </list></t>
    </section>
 
-   <section title="Higher layer header fields" anchor="sec_alt_ipv4_higher">
+   <!--section title="Higher layer header fields" anchor="sec_alt_ipv4_higher">
     <t>
       Fields of headers belonging to higher OSI layers, e.g., transport  layer,
       can be used to implement functionality that is not provided by the IPv4
-      header fields. See the discussion in <xref target="sec_alt_ipv6_higher"/>,
+      header fields. See the discussion in <xref target="sec_alt_higher"/>,
       which is directly applicable for IPv4 as well.
     </t>
-   </section> 
+   </section --> 
 
    <section title="Summary">
    </section>
@@ -1872,6 +1839,46 @@ title="BIER-TE Header">
   </section>
   </section>
 
+   <section title="Higher layer header fields" anchor="sec_alt_higher">
+    <t>
+      Fields of headers belonging to higher OSI layers, e.g., transport  layer,
+      can be used to implement functionality that is not provided e.g., by the
+      IPv6 or IPv4 header fields. However, this approach cannot be always
+      applied, e.g., due to encryption. Furthermore, even if this approach is
+      applicable, it requires deep packet inspection from the routers and
+      switches. There are implementation dependent limits how far into the
+      packet the lookup can be done efficiently in the fast path. In general a
+      safe bet is between 128 and 256 octets for the maximum lookup depth.
+      Various higher layer protocols can be applied. Some examples are provided
+      here for the sequence numbering feature (<xref target="sec_crit_seq"/>).
+    </t>
+    
+    <section title="TCP">
+    <t>
+      The TCP header includes a sequence number parameter, which can be applied
+      to detect and eliminate duplicate packets if seamless redundancy is used.
+      As the TCP header is right after the IP header, it does not require very 
+      deep packet inspection; the 4-byte sequence number is conveyed by bits 32
+      through 63 of the TCP header.  In addition to sequencing, the TCP header
+      also contain source and destination port information that can be used for
+      assisting the flow/stream identification.
+    </t>
+    </section> 
+    
+    <section title="RTP">
+    <t>
+      RTP is often used to deliver time critical traffic in IP networks. RTP is
+      is carried on top of IP and UDP <xref target="RFC3550"/>. The RTP header
+      includes a 2-byte sequence number, which can be used to detect and
+      eliminate duplicate packets if seamless redundancy is used. The sequence
+      number is conveyed by bits 16 through 31 of the RTP header. In addition to
+      the sequence number the RTP header has also timestamp field (bits 32
+      through 63) that can be useful for time synchronization purposes.
+      Furthermore, the RTP header has also one or more synchronization sources
+      (bits starting from 64) that can potentially be useful for flow/stream
+      identification purposes.
+    </t>
+    </section>
  </section>  <!-- Det layer technologies -->
 
 
