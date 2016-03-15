@@ -5,13 +5,13 @@
 DetNet                                                  J. Korhonen, Ed.
 Internet-Draft                                                  Broadcom
 Intended status: Informational                                 J. Farkas
-Expires: September 11, 2016                                    G. Mirsky
+Expires: September 16, 2016                                    G. Mirsky
                                                                 Ericsson
                                                               P. Thubert
                                                                    Cisco
-                                                                Z. Zhuan
+                                                               Y. Zhuang
                                                                   Huawei
-                                                          March 10, 2016
+                                                          March 15, 2016
 
 
           DetNet Data Plane Protocol and Solution Alternatives
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 11, 2016.
+   This Internet-Draft will expire on September 16, 2016.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 1]
+Korhonen, et al.       Expires September 16, 2016               [Page 1]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 2]
+Korhonen, et al.       Expires September 16, 2016               [Page 2]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -165,7 +165,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 3]
+Korhonen, et al.       Expires September 16, 2016               [Page 3]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -221,7 +221,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 4]
+Korhonen, et al.       Expires September 16, 2016               [Page 4]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -242,16 +242,16 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    this document.  They can be mapped to the two layers as shown in
    Figure 2.
 
-                         .
-                         .
-                         .
-                     +-------+
-                     |  Det  | PW, RTP, UDP, GRE, L2TP
-                     ~~~~~~~~~
-                     |  Net  | IPv6, IPv4, MPLS LSPs
-                     +-------+
-                         .
-                         .
+                  .
+                  .
+                  .
+              +-------+
+              |  Det  | PW, RTP, UDP, GRE, L2TP
+              ~~~~~~~~~
+              |  Net  | IPv6, IPv4, MPLS LSPs, BIER, BIER-TE
+              +-------+
+                  .
+                  .
 
                  Figure 2: DetNet adaptation to data plane
 
@@ -277,7 +277,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 5]
+Korhonen, et al.       Expires September 16, 2016               [Page 5]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -333,7 +333,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 6]
+Korhonen, et al.       Expires September 16, 2016               [Page 6]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -389,7 +389,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 7]
+Korhonen, et al.       Expires September 16, 2016               [Page 7]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -445,7 +445,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 8]
+Korhonen, et al.       Expires September 16, 2016               [Page 8]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -501,7 +501,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016               [Page 9]
+Korhonen, et al.       Expires September 16, 2016               [Page 9]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -557,7 +557,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 10]
+Korhonen, et al.       Expires September 16, 2016              [Page 10]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -613,7 +613,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 11]
+Korhonen, et al.       Expires September 16, 2016              [Page 11]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -669,7 +669,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 12]
+Korhonen, et al.       Expires September 16, 2016              [Page 12]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -694,12 +694,12 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Packet replication and deletion (W)
 
-      The implementation of this functionality largely depends on used
-      the packet sequencing and flow/stream identification approaches.
-      The above discussion on the potential use of new Options for
-      packet sequencing and flow/stream identification approaches, as
-      well as source routing and IP tunnels to signal explicit paths,
-      also applies here.
+      The implementation of this functionality largely depends on the
+      packet sequencing and flow/stream identification approaches.  The
+      above discussion on the potential use of new Options for packet
+      sequencing and flow/stream identification approaches, as well as
+      source routing and IP tunnels to signal explicit paths, also
+      applies here.
 
       The functionality of replicating a packet exists in IPv6 but is
       limited to multicast flows.  On the other hand, there is currently
@@ -725,7 +725,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 13]
+Korhonen, et al.       Expires September 16, 2016              [Page 13]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -781,7 +781,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 14]
+Korhonen, et al.       Expires September 16, 2016              [Page 14]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -837,7 +837,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 15]
+Korhonen, et al.       Expires September 16, 2016              [Page 15]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -893,7 +893,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 16]
+Korhonen, et al.       Expires September 16, 2016              [Page 16]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -949,7 +949,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 17]
+Korhonen, et al.       Expires September 16, 2016              [Page 17]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1005,7 +1005,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 18]
+Korhonen, et al.       Expires September 16, 2016              [Page 18]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1061,7 +1061,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 19]
+Korhonen, et al.       Expires September 16, 2016              [Page 19]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1117,7 +1117,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 20]
+Korhonen, et al.       Expires September 16, 2016              [Page 20]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1173,7 +1173,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 21]
+Korhonen, et al.       Expires September 16, 2016              [Page 21]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1229,7 +1229,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 22]
+Korhonen, et al.       Expires September 16, 2016              [Page 22]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1285,7 +1285,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 23]
+Korhonen, et al.       Expires September 16, 2016              [Page 23]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1341,7 +1341,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 24]
+Korhonen, et al.       Expires September 16, 2016              [Page 24]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1397,7 +1397,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 25]
+Korhonen, et al.       Expires September 16, 2016              [Page 25]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1453,7 +1453,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 26]
+Korhonen, et al.       Expires September 16, 2016              [Page 26]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1509,7 +1509,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 27]
+Korhonen, et al.       Expires September 16, 2016              [Page 27]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1565,7 +1565,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 28]
+Korhonen, et al.       Expires September 16, 2016              [Page 28]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1621,7 +1621,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 29]
+Korhonen, et al.       Expires September 16, 2016              [Page 29]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1677,7 +1677,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 30]
+Korhonen, et al.       Expires September 16, 2016              [Page 30]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1733,7 +1733,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 31]
+Korhonen, et al.       Expires September 16, 2016              [Page 31]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1789,7 +1789,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 32]
+Korhonen, et al.       Expires September 16, 2016              [Page 32]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1845,7 +1845,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 33]
+Korhonen, et al.       Expires September 16, 2016              [Page 33]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1901,7 +1901,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 34]
+Korhonen, et al.       Expires September 16, 2016              [Page 34]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -1957,7 +1957,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 35]
+Korhonen, et al.       Expires September 16, 2016              [Page 35]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -2013,7 +2013,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 36]
+Korhonen, et al.       Expires September 16, 2016              [Page 36]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -2069,7 +2069,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 37]
+Korhonen, et al.       Expires September 16, 2016              [Page 37]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -2125,7 +2125,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 38]
+Korhonen, et al.       Expires September 16, 2016              [Page 38]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -2181,7 +2181,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 39]
+Korhonen, et al.       Expires September 16, 2016              [Page 39]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -2237,7 +2237,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 40]
+Korhonen, et al.       Expires September 16, 2016              [Page 40]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -2293,7 +2293,7 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 41]
+Korhonen, et al.       Expires September 16, 2016              [Page 41]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
 
@@ -2338,7 +2338,7 @@ Authors' Addresses
    Email: pthubert@cisco.com
 
 
-   Zhuangyan Zhuang
+   Yan Zhuang
    Huawei
 
    Email: zhuangyan.zhuang@huawei.com
@@ -2349,4 +2349,4 @@ Authors' Addresses
 
 
 
-Korhonen, et al.       Expires September 11, 2016              [Page 42]
+Korhonen, et al.       Expires September 16, 2016              [Page 42]
