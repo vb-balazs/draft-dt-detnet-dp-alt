@@ -1004,6 +1004,11 @@ title="DetNet adaptation to data plane">
      of the MPLS trasnport is most likely needed on the "Det" layer to enable a
      complete deterministic networking data plane solution.
     </t>
+    <t>
+     [Editor's note: Continue with text following the pricinples found in
+     RFC5921.]
+    </t>
+
    </section>
 
    <section title="Analysis and Discussion">
