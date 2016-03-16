@@ -36,6 +36,7 @@
 <!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
 <!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
 <!ENTITY rfc5921 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5921.xml">
+<!ENTITY rfc5960 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5960.xml">
 <!ENTITY rfc6275 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6275.xml">
 <!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
 <!ENTITY rfc2890 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2890.xml">
@@ -981,16 +982,69 @@ title="DetNet adaptation to data plane">
  
   <section title="MPLS" anchor="sec_alt_mpls">
    <section title="Solution description">
+     
     <t>
-     This section concentrates on MPLS <xref target="RFC3031"/><xref
-     target="RFC3032"/> i.e., to a data plane solutions where a payload traffic
-     is transported directly over MPLS. Basically, MPLS is capable of
-     transporting any traffic payload, not just IP. However, in non-IP transport
-     payload cases the solution quickly starts to resemble PseudoWires (see <xref
-     target="sec_alt_pwe"/>) or other MPLS-based solutions with appropriate
-     shim/adaptation layer between the MPLS label and the transported payload
-     (see Sections <xref format="counter" target="sec_alt_bier"/> and <xref
-     format="counter" target="sec_alt_bier_te"/>).
+      Multiprotocol Label Switching Architecture (MPLS)
+      <xref target="RFC3031"/> and its variants, MPLS with Traffic
+      Engineering (MPLS-TE) <xref target="RFC3209"/> and
+      <xref target="RFC3473"/>, and MPLS Transport Profile (MPLS-TP)
+      <xref target="RFC5921"/> is a widely deployed technology that switches
+      traffic based on MPLS label stacks <xref target="RFC3032"/> and
+      <xref target="RFC5960"/>.  MPLS is the foundation for Pseudowire-based
+      services <xref format="counter" target="sec_alt_pwe"/> and emerging
+      technologies such as Bit-Indexed Explicit Replication (BIER)
+      <xref format="counter" target="sec_alt_bier"/> and Segment Routing
+      [https://datatracker.ietf.org/wg/spring/charter/].
+    </t>
+    <t>
+      The remainder of this section is a work in progress and draws heavily
+      from <xref target="RFC5921"/>.
+    </t>
+    <t>
+      MPLS supports both the Det and Net layers and provides a very rich set
+      of mechanisms that can be reused directly, and perhaps augmented in
+      certain cases, to deliver DetNet services. At the Net layer, MPLS
+      provides forwarding, protection and OAM services.  At the Det Layer it
+      provides client service adaption, directly, via Pseudowires and other
+      label-like mechanisms (e.g., EPVN control word [EVPN]).  Are
+      representation of these options are shown in <xref target="fig_mpls_clients"/>.
+    </t>
+<figure anchor="fig_mpls_clients" align="center"
+title="MPLS-based Services">
+<artwork align="center"><![CDATA[
+
+   PW-Based               MPLS Labeled                 IP
+   Services                  Services                Transport
+ |------------|  |-----------------------------|  |------------|
+
+   Emulated        PW over LSP      IP over LSP         IP
+   Service
+                  +------------+
+                  | PW Payload |
+                  +------------+  +------------+               (CLIENTS)
+                  |PW Lbl(S=1) |  |     IP     |
+ +------------+   +------------+  +------------+  +------------+
+ | PW Payload |   |LSP Lbl(S=0)|  |LSP Lbl(S=1)|  |     IP     |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ |PW Lbl (S=1)|   |LSP Lbl(S=0)|  |LSP Lbl(S=0)|  |LSP Lbl(S=1)|
+ +------------+   +------------+  +------------+  +------------+
+ |LSP Lbl(S=0)|         .               .               .
+ +------------+         .               .               .      (MPLS-TP)
+        .               .               .               .
+        .
+        .
+
+~~~~~~~~~~~ denotes Det <-> Net layer boundary
+]]></artwork>
+</figure>
+    <t>
+      
+    </t>
+    <t>
+    </t>
+    <t>
+    </t>
+    <t>
     </t>
     <t>
      In the contex of deterministic networking the MPLS as such is specifically
@@ -1511,6 +1565,10 @@ title="DetNet in BIER domain">
 
  <section title="Bit Indexed Explicit Replication - Traffic Engineering"
           anchor="sec_alt_bier_te">
+
+  <t>
+    [LB: This really should be merged with previous section.]
+  </t>
   <t>
    An alternate use of Bit-Indexed Explicit Replication (BIER) uses bits in the
    BitString to represent adjacencies as opposed to destinations, as discussed in
@@ -1990,6 +2048,7 @@ title="BIER-TE Header">
    &rfc1393;
    &rfc6540;
    &rfc5921;
+   &rfc5960;
    &rfc6275;
    &rfc2474;
    &rfc2702;
