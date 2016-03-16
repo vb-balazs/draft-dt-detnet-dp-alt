@@ -865,9 +865,7 @@ title="DetNet adaptation to data plane">
       packets <xref target="RFC1122"/>. However, recent update <xref
       target="RFC6864"/> to both <xref target="RFC0791"/> and <xref
       target="RFC1122"/> restricts the use of IPv4 identification field only to
-      fragmentation purposes. Duplicate packet detection for IPv4 is studied in
-      <xref target="RFC6621"/> to a great detail in the context of simplified
-      multicast forwarding. 
+      fragmentation purposes. 
       <vspace blankLines="1"/>
       The IPv4 also has a stream identifier option <xref target="RFC0791"/>,
       which contains a 16-bit SATNET stream identifier. However, the option has
@@ -879,11 +877,11 @@ title="DetNet adaptation to data plane">
       identification.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Packet sequencing (W/N)">
+     <!-- t hangText="Packet sequencing (W/N)">
       <vspace blankLines="1"/>
       IPv4 has no inbuilt support for packet sequencing. Upper layer protocol
       header support such as the RTP is required.
-     <vspace blankLines="1"/></t>
+     <vspace blankLines="1"/></t-->
      
      <t hangText="Explicit routes (M/W)">
       <vspace blankLines="1"/>
@@ -893,12 +891,14 @@ title="DetNet adaptation to data plane">
       questionable but within a closed network the support may be assumed.
      <vspace blankLines="1"/></t>
     
-     <t hangText="Packet replication and deletion (W/N)">
+     <t hangText="Packet replication (W/N)">
       <vspace blankLines="1"/>
-      Currently there is no native mechamism for IPv4 to support packet
-      replication and deletion. In general the issue regarding the IPv6
-      packet replication and deletion also applies to IPv4.
-     <vspace blankLines="1"/></t>
+      The functionality of replicating a packet exists in IPv4 but is limited to
+      multicast flows.  In general the issue regarding the IPv6 packet
+      replication also applies to IPv4.  Duplicate packet detection for IPv4 is
+      studied in <xref target="RFC6621"/> to a great detail in the context of
+      simplified multicast forwarding. 
+      <vspace blankLines="1"/></t>
     
      <t hangText="Operations and management (M)">
       <vspace blankLines="1"/>
@@ -906,7 +906,7 @@ title="DetNet adaptation to data plane">
       network management.
     <vspace blankLines="1"/></t>
     
-     <t hangText="Time synchronization (W/N)">
+     <!--t hangText="Time synchronization (W/N)">
       <vspace blankLines="1"/>
       IPv4 has an existing option for transporting "Internet Timestamp" <xref
       target="RFC0791"/> with the accuracy of 1ms. The support and usability of
@@ -914,7 +914,7 @@ title="DetNet adaptation to data plane">
       plane. Similarly to IPv6 new work would be needed to introduce sense of
       time to IPv4 or rely on upper layer protocol such as the RTP to provide the
       required functionality.
-     <vspace blankLines="1"/></t>
+     <vspace blankLines="1"/></t-->
     
      <t hangText="Class and quality of service capabilities (M)">
       <vspace blankLines="1"/>
@@ -938,15 +938,6 @@ title="DetNet adaptation to data plane">
      <vspace blankLines="1"/></t>
     </list></t>
    </section>
-
-   <!--section title="Higher layer header fields" anchor="sec_alt_ipv4_higher">
-    <t>
-      Fields of headers belonging to higher OSI layers, e.g., transport  layer,
-      can be used to implement functionality that is not provided by the IPv4
-      header fields. See the discussion in <xref target="sec_alt_higher"/>,
-      which is directly applicable for IPv4 as well.
-    </t>
-   </section --> 
 
    <section title="Summary">
    </section>
@@ -1065,13 +1056,13 @@ title="DetNet adaptation to data plane">
       sequencing number is 32 bits.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Explicit routes (W/N)">
+     <!--t hangText="Explicit routes (W/N)">
       <vspace blankLines="1"/>
       GRE has no packet replication and deletion currently in its header and
          should be extended or rely on delivery protocols.
-     <vspace blankLines="1"/></t>
+     <vspace blankLines="1"/></t-->
      
-     <t hangText="Packet replication and deletion (N)">
+     <t hangText="Duplicate packet deletion (N)">
       <vspace blankLines="1"/>
       GRE has no packet replication and deletion currently in its header and
       should be extended or rely on delivery protocols.
@@ -1097,11 +1088,11 @@ title="DetNet adaptation to data plane">
       of a traffic can be extended in GRE header.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Packet traceability (W/N)">
+     <!--t hangText="Packet traceability (W/N)">
       <vspace blankLines="1"/>
       [note: rely on the delivery protocol] GRE has no packet replication and
       deletion currently and should be relied on delivery protocols.
-      <vspace blankLines="1"/></t>
+      <vspace blankLines="1"/></t-->
      
      <t hangText="Technical maturity (M)">
       <vspace blankLines="1"/>
@@ -1259,7 +1250,7 @@ title="DetNet adaptation to data plane">
       16 bits, which might be, depending on the used link speed be too little.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Explicit routes (M)">
+     <!--t hangText="Explicit routes (M)">
       <vspace blankLines="1"/>
       In a case of the MPLS PSN the traffic engineering toolbox developed for
       MPLS can be used to signal explicit label switched paths (LSP) <xref
@@ -1268,18 +1259,19 @@ title="DetNet adaptation to data plane">
       routes <xref target="I-D.ietf-spring-segment-routing"/>. Segmement routing
       based solution would also be available for IPv6 PSN <xref
       target="I-D.ietf-6man-segment-routing-header"/>.
-     <vspace blankLines="1"/></t>
+     <vspace blankLines="1"/></t-->
      
-     <t hangText="Packet replication and deletion (W)">
+     <t hangText="Duplicate packet deletion (W)">
       <vspace blankLines="1"/>
-      The 1+1 PW/LSP protection / redundancy mechanisms  <xref
+      <!--The 1+1 PW/LSP protection / redundancy mechanisms  <xref
       target="RFC6718"/> could provide tools for packet replication. However,
       these solutions are not really intended for sourcing multiple simultaneous
-      packet streams. The solutions have one active and other standby stream.
+      packet streams. The solutions have one active and other standby stream.-->
       The PW duplicate detection mechanism also exists in theory <xref
-      target="RFC3985"/> but no emulated service makes use of it currently.  For
+      target="RFC3985"/> but no emulated service makes use of it currently.  
+      <!--For
       IP PSN refer to the discussion in  <xref target="sec_alt_ipv6_ana"/> and
-      <xref target="sec_alt_ipv4_ana"/>. 
+      <xref target="sec_alt_ipv4_ana"/>.--> 
      <vspace blankLines="1"/></t>
      
      <t hangText="Operations and management (M/W)">
@@ -1317,7 +1309,7 @@ title="DetNet adaptation to data plane">
       specific mapping between bit fields have to be done.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Packet traceability (M/W)">
+     <!--t hangText="Packet traceability (M/W)">
       <vspace blankLines="1"/>
       In a case of MPLS PSN and an approach where PWs are prepended with a PSN
       layer outer label (or more labels in a stack) help tracing the explicit
@@ -1327,7 +1319,7 @@ title="DetNet adaptation to data plane">
       intermediate node identities are not recorded into the packet hop-by-hop
       basis as some protocol do (for example, Diameter protocol loop detection
       <xref target="RFC6733"/>).
-     <vspace blankLines="1"/></t>
+     <vspace blankLines="1"/></t-->
      
      <t hangText="Technical maturity (M)">
       <vspace blankLines="1"/>
@@ -1356,6 +1348,10 @@ title="DetNet adaptation to data plane">
 
 
  <section title="Bit Indexed Explicit Replication" anchor="sec_alt_bier">
+  <t>
+   [Editor's note: reflecting the new Det and Net structure has not been
+    done for this section.]
+  </t>
   <t>
    Bit-Indexed Explicit Replication (BIER) layer may be considered to be
    included into Deterministic Networking data plane solution. Encapsulation of
