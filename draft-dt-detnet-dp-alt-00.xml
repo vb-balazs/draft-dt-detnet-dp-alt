@@ -4,6 +4,7 @@
 <!ENTITY rfc1122 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1122.xml">
 <!ENTITY rfc1393 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1393.xml">
 <!ENTITY rfc2119 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY rfc2205 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2205.xml">
 <!ENTITY rfc2460 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
 <!ENTITY rfc2474 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2474.xml">
 <!ENTITY rfc2702 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2702.xml">
@@ -11,6 +12,7 @@
 <!ENTITY rfc3032 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3032.xml">
 <!ENTITY rfc3168 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3168.xml">
 <!ENTITY rfc3209 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3209.xml">
+<!ENTITY rfc3473 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3473.xml">
 <!ENTITY rfc3270 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3270.xml">
 <!ENTITY rfc3550 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3550.xml">
 <!ENTITY rfc3985 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3985.xml">
@@ -175,14 +177,14 @@
      <list style="symbols">
       <t>zero congestion loss,</t>
       <t>explicit routes,</t>
-      <t>packet replications and deletion.</t>
+      <t>packet replication and deletion.</t>
      </list>
    This document identifies existing IP and Multiprotocol Label Switching (MPLS)
    <xref target="RFC3031"/>, layer-2 or layer-3 encapsulations and transport
    protocols  that could be considered as foundations for a
    deterministic networking data plane.  The full scope of the deterministic
-   networking data plane solution is considered including, as appropriate,
-   quality of service (QoS), operations and management (O&amp;M), and time
+   networking data plane solution is considered including, as appropriate:
+   quality of service (QoS); Operations, Administration and Maintenance (OAM); and time
    synchronization among other criteria decribed in <xref target="sec_crit"/>.
   </t>
   <t>
@@ -332,7 +334,7 @@ title="DetNet adaptation to data plane">
     <t>#3 Packet sequencing (sequence number)</t>
     <t>#5 Packet replication and deletion (note: only the packet deletion for
        seamless redundancy)</t>
-    <t>#6 Operations and management (capabilities)</t>
+    <t>#6 Operations, Administration and Maintenance (capabilities)</t>
     <t>#7 Time synchronization (e.g., time stamping)</t>
     <t>#8 Class and quality of service capabilities (Det specific)</t>
     <t>#10 Technical maturity</t>
@@ -347,7 +349,7 @@ title="DetNet adaptation to data plane">
     <t>#4 Explicit routes (network path)</t>
     <t>#5 Packet replication and deletion (note: only the packet replication
        for seamless redundancy)</t>
-    <t>#6 Operations and management (capabilities)</t>
+    <t>#6 Operations, Administration and Maintenance (capabilities)</t>
     <t>#7 Time synchronization (time/phase sync of nodes)</t>
     <t>#8 Class and quality of service capabilities (Net specific)</t>
     <t>#9 Packet traceability (verification purposes)</t>
@@ -489,7 +491,9 @@ title="DetNet adaptation to data plane">
      routing or a pre-reserved path e.g., using some network management
      procedure. It should be noted that the explicit route does not need to be
      detailed to a level where every possible intermediate node along the path
-     is part of the named explicit route. The IEEE 802.1Qca <xref
+     is part of the named explicit route. RSVP-TE <xref target="RFC3209"/> 
+     supports explicit routes, and typically provides pinned data paths
+     for established LSPs. At Layer-2, the IEEE 802.1Qca <xref 
      target="IEEE8021Qca"/> specification defines how to do explicit path
      control in a bridged network and its IETF counter part is defined in 
      <xref target="I-D.ietf-isis-pcr"/>. This criteria concerns the
@@ -499,6 +503,16 @@ title="DetNet adaptation to data plane">
   </section>
 
   <section title="#5 Packet replication and deletion" anchor="sec_crit_repdup">
+    <t>
+      The objective for supporting packet replication and deletio is to
+      enable hitless (or lossless) 1+1 protection, which is also called
+      Seemless redundancy in <xref target="I-D.finn-detnet-architecture"/>.
+      Data plane solutions need to meet this objective independent of
+      the particular solution used.  In other words, a packet
+      replication and deletion is one identified method for a data plane
+      solution to provide seemless redundancy and other methods, if so
+      identified, are permissible. 
+    </t>
     <t>
      The solution alternative has to provide means for end systems and/or relay
      systems to be able to replicate packets, and later eliminate all but one of
@@ -519,59 +533,78 @@ title="DetNet adaptation to data plane">
     </t>
   </section>
 
-  <section title="#6 Operations and management" anchor="sec_crit_oam" >
+  <section title="#6 Operations, Administration and Maintenance" anchor="sec_crit_oam" >
     <t>
-     The solution alternative should demonstrate an availability of appropriate
-     standardized O&amp;M tools or control/management plane that can be
-     extended for deterministic networking purposes with a reasonable effort,
-     when required. The O&amp;M tools do not necessarily need to be specific to
+     The solution alternative should demonstrate an availability of
+     appropriate standardized OAM tools that can be extended for
+     deterministic networking purposes with a reasonable effort, when
+     required. The OAM tools do not necessarily need to be specific to
      the data plane protocol as it could be the case, for example, with
-     MPLS-based data planes.
+     MPLS-based data planes. But any OAM-related implications or
+     requirements on data plane hardware must be considered.
     </t>
   </section>
 
   <section title="#7 Time synchronization" anchor="sec_crit_sync">
     <t>
-      Time synchronization between DetNet systems and nodes can be used to
-      enable fine grain scheduling of traffic along an end-to-end data path.
-      Such scheduling can be used to deliver very low jitter and latency.
-      [DetNet-ARCH] refers to a synchronization target of less than 1 microsecond.  
+      Time synchronization between DetNet systems and nodes can be used
+      to enable fine grain scheduling of traffic along an end-to-end
+      data path.  Such scheduling can be used to deliver very low jitter
+      and latency.  [DetNet-ARCH] refers to a synchronization target of
+      less than 1 microsecond.  Meeting such time synchronization
+      objectives is likely to require specific hardware support, both at
+      the synchronization protocol level and at the (time synchronized)
+      packet scheduling level. It is worth noting that certain aspects
+      of time synchronization and packet scheduling may be provided by
+      the underlying sub-net technology, e.g.,
+      <xref target="IEEE802.1Qbv"/> and <xref target="IEEE802.1Qch"/>.
     </t>
   </section>
 
-  <section title="#8 Class and quality of service capabilities" anchor="sec_crit_qos">
+  <section title="#8 Class and quality of service capabilities"
+      anchor="sec_crit_qos">
+
+
     <t>
-     The data plane solution alternative should provide means for class of
-     service (CoS) based traffic classification, for example, for queuing
-     discipline.  Existing CoS traffic classification enablers include but are
-     not limited to IP header differentiated services code point (DSCP) field
-     <xref target="RFC2474"/>, MPLS label traffic class field <xref
-     target="RFC5462"/>, and IEEE 803.1p priority code point (PCP) field to name
-     few.
+      Class and quality of service, i.e., CoS and QoS, are terms that
+      are often used interchangeably and confused.  In the context of
+      DetNet, CoS is used to refer to mechanisms that provide traffic
+      forwarding treatment based on aggregate group basis and QoS is
+      used to refer to mechanisms that provide traffic forwarding
+      treatment based on a specific DetNet flow basis.  Examples of CoS
+      mechanisms include DiffServ which is enabled by IP header
+      differentiated services code point (DSCP) field
+      <xref target="RFC2474"/> and MPLS label traffic class field
+      <xref target="RFC5462"/>, and at Layer-2, by IEEE 803.1p priority
+      code point (PCP).
     </t>
     <t>
-     Quality of Service (QoS) is a mechanism for flow/stream specific traffic
-     treatment and typically includes a guarantee/agreement for the service.
-     In the context of the data plane solution alternative there should be
-     means for flow/stream identification, which then can be used to map a
-     flow/stream against specific resources and treatment in a node enforcing
-     the QoS.  Example QoS mechanisms include discrete resource allocation,
-     admission control, flow identification and isolation, and sometimes path
-     control, traffic protection, shaping, policing and remarking.
+     Quality of Service (QoS) mechanisms for flow specific traffic
+     treatment and typically includes a guarantee/agreement for the
+     service, and allocation of resources to support the service.
+     Example QoS mechanisms include discrete resource allocation,
+     admission control, flow identification and isolation, and sometimes
+     path control, traffic protection, shaping, policing and
+     remarking. Example protocols that support QoS control
+     include <xref target="RFC2205">Resource ReSerVation Protocol</xref>
+     (RSVP) and RSVP-TE <xref target="RFC3209"/> and  <xref target="RFC3473"/>.
     </t>
-    <t> 
-     This Criteria concerns the availability and mechanisms for the CoS and QoS
-     marking and signaling as a part of the data plane protocol solution alternative.
+    <t>
+     In the context of the data plane solution  there should be
+     means for flow identification, which then can be used to map a
+     flow against specific resources and treatment in a node enforcing
+     the QoS.  
     </t>
   </section>
   <section title="#9 Packet traceability" anchor="sec_crit_trace">
     <t>
-     For the network management and specifically for tracing down
+     For the network management and specifically for tracing 
      implementation or network configuration errors any means to find out
      whether a packet is a replica, which node performed replication, and
      which path was intended for the replica, can be very useful.
      This criteria concerns the availability of solutions for
-     tracing packets in the context of data plane protocol alternative.
+     tracing packets in the context of data plane protocol
+     alternative. Packet trace is a form of OAM.
     </t>
   </section>
   <section title="#10 Technical maturity" anchor="sec_crit_matu">
@@ -583,7 +616,10 @@ title="DetNet adaptation to data plane">
      extensions, available with repurposing/redefining portions of the protocol
      or its header fields.  Yet another important measure for maturity is the
      deployment experience. This criteria concerns the maturity of the data
-     plane protocol alternative as the solution alternative.
+     plane protocol alternative as the solution alternative.  This
+     criteria is particularly important given, as previously noted, that
+     the DetNet data plane solution is expected to impact, i.e., be
+     supported in, hardware.
     </t>
   </section>
 </section>
@@ -748,7 +784,7 @@ title="DetNet adaptation to data plane">
       <vspace blankLines="1"/>
       </t>
      
-     <t hangText="Operations and management (M/W)">
+     <t hangText="Operations, Administration and Maintenance (M/W)">
       <vspace blankLines="1"/>
       IPv6 enjoys the existing toolbox for generic IP network management.
       However, IPv6 specific management features are still not at the level of
@@ -900,7 +936,7 @@ title="DetNet adaptation to data plane">
       simplified multicast forwarding. 
       <vspace blankLines="1"/></t>
     
-     <t hangText="Operations and management (M)">
+     <t hangText="Operations, Administration and Maintenance (M)">
       <vspace blankLines="1"/>
       IPv4 enjoys the extensive and "complete" existing toolbox for generic IP
       network management.
@@ -1068,7 +1104,7 @@ title="DetNet adaptation to data plane">
       should be extended or rely on delivery protocols.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Operations and management (W/N)">
+     <t hangText="Operations, Administration and Maintenance (W/N)">
       <vspace blankLines="1"/>
       [note: rely on the delivery protocol] GRE has no packet replication and
       deletion currently and should be relied on delivery protocols.
@@ -1174,7 +1210,7 @@ title="DetNet adaptation to data plane">
     </artwork></figure>
     <t>
      PWs appear as a good data plane solution alternative for a number of
-     reasons. PWs are a proven and deployed technology with a rich O&amp;M
+     reasons. PWs are a proven and deployed technology with a rich OAM
      control plane <xref target="RFC4447"/>, and enjoy the toolbox developed for
      MPLS networks. Furthermore, PWs may have an optional Control Word (CW) as
      part of the payload encapsulation between the PSN and the emulated service
@@ -1274,11 +1310,11 @@ title="DetNet adaptation to data plane">
       <xref target="sec_alt_ipv4_ana"/>.--> 
      <vspace blankLines="1"/></t>
      
-     <t hangText="Operations and management (M/W)">
+     <t hangText="Operations, Administration and Maintenance (M/W)">
       <vspace blankLines="1"/>
       PWs have rich control plane for O&amp; and in a case of the MPLS PSN enjoy
-      the full control plane toolbox developed for MPLS network O&amp;M likewise
-      IP PSN have the full toolbox of IP network  O&amp;M tools. There could be,
+      the full control plane toolbox developed for MPLS network OAM likewise
+      IP PSN have the full toolbox of IP network  OAM tools. There could be,
       however, need for deterministic networking specific extensions for the
       mentioned control planes.
      <vspace blankLines="1"/></t>
@@ -1336,7 +1372,7 @@ title="DetNet adaptation to data plane">
     <t>
      PseudoWires appear to be a strong candidate as the deterministic networking
      data plane solution alternative. The strong points are the technical
-     maturity and the extensive control plane for O&amp;M. This holds
+     maturity and the extensive control plane for OAM. This holds
      specifically for MPLS-based PSN.
     </t>
     <t>
@@ -1812,7 +1848,7 @@ title="BIER-TE Header">
   </t><t>
    The DetNet data plane uses BIER-TE to control which adjacencies are used
    for a given packet. This is signaled from the path ingress, which sets the
-   appropriate bits in the BIER BitString to indicate which replications must
+   appropriate bits in the BIER BitString to indicate which replication must
    happen.
   </t><t>
    The replication point clears the bit associated to the adjacency where the
@@ -1942,6 +1978,7 @@ title="BIER-TE Header">
   <references title="Informative References">
    &rfc0791;
    &rfc1122;
+   &rfc2205;
    &rfc2460;
    &rfc3031;
    &rfc3032;
@@ -1959,6 +1996,7 @@ title="BIER-TE Header">
    &rfc3168;
    &rfc3209;
    &rfc3270;
+   &rfc3473;
    &rfc4023;
    &rfc4446;
    &rfc4447;
@@ -2046,6 +2084,17 @@ title="BIER-TE Header">
     <format type="PDF" target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-1.pdf"/>
    </reference>
 
+   <reference anchor="IEEE802.1Qbv"
+	      target="http://www.ieee802.org/1/files/private/bv-drafts/">
+     <front>
+       <title>Enhancements for Scheduled Traffic</title>
+       <author>
+	 <organization>IEEE</organization>
+       </author>
+       <date year="2016" />
+     </front>
+   </reference>
+   
    <reference anchor="IEEE8021Qca"
      target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf">
     <front>
@@ -2058,7 +2107,18 @@ title="BIER-TE Header">
     <seriesInfo name="IEEE P802.1Qca/D2.1" value="P802.1Qca"/>
     <format type="PDF" target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf"/>
    </reference>
-  
+   
+   <reference anchor="IEEE802.1Qch"
+	      target="http://www.ieee802.org/1/files/private/ch-drafts/">
+     <front>
+       <title>Cyclic Queuing and Forwarding</title>
+       <author>
+	 <organization>IEEE</organization>
+       </author>
+       <date year="2016" />
+     </front>
+   </reference>
+
    <reference anchor="sixlab"
      target="http://6lab.cisco.com/stats/" >
     <front>
