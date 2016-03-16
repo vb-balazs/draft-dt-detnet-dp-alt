@@ -564,8 +564,6 @@ title="DetNet adaptation to data plane">
 
   <section title="#8 Class and quality of service capabilities"
       anchor="sec_crit_qos">
-
-
     <t>
       Class and quality of service, i.e., CoS and QoS, are terms that
       are often used interchangeably and confused.  In the context of
@@ -588,13 +586,23 @@ title="DetNet adaptation to data plane">
      path control, traffic protection, shaping, policing and
      remarking. Example protocols that support QoS control
      include <xref target="RFC2205">Resource ReSerVation Protocol</xref>
-     (RSVP) and RSVP-TE <xref target="RFC3209"/> and  <xref target="RFC3473"/>.
+     (RSVP) and RSVP-TE <xref target="RFC3209"/> and <xref target="RFC3473"/>.
     </t>
     <t>
-     In the context of the data plane solution  there should be
+      A critical DetNet service enabled by QoS (and perhaps CoS) is
+      delivering zero congestion loss. There are different mechanisms that
+      maybe used separately or in combination to deliver a zero
+      congestion loss service.  The key aspect of this objective is that
+      DetNet packets are not discarded due to congestion at any point in a
+      DetNet aware network.
+    </t>
+    <t>
+     In the context of the data plane solution there should be
      means for flow identification, which then can be used to map a
      flow against specific resources and treatment in a node enforcing
-     the QoS.  
+     the QoS.  Hereto, certain aspects of CoS and QoS may be provided by
+     the underlying sub-net technology, e.g., actual queuing or IEEE 802.3x
+     priority flow control (PFC).
     </t>
   </section>
   <section title="#9 Packet traceability" anchor="sec_crit_trace">
@@ -1029,7 +1037,7 @@ title="MPLS-based Services">
  |PW Lbl (S=1)|   |LSP Lbl(S=0)|  |LSP Lbl(S=0)|  |LSP Lbl(S=1)|
  +------------+   +------------+  +------------+  +------------+
  |LSP Lbl(S=0)|         .               .               .
- +------------+         .               .               .      (MPLS-TP)
+ +------------+         .               .               .      (MPLS Network)
         .               .               .               .
         .
         .
