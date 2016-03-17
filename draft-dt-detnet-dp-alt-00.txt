@@ -11,6 +11,11 @@ Expires: September 18, 2016                                    G. Mirsky
                                                                    Cisco
                                                                Y. Zhuang
                                                                   Huawei
+<<<<<<< HEAD
+=======
+                                                               L. Berger
+                                                                    LabN
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
                                                           March 17, 2016
 
 
@@ -48,8 +53,6 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-   (http://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
 
 
 
@@ -58,6 +61,8 @@ Korhonen, et al.       Expires September 18, 2016               [Page 1]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
@@ -104,8 +109,6 @@ Table of Contents
      5.3.  Virtual Extensible LAN (VXLAN)  . . . . . . . . . . . . .  21
        5.3.1.  Solution description  . . . . . . . . . . . . . . . .  21
        5.3.2.  Analysis and Discussion . . . . . . . . . . . . . . .  21
-       5.3.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.4.  Pseudo Wire Emulation Edge-to-Edge (PWE3) . . . . . . . .  21
 
 
 
@@ -114,6 +117,8 @@ Korhonen, et al.       Expires September 18, 2016               [Page 2]
 Internet-Draft       DetNet data plane alternatives           March 2016
 
 
+       5.3.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  21
+     5.4.  Pseudo Wire Emulation Edge-to-Edge (PWE3) . . . . . . . .  21
        5.4.1.  Solution description  . . . . . . . . . . . . . . . .  21
        5.4.2.  Analysis and Discussion . . . . . . . . . . . . . . .  23
        5.4.3.  Summary . . . . . . . . . . . . . . . . . . . . . . .  25
@@ -163,8 +168,11 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
 Korhonen, et al.       Expires September 18, 2016               [Page 3]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
@@ -1424,6 +1432,21 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
                 Figure 7: BIER packet in MPLS encapsulation
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 25]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
 5.5.1.1.  Solution description
 
    The DetNet may be presented in BIER as distinctive payload type with
@@ -1453,6 +1476,31 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
 Korhonen, et al.       Expires September 18, 2016              [Page 26]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
@@ -1563,8 +1611,11 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
 Korhonen, et al.       Expires September 18, 2016              [Page 28]
 
 Internet-Draft       DetNet data plane alternatives           March 2016
@@ -1770,9 +1821,52 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    The BIER header is of variable size, and a DetNet network of a
    limited size can use a model with 64 bits if 64 adjacencies are
    enough, whereas a larger deployment may be able to signal up to 256
+<<<<<<< HEAD
    adjacencies for use in very complex paths.  Figure 7 illustrates a
    BIER header as encapsulated within MPLS.  The format of this header
    is common to BIER and BIER-TE.
+=======
+   adjacencies for use in very complex paths.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 32]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+       0                   1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |0 1 0 1|  Ver  |  Len  |              Entropy                  |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |                BitString  (first 32 bits)                     ~
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      ~                                                               ~
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      ~                BitString  (last 32 bits)                      |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |OAM|     Reserved      | Proto |            BFIR-id            |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+                         Figure 12: BIER-TE Header
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
 
    For the DetNet data plane, a replication point is an ingress point
    for more than one adjacency, and an elimination point is an egress
@@ -1812,6 +1906,17 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
    Finally, using the same BIER-TE bit for both directions of the steps
    of the ladder enables to avoid replication in both directions along
+<<<<<<< HEAD
+=======
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 33]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    the crossing adjacencies.  At the time of sending along the step of
    the ladder, the bit may have been already reset by performing the AND
    operation with the copy from the other side, in which case the
@@ -1863,6 +1968,21 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    or more synchronization sources (bits starting from 64) that can
    potentially be useful for flow identification purposes.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 34]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
 6.  Summary of data plane alternatives
 
    TBD.  A condensed summary of all solution alternative.
@@ -1920,6 +2040,16 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
+<<<<<<< HEAD
+=======
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 35]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
 10.2.  Informative References
 
    [ETYPES]   IANA, "Ethernet Numbers", March 2015, <http://ftp.isi.edu/
@@ -1979,6 +2109,19 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               for Generic Routing Encapsulation (GRE)", draft-ietf-
               intarea-gre-ipv6-14 (work in progress), September 2015.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 36]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    [I-D.ietf-isis-pcr]
               Farkas, J., Bragg, N., Unbehagen, P., Parsons, G.,
               Ashwood-Smith, P., and C. Bowers, "IS-IS Path Computation
@@ -2032,6 +2175,19 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               <http://www.ieee802.org/1/files/private/ca-drafts/
               d2/802-1Qca-d2-1.pdf>.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 37]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    [RFC0791]  Postel, J., "Internet Protocol", STD 5, RFC 791,
               DOI 10.17487/RFC0791, September 1981,
               <http://www.rfc-editor.org/info/rfc791>.
@@ -2088,6 +2244,19 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               RFC 2890, DOI 10.17487/RFC2890, September 2000,
               <http://www.rfc-editor.org/info/rfc2890>.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 38]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    [RFC3031]  Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
               Label Switching Architecture", RFC 3031,
               DOI 10.17487/RFC3031, January 2001,
@@ -2145,6 +2314,18 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               DOI 10.17487/RFC3985, March 2005,
               <http://www.rfc-editor.org/info/rfc3985>.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 39]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    [RFC4023]  Worster, T., Rekhter, Y., and E. Rosen, Ed.,
               "Encapsulating MPLS in IP or Generic Routing Encapsulation
               (GRE)", RFC 4023, DOI 10.17487/RFC4023, March 2005,
@@ -2199,6 +2380,20 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               Engineering", RFC 5305, DOI 10.17487/RFC5305, October
               2008, <http://www.rfc-editor.org/info/rfc5305>.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 40]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    [RFC5440]  Vasseur, JP., Ed. and JL. Le Roux, Ed., "Path Computation
               Element (PCE) Communication Protocol (PCEP)", RFC 5440,
               DOI 10.17487/RFC5440, March 2009,
@@ -2256,6 +2451,17 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               RFC 6621, DOI 10.17487/RFC6621, May 2012,
               <http://www.rfc-editor.org/info/rfc6621>.
 
+<<<<<<< HEAD
+=======
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 41]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    [RFC6658]  Bryant, S., Ed., Martini, L., Swallow, G., and A. Malis,
               "Packet Pseudowire Encapsulation over an MPLS PSN",
               RFC 6658, DOI 10.17487/RFC6658, July 2012,
@@ -2310,6 +2516,21 @@ Internet-Draft       DetNet data plane alternatives           March 2016
               DOI 10.17487/RFC7399, October 2014,
               <http://www.rfc-editor.org/info/rfc7399>.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 42]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    [RFC7426]  Haleplidis, E., Ed., Pentikousis, K., Ed., Denazis, S.,
               Hadi Salim, J., Meyer, D., and O. Koufopavlou, "Software-
               Defined Networking (SDN): Layers and Architecture
@@ -2372,6 +2593,16 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    Email: janos.farkas@ericsson.com
 
 
+<<<<<<< HEAD
+=======
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 43]
+
+Internet-Draft       DetNet data plane alternatives           March 2016
+
+
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)
    Gregory Mirsky
    Ericsson
 
@@ -2390,6 +2621,10 @@ Internet-Draft       DetNet data plane alternatives           March 2016
    Email: zhuangyan.zhuang@huawei.com
 
 
+   Lou Berger
+   LabN Consulting, L.L.C.
+
+   Email: lberger@labn.net
 
 
 
@@ -2404,5 +2639,23 @@ Internet-Draft       DetNet data plane alternatives           March 2016
 
 
 
-
+<<<<<<< HEAD
 Korhonen, et al.       Expires September 18, 2016              [Page 43]
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Korhonen, et al.       Expires September 18, 2016              [Page 44]
+>>>>>>> 068640d... Added me as author (no idea how to do contributor)

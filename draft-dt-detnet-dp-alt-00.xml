@@ -145,6 +145,12 @@
    </address>
   </author>
   
+  <author initials='L.' surname="Berger" fullname='Lou Berger'>
+    <organization abbrev="LabN">LabN Consulting, L.L.C.</organization>
+    <address>
+      <email>lberger@labn.net</email>
+    </address>
+  </author>
   <date />
   <workgroup>DetNet</workgroup>
 
