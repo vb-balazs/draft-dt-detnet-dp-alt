@@ -59,6 +59,7 @@
 <!ENTITY I-D.ietf-spring-segment-routing SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-spring-segment-routing.xml">
 <!ENTITY I-D.ietf-v6ops-ipv6-ehs-in-real-world SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-v6ops-ipv6-ehs-in-real-world.xml">
 <!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
+<!ENTITY I-D.ietf-bier-architecture SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-bier-architecture.xml">
 <!ENTITY I-D.eckert-bier-te-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.eckert-bier-te-arch.xml">
 <!ENTITY I-D.ietf-intarea-gre-ipv6 SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-intarea-gre-ipv6.xml">
 <!ENTITY I-D.ietf-6man-rfc2460bis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-rfc2460bis.xml">
@@ -1438,9 +1439,30 @@ title="MPLS-based Services">
 
  <section title="Bit Indexed Explicit Replication (BIER)">
   <t>
-   [Editor's note: reflecting the new Det and Net structure has not been
-    done for this section.]
+   <xref target="I-D.ietf-bier-architecture">Bit Indexed Explicit Replication
+   </xref> (BIER) is a network plane replication technique that was initially
+   intended as a new method for multicast distribution. In a nutshell, a BIER
+   header includes a bitmap that explicitly signals the listeners that are
+   intended for a particular packet, which means that 1) the sender is aware of
+   the individual listeners and 2) the BIER control plane is a simple extension 
+   of the unicast routing as opposed to a dedicated multicast dataplane, which 
+   represents a considerable reduction in OPEX. For this reason, the technology
+   faces a lot of traction from Service Providers. <xref target="sec_alt_bier"/>
+   discusses the applicability of BIER for replication in the DetNet. 
   </t>
+  <t>
+   The simplicity of the BIER technology makes it very versatile as a network
+   plane signaling protocol. Already, a new Traffic Engineering variation is
+   emerging that uses bits to signal segments along a TE path. While the more
+   classical BIER is mainly a multicast technology that typically leverages a
+   unicast distributed control plane through IGP extensions, BIER-TE is mainly
+   a unicast technology that leverages a central computation to setup path,
+   compute segments and install the mapping in the intermediate nodes.
+   <xref target="sec_alt_bier_te"/>
+   discusses the applicability of BIER-TE for replication, traceability and 
+   OAM operations in DetNet. 
+  </t>
+
 
   <section title="Base BIER" anchor="sec_alt_bier">
 
@@ -1565,9 +1587,7 @@ title="DetNet in BIER domain">
  <section title="BIER - Traffic Engineering"
           anchor="sec_alt_bier_te">
 
-  <t>
-    [LB: This really should be merged with previous section.]
-  </t>
+
   <t>
    An alternate use of Bit-Indexed Explicit Replication (BIER) uses bits in the
    BitString to represent adjacencies as opposed to destinations, as discussed in
@@ -1867,28 +1887,10 @@ title="Enabled Adjacencies">
    The BIER header is of variable size, and a DetNet network of a limited size
    can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
    deployment may be able to signal up to 256 adjacencies for use 
-   in very complex paths.
+   in very complex paths. <xref target="fig_BIER_MPLS"/> illustrates a BIER 
+   header as encapsulated within MPLS. The format of this header is common to
+   BIER and BIER-TE.
   </t>
-<figure anchor="fig_BIER_bitsagain" align="center"
-title="BIER-TE Header">
-<artwork align="center"><![CDATA[
- 
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |0 1 0 1|  Ver  |  Len  |              Entropy                  |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                BitString  (first 32 bits)                     ~
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   ~                                                               ~
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   ~                BitString  (last 32 bits)                      |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |OAM|     Reserved      | Proto |            BFIR-id            |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- 
-]]></artwork>
-</figure>
  <t>
    For the DetNet data plane, a replication point is an ingress point for more
    than one adjacency, and an elimination point is an egress point for more than
@@ -2095,6 +2097,7 @@ title="BIER-TE Header">
    &I-D.eckert-bier-te-arch;
    &I-D.ietf-6man-rfc2460bis;
    &I-D.ietf-idr-ls-distribution;
+   &I-D.ietf-bier-architecture;
 
    <reference anchor="ETYPES"
      target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers ">
