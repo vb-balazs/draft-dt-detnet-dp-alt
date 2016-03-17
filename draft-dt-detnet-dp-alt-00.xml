@@ -3,54 +3,63 @@
 <!ENTITY rfc0791 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.0791.xml">
 <!ENTITY rfc1122 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1122.xml">
 <!ENTITY rfc1393 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1393.xml">
+<!ENTITY rfc1700 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1700.xml">
 <!ENTITY rfc2119 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc2205 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2205.xml">
 <!ENTITY rfc2460 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
 <!ENTITY rfc2474 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2474.xml">
 <!ENTITY rfc2702 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2702.xml">
+<!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
+<!ENTITY rfc2890 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2890.xml">
 <!ENTITY rfc3031 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3031.xml">
 <!ENTITY rfc3032 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3032.xml">
 <!ENTITY rfc3168 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3168.xml">
 <!ENTITY rfc3209 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3209.xml">
-<!ENTITY rfc3473 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3473.xml">
 <!ENTITY rfc3270 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3270.xml">
+<!ENTITY rfc3443 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3443.xml">
+<!ENTITY rfc3473 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3473.xml">
 <!ENTITY rfc3550 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3550.xml">
+<!ENTITY rfc3931 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3931.xml">
 <!ENTITY rfc3985 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3985.xml">
 <!ENTITY rfc4023 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4023.xml">
 <!ENTITY rfc4446 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4446.xml">
 <!ENTITY rfc4447 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4447.xml">
 <!ENTITY rfc4448 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4448.xml">
 <!ENTITY rfc4817 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4817.xml">
+<!ENTITY rfc4875 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4875.xml">
 <!ENTITY rfc5086 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5086.xml">
 <!ENTITY rfc5087 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5087.xml">
 <!ENTITY rfc5129 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5129.xml">
+<!ENTITY rfc5305 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5305.xml">
+<!ENTITY rfc5331 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5331.xml">
+<!ENTITY rfc5332 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5332.xml">
+<!ENTITY rfc5440 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5440.xml">
 <!ENTITY rfc5462 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5462.xml">
-<!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
-<!ENTITY rfc6437 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6437.xml">
-<!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
-<!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
-<!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
-<!ENTITY rfc6733 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6733.xml">
-<!ENTITY rfc6864 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6864.xml">
-<!ENTITY rfc6621 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6621.xml">
-<!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
-<!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
+<!ENTITY rfc5586 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5586.xml">
 <!ENTITY rfc5921 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5921.xml">
 <!ENTITY rfc5960 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5960.xml">
+<!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
 <!ENTITY rfc6275 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6275.xml">
-<!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
-<!ENTITY rfc2890 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2890.xml">
-<!ENTITY rfc7637 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7637.xml">
-<!ENTITY rfc1700 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1700.xml">
-<!ENTITY rfc7426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7426.xml">
-<!ENTITY rfc7399 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7399.xml">
-<!ENTITY rfc7510 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7510.xml">
-<!ENTITY rfc5305 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5305.xml">
-<!ENTITY rfc5440 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5440.xml">
+<!ENTITY rfc6373 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6373.xml">
+<!ENTITY rfc6378 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6378.xml">
+<!ENTITY rfc6426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6426.xml">
+<!ENTITY rfc6437 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6437.xml">
+<!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
 <!ENTITY rfc6564 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6564.xml">
+<!ENTITY rfc6621 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6621.xml">
+<!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
+<!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
+<!ENTITY rfc6733 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6733.xml">
+<!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
+<!ENTITY rfc6864 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6864.xml">
 <!ENTITY rfc7045 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7045.xml">
+<!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
+<!ENTITY rfc7271 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7271.xml">
 <!ENTITY rfc7348 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7348.xml">
-<!ENTITY rfc3931 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3931.xml">
+<!ENTITY rfc7399 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7399.xml">
+<!ENTITY rfc7426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7426.xml">
+<!ENTITY rfc7510 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7510.xml">
+<!ENTITY rfc7637 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7637.xml">
 
 <!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
 <!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
@@ -64,6 +73,7 @@
 <!ENTITY I-D.ietf-intarea-gre-ipv6 SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-intarea-gre-ipv6.xml">
 <!ENTITY I-D.ietf-6man-rfc2460bis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-rfc2460bis.xml">
 <!ENTITY I-D.ietf-idr-ls-distribution SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-idr-ls-distribution.xml">
+<!ENTITY I-D.ietf-mpls-residence-time SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-mpls-residence-time">
 
 ]>
 
@@ -502,7 +512,7 @@ title="DetNet adaptation to data plane">
 
   <section title="#5 Packet replication and deletion" anchor="sec_crit_repdup">
     <t>
-      The objective for supporting packet replication and deletio is to
+      The objective for supporting packet replication and deletion is to
       enable hitless (or lossless) 1+1 protection, which is also called
       Seemless redundancy in <xref target="I-D.finn-detnet-architecture"/>.
       Data plane solutions need to meet this objective independent of
@@ -757,7 +767,7 @@ title="DetNet adaptation to data plane">
       can be guaranteed to be non-overlapping. Loose source routing only signals
       some of the intermediate hops and it takes additional knowledge to ensure
       that there is no single point of failure.
-        <vspace blankLines="1"/>    
+        <vspace blankLines="1"/>
      </t>
      
      <t hangText="Packet replication (W)">
@@ -859,7 +869,6 @@ title="DetNet adaptation to data plane">
     </list></t>
    </section>
 
-   </section> 
  
    <section title="Summary">
     <t>
@@ -998,77 +1007,302 @@ title="DetNet adaptation to data plane">
       <xref target="RFC5960"/>.  MPLS is the foundation for Pseudowire-based
       services <xref format="counter" target="sec_alt_pwe"/> and emerging
       technologies such as Bit-Indexed Explicit Replication (BIER)
-      <xref format="counter" target="sec_alt_bier"/> and Segment Routing
-      [https://datatracker.ietf.org/wg/spring/charter/].
+      <xref format="counter" target="sec_alt_bier"/> and 
+      <eref target="https://datatracker.ietf.org/wg/spring/charter/">
+	Source Packet Routing</eref>.
     </t>
     <t>
-      The remainder of this section is a work in progress and draws heavily
-      from <xref target="RFC5921"/>.
-    </t>
-    <t>
-      MPLS supports both the DetNet Service and DetNet Transport layers and
-      provides a very rich set of mechanisms that can be reused directly, and
-      perhaps augmented in certain cases, to deliver DetNet services. At the
-      DetNet Transport layer, MPLS provides forwarding, protection and OAM
-      services.  At the DetNet Service Layer it provides client service
-      adaption, directly, via Pseudowires and other label-like mechanisms (e.g.,
-      EPVN control word [EVPN]).  Are representation of these options are shown
-      in <xref target="fig_mpls_clients"/>.
+      MPLS supports the equivalent of both the DetNet Service and DetNet
+      Transport layers, and provides a very rich set of mechanisms that
+      can be reused directly, and perhaps augmented in certain cases, to
+      deliver DetNet services. At the DetNet Transport layer, MPLS
+      provides forwarding, protection and OAM services.  At the DetNet
+      Service Layer it provides client service adaption, directly, via
+      Pseudowires <xref format="counter" target="sec_alt_pwe"/> and via
+      other label-like mechanisms such as EPVN <xref format="counter"
+      target="sec_alt_evpn"/>.  A representation of these options are
+      shown in <xref target="fig_mpls_clients"/>.
     </t>
 <figure anchor="fig_mpls_clients" align="center"
 title="MPLS-based Services">
 <artwork align="center"><![CDATA[
-
-   PW-Based               MPLS Labeled                 IP
+   PW-Based               EVPN Labeled                 IP
    Services                  Services                Transport
  |------------|  |-----------------------------|  |------------|
 
-   Emulated        PW over LSP      IP over LSP         IP
+   Emulated       EVPN over LSP   EVPN w/ ESI ID        IP
    Service
-                  +------------+
-                  | PW Payload |
-                  +------------+  +------------+               (CLIENTS)
-                  |PW Lbl(S=1) |  |     IP     |
+                                  +------------+
+                                  |  Payload   |
+ +------------+   +------------+  +------------+             (Service)
+ | PW Payload |   |  Payload   |  |ESI Lbl(S=1)|
  +------------+   +------------+  +------------+  +------------+
- | PW Payload |   |LSP Lbl(S=0)|  |LSP Lbl(S=1)|  |     IP     |
+ |PW Lbl(S=1) |   |VPN Lbl(S=1)|  |VPN Lbl(S=0)|  |     IP     |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- |PW Lbl (S=1)|   |LSP Lbl(S=0)|  |LSP Lbl(S=0)|  |LSP Lbl(S=1)|
+ |LSP Lbl(S=0)|   |LSP Lbl(S=0)|  |LSP Lbl(S=0)|  |LSP Lbl(S=1)|
  +------------+   +------------+  +------------+  +------------+
- |LSP Lbl(S=0)|         .               .               .
- +------------+         .               .               .      (MPLS Network)
-        .               .               .               .
-        .
-        .
+       .                .               .               .
+       .                .               .               .    (Transport)
+       .                .               .               .
 
 ~~~~~~~~~~~ denotes DetNet Service <-> DetNet Transport layer boundary
 ]]></artwork>
 </figure>
+<!---
     <t>
-      
+      The basic header used in MPLS is the MPLS label stack,
+      <xref target="RFC3032"/>.  A good overview of the MPLS data plane
+      can be found in <xref target="RFC5960"/>, notably Section 3.1.
+      Important MPLS data plane behaviors are defined in combination
+      with the associated control plane mechansims.  This includes MPLS
+      Traffic Engineering (MPLS-TE), <xref target="RFC3209"/> and
+      <xref target="RFC3473"/>.  Point-to-Multipoint TE Label Switched
+      Paths (LSPs), <xref target="RFC4875"/>. Linear Protection,
+      <xref target="RFC6378"/> and  <xref target="RFC7271"/>. And the in
+      progress work on MPLS support for time synchronization
+      <xref target="I-D.ietf-mpls-residence-time"/>. 
+    </t>
+-->
+    <t>
+      MPLS can be controlled in a number of ways including via a control
+      plane, via the managment plane, or via centralized controller
+      (SDN) based aproaches. MPLS also provide stanard control plane
+      reference points.  Additional information on MPLS architecture and
+      control can be found in <xref target="RFC5921"/>.  A summary of
+      MPLS control plane related functions can be found in
+      <xref target="RFC6373"/>. The remainder of this section will focus
+      on the MPLS transport data plane, additional information on the
+      MPLS service data plane can be found below in
+      <xref format="counter" target="sec_alt_mpls_svc"/>.
     </t>
     <t>
+      The following is a work in progress and draws
+      heavily from <xref target="RFC5960"/> and may be updated, replaced
+      or removed.
     </t>
     <t>
+      Encapsulation and forwarding of packets traversing MPLS LSPs
+      follows standard MPLS packet encapsulation and forwarding as
+      defined in <xref target="RFC3031"/>, <xref target="RFC3032"/>,
+      <xref target="RFC5331"/>, and <xref target="RFC5332"/>.
     </t>
     <t>
+      Data plane Quality of Service capabilities are included in the
+      MPLS in the form of Traffic Engineered (TE) LSPs
+      <xref target="RFC3209"/> and the MPLS Differentiated Services
+      (DiffServ) architecture <xref target="RFC3270"/>.  Both E-LSP and
+      L-LSP MPLS DiffServ modes are defined.  The Traffic Class field
+      (formerly the EXP field) of an MPLS label follows the definition
+      of <xref target="RFC5462"/> and <xref target="RFC3270"/>.
     </t>
     <t>
-     In the contex of deterministic networking the MPLS as such is specifically
-     on the "Net" layer. Some additional functionality or a shim layer on a top
-     of the MPLS trasnport is most likely needed on the "Det" layer to enable a
-     complete deterministic networking data plane solution.
+      Except for transient packet reordering that may occur, for example,
+      during fault conditions, packets are delivered in order on L-LSPs,
+      and on E-LSPs within a specific ordered aggregate.
     </t>
     <t>
-     [Editor's note: Continue with text following the pricinples found in
-     RFC5921.]
+      The Uniform, Pipe, and Short Pipe DiffServ tunneling and TTL
+      processing models are described in <xref target="RFC3270"/> and
+      <xref target="RFC3443"/> and may be used for MPLS LSPs.  
     </t>
-
+    <t>
+      Equal-Cost Multi-Path (ECMP) load-balancing is possible with MPLS
+      LSPs and can be avoided using a number of techniques. The same
+      holds for Penultimate Hop Popping (PHP).
+    </t>
+    <t>
+      MPLS includes the following LSP types:
+    </t>
+    <t>
+      o  Point-to-point unidirectional
+    </t>
+    <t>
+      o  Point-to-point associated bidirectional
+    </t>
+    <t>
+      o  Point-to-point co-routed bidirectional
+    </t>
+    <t>
+      o  Point-to-multipoint unidirectional
+    </t>
+    <t>
+      Point-to-point unidirectional LSPs are supported by the basic MPLS
+      architecture <xref target="RFC3031"/>.
+    </t>
+    <t>
+      A point-to-point associated bidirectional LSP between LSRs A and B
+      consists of two unidirectional point-to-point LSPs, one from A to
+      B and the other from B to A, which are regarded as a pair
+      providing a single logical bidirectional transport path.
+    </t>
+    <t>
+      A point-to-point co-routed bidirectional LSP is a point-to-point
+      associated bidirectional LSP with the additional constraint that
+      its two unidirectional component LSPs in each direction follow the
+      same path (in terms of both nodes and links).  An important
+      property of co-routed bidirectional LSPs is that their
+      unidirectional component LSPs share fate.
+    </t>
+    <t>
+      A point-to-multipoint unidirectional LSP functions in the same
+      manner in the data plane, with respect to basic label processing
+      and packet-switching operations, as a point-to-point
+      unidirectional LSP, with one difference: an LSR may have more than
+      one (egress interface, outgoing label) pair associated with the
+      LSP, and any packet it transmits on the LSP is transmitted out all
+      associated egress interfaces.  Point-to-multipoint LSPs are
+      described in <xref target="RFC4875"/> and
+      <xref target="RFC5332"/>.  TTL processing and exception handling
+      for point-to- multipoint LSPs is the same as for point-to-point
+      LSPs.
+    </t>
+    <t>
+      Additional data plane capabilities include Linear Protection,
+      <xref target="RFC6378"/> and <xref target="RFC7271"/>. And the in
+      progress work on MPLS support for time synchronization
+      <xref target="I-D.ietf-mpls-residence-time"/>.
+    </t>
    </section>
 
    <section title="Analysis and Discussion">
+
+    <t><list style="hanging">
+     <t hangText="#? DetNet Service Interface (M)">
+        <vspace blankLines="1"/> The DetNet service interface is enabled
+	through the DetNet Service Layer it provides client service
+	adaption, directly, via Pseudowires <xref format="counter"
+	target="sec_alt_pwe"/> and via other label-like mechanisms such
+	as EPVN <xref format="counter" target="sec_alt_evpn"/>.
+     </t>
+     <t hangText="#1 Encapsulation and overhead (M)">
+        <vspace blankLines="1"/> 
+
+	There are two perspectives to consider when looking at
+	encapsulation.  The first is encapsulation to support services.
+	These considerations are part of the DetNet service layer and
+	are covered below, see <xref format="counter"
+	target="sec_alt_pwe"/> and <xref format="counter"
+	target="sec_alt_evpn"/>.
+
+	<vspace blankLines="1"/> 
+
+	The second perspective relates to encapsulation, if any, is
+	needed to transport packets across network.  In this case, the
+	MPLS label stack, <xref target="RFC3032"/> is used to identify
+	flows across a network.  MPLS labels are compact and highly
+	flexible.  They can be stacked to support client adaptation,
+	protection, network layering, source routing, etc.
+     </t>
+     <t hangText="#2 Stream identification (M)">
+        <vspace blankLines="1"/>
+
+	MPLS label stacks provide highly flexible ways to identify
+	flows.  Basically, they enable the complete separation of
+	traffic classification from traffic treatment and thereby enable
+	arbitrary combinations of both.
+     </t>
+     <t hangText="#3 Packet sequencing (M)">
+        <vspace blankLines="1"/>
+
+	Packet ordering in MPLS is generally similar to packet ordering
+	in Ethernet. MPLS implementations can also support ECMP for
+	certain types of traffic which can to lead to out of order
+	delivery.  There are defined techniques to avoid ECMP and
+	iensure in order delivery during normal operation. Out of order
+	delivery is still possible in certain MPLS protection
+	scenarios.  If additional ordering mechanisms are required,
+	these are likely to be implemented at the DetNet Service Layer.
+     </t>
+     <t hangText="#4 Explicit routes (M)">
+        <vspace blankLines="1"/>
+
+	MPLS supports explicit routes based on how LSPs are established,
+	e.g., via TE explicit routes <xref target="RFC3209"/>.
+	Additional, but not required, additional capabilities are being
+	defined as part of Segment Routing (SR)
+	<xref target="I-D.ietf-spring-segment-routing"/>. 
+     </t>
+     <t hangText="#5 Packet replication and deletion (M)">
+        <vspace blankLines="1"/>
+
+	At the MPLS LSP level, there are mechanisms defined to provide
+	1+1 protection.  The current definitions
+	<xref target="RFC6378"/> and <xref target="RFC7271"/> use OAM
+	mechanisms to support and coordinate protection switching and
+	packet loss is possible during a switch.  While such this level
+	of protection may be sufficient for man DetNet applications,
+	when truly hitless (i.e., zero loss) switching is required
+	additional mechanisms will be needed.  It is expected that these
+	additional mechanisms will be defined at the DetNet Service
+	Layer.
+     </t>
+     <t hangText="#6 Operations, Administration and Maintenance (M)">
+        <vspace blankLines="1"/>
+
+	MPLS already includes a rich set of OAM functions at both the
+	Service and Transport Layers. This includes LSP ping [ref] and
+	those enabled via the MPLS Generic Associated Channel
+	<xref target="RFC5586"/> and registered by 
+	<eref target="http://www.iana.org/assignments/g-ach-parameters/g-ach-parameters.xhtml">
+	  IANA</eref>.
+     </t>
+     <t hangText="#7 Time synchronization (W)">
+        <vspace blankLines="1"/>
+
+	MPLS itself does not provide any time synchronization service.
+	The expectations is that the actual time-based scheduling will
+	be provided by the sub-network layer, e.g., by
+	<xref target="TSNTG"/>, and that the DetNet transport layer will
+	merely need to facilitate time synchronization (with hardware
+	support) across multiple sub-network domains and technologies.
+	Work is in progress
+	<xref target="I-D.ietf-mpls-residence-time"/> that may satisfy,
+	or serve as a building block for, DetNet time synchronization.
+     </t>
+     <t hangText="#8 Class and quality of service capabilities (M/W)">
+        <vspace blankLines="1"/>
+
+	As previously mentioned, Data plane Quality of Service
+	capabilities are included in the MPLS in the form of Traffic
+	Engineered (TE) LSPs <xref target="RFC3209"/> and the MPLS
+	Differentiated Services (DiffServ) architecture
+	<xref target="RFC3270"/>.  Both E-LSP and L-LSP MPLS DiffServ
+	modes are defined.  The Traffic Class field (formerly the EXP
+	field) of an MPLS label follows the definition of
+	<xref target="RFC5462"/> and <xref target="RFC3270"/>.  One
+	potential open area of work is synchronized, time based
+	scheduling. 
+     </t>
+     <t hangText="#9 Packet traceability (M)">
+        <vspace blankLines="1"/>
+	
+	MPLS supports multiple tracing mechanisms.  A control based one
+	is defined in  <xref target="RFC3209"/>.  An OAM based mechanism
+	is defined in MPLS On-Demand Connectivity Verification and Route
+	Tracing  <xref target="RFC6426"/>.
+     </t>
+     <t hangText="#10 Technical maturity (M)">
+        <vspace blankLines="1"/> 
+
+	MPLS as a mature technology that has been widely deployed in
+	many networks for many years.  Numerous vendor products and
+	multiple generations of MPLS hardware have been built and
+	deployed.
+     </t>
+     </list>
+     </t>
+
    </section>
 
    <section title="Summary">
+    <t>
+     MPLS LSPs support a significant portion of the identified DetNet
+     data plane criteria today.  MPLS as a mature technology that has
+     been widely deployed.  Numerous vendor products and and multiple
+     generations of MPLS hardware have been built and deployed.  There
+     are aspects of the DetNet data plane that are not fully supported,
+     but these can be incrementally added.
+    </t>
    </section>
   </section>
  </section> <!-- Net layer technolofes -->
@@ -1205,6 +1439,7 @@ title="MPLS-based Services">
     </section>
    </section>
     
+  <!--section
    <section title="Layer-2 Tunneling Protocol (L2TP)" anchor="sec_alt_l2tp">
     <t>
     [Editor's note: L2TPv3 <xref target="RFC3931"/> content to be provided later, if needed]
@@ -1232,9 +1467,61 @@ title="MPLS-based Services">
     <section title="Summary">
     </section>
    </section>
-  <!--/section-->
+  /section-->
   
-  
+  <section title="MPLS-based Services" anchor="sec_alt_mpls_svc">
+
+    <t>
+      [LB: this probably be an umbrella for EVPN and PWE3]
+    </t>
+    <section title="Solution description">
+    </section>
+ 
+    <section title="Analysis and Discussion">   
+      <t><list style="hanging">
+	  <t hangText="#? DetNet Service Interface ">
+            <vspace blankLines="1"/> 
+	  </t>
+	  <t hangText="#1 Encapsulation and overhead">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#2 Stream identification">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#3 Packet sequencing">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#4 Explicit routes">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#5 Packet replication and deletion">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#6 Operations, Administration and Maintenance">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#7 Time synchronization">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#8 Class and quality of service capabilities">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#9 Packet traceability">
+            <vspace blankLines="1"/>
+	    
+	  </t>
+	  <t hangText="#10 Technical maturity">
+            <vspace blankLines="1"/>
+	  </t>
+	</list>
+      </t>
+
+    </section>
+ 
+    <section title="Summary">
+    </section>
+   </section>
+
   <section title="Pseudo Wire Emulation Edge-to-Edge (PWE3)" anchor="sec_alt_pwe">
    <section title="Solution description">
     <t>
@@ -1442,6 +1729,58 @@ title="MPLS-based Services">
    </section>
   </section>
 
+  <section title="EVPN (MPLS-based Ethernet Services)" anchor="sec_alt_evpn">
+
+    <t>
+
+    </t>
+    <section title="Solution description">
+    </section>
+ 
+    <section title="Analysis and Discussion">
+      <t><list style="hanging">
+	  <t hangText="#? DetNet Service Interface ">
+            <vspace blankLines="1"/> 
+	  </t>
+	  <t hangText="#1 Encapsulation and overhead">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#2 Stream identification">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#3 Packet sequencing">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#4 Explicit routes">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#5 Packet replication and deletion">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#6 Operations, Administration and Maintenance">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#7 Time synchronization">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#8 Class and quality of service capabilities">
+            <vspace blankLines="1"/>
+	  </t>
+	  <t hangText="#9 Packet traceability">
+            <vspace blankLines="1"/>
+	    
+	  </t>
+	  <t hangText="#10 Technical maturity">
+            <vspace blankLines="1"/>
+	  </t>
+	</list>
+      </t>
+
+    </section>
+ 
+    <section title="Summary">
+    </section>
+   </section>
 
  <section title="Bit Indexed Explicit Replication (BIER)">
   <t>
@@ -1979,8 +2318,7 @@ title="Enabled Adjacencies">
     </section>
  </section>  <!-- Det layer technologies -->
 
-
-
+</section>
 </section>
 
 <!-- ===================================================================== -->
@@ -2044,66 +2382,76 @@ title="Enabled Adjacencies">
   <references title="Informative References">
    &rfc0791;
    &rfc1122;
+   &rfc1393;
+   &rfc1700;
    &rfc2205;
    &rfc2460;
-   &rfc3031;
-   &rfc3032;
-   &rfc3985;
-   &rfc3550;
-   &rfc6864;
-   &rfc6621;
-   &rfc6814;
-   &rfc1393;
-   &rfc6540;
-   &rfc5921;
-   &rfc5960;
-   &rfc6275;
    &rfc2474;
    &rfc2702;
+   &rfc2784;
+   &rfc2890;
+   &rfc3031;
+   &rfc3032;
    &rfc3168;
    &rfc3209;
    &rfc3270;
+   &rfc3443;
    &rfc3473;
+   &rfc3550;
+   &rfc3931;
+   &rfc3985;
    &rfc4023;
    &rfc4446;
    &rfc4447;
    &rfc4448;
    &rfc4817;
+   &rfc4875;
+   &rfc5086;
    &rfc5087;
    &rfc5129;
-   &rfc5462;
-   &rfc6658;
-   &rfc6073;
-   &rfc6437;
-   &rfc6718;
-   &rfc7167;
-   &rfc6733;
-   &rfc2784;
-   &rfc2890;
-   &rfc7637;
-   &rfc1700;
-   &rfc5086;
-   &rfc7426;
-   &rfc7399;
-   &rfc7510;
-   &rfc5440;
    &rfc5305;
-   &rfc7045;
+   &rfc5331;
+   &rfc5332;
+   &rfc5440;
+   &rfc5462;
+   &rfc5586;
+   &rfc5921;
+   &rfc5960;
+   &rfc6073;
+   &rfc6275;
+   &rfc6373;
+   &rfc6378;
+   &rfc6426;
+   &rfc6437;
+   &rfc6540;
    &rfc6564;
+   &rfc6621;
+   &rfc6658;
+   &rfc6718;
+   &rfc6733;
+   &rfc6814;
+   &rfc6864;
+   &rfc7045;
+   &rfc7167;
+   &rfc7271;
    &rfc7348;
-   &rfc3931;
-   &I-D.ietf-intarea-gre-ipv6;
-   &I-D.finn-detnet-problem-statement;
+   &rfc7399;
+   &rfc7426;
+   &rfc7510;
+   &rfc7637;
    &I-D.finn-detnet-architecture;
-   &I-D.ietf-isis-pcr;
-   &I-D.ietf-spring-segment-routing;
-   &I-D.ietf-6man-segment-routing-header;
-   &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
-   &I-D.ietf-sunset4-gapanalysis;
-   &I-D.eckert-bier-te-arch;
+   &I-D.finn-detnet-problem-statement;
    &I-D.ietf-6man-rfc2460bis;
-   &I-D.ietf-idr-ls-distribution;
+   &I-D.ietf-6man-segment-routing-header;
    &I-D.ietf-bier-architecture;
+   &I-D.ietf-idr-ls-distribution;
+   &I-D.ietf-intarea-gre-ipv6;
+   &I-D.ietf-isis-pcr;
+   &I-D.ietf-mpls-residence-time;
+   &I-D.ietf-spring-segment-routing;
+   &I-D.ietf-sunset4-gapanalysis;
+   &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
+   &I-D.eckert-bier-te-arch;
 
    <reference anchor="ETYPES"
      target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers ">
