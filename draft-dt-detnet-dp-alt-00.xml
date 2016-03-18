@@ -325,7 +325,7 @@ title="DetNet adaptation to data plane">
  </t>
   
  <t>
-  [Lou's note: I', not sure if the remainder of this section says
+  [Lou's note: I'm not sure if the remainder of this section says
   anything not present in the next section. Will need to revisit
   as part of the pre-pub review.]
  </t>
@@ -345,7 +345,7 @@ title="DetNet adaptation to data plane">
   The criteria for the DetNet Service layer:
    <list style="nosymbols">
     <t>#1 Encapsulation and overhead</t>
-    <t>#2 Stream identification (Flow ID part of the DetNet flows)</t>
+    <t>#2 Flow identification (Flow ID part of the DetNet flows)</t>
     <t>#3 Packet sequencing (sequence number)</t>
     <t>#5 Packet replication and deletion (note: only the packet deletion for
        seamless redundancy)</t>
@@ -360,7 +360,7 @@ title="DetNet adaptation to data plane">
   The criteria for the DetNet Transport layer:
    <list style="nosymbols">
     <t>#1 Encapsulation and overhead</t>
-    <t>#2 Stream identification (Egress ID)</t>
+    <t>#2 Flow identification (Egress ID)</t>
     <t>#4 Explicit routes (network path)</t>
     <t>#5 Packet replication and deletion (note: only the packet replication
        for seamless redundancy)</t>
@@ -384,7 +384,7 @@ title="DetNet adaptation to data plane">
   the two different layers for other criteria, e.g., time synchronization.
   Furthermore, technical maturity is a criteria valid for both layers.
  </t> 
- 
+<!-- 
  <t>
   The Stream ID is compound of a Flow ID and an Egress ID in order to provide a
   unique ID for a DetNet flow. The Egress ID belongs to the DetNet Transport
@@ -412,6 +412,7 @@ title="DetNet adaptation to data plane">
   layer provides time and/or phase synchronization among network nodes, e.g.,
   using IEEE 1588 or one of its Profiles.
  </t>
+-->
 </section>
 
 <section title="Criteria for data plane solution alternatives" anchor="sec_crit">
@@ -460,7 +461,7 @@ title="DetNet adaptation to data plane">
     </t>
   </section>
 
-  <section title="#2 Stream identification" anchor="sec_crit_streamid">
+  <section title="#2 Flow identification" anchor="sec_crit_streamid">
     <t>
      The solution alternative has to provide means to identify specific
      deterministic flows. The flow identification can, for example,
@@ -714,7 +715,7 @@ title="DetNet adaptation to data plane">
       <vspace blankLines="1"/>
       </t>
     
-     <t hangText="Stream identification (M/W)">
+     <t hangText="Flow identification (M/W)">
       <vspace blankLines="1"/>
       The 20-bit flow label field of the fixed IPv6 header is suitable to
       distinguish different deterministic flows. But guidance on the use
@@ -724,7 +725,7 @@ title="DetNet adaptation to data plane">
       existing implementations generally do not open APIs to control the flow
       label from the upper layers.
       <vspace blankLines="1"/>
-      Alternatively, the Stream identification could
+      Alternatively, the Flow identification could
       be transported in a new option in the Hop-by-Hop Options Header. 
      <vspace blankLines="1"/></t>
      
@@ -906,7 +907,7 @@ title="DetNet adaptation to data plane">
       header size if 60 octets leaving only 40 octets for possible options.
       <vspace blankLines="1"/></t>
      
-     <t hangText="Stream identification (W/N)">
+     <t hangText="Flow identification (W/N)">
       <vspace blankLines="1"/>
       The IPv4 header has a 16-bit identification field that was originally
       intended for assisting fragmentation and reassembly of IPv4 packets as
@@ -1193,7 +1194,7 @@ title="MPLS-based Services">
 	flexible.  They can be stacked to support client adaptation,
 	protection, network layering, source routing, etc.
      </t>
-     <t hangText="#2 Stream identification (M)">
+     <t hangText="#2 Flow identification (M)">
         <vspace blankLines="1"/>
 
 	MPLS label stacks provide highly flexible ways to identify
@@ -1369,7 +1370,7 @@ title="MPLS-based Services">
       target="fig_gre_hdr"/>.
       <vspace blankLines="1"/></t>
      
-     <t hangText="Stream identification (W)">
+     <t hangText="Flow identification (W)">
       <vspace blankLines="1"/>
       There is no flow identification field in GRE header. However, it can rely
       on the flow identification mechanism applied in the delivery protocols,
@@ -1485,7 +1486,7 @@ title="MPLS-based Services">
 	  <t hangText="#1 Encapsulation and overhead">
             <vspace blankLines="1"/>
 	  </t>
-	  <t hangText="#2 Stream identification">
+	  <t hangText="#2 Flow identification">
             <vspace blankLines="1"/>
 	  </t>
 	  <t hangText="#3 Packet sequencing">
@@ -1615,7 +1616,7 @@ title="MPLS-based Services">
       encapsulations is used.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Stream identification (M)">
+     <t hangText="Flow identification (M)">
       <vspace blankLines="1"/>
       PWs provide multiple layers of flow identification, especially in the case
       of the MPLS PSN. The PWs are typically prepended with a PW label that can be
@@ -1745,7 +1746,7 @@ title="MPLS-based Services">
 	  <t hangText="#1 Encapsulation and overhead">
             <vspace blankLines="1"/>
 	  </t>
-	  <t hangText="#2 Stream identification">
+	  <t hangText="#2 Flow identification">
             <vspace blankLines="1"/>
 	  </t>
 	  <t hangText="#3 Packet sequencing">
