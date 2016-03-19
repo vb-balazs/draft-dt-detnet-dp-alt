@@ -10,6 +10,7 @@
 <!ENTITY rfc2474 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2474.xml">
 <!ENTITY rfc2702 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2702.xml">
 <!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
+<!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
 <!ENTITY rfc2890 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2890.xml">
 <!ENTITY rfc3031 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3031.xml">
 <!ENTITY rfc3032 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3032.xml">
@@ -203,7 +204,7 @@
    deterministic networking data plane.  The full scope of the deterministic
    networking data plane solution is considered including, as appropriate:
    quality of service (QoS); Operations, Administration and Maintenance (OAM); and time
-   synchronization among other criteria decribed in <xref target="sec_crit"/>.
+   synchronization among other criteria described in <xref target="sec_crit"/>.
   </t>
   <t>
    This document does not select a deterministic networking data
@@ -236,9 +237,9 @@
  </t>
  <t>
    A "Deterministic Network" will be composed of DetNet enabled
-   "end systems" and DetNet enabled "network nodes".  DetNet
+   "End Systems" and DetNet enabled "Network Nodes".  DetNet
    enabled network nodes will provide a DetNet service to attached
-   DetNet end systems.  All DetNet enabled systems and nodes will
+   DetNet End Systems.  All DetNet enabled systems and nodes will
    be interconnected by sub-networks.  These sub-networks will
    provide DetNet compatible service for support of DetNet
    traffic.  Examples of sub-networks include 802.1TSN and a
@@ -263,6 +264,23 @@ title="A Simple DetNet Enabled Network">
 ]]></artwork>
 </figure>
 
+<figure align="center"
+title="A Simple DetNet Enabled Network">
+<artwork align="center"><![CDATA[
+
++------+                                                  +------+
+| End  |<-------------Deterministic flow----------------->| End  |
+|System|                                                  |System|
++--+---+                                                  +-+----+
+   |Link   <--------------DetNet flow------------------->   |
+   |    +------+     +-------+   ,-'''-.   +-------+  +------+
+   |    | Edge |Link |Network|--[  Sub  ]--|Network|--| Edge |
+   +----| Node |-----|  Node |  [Network]  |  Node |  | Node |
+        +------+     +-------+   +-...-'   +-------+  +------+
+]]></artwork>
+</figure>
+
+
  <t>
    
  </t>
@@ -274,12 +292,12 @@ title="A Simple DetNet Enabled Network">
     <t>
      The DetNet Service layer provides adaptation of DetNet services.  It is
      composed of a shim layer to carry DetNet flow specific attributes, which
-     are needed during forwarding. End systems originate and terminate the Det
-     layer and are peers at the DetNet Service layer.
+     are needed during forwarding. End systems originate and terminate the 
+     DetNet Service layer and are peers at the DetNet Service layer.
     </t>
     <t>
      The DetNet Transport layer is supported by all DetNet aware systems and
-     nodes.  It operates below the DetNet Service layer. The Detnet Transport
+     nodes.  It operates below the DetNet Service layer. The DetNet Transport
      layer is used to relay traffic end to end across a DetNet domain.
     </t>
    </list>
@@ -287,7 +305,7 @@ title="A Simple DetNet Enabled Network">
   layers helps to explore and evaluate various combinations of the
   data plane solutions available.  This separation of DetNet
   layers, while helpful, should not be considered as formal
-  requirements.  For example, some technologies may violate these
+  requirement.  For example, some technologies may violate these
   strict layers and still be able to deliver a DetNet service.
  </t>
  
@@ -417,7 +435,7 @@ title="DetNet adaptation to data plane">
 
 <section title="Criteria for data plane solution alternatives" anchor="sec_crit">
  <t>
-   This section provides criteria to help evaluate potential options.  The
+   This section provides criteria to help to evaluate potential options.  The
    criteria can be broken down based on layer.  That is if the criteria is
    focused on delivering DetNet service adaptation, i.e., is concerned with the
    DetNet Service layer, or if the criteria is focused on transporting flows
@@ -466,9 +484,9 @@ title="DetNet adaptation to data plane">
      The solution alternative has to provide means to identify specific
      deterministic flows. The flow identification can, for example,
      be explicit field in the data plane encapsulation header or implicitly
-     encoded into the addressing scheme of the used data plane protocol. This
-     criteria concerns the availability and details of deterministic flow
-     identification the data plane protocol alternative has.
+     encoded into the addressing scheme of the used data plane protocol or their
+     combination. This criteria concerns the availability and details of 
+     deterministic flow identification the data plane protocol alternative has.
     </t>
   </section>
 
@@ -515,21 +533,42 @@ title="DetNet adaptation to data plane">
     <t>
       The objective for supporting packet replication and deletion is to
       enable hitless (or lossless) 1+1 protection, which is also called
-      Seemless redundancy in <xref target="I-D.finn-detnet-architecture"/>.
+      Seamless redundancy in <xref target="I-D.finn-detnet-architecture"/>.
       Data plane solutions need to meet this objective independent of
       the particular solution used.  In other words, a packet
       replication and deletion is one identified method for a data plane
-      solution to provide seemless redundancy and other methods, if so
+      solution to provide seamless redundancy and other methods, if so
       identified, are permissible. 
     </t>
     <t>
      The solution alternative has to provide means for end systems and/or relay
      systems to be able to replicate packets, and later eliminate all but one of
      the replicas, at multiple points in the network in order to ensure that one
-     (or more) equipment failure events still leave at least one path intact for
+     (or more) equipment failure event(s) still leave at least one path intact for
      a deterministic networking flow. The goal is to enable hitless 1+1
      protection in a way that no packet gets lost or there is no ramp up time
      when either one of the paths fails for one reason or another.
+    </t>
+    <t>
+     Another concern regarding packet replication is how to enforce
+     replicated packets to take different route while the final
+     destination still remains the same.  With strict source routing,
+     all the intermediate hops are listed and paths can be guaranteed
+     to be non-overlapping.  Loose source routing only signals some of
+     the intermediate hops and it takes additional knowledge to ensure
+     that there is no single point of failure.
+      <vspace blankLines="1"/>
+      [Editor's note: at the DetNet Transport layer this criteria does not
+      concern packet deletion, only the packet replication. The packet deletion
+      belongs to the DetNet Service layer] 
+      <!-- vspace blankLines="1"/>
+      The implementation of this functionality largely depends on the
+      packet sequencing and flow identification approaches. The above
+      discussion on the potential use of new Options for packet sequencing and
+      flow identification approaches, as well as source routing and IP
+      tunnels to signal explicit paths, also applies here. -->
+      <vspace blankLines="1"/>
+
     </t>
     <t>
      The IEEE 802.1CB <xref target="IEEE8021CB"/> is an example of
@@ -582,12 +621,12 @@ title="DetNet adaptation to data plane">
       mechanisms include DiffServ which is enabled by IP header
       differentiated services code point (DSCP) field
       <xref target="RFC2474"/> and MPLS label traffic class field
-      <xref target="RFC5462"/>, and at Layer-2, by IEEE 803.1p priority
+      <xref target="RFC5462"/>, and at Layer-2, by IEEE 802.1p priority
       code point (PCP).
     </t>
     <t>
      Quality of Service (QoS) mechanisms for flow specific traffic
-     treatment and typically includes a guarantee/agreement for the
+     treatment typically includes a guarantee/agreement for the
      service, and allocation of resources to support the service.
      Example QoS mechanisms include discrete resource allocation,
      admission control, flow identification and isolation, and sometimes
@@ -653,7 +692,7 @@ title="DetNet adaptation to data plane">
   or too much work envisioned.
  </t>
 
- <section title="Net layer technologies" anchor="sec_net">
+ <section title="DetNet Transport layer technologies" anchor="sec_net">
   <section title="Native IPv6 transport" anchor="sec_alt_ipv6">
    <section title="Solution description">
     <t>
@@ -673,13 +712,13 @@ title="DetNet adaptation to data plane">
   
    <section title="Analysis and Discussion" anchor="sec_alt_ipv6_ana">
     <t><list style="hanging">
-     <t hangText="Encapsulation and overhead (W)">
+     <t hangText="Encapsulation and overhead (M/W)">
       <vspace blankLines="1"/>
-      Deterministic flows are assumed to be handled natively at layer-3 by IPv6
-      at the first place. The fixed header of an IPv6 packet is 40 bytes <xref
-      target="RFC2460"/>. This overhead is bigger if any Extension Header is
-      used, and a generic behaviour for host and forwarding nodes is specified
-      in <xref target="RFC7045"/>.
+      The DetNet Service layer encapsulated DetNet flows are assumed to be 
+      handled natively at layer-3 by IPv6 at the first place. The fixed header 
+      of an IPv6 packet is 40 bytes <xref target="RFC2460"/>. This overhead is 
+      bigger if any Extension Header is used, and a generic behaviour for host 
+      and forwarding nodes is specified in <xref target="RFC7045"/>.
       However, the exact overhead (<xref target="sec_crit_encap"/>)
       depends on what solution is actually used to provide DetNet features,
       e.g., explicit routing or seamless redundancy if any of these is applied.     
@@ -772,26 +811,12 @@ title="DetNet adaptation to data plane">
      </t>
      
      <t hangText="Packet replication (W)">
-      <vspace blankLines="1"/>
-      [Editor's note: at the DetNet Transport layer this criteria does not
-      concern packet deletion, only the packet replication. The packet deletion
-      belongs to the DetNet Service layer] 
-      <!-- vspace blankLines="1"/>
-      The implementation of this functionality largely depends on the
-      packet sequencing and flow identification approaches. The above
-      discussion on the potential use of new Options for packet sequencing and
-      flow identification approaches, as well as source routing and IP
-      tunnels to signal explicit paths, also applies here. -->
-      <vspace blankLines="1"/>
       The functionality of replicating a packet exists in IPv6 but is limited
-      to multicast flows. On the other hand, there is currently no specification
-      for the duplicate packet deletion functionality at the elimination points.
-      The behaviour of keeping a state about received packets exists in Neighbor
-      Discovery during the address resolution process, but it is limited to final
-      delivery and prone to DOS attacks.
+      to multicast flows.
       <vspace blankLines="1"/>
-      As discussed above, IP-in-IP encapsulation and Segment Routing could be 
-      leveraged to signal a segment in a packet. 
+      aboveIn order to enforce replicated packets to take different routes, 
+      IP-in-IP encapsulation and Segment Routing could be leveraged to signal
+      a segment in a packet. 
       A replication point would insert a different routing header in each copy it
       makes, the routing header providing explicitly the hops to the elimination
       point for that particular replica of the packet, in a strict or in a loose
@@ -830,17 +855,17 @@ title="DetNet adaptation to data plane">
       The traceability of replicated packets involves the capability to resolve
       which replication point issued a particular copy of a packet, which segment
       was intended for that replica, and which particular packet of which
-      particular flow this is. sequence also depends on the sequencing
-      mechanism. The replication point may be indicated as the source of the
+      particular flow this is. Sequence also depends on the sequencing
+      mechanism. As an example, the replication point may be indicated as the source of the
       packet if IP-in-IP encapsulation is used to forward along segments.
-      An alternate to IP-in-IP tunneling along segments would be to protect the
+      Another alternate to IP-in-IP tunneling along segments would be to protect the
       original source address in a destination option similar to the Home Address
       option <xref target="RFC6275"/> and then use the address of the replication
       point as source in the IP header.
       <vspace blankLines="1"/>
       The traceability also involves the capability to determine if a particular
       segment is operational. While IPv6 as such has no support for reversing a
-      path this, it appears source route extensions such as the one defined for
+      path, it appears source route extensions such as the one defined for
       segment routing could be used for tracing purposes. Though it is not a 
       usual practice, IPv6 <xref target="RFC2460"/> expects that a Source Route
       path may be reversed, and the standard insists that a node must not include
@@ -894,7 +919,7 @@ title="DetNet adaptation to data plane">
      outside closed networks cannot typically be guaranteed. In the context of
      deterministic networking data plane solutions the major difference between
      IPv4 and IPv6 seems to be the practical support for header extensibility.
-     Anything below and above the IP header independent of the verion is
+     Anything below and above the IP header independent of the version is
      practically the same. 
     </t>
    </section>
@@ -1066,11 +1091,12 @@ title="MPLS-based Services">
 -->
     <t>
       MPLS can be controlled in a number of ways including via a control
-      plane, via the managment plane, or via centralized controller
-      (SDN) based aproaches. MPLS also provide stanard control plane
+      plane, via the management plane, or via centralized controller
+      (SDN) based approaches. MPLS also provides standard control plane
       reference points.  Additional information on MPLS architecture and
       control can be found in <xref target="RFC5921"/>.  A summary of
       MPLS control plane related functions can be found in
+      <xref target="RFC6373"/>. The remainder of this section will focus
       <xref target="RFC6373"/>. The remainder of this section will focus
       on the MPLS transport data plane, additional information on the
       MPLS service data plane can be found below in
@@ -1209,7 +1235,7 @@ title="MPLS-based Services">
 	in Ethernet. MPLS implementations can also support ECMP for
 	certain types of traffic which can to lead to out of order
 	delivery.  There are defined techniques to avoid ECMP and
-	iensure in order delivery during normal operation. Out of order
+	ensure in order delivery during normal operation. Out of order
 	delivery is still possible in certain MPLS protection
 	scenarios.  If additional ordering mechanisms are required,
 	these are likely to be implemented at the DetNet Service Layer.
@@ -1299,7 +1325,7 @@ title="MPLS-based Services">
     <t>
      MPLS LSPs support a significant portion of the identified DetNet
      data plane criteria today.  MPLS as a mature technology that has
-     been widely deployed.  Numerous vendor products and and multiple
+     been widely deployed.  Numerous vendor products and multiple
      generations of MPLS hardware have been built and deployed.  There
      are aspects of the DetNet data plane that are not fully supported,
      but these can be incrementally added.
@@ -1341,7 +1367,7 @@ title="MPLS-based Services">
      <t>
       Based on RFC2784, <xref target="RFC2890"/> further includes sequencing
       number and Key in optional fields of the GRE header, which may help to
-      transport Detnet traffic flows over IP networks. The format of a GRE header
+      transport DetNet traffic flows over IP networks. The format of a GRE header
       is presented in <xref target="fig_gre_hdr"/>.
      </t>
      <figure title="Format of a GRE header" anchor="fig_gre_hdr">
@@ -1363,7 +1389,7 @@ title="MPLS-based Services">
      <t hangText="Encapsulation and overhead (M)">
       <vspace blankLines="1"/>
       GRE provides encapsulation for a network layer protocol over anther network
-      layer protocol. A new protocol type for Detnet traffics should be allocated
+      layer protocol. A new protocol type for DetNet traffics should be allocated
       as an "Ether Type" in <xref target="RFC1700"/> and in <xref
       target="ETYPES"/>. The fixed header of a GRE packet is 4 octets while the
       maximum header is 16 octets with optional fields in <xref
@@ -1622,8 +1648,8 @@ title="MPLS-based Services">
       of the MPLS PSN. The PWs are typically prepended with a PW label that can be
       used to identify a specific PW. Furthermore, the PSN also uses one or more
       labels to transport packets over a specific label switched paths (that then
-      would carry PWs). IP (and other) PSNs would need other mechanisms, such as, 
-      UDP port numbers, upper layer protocol header (like TRP) or some IP extension
+      would carry PWs). IP (and other) PSNs may need other mechanisms, such as, 
+      UDP port numbers, upper layer protocol header (like RTP) or some IP extension
       header to provide required flow identification.
      <vspace blankLines="1"/></t>
      
@@ -1631,7 +1657,8 @@ title="MPLS-based Services">
       <vspace blankLines="1"/>
       As mentioned earlier PWs may contain an optional CW that is able to provide
       sequencing services. The size of the sequence number in the generic CW is
-      16 bits, which might be, depending on the used link speed be too little.
+      16 bits, which might be, depending on the used link and DetNet flow speed 
+      be too little.
      <vspace blankLines="1"/></t>
      
      <!--t hangText="Explicit routes (M)">
@@ -1667,7 +1694,7 @@ title="MPLS-based Services">
       mentioned control planes.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Time synchronization (M)">
+     <t hangText="Time synchronization (M/W)">
       <vspace blankLines="1"/>
       It is possible to carry time synchronization information as part of the PW
       encapsulation layer (see for example <xref target="RFC5087"/>). Whether
@@ -1687,7 +1714,7 @@ title="MPLS-based Services">
       the label reserved for for both  Explicitly TC-encoded-PSC LSPs (E-LSP)
       <xref target="RFC3270"/> and ECN <xref target="RFC5129"/>.  Due to the
       limited number of bits in the TC field, their use for QoS and ECN
-      functions restricted and intended to be flexible. Although the Qos/CoS
+      functions restricted and intended to be flexible. Although the QoS/CoS
       mechanism is already in place some clarifications may be required in the
       context of deterministic networking flows, for example, if some
       specific mapping between bit fields have to be done.
@@ -1719,9 +1746,9 @@ title="MPLS-based Services">
    <section title="Summary">
     <t>
      PseudoWires appear to be a strong candidate as the deterministic networking
-     data plane solution alternative. The strong points are the technical
-     maturity and the extensive control plane for OAM. This holds
-     specifically for MPLS-based PSN.
+     data plane solution alternative for the DetNet Service layer. The strong 
+     points are the technical maturity and the extensive control plane for OAM. 
+     This holds specifically for MPLS-based PSN.
     </t>
     <t>
      Extensions are required to realize the packet replication and duplicate
@@ -2279,16 +2306,16 @@ title="Enabled Adjacencies">
 
    <section title="Higher layer header fields" anchor="sec_alt_higher">
     <t>
-      Fields of headers belonging to higher OSI layers, e.g., transport  layer,
-      can be used to implement functionality that is not provided e.g., by the
-      IPv6 or IPv4 header fields. However, this approach cannot be always
-      applied, e.g., due to encryption. Furthermore, even if this approach is
-      applicable, it requires deep packet inspection from the routers and
-      switches. There are implementation dependent limits how far into the
-      packet the lookup can be done efficiently in the fast path. In general a
-      safe bet is between 128 and 256 octets for the maximum lookup depth.
-      Various higher layer protocols can be applied. Some examples are provided
-      here for the sequence numbering feature (<xref target="sec_crit_seq"/>).
+      Fields of headers belonging to higher OSI layers can be used to implement 
+      functionality that is not provided e.g., by the IPv6 or IPv4 header fields. 
+      However, this approach cannot be always applied, e.g., due to encryption. 
+      Furthermore, even if this approach is applicable, it requires deep packet 
+      inspection from the routers and switches. There are implementation 
+      dependent limits how far into the packet the lookup can be done 
+      efficiently in the fast path. In general a safe bet is between 128 and 256 
+      octets for the maximum lookup depth. Various higher layer protocols can be 
+      applied. Some examples are provided here for the sequence numbering feature 
+      (<xref target="sec_crit_seq"/>).
     </t>
     
     <section title="TCP">
