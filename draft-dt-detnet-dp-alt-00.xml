@@ -236,35 +236,18 @@
   the DetNet Architecture document at some future point.]
  </t>
  <t>
-   A "Deterministic Network" will be composed of DetNet enabled
-   "End Systems" and DetNet enabled "Network Nodes".  DetNet
-   enabled network nodes will provide a DetNet service to attached
-   DetNet End Systems.  All DetNet enabled systems and nodes will
-   be interconnected by sub-networks.  These sub-networks will
-   provide DetNet compatible service for support of DetNet
-   traffic.  Examples of sub-networks include 802.1TSN and a
-   point-to-point OTN link.  Of course, multi-layer DetNet systems
-   may be possible too, where one DetNet appears as a sub-network,
-   and provides service to, a higher layer DetNet system. A
-   simple DetNet is shown in <xref target="fig_detnet"/>.
+   A "Deterministic Network" will be composed of DetNet enabled "End Systems",
+   DetNet enabled "Edge Nodes", and DetNet enabled "Network Nodes".  DetNet
+   enabled nodes will provide a DetNet service to attached DetNet End Systems.
+   All DetNet enabled systems and nodes will be interconnected by sub-networks.
+   These sub-networks will provide DetNet compatible service for support of
+   DetNet traffic.  Examples of sub-networks include 802.1TSN and a
+   point-to-point OTN link.  Of course, multi-layer DetNet systems may be
+   possible too, where one DetNet appears as a sub-network, and provides service
+   to, a higher layer DetNet system. A simple DetNet is shown in <xref
+   target="fig_detnet"/>.
  </t>
 <figure anchor="fig_detnet" align="center"
-title="A Simple DetNet Enabled Network">
-<artwork align="center"><![CDATA[
-
-+------+                                               +------+
-| End  |                                               | End  |
-|System|                                               |System|
-+--+---+                                               +---+--+
-   |Link                                                   |
-   |    +-------+     +-------+   ,-'''-.   +-------+   ,-'''-.
-   |    |Network|Link |Network|--[  Sub  ]--|Network|--[  Sub  ]
-   +----|  Node |-----|  Node |  [Network]  |  Node |  [Network]
-        +-------+     +-------+   +-...-'   +-------+   +-...-'
-]]></artwork>
-</figure>
-
-<figure align="center"
 title="A Simple DetNet Enabled Network">
 <artwork align="center"><![CDATA[
 
@@ -378,7 +361,7 @@ title="DetNet adaptation to data plane">
   The criteria for the DetNet Transport layer:
    <list style="nosymbols">
     <t>#1 Encapsulation and overhead</t>
-    <t>#2 Flow identification (Egress ID)</t>
+    <t>#2 Flow identification</t>
     <t>#4 Explicit routes (network path)</t>
     <t>#5 Packet replication and deletion (note: only the packet replication
        for seamless redundancy)</t>
@@ -463,7 +446,7 @@ title="DetNet adaptation to data plane">
 
   <section title="#1 Encapsulation and overhead" anchor="sec_crit_encap">
     <t>
-      Encapsulation and overhead is related to how the DetNet Service layer
+      Encapsulation and overhead is related to how the DetNet data plane
       carries DetNet user traffic.  In several cases a deterministic flow has to
       be encapsulated inside other protocols, for example, when transporting a
       layer-2 Ethernet frame over an IP transport network. In some cases a
@@ -814,7 +797,7 @@ title="DetNet adaptation to data plane">
       The functionality of replicating a packet exists in IPv6 but is limited
       to multicast flows.
       <vspace blankLines="1"/>
-      aboveIn order to enforce replicated packets to take different routes, 
+      In order to enforce replicated packets to take different routes, 
       IP-in-IP encapsulation and Segment Routing could be leveraged to signal
       a segment in a packet. 
       A replication point would insert a different routing header in each copy it
@@ -905,10 +888,6 @@ title="DetNet adaptation to data plane">
  
   <section title="Native IPv4 transport" anchor="sec_alt_ipv4">
    <section title="Solution description">
-    <t>
-     [Editor's note: this section has not been cleaned yet for the new
-      division of criteria.]
-    </t>
     <t>
      IPv4 <xref target="RFC0791"/> is in principle the same as IPv6, except that
      it has a smaller address space. However, IPv6 was designed around the fact
@@ -1017,6 +996,9 @@ title="DetNet adaptation to data plane">
    </section>
 
    <section title="Summary">
+    <t>
+     TBD.
+    </t>
    </section>
   </section>
  
@@ -1196,125 +1178,136 @@ title="MPLS-based Services">
     <t><list style="hanging">
      <t hangText="#? DetNet Service Interface (M)">
         <vspace blankLines="1"/> The DetNet service interface is enabled
-	through the DetNet Service Layer it provides client service
-	adaption, directly, via Pseudowires <xref format="counter"
-	target="sec_alt_pwe"/> and via other label-like mechanisms such
-	as EPVN <xref format="counter" target="sec_alt_evpn"/>.
+	  through the DetNet Service Layer it provides client service
+	  adaption, directly, via Pseudowires <xref format="counter"
+	  target="sec_alt_pwe"/> and via other label-like mechanisms such
+	  as EPVN <xref format="counter" target="sec_alt_evpn"/>.
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#1 Encapsulation and overhead (M)">
-        <vspace blankLines="1"/> 
+      <vspace blankLines="1"/> 
 
-	There are two perspectives to consider when looking at
-	encapsulation.  The first is encapsulation to support services.
-	These considerations are part of the DetNet service layer and
-	are covered below, see <xref format="counter"
-	target="sec_alt_pwe"/> and <xref format="counter"
-	target="sec_alt_evpn"/>.
+	  There are two perspectives to consider when looking at
+	  encapsulation.  The first is encapsulation to support services.
+	  These considerations are part of the DetNet service layer and
+	  are covered below, see <xref format="counter"
+	  target="sec_alt_pwe"/> and <xref format="counter"
+	  target="sec_alt_evpn"/>.
 
-	<vspace blankLines="1"/> 
+	  <vspace blankLines="1"/> 
 
-	The second perspective relates to encapsulation, if any, is
-	needed to transport packets across network.  In this case, the
-	MPLS label stack, <xref target="RFC3032"/> is used to identify
-	flows across a network.  MPLS labels are compact and highly
-	flexible.  They can be stacked to support client adaptation,
-	protection, network layering, source routing, etc.
+	  The second perspective relates to encapsulation, if any, is
+	  needed to transport packets across network.  In this case, the
+	  MPLS label stack, <xref target="RFC3032"/> is used to identify
+	  flows across a network.  MPLS labels are compact and highly
+	  flexible.  They can be stacked to support client adaptation,
+	  protection, network layering, source routing, etc.
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#2 Flow identification (M)">
         <vspace blankLines="1"/>
 
-	MPLS label stacks provide highly flexible ways to identify
-	flows.  Basically, they enable the complete separation of
-	traffic classification from traffic treatment and thereby enable
-	arbitrary combinations of both.
+	  MPLS label stacks provide highly flexible ways to identify
+	  flows.  Basically, they enable the complete separation of
+	  traffic classification from traffic treatment and thereby enable
+	  arbitrary combinations of both.
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#3 Packet sequencing (M)">
         <vspace blankLines="1"/>
 
-	Packet ordering in MPLS is generally similar to packet ordering
-	in Ethernet. MPLS implementations can also support ECMP for
-	certain types of traffic which can to lead to out of order
-	delivery.  There are defined techniques to avoid ECMP and
-	ensure in order delivery during normal operation. Out of order
-	delivery is still possible in certain MPLS protection
-	scenarios.  If additional ordering mechanisms are required,
-	these are likely to be implemented at the DetNet Service Layer.
+	  Packet ordering in MPLS is generally similar to packet ordering
+	  in Ethernet. MPLS implementations can also support ECMP for
+	  certain types of traffic which can to lead to out of order
+	  delivery.  There are defined techniques to avoid ECMP and
+	  ensure in order delivery during normal operation. Out of order
+	  delivery is still possible in certain MPLS protection
+	  scenarios.  If additional ordering mechanisms are required,
+	  these are likely to be implemented at the DetNet Service Layer.
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#4 Explicit routes (M)">
         <vspace blankLines="1"/>
 
-	MPLS supports explicit routes based on how LSPs are established,
-	e.g., via TE explicit routes <xref target="RFC3209"/>.
-	Additional, but not required, additional capabilities are being
-	defined as part of Segment Routing (SR)
-	<xref target="I-D.ietf-spring-segment-routing"/>. 
+	  MPLS supports explicit routes based on how LSPs are established,
+	  e.g., via TE explicit routes <xref target="RFC3209"/>.
+	  Additional, but not required, additional capabilities are being
+	  defined as part of Segment Routing (SR)
+	  <xref target="I-D.ietf-spring-segment-routing"/>. 
+      <vspace blankLines="1"/>
      </t>
-     <t hangText="#5 Packet replication and deletion (M)">
+     <t hangText="#5 Packet replication and deletion (M/W)">
         <vspace blankLines="1"/>
 
-	At the MPLS LSP level, there are mechanisms defined to provide
-	1+1 protection.  The current definitions
-	<xref target="RFC6378"/> and <xref target="RFC7271"/> use OAM
-	mechanisms to support and coordinate protection switching and
-	packet loss is possible during a switch.  While such this level
-	of protection may be sufficient for man DetNet applications,
-	when truly hitless (i.e., zero loss) switching is required
-	additional mechanisms will be needed.  It is expected that these
-	additional mechanisms will be defined at the DetNet Service
-	Layer.
+	  At the MPLS LSP level, there are mechanisms defined to provide
+	  1+1 protection.  The current definitions
+	  <xref target="RFC6378"/> and <xref target="RFC7271"/> use OAM
+	  mechanisms to support and coordinate protection switching and
+	  packet loss is possible during a switch.  While such this level
+	  of protection may be sufficient for man DetNet applications,
+	  when truly hitless (i.e., zero loss) switching is required
+	  additional mechanisms will be needed.  It is expected that these
+	  additional mechanisms will be defined at the DetNet Service
+	  Layer.
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#6 Operations, Administration and Maintenance (M)">
         <vspace blankLines="1"/>
 
-	MPLS already includes a rich set of OAM functions at both the
-	Service and Transport Layers. This includes LSP ping [ref] and
-	those enabled via the MPLS Generic Associated Channel
-	<xref target="RFC5586"/> and registered by 
-	<eref target="http://www.iana.org/assignments/g-ach-parameters/g-ach-parameters.xhtml">
+	  MPLS already includes a rich set of OAM functions at both the
+	  Service and Transport Layers. This includes LSP ping [ref] and
+	  those enabled via the MPLS Generic Associated Channel
+	  <xref target="RFC5586"/> and registered by 
+	  <eref target="http://www.iana.org/assignments/g-ach-parameters/g-ach-parameters.xhtml">
 	  IANA</eref>.
+      <vspace blankLines="1"/>
      </t>
-     <t hangText="#7 Time synchronization (W)">
+     <t hangText="#7 Time synchronization (M/W)">
         <vspace blankLines="1"/>
 
-	MPLS itself does not provide any time synchronization service.
-	The expectations is that the actual time-based scheduling will
-	be provided by the sub-network layer, e.g., by
-	<xref target="TSNTG"/>, and that the DetNet transport layer will
-	merely need to facilitate time synchronization (with hardware
-	support) across multiple sub-network domains and technologies.
-	Work is in progress
-	<xref target="I-D.ietf-mpls-residence-time"/> that may satisfy,
-	or serve as a building block for, DetNet time synchronization.
+	  MPLS itself does not provide any time synchronization service.
+	  The expectations is that the actual time-based scheduling will
+	  be provided by the sub-network layer, e.g., by
+	  <xref target="TSNTG"/>, and that the DetNet transport layer will
+	  merely need to facilitate time synchronization (with hardware
+	  support) across multiple sub-network domains and technologies.
+	  Work is in progress
+	  <xref target="I-D.ietf-mpls-residence-time"/> that may satisfy,
+	  or serve as a building block for, DetNet time synchronization.
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#8 Class and quality of service capabilities (M/W)">
         <vspace blankLines="1"/>
 
-	As previously mentioned, Data plane Quality of Service
-	capabilities are included in the MPLS in the form of Traffic
-	Engineered (TE) LSPs <xref target="RFC3209"/> and the MPLS
-	Differentiated Services (DiffServ) architecture
-	<xref target="RFC3270"/>.  Both E-LSP and L-LSP MPLS DiffServ
-	modes are defined.  The Traffic Class field (formerly the EXP
-	field) of an MPLS label follows the definition of
-	<xref target="RFC5462"/> and <xref target="RFC3270"/>.  One
-	potential open area of work is synchronized, time based
-	scheduling. 
+      As previously mentioned, Data plane Quality of Service
+      capabilities are included in the MPLS in the form of Traffic
+      Engineered (TE) LSPs <xref target="RFC3209"/> and the MPLS
+	  Differentiated Services (DiffServ) architecture
+	  <xref target="RFC3270"/>.  Both E-LSP and L-LSP MPLS DiffServ
+	  modes are defined.  The Traffic Class field (formerly the EXP
+	  field) of an MPLS label follows the definition of
+	  <xref target="RFC5462"/> and <xref target="RFC3270"/>.  One
+	  potential open area of work is synchronized, time based
+	  scheduling. 
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#9 Packet traceability (M)">
         <vspace blankLines="1"/>
 	
-	MPLS supports multiple tracing mechanisms.  A control based one
-	is defined in  <xref target="RFC3209"/>.  An OAM based mechanism
-	is defined in MPLS On-Demand Connectivity Verification and Route
-	Tracing  <xref target="RFC6426"/>.
+      MPLS supports multiple tracing mechanisms.  A control based one
+	  is defined in  <xref target="RFC3209"/>.  An OAM based mechanism
+	  is defined in MPLS On-Demand Connectivity Verification and Route
+	  Tracing  <xref target="RFC6426"/>.
+      <vspace blankLines="1"/>
      </t>
      <t hangText="#10 Technical maturity (M)">
         <vspace blankLines="1"/> 
 
-	MPLS as a mature technology that has been widely deployed in
-	many networks for many years.  Numerous vendor products and
-	multiple generations of MPLS hardware have been built and
-	deployed.
+	  MPLS as a mature technology that has been widely deployed in
+	  many networks for many years.  Numerous vendor products and
+	  multiple generations of MPLS hardware have been built and
+	  deployed.
+      <vspace blankLines="1"/>
      </t>
      </list>
      </t>
