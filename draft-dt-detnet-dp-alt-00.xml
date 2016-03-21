@@ -258,11 +258,16 @@
 title="A Simple DetNet Enabled Network">
 <artwork align="center"><![CDATA[
 
-+------+                                                  +------+
-| End  |<-------------Deterministic flow----------------->| End  |
-|System|                                                  |System|
-+--+---+                                                  +-+----+
-   |Link   <--------------DetNet flow------------------->   |
++------+                                                +------+
+| End  |<-------------Deterministic flow--------------->| End  |
+|System|                                                |System|
++--+---+                                                +-+----+
+   |      <--------------DetNet flow----------------->    |
+   |                                                  ,+-''''--.
+   |                                                  [   Sub   ]
+   |Link                                              [ Network ]
+   |                                                   +-....--'
+   |                                                      |
    |    +------+     +-------+   ,-'''-.   +-------+  +------+
    |    | Edge |Link |Network|--[  Sub  ]--|Network|--| Edge |
    +----| Node |-----|  Node |  [Network]  |  Node |  | Node |
@@ -312,7 +317,7 @@ title="DetNet adaptation to data plane">
     .
     .
 +-----------+
-|  Service  | PW, RTP, UDP, GRE, L2TP
+|  Service  | PW, RTP, UDP, GRE, L2TP, VXLAN
 ~~~~~~~~~~~~~
 | Transport | IPv6, IPv4, MPLS LSPs, BIER, BIER-TE
 +-----------+
@@ -333,7 +338,7 @@ title="DetNet adaptation to data plane">
  </t>
   
  <t>
-  [Lou's note: I'm not sure if the remainder of this section says
+  [Editor's note: I'm not sure if the remainder of this section says
   anything not present in the next section. Will need to revisit
   as part of the pre-pub review.]
  </t>
@@ -429,7 +434,7 @@ title="DetNet adaptation to data plane">
    criteria can be broken down based on layer.  That is if the criteria is
    focused on delivering DetNet service adaptation, i.e., is concerned with the
    DetNet Service layer, or if the criteria is focused on transporting flows
-   across an end to end DetNet domain. [Lou B.: which is TBD.]
+   across an end to end DetNet domain. [Editor's note: which is TBD.]
  </t>
   
   <t>
@@ -442,6 +447,9 @@ title="DetNet adaptation to data plane">
  
 
   <section title="#? DetNet Service Interface" anchor="sec_crit_svc">
+    <t>
+     [Editor's note: this criteria needs a bit more discussion.]
+    </t>
     <t>
       One of the most fundamental differences between different potential
       data plane options is the basic addressing and headers used by DetNet
@@ -482,9 +490,9 @@ title="DetNet adaptation to data plane">
 
   <section title="#3 Packet sequencing" anchor="sec_crit_seq">
     <t>
-      [LB is in order delivery a strict requirement?  if so, it should be
-      stated as such and separately from any other requirement. There are
-      multiple ways to solve this criteria.]
+      [Editor's note: is in order delivery a strict requirement?  if so, it
+      should be stated as such and separately from any other requirement. There
+      are multiple ways to solve this criteria.]
     </t>
     <t>
      The solution alternative has to provide means for end systems to number
@@ -493,8 +501,8 @@ title="DetNet adaptation to data plane">
      important uses for sequencing is detecting duplicates. In a case of
      intentional packet duplication a combination of flow identification and
      packet sequencing allows for detecting and discarding duplicates at the
-     receiver (see <xref target="sec_crit_repdup"/> for more details).  This criteria
-     concerns the availability and details of the packet sequencing
+     receiver (see <xref target="sec_crit_repdup"/> for more details).  This
+     criteria concerns the availability and details of the packet sequencing
      capabilities the data plane protocol alternative has.
     </t>
   </section>
@@ -534,10 +542,10 @@ title="DetNet adaptation to data plane">
      The solution alternative has to provide means for end systems and/or relay
      systems to be able to replicate packets, and later eliminate all but one of
      the replicas, at multiple points in the network in order to ensure that one
-     (or more) equipment failure event(s) still leave at least one path intact for
-     a deterministic networking flow. The goal is to enable hitless 1+1
-     protection in a way that no packet gets lost or there is no ramp up time
-     when either one of the paths fails for one reason or another.
+     (or more) equipment failure event(s) still leave at least one path intact
+     for a deterministic networking flow. The goal is to enable hitless 1+1
+         protection in a way that no packet gets lost or there is no ramp up
+         time when either one of the paths fails for one reason or another.
     </t>
     <t>
      Another concern regarding packet replication is how to enforce
@@ -871,13 +879,15 @@ title="DetNet adaptation to data plane">
       to work on as they show up once operations experience grows. 
       
      <vspace blankLines="1"/>
-      The <xref target="sixlab">Cisco 6Lab site</xref> provides information on
-      IPv6 deployment per country, indicating figures for prefixes, transit AS,
-      content and users. Per this site, many countries, including Canada, Brazil, 
-      the USA, Germany, France, Japan, Portugal, Sweden, Finland, Norway, Greece, 
-      and Ecuador, achieve a deployment ratio above 30 percent, and the overall 
-      adoption reported by <xref target="googleipv6">Google Statistics</xref> is
-      now above 10 percent.      
+      The <eref target="http://6lab.cisco.com/stats/">Cisco 6Lab site</eref>
+      provides information on IPv6 deployment per country, indicating figures
+      for prefixes, transit AS, content and users. Per this site, many
+          countries, including Canada, Brazil, the USA, Germany, France, Japan,
+          Portugal, Sweden, Finland, Norway, Greece, and Ecuador, achieve a
+          deployment ratio above 30 percent, and the overall adoption reported
+          by <eref
+          target="https://www.google.com/intl/en/ipv6/statistics.html">Google
+          Statistics</eref> is now above 10 percent.      
       <!--     A good meter
       is the number of basic IPv6 related documents in IETF V6OPS, V6MAN and
       other use case specific working groups. -->
@@ -1013,29 +1023,26 @@ title="DetNet adaptation to data plane">
    <section title="Solution description">
      
     <t>
-      Multiprotocol Label Switching Architecture (MPLS)
-      <xref target="RFC3031"/> and its variants, MPLS with Traffic
-      Engineering (MPLS-TE) <xref target="RFC3209"/> and
-      <xref target="RFC3473"/>, and MPLS Transport Profile (MPLS-TP)
-      <xref target="RFC5921"/> is a widely deployed technology that switches
-      traffic based on MPLS label stacks <xref target="RFC3032"/> and
-      <xref target="RFC5960"/>.  MPLS is the foundation for Pseudowire-based
-      services <xref format="counter" target="sec_alt_pwe"/> and emerging
-      technologies such as Bit-Indexed Explicit Replication (BIER)
-      <xref format="counter" target="sec_alt_bier"/> and 
-      <eref target="https://datatracker.ietf.org/wg/spring/charter/">
-        Source Packet Routing</eref>.
+      Multiprotocol Label Switching Architecture (MPLS) <xref target="RFC3031"/>
+      and its variants, MPLS with Traffic Engineering (MPLS-TE) <xref
+      target="RFC3209"/> and <xref target="RFC3473"/>, and MPLS Transport
+      Profile (MPLS-TP) <xref target="RFC5921"/> is a widely deployed technology
+      that switches traffic based on MPLS label stacks <xref target="RFC3032"/>
+      and <xref target="RFC5960"/>.  MPLS is the foundation for Pseudowire-based
+      services <xref target="sec_alt_pwe"/> and emerging technologies such as
+      Bit-Indexed Explicit Replication (BIER) <xref target="sec_alt_bier"/> and
+      <eref target="https://datatracker.ietf.org/wg/spring/charter/"> Source
+      Packet Routing</eref>.
     </t>
     <t>
       MPLS supports the equivalent of both the DetNet Service and DetNet
-      Transport layers, and provides a very rich set of mechanisms that
-      can be reused directly, and perhaps augmented in certain cases, to
-      deliver DetNet services. At the DetNet Transport layer, MPLS
-      provides forwarding, protection and OAM services.  At the DetNet
-      Service Layer it provides client service adaption, directly, via
-      Pseudowires <xref format="counter" target="sec_alt_pwe"/> and via
-      other label-like mechanisms such as EPVN <xref format="counter"
-      target="sec_alt_evpn"/>.  A representation of these options are
+      Transport layers, and provides a very rich set of mechanisms that can be
+      reused directly, and perhaps augmented in certain cases, to deliver DetNet
+      services. At the DetNet Transport layer, MPLS provides forwarding,
+      protection and OAM services.  At the DetNet Service Layer it provides
+      client service adaption, directly, via Pseudowires <xref
+      target="sec_alt_pwe"/> and via other label-like mechanisms such as EPVN
+      <xref target="sec_alt_evpn"/>.  A representation of these options are
       shown in <xref target="fig_mpls_clients"/>.
     </t>
 <figure anchor="fig_mpls_clients" align="center"
@@ -1089,7 +1096,7 @@ title="MPLS-based Services">
       <xref target="RFC6373"/>. The remainder of this section will focus
       on the MPLS transport data plane, additional information on the
       MPLS service data plane can be found below in
-      <xref format="counter" target="sec_alt_mpls_svc"/>.
+      <xref target="sec_alt_mpls_svc"/>.
     </t>
     <t>
       The following is a work in progress and draws
@@ -1184,20 +1191,17 @@ title="MPLS-based Services">
 
     <t><list style="hanging">
      <t hangText="#? DetNet Service Interface (M)">
-        <vspace blankLines="1"/> The DetNet service interface is enabled
-          through the DetNet Service Layer it provides client service
-          adaption, directly, via Pseudowires <xref format="counter"
-          target="sec_alt_pwe"/> and via other label-like mechanisms such
-          as EPVN <xref format="counter" target="sec_alt_evpn"/>.
-      <vspace blankLines="1"/>
-     </t>
+        <vspace blankLines="1"/> The DetNet service interface is enabled through
+        the DetNet Service Layer it provides client service adaption, directly,
+        via Pseudowires <xref target="sec_alt_pwe"/> and via other label-like
+        mechanisms such as EPVN <xref target="sec_alt_evpn"/>.
+      <vspace blankLines="1"/> </t>
      <t hangText="#1 Encapsulation and overhead (M)">
       <vspace blankLines="1"/> 
-
           There are two perspectives to consider when looking at
           encapsulation.  The first is encapsulation to support services.
           These considerations are part of the DetNet service layer and
-          are covered below, see <xref format="counter"
+          are covered below, see Sections <xref format="counter"
           target="sec_alt_pwe"/> and <xref format="counter"
           target="sec_alt_evpn"/>.
 
@@ -1209,8 +1213,7 @@ title="MPLS-based Services">
           flows across a network.  MPLS labels are compact and highly
           flexible.  They can be stacked to support client adaptation,
           protection, network layering, source routing, etc.
-      <vspace blankLines="1"/>
-     </t>
+      <vspace blankLines="1"/> </t>
      <t hangText="#2 Flow identification (M)">
         <vspace blankLines="1"/>
 
@@ -1218,8 +1221,7 @@ title="MPLS-based Services">
           flows.  Basically, they enable the complete separation of
           traffic classification from traffic treatment and thereby enable
           arbitrary combinations of both.
-      <vspace blankLines="1"/>
-     </t>
+      <vspace blankLines="1"/> </t>
      <t hangText="#3 Packet sequencing (M)">
         <vspace blankLines="1"/>
 
@@ -1231,8 +1233,7 @@ title="MPLS-based Services">
           delivery is still possible in certain MPLS protection
           scenarios.  If additional ordering mechanisms are required,
           these are likely to be implemented at the DetNet Service Layer.
-      <vspace blankLines="1"/>
-     </t>
+      <vspace blankLines="1"/> </t>
      <t hangText="#4 Explicit routes (M)">
         <vspace blankLines="1"/>
 
@@ -1241,8 +1242,7 @@ title="MPLS-based Services">
           Additional, but not required, additional capabilities are being
           defined as part of Segment Routing (SR)
           <xref target="I-D.ietf-spring-segment-routing"/>. 
-      <vspace blankLines="1"/>
-     </t>
+      <vspace blankLines="1"/> </t>
      <t hangText="#5 Packet replication and deletion (M/W)">
         <vspace blankLines="1"/>
 
@@ -1256,8 +1256,7 @@ title="MPLS-based Services">
           additional mechanisms will be needed.  It is expected that these
           additional mechanisms will be defined at the DetNet Service
           Layer.
-      <vspace blankLines="1"/>
-     </t>
+      <vspace blankLines="1"/> </t>
      <t hangText="#6 Operations, Administration and Maintenance (M)">
         <vspace blankLines="1"/>
 
@@ -1267,8 +1266,7 @@ title="MPLS-based Services">
           <xref target="RFC5586"/> and registered by 
           <eref target="http://www.iana.org/assignments/g-ach-parameters/g-ach-parameters.xhtml">
           IANA</eref>.
-      <vspace blankLines="1"/>
-     </t>
+      <vspace blankLines="1"/> </t>
      <t hangText="#7 Time synchronization (M/W)">
         <vspace blankLines="1"/>
 
@@ -1389,29 +1387,31 @@ title="MPLS-based Services">
      <t><list style="hanging">
      <t hangText="Encapsulation and overhead (M)">
       <vspace blankLines="1"/>
-      GRE provides encapsulation for a network layer protocol over anther network
-      layer protocol. A new protocol type for DetNet traffics should be allocated
-      as an "Ether Type" in <xref target="RFC1700"/> and in <xref
-      target="ETYPES"/>. The fixed header of a GRE packet is 4 octets while the
-      maximum header is 16 octets with optional fields in <xref
-      target="fig_gre_hdr"/>.
+      GRE provides encapsulation for a network layer protocol over anther
+      network layer protocol. A new protocol type for DetNet traffics should be
+      allocated as an "Ether Type" in <xref target="RFC1700"/> and in <eref
+      target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers">IANA
+      Ethernet Numbers.</eref> The fixed header of a GRE packet is 4 octets
+      while the maximum header is 16 octets with optional fields in <xref
+          target="fig_gre_hdr"/>.
       <vspace blankLines="1"/></t>
      
      <t hangText="Flow identification (W)">
       <vspace blankLines="1"/>
       There is no flow identification field in GRE header. However, it can rely
       on the flow identification mechanism applied in the delivery protocols,
-      such as flow identification stated in IP section 3.2.1 and 3.2.2 when the
-      delivery protocol are IPv6 and IPv4 respectively.  Alternatively, the Key
-      field can also be extended to carry the flow identification. The size of
-      Key field is 4 octets.
+      such as flow identification stated in IP Sections <xref format="counter"
+      target="sec_alt_ipv6"/> and <xref format="counter" target="sec_alt_ipv4"/>
+      when the delivery protocols are IPv6 and IPv4 respectively.
+      Alternatively, the Key field can also be extended to carry the flow
+      identification. The size of Key field is 4 octets.
      <vspace blankLines="1"/></t>
      
      <t hangText="Packet sequencing (M)">
       <vspace blankLines="1"/>
-      As stated in section 3.x.1, GRE provides an optional sequencing number in
-      its header to provide sequencing services for packets. The size of the
-      sequencing number is 32 bits.
+      As stated in <xref target="sec_alt_gre"/>, GRE provides an optional
+      sequencing number in its header to provide sequencing services for
+      packets. The size of the sequencing number is 32 bits.
      <vspace blankLines="1"/></t>
      
      <!--t hangText="Explicit routes (W/N)">
@@ -1464,53 +1464,54 @@ title="MPLS-based Services">
     </section>
 
     <section title="Summary">
+     <t>
+      TBD.
+     </t>
     </section>
    </section>
     
-  <!--section
    <section title="Layer-2 Tunneling Protocol (L2TP)" anchor="sec_alt_l2tp">
     <t>
     [Editor's note: L2TPv3 <xref target="RFC3931"/> content to be provided later, if needed]
     </t>
-    <section title="Solution description">
+    <!-- section title="Solution description">
     </section>
  
     <section title="Analysis and Discussion">
     </section>
  
     <section title="Summary">
-    </section>
+     <t>
+      TBD.
+    </section-->
    </section>
 
    <section title="Virtual Extensible LAN (VXLAN)" anchor="sec_alt_vxlan">
     <t>
     [Editor's note: VXLAN <xref target="RFC7348"/> content to be provided later, if needed]
     </t>
-    <section title="Solution description">
+    <!-- section title="Solution description">
     </section>
  
     <section title="Analysis and Discussion">
     </section>
  
     <section title="Summary">
-    </section>
+     <t>
+      TBD.
+    </section-->
    </section>
-  /section-->
   
   <section title="MPLS-based Services" anchor="sec_alt_mpls_svc">
-
-    <t>
-      [LB: this may be an umbrella for EVPN and PWE3]
-    </t>
     <section title="Solution description">      
     <t>
       MPLS supports the equivalent of both the DetNet Service and DetNet
       Transport layers.  This, as well as a general overview of MPLS, is
       covered above in <xref target="sec_alt_mpls"/>. This section will
       focus on the DetNet Service Layer it provides client service
-      adaption, via Pseudowires <xref format="counter"
+      adaption, via Pseudowires in <xref 
       target="sec_alt_pwe"/> and via native and other label-like
-      mechanisms such as EPVN <xref format="counter"
+      mechanisms such as EPVN in <xref 
       target="sec_alt_evpn"/>.  A representation of these options was
       previously discussed and is shown in
       <xref target="fig_mpls_clients"/>.
@@ -1551,11 +1552,10 @@ title="MPLS-based Services">
 
             <vspace blankLines="1"/> 
 
-            While MPLS service can provided on and true end-system to
-            end-system basis, it's more likely that DetNet service will
-            be provided over Pseudowires 
-            <xref format="counter" target="sec_alt_pwe"/> or via an EPVN-based service 
-            <xref format="counter" target="sec_alt_evpn"/> .
+            While MPLS service can provided on and true end-system to end-system
+            basis, it's more likely that DetNet service will be provided over
+            Pseudowires as described in <xref target="sec_alt_pwe"/> or via an
+            EPVN-based service described in <xref target="sec_alt_evpn"/> .
 
             <vspace blankLines="1"/> 
           </t>
@@ -1567,7 +1567,7 @@ title="MPLS-based Services">
             service identifiers.  Typically a single label is used for
             service identification.  Additional details on how
             client adaptation makes use of such labels is part of actual
-            client-related adaptation processing see 
+            client-related adaptation processing, see Sections
             <xref format="counter" target="sec_alt_pwe"/> and 
             <xref format="counter" target="sec_alt_evpn"/>.
             
@@ -1575,7 +1575,6 @@ title="MPLS-based Services">
           </t>
           <t hangText="#2 Flow identification (M)">
             <vspace blankLines="1"/>
-
             This is basically the same as MPLS at the DetNet transport layer.
             MPLS label stacks provide highly flexible ways to identify
             flows.  Basically, they enable the complete separation of
@@ -1587,21 +1586,19 @@ title="MPLS-based Services">
           </t>
           <t hangText="#3 Packet sequencing (M)">
             <vspace blankLines="1"/>
-
             This is the same as MPLS at the DetNet transport layer.  If
-            additional ordering mechanisms are required, these will be
-            needed (and added) in client-related adaptation processing see 
-            <xref format="counter" target="sec_alt_pwe"/> and 
-            <xref format="counter" target="sec_alt_evpn"/>.
-
+            additional ordering mechanisms are required, these will be needed
+            (and added) in client-related adaptation processing, see Sections
+            <xref format="counter" target="sec_alt_pwe"/> and <xref
+            format="counter" target="sec_alt_evpn"/>.
             <vspace blankLines="1"/> 
           </t>
           <t hangText="#4 Explicit routes (N/A)">
             <vspace blankLines="1"/>
 
-            Explicit routes are part of the DetNet transport layer,
-            <xref format="counter" target="sec_alt_evpn"/>, or as part
-            of multi-segment PWEs,  <xref format="counter" target="sec_alt_pwe"/>.
+            Explicit routes are part of the DetNet transport layer, see
+            <xref target="sec_alt_evpn"/>, or as part
+            of multi-segment PWEs,  <xref target="sec_alt_pwe"/>.
 
             <vspace blankLines="1"/> 
           </t>
@@ -1611,7 +1608,7 @@ title="MPLS-based Services">
             This is the same as MPLS at the DetNet transport layer.
             Additional capability may also be provided as part of
             client-related adaptation processing see
-            <xref format="counter" target="sec_alt_pwe"/>.
+            <xref target="sec_alt_pwe"/>.
 
             <vspace blankLines="1"/> 
           </t>
@@ -2588,10 +2585,10 @@ title="Enabled Adjacencies">
 <!-- ===================================================================== -->
 
 <section title="Summary of data plane alternatives">
-  <t>TBD. A condensed summary of all solution alternative.
+  <t>TBD.
   </t>
    
-  <texttable anchor="tab_all_summary" title="PseudoWire criteria summary">
+  <!--texttable anchor="tab_all_summary" title="PseudoWire criteria summary">
    <ttcol align="left">Alternative</ttcol>
    <ttcol align="left">Comments</ttcol>
    <c>Native IPv4</c>
@@ -2602,18 +2599,18 @@ title="Enabled Adjacencies">
    <c>..</c>
    <c>L2TP</c>
    <c>..</c>
-   <c>IP/MPLS</c>
+   <c>MPLS</c>
    <c>..</c>
    <c>PWE</c>
    <c>..</c>
    <c>BIER</c>
    <c>..</c>
-  </texttable>
+  </texttable-->
 </section>
 
 
 <section title="Security considerations">
-  <t>TBD. Analysis per solution alternative.
+  <t>TBD.
   </t>
 </section>
 
@@ -2640,9 +2637,9 @@ title="Enabled Adjacencies">
 </middle>
 
 <back>
-  <references title="Normative References">
+  <!--references title="Normative References">
    &rfc2119;
-  </references>
+  </references-->
   <references title="Informative References">
    &rfc0791;
    &rfc1122;
@@ -2724,16 +2721,6 @@ title="Enabled Adjacencies">
    &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
    &I-D.eckert-bier-te-arch;
 
-   <reference anchor="ETYPES"
-     target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers ">
-    <front>
-     <title>Ethernet Numbers</title>
-     <author>
-      <organization>IANA</organization>
-     </author>
-     <date year="2015" month="March"/>
-    </front>
-   </reference>
    
    <reference anchor="ST20227"
      target="https://www.smpte.org/digital-library">
@@ -2804,29 +2791,6 @@ title="Enabled Adjacencies">
        </author>
        <date year="2016" />
      </front>
-   </reference>
-
-   <reference anchor="sixlab"
-     target="http://6lab.cisco.com/stats/" >
-    <front>
-     <title>6lab - The place to monitor IPv6 adoption</title>
-     <author>
-      <organization>Cisco</organization>
-     </author>
-     <date />
-    </front>
-   </reference>
-      
-      
-   <reference anchor="googleipv6"
-     target="https://www.google.com/intl/en/ipv6/statistics.html" >
-    <front>
-     <title>Google IPv6 stats</title>
-     <author>
-      <organization>Google</organization>
-     </author>
-     <date />
-    </front>
    </reference>
 
   </references>
