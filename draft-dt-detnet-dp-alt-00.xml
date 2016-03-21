@@ -23,9 +23,11 @@
 <!ENTITY rfc3931 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3931.xml">
 <!ENTITY rfc3985 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3985.xml">
 <!ENTITY rfc4023 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4023.xml">
+<!ENTITY rfc4385 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4385.xml">
 <!ENTITY rfc4446 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4446.xml">
 <!ENTITY rfc4447 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4447.xml">
 <!ENTITY rfc4448 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4448.xml">
+<!ENTITY rfc4664 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4664.xml">
 <!ENTITY rfc4817 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4817.xml">
 <!ENTITY rfc4875 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4875.xml">
 <!ENTITY rfc5086 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5086.xml">
@@ -42,6 +44,7 @@
 <!ENTITY rfc5960 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5960.xml">
 <!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
 <!ENTITY rfc6275 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6275.xml">
+<!ENTITY rfc6371 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6371.xml">
 <!ENTITY rfc6373 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6373.xml">
 <!ENTITY rfc6378 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6378.xml">
 <!ENTITY rfc6426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6426.xml">
@@ -52,14 +55,17 @@
 <!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
 <!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
 <!ENTITY rfc6733 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6733.xml">
+<!ENTITY rfc6790 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6790.xml">
 <!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
 <!ENTITY rfc6864 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6864.xml">
 <!ENTITY rfc7045 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7045.xml">
 <!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
+<!ENTITY rfc7209 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7209.xml">
 <!ENTITY rfc7271 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7271.xml">
 <!ENTITY rfc7348 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7348.xml">
 <!ENTITY rfc7399 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7399.xml">
 <!ENTITY rfc7426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7426.xml">
+<!ENTITY rfc7432 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7432.xml">
 <!ENTITY rfc7510 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7510.xml">
 <!ENTITY rfc7637 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7637.xml">
 
@@ -423,7 +429,7 @@ title="DetNet adaptation to data plane">
    criteria can be broken down based on layer.  That is if the criteria is
    focused on delivering DetNet service adaptation, i.e., is concerned with the
    DetNet Service layer, or if the criteria is focused on transporting flows
-   across an end to end DetNet domain. [Lou B.: this is TBD.]
+   across an end to end DetNet domain. [Lou B.: which is TBD.]
  </t>
   
   <t>
@@ -1878,73 +1884,136 @@ title="MPLS-based Services">
    </section>
   </section>
 
-  <section title="EVPN (MPLS-based Ethernet Services)" anchor="sec_alt_evpn">
-
-    <t>
-
-    </t>
+  <section title="MPLS-Based Ethernet VPN (EVPN)" anchor="sec_alt_evpn">
     <section title="Solution description">
+    <t>
+      MPLS-Based Ethernet VPN (EVPN), in the form documented in
+      <xref target="RFC7432"/> and <xref target="RFC7209"/>, is an
+      increasingly popular approach to delivering MPLS-based Ethernet
+      services and is designed to be the successor to Virtual Private LAN
+      Service (VPLS), <xref target="RFC4664"/>. 
+    </t>
+    <t>
+      EVPN provides client adaptation and reuses the MPLS data plane
+      discussed above in <xref target="sec_alt_mpls_svc"/>.  In certain
+      special cases, it also uses the PW MPLS Control Word.  EVPN
+      control is via BGP, <xref target="RFC7432"/>, and may use TE-LSPs,
+      e.g., controlled via <xref target="RFC3209"/> for MPLS transport.
+      Additional EVPN related RFCs and in progress drafts are being
+      developed by the <eref target="https://tools.ietf.org/wg/bess/">
+	BGP Enabled Services Working Group</eref>.
+    </t>
     </section>
  
     <section title="Analysis and Discussion">
       <t><list style="hanging">
-          <t hangText="#? DetNet Service Interface ">
+          <t hangText="#? DetNet Service Interface (M/W)">
             <vspace blankLines="1"/> 
 
+	    The service supported by EVPN is a layer 2 Ethernet virtual
+	    private network.  While EVPN is typically envisioned to be
+	    deployed on provider edge systems, it is also possible to
+	    extent the EVPN service to a DetNet end or edge system if
+	    such service is needed.
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#1 Encapsulation and overhead (M)">
+            <vspace blankLines="1"/>
+
+	    EVPN generally uses a single MPLS label stack entry to
+	    support its client adaptation service.  The optional
+	    addition of a second label is also supported. In certain
+	    cases PW Control Word may also be used.
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#1 Encapsulation and overhead">
+          <t hangText="#2 Flow identification (W)">
             <vspace blankLines="1"/>
 
+	    EVPN currently uses labels to identify flows per  
+	    {Ethernet Segment Identifier, VLAN} or per MAC
+	    level. Additional definition will be needed to standardize
+	    identification of finer granularity DetNet flows.
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#2 Flow identification">
+          <t hangText="#3 Packet sequencing (M/W)">
             <vspace blankLines="1"/>
 
+	    Like MPLS, EVPN generally orders packets similar to
+	    Ethernet. Reordering is possible primarily during path
+	    changes and protection switching.  In order to avoid
+	    misordering due to ECMP, EVPN uses the "Preferred PW MPLS
+	    Control Word" <xref target="RFC4385"/> or the entropy labels
+	    <xref target="RFC6790"/>.
+
+            <vspace blankLines="1"/> 
+
+	    If additional ordering mechanisms are required, such
+	    mechanisms will need to be defined.
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#3 Packet sequencing">
+          <t hangText="#4 Explicit routes (M)">
             <vspace blankLines="1"/>
 
+	    EVPN itself doesn't offer support for explicit routes as it
+	    is simply an adaptation function.  Explicit routes for EVPN at
+	    the DetNet transport layer would be provided via MPLS.
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#4 Explicit routes">
+          <t hangText="#5 Packet replication and deletion (M/W)">
             <vspace blankLines="1"/>
-
+	    
+	    EVPN relies on the MPLS layer for all protection functions.
+	    See <xref target="sec_alt_mpls"/> and
+	    <xref target="sec_alt_mpls_svc"/>.  Some extensions, either
+	    at the EVPN or MPLS levels, will be need to support those
+	    DetNet applications which require true hitless (i.e., zero
+	    loss) 1+1 protection switching.  (Network coding may be an
+	    interesting alternative to investigate to delivering such
+	    hitless loss protection capability.)
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#5 Packet replication and deletion">
+          <t hangText="#6 Operations, Administration and Maintenance (M/W)">
             <vspace blankLines="1"/>
 
+	    Nodes supporting EVPN may participate in either or both
+	    Ethernet level and MPLS level OAM.  It is likely that it may
+	    make sense to map or adapt the OAM functions at the
+	    different levels, but such has yet to be defined.
+	    <xref target="RFC6371"/> provides some useful background on
+	    this topic.
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#6 Operations, Administration and Maintenance">
+          <t hangText="#7 Time synchronization (W)">
             <vspace blankLines="1"/>
 
+	    The interface to the DetNet time synchronization service is
+	    still to be determined.  If the service is accessed by end
+	    systems via IEEE defined mechanisms, then those mechanisms
+	    will need to be mapped to the MPLS provided mechanisms
+	    discussed in <xref target="sec_alt_mpls"/>.
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#7 Time synchronization">
+          <t hangText="#8 Class and quality of service capabilities (M/W)">
             <vspace blankLines="1"/>
 
+	    EVPN is largely silent on the topics of CoS and QoS, but  the
+	    existing Ethernet and MPLS mechanisms can be directly used.
+	    While an implementation may support such mappings today,
+	    standardized mappings do not (yet) exist. 	    
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#8 Class and quality of service capabilities">
+          <t hangText="#9 Packet traceability (M)">
             <vspace blankLines="1"/>
 
-
-            <vspace blankLines="1"/> 
-          </t>
-          <t hangText="#9 Packet traceability">
-            <vspace blankLines="1"/>
-
+	    EVPN nodes can utilize MPLS layers tracing mechanisms.
 
             <vspace blankLines="1"/> 
             
@@ -1952,7 +2021,11 @@ title="MPLS-based Services">
           <t hangText="#10 Technical maturity">
             <vspace blankLines="1"/>
 
-
+	    EVPN is a second (or third) generation MPLS-based L2VPN
+	    service standard.  From a data plane standpoint it makes
+	    uses of existing MPLS data plane mechanisms.  The mechanisms
+	    have been widely implemented and deployed.
+	    
             <vspace blankLines="1"/> 
           </t>
         </list>
@@ -1961,6 +2034,15 @@ title="MPLS-based Services">
     </section>
  
     <section title="Summary">
+      <t>
+	EVPN is the emerging successor to VPLS.  EVPN is standardized,
+	implemented and deployed.  It makes use of the mature MPLS data
+	plane.  While offering a mature and very comprehensive set of
+	features, certain DetNet required features are not
+	fully/directly supported and additional standardization in these
+	areas are needed.  Examples include: mapping CoS and QoS; use of
+	labels per DetNet flow, and hitless 1+1 protection.  
+      </t>
     </section>
    </section>
 
@@ -2583,9 +2665,11 @@ title="Enabled Adjacencies">
    &rfc3931;
    &rfc3985;
    &rfc4023;
+   &rfc4385;
    &rfc4446;
    &rfc4447;
    &rfc4448;
+   &rfc4664;
    &rfc4817;
    &rfc4875;
    &rfc5086;
@@ -2602,6 +2686,7 @@ title="Enabled Adjacencies">
    &rfc5960;
    &rfc6073;
    &rfc6275;
+   &rfc6371;
    &rfc6373;
    &rfc6378;
    &rfc6426;
@@ -2612,14 +2697,17 @@ title="Enabled Adjacencies">
    &rfc6658;
    &rfc6718;
    &rfc6733;
+   &rfc6790;
    &rfc6814;
    &rfc6864;
    &rfc7045;
    &rfc7167;
+   &rfc7209;
    &rfc7271;
    &rfc7348;
    &rfc7399;
    &rfc7426;
+   &rfc7432;
    &rfc7510;
    &rfc7637;
    &I-D.finn-detnet-architecture;
