@@ -1768,6 +1768,10 @@ title="MPLS-based Services">
      
      <t hangText="Flow identification (M)">
       <vspace blankLines="1"/>
+      [Editor's note: this criteria has not been checked against the latest
+      view of flow identification after the separation of transport and service
+      layers.]
+      <vspace blankLines="1"/>
       PWs provide multiple layers of flow identification, especially in the case
       of the MPLS PSN. The PWs are typically prepended with a PW label that can be
       used to identify a specific PW. Furthermore, the PSN also uses one or more
@@ -1876,7 +1880,7 @@ title="MPLS-based Services">
     </t>
     <t>
      Extensions are required to realize the packet replication and duplicate
-     detection.  feature of the deterministic networking data plane.
+     detection features of the deterministic networking data plane.
     </t>
    </section>
   </section>
@@ -2633,6 +2637,12 @@ title="Enabled Adjacencies">
    <t>Pascal Thubert</t>
    <t>Zhuangyan Zhuang</t>
   </list></t>
+  <t>
+   The DetNet chairs serving during the DetNet Data Plane Design Team:
+   <list style="bullets">
+    <t>Lou Berger</t>
+    <t>Pat Thaler</t>
+   </list></t>
 </section>
 </middle>
 
