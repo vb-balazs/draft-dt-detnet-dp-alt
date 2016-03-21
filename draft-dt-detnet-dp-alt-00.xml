@@ -37,6 +37,7 @@
 <!ENTITY rfc5440 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5440.xml">
 <!ENTITY rfc5462 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5462.xml">
 <!ENTITY rfc5586 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5586.xml">
+<!ENTITY rfc5659 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5659.xml">
 <!ENTITY rfc5921 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5921.xml">
 <!ENTITY rfc5960 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5960.xml">
 <!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
@@ -88,8 +89,8 @@
 <?rfc subcompact="yes"?>
 <rfc category="info"
      docName="draft-dt-detnet-dp-alt-00"
-	 ipr="trust200902"
-	 submissionType="IETF">
+         ipr="trust200902"
+         submissionType="IETF">
   <front>
     <title abbrev="DetNet data plane alternatives">
      DetNet Data Plane Protocol and Solution Alternatives</title>
@@ -218,7 +219,7 @@
   </t>
   <!--t>
    [Editor's note: add text to 1) set the context, 2) scope of the document, and 3)
-   prepare reader to realize the potential impact on the DetNet aware harware].
+   prepare reader to realize the potential impact on the DetNet aware hardware].
   </t-->
  </section>
 
@@ -315,7 +316,7 @@ title="DetNet adaptation to data plane">
 </figure>
 
  <t>
-  Both the DetiNet Service and the DetNet Transport layers are provided by a
+  Both the DetNet Service and the DetNet Transport layers are provided by a
   single technology in some solutions, e.g. the DetNet Service layer is PW and the DetNet
   Transport layer is MPLS in case of PW over MPLS. Nonetheless, both the DetNet Service and
   the DetNet Transport layers can include multiple technology layers in other
@@ -436,7 +437,7 @@ title="DetNet adaptation to data plane">
 
   <section title="#? DetNet Service Interface" anchor="sec_crit_svc">
     <t>
-      One of the most fundamental differentiators between different potential
+      One of the most fundamental differences between different potential
       data plane options is the basic addressing and headers used by DetNet
       clients.  For example, is the basic service a Layer 2 (e.g., Ethernet) or
       Layer 3 (i.e., IP) service. This decision impacts how DetNet end points
@@ -651,7 +652,7 @@ title="DetNet adaptation to data plane">
      The technical maturity of the data plane solution alternative is crucial,
      since it  basically defines the effort, time line and risks involved for
      the use of the solution in deployments. For example, the maturity level
-     can be categorised as available immediately, available with small
+     can be categorized as available immediately, available with small
      extensions, available with repurposing/redefining portions of the protocol
      or its header fields.  Yet another important measure for maturity is the
      deployment experience. This criteria concerns the maturity of the data
@@ -770,7 +771,7 @@ title="DetNet adaptation to data plane">
       <xref target="RFC7426"/> based approach is applied to compute, establish
       and manage the explicit routes, leveraging Traffic Engineering (TE)
       extensions to routing protocols <xref target="RFC5305"/>
-      <xref target="I-D.ietf-idr-ls-distribution"/> and evolutions to the
+      <xref target="I-D.ietf-idr-ls-distribution"/> and evolving to the
       Path Computation Element (PCE) Architecture <xref target="RFC5440"/>, 
       though a number of issues remain to be solved <xref target="RFC7399"/>.
       <vspace blankLines="1"/>
@@ -892,7 +893,7 @@ title="DetNet adaptation to data plane">
      IPv4 <xref target="RFC0791"/> is in principle the same as IPv6, except that
      it has a smaller address space. However, IPv6 was designed around the fact
      that extension headers are an integral part of the protocol and operation
-     from the beginning, although the practise may some times prove differently
+     from the beginning, although the practice may some times prove differently
      <xref target="I-D.ietf-v6ops-ipv6-ehs-in-real-world"/>. IPv4 never really
      needed any extension headers to work properly, thus support for IPv4 options
      outside closed networks cannot typically be guaranteed. In the context of
@@ -1017,7 +1018,7 @@ title="DetNet adaptation to data plane">
       technologies such as Bit-Indexed Explicit Replication (BIER)
       <xref format="counter" target="sec_alt_bier"/> and 
       <eref target="https://datatracker.ietf.org/wg/spring/charter/">
-	Source Packet Routing</eref>.
+        Source Packet Routing</eref>.
     </t>
     <t>
       MPLS supports the equivalent of both the DetNet Service and DetNet
@@ -1062,7 +1063,7 @@ title="MPLS-based Services">
       <xref target="RFC3032"/>.  A good overview of the MPLS data plane
       can be found in <xref target="RFC5960"/>, notably Section 3.1.
       Important MPLS data plane behaviors are defined in combination
-      with the associated control plane mechansims.  This includes MPLS
+      with the associated control plane mechanisms.  This includes MPLS
       Traffic Engineering (MPLS-TE), <xref target="RFC3209"/> and
       <xref target="RFC3473"/>.  Point-to-Multipoint TE Label Switched
       Paths (LSPs), <xref target="RFC4875"/>. Linear Protection,
@@ -1178,102 +1179,102 @@ title="MPLS-based Services">
     <t><list style="hanging">
      <t hangText="#? DetNet Service Interface (M)">
         <vspace blankLines="1"/> The DetNet service interface is enabled
-	  through the DetNet Service Layer it provides client service
-	  adaption, directly, via Pseudowires <xref format="counter"
-	  target="sec_alt_pwe"/> and via other label-like mechanisms such
-	  as EPVN <xref format="counter" target="sec_alt_evpn"/>.
+          through the DetNet Service Layer it provides client service
+          adaption, directly, via Pseudowires <xref format="counter"
+          target="sec_alt_pwe"/> and via other label-like mechanisms such
+          as EPVN <xref format="counter" target="sec_alt_evpn"/>.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#1 Encapsulation and overhead (M)">
       <vspace blankLines="1"/> 
 
-	  There are two perspectives to consider when looking at
-	  encapsulation.  The first is encapsulation to support services.
-	  These considerations are part of the DetNet service layer and
-	  are covered below, see <xref format="counter"
-	  target="sec_alt_pwe"/> and <xref format="counter"
-	  target="sec_alt_evpn"/>.
+          There are two perspectives to consider when looking at
+          encapsulation.  The first is encapsulation to support services.
+          These considerations are part of the DetNet service layer and
+          are covered below, see <xref format="counter"
+          target="sec_alt_pwe"/> and <xref format="counter"
+          target="sec_alt_evpn"/>.
 
-	  <vspace blankLines="1"/> 
+          <vspace blankLines="1"/> 
 
-	  The second perspective relates to encapsulation, if any, is
-	  needed to transport packets across network.  In this case, the
-	  MPLS label stack, <xref target="RFC3032"/> is used to identify
-	  flows across a network.  MPLS labels are compact and highly
-	  flexible.  They can be stacked to support client adaptation,
-	  protection, network layering, source routing, etc.
+          The second perspective relates to encapsulation, if any, is
+          needed to transport packets across network.  In this case, the
+          MPLS label stack, <xref target="RFC3032"/> is used to identify
+          flows across a network.  MPLS labels are compact and highly
+          flexible.  They can be stacked to support client adaptation,
+          protection, network layering, source routing, etc.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#2 Flow identification (M)">
         <vspace blankLines="1"/>
 
-	  MPLS label stacks provide highly flexible ways to identify
-	  flows.  Basically, they enable the complete separation of
-	  traffic classification from traffic treatment and thereby enable
-	  arbitrary combinations of both.
+          MPLS label stacks provide highly flexible ways to identify
+          flows.  Basically, they enable the complete separation of
+          traffic classification from traffic treatment and thereby enable
+          arbitrary combinations of both.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#3 Packet sequencing (M)">
         <vspace blankLines="1"/>
 
-	  Packet ordering in MPLS is generally similar to packet ordering
-	  in Ethernet. MPLS implementations can also support ECMP for
-	  certain types of traffic which can to lead to out of order
-	  delivery.  There are defined techniques to avoid ECMP and
-	  ensure in order delivery during normal operation. Out of order
-	  delivery is still possible in certain MPLS protection
-	  scenarios.  If additional ordering mechanisms are required,
-	  these are likely to be implemented at the DetNet Service Layer.
+          Packet ordering in MPLS is generally similar to packet ordering
+          in Ethernet. MPLS implementations can also support ECMP for
+          certain types of traffic which can to lead to out of order
+          delivery.  There are defined techniques to avoid ECMP and
+          ensure in order delivery during normal operation. Out of order
+          delivery is still possible in certain MPLS protection
+          scenarios.  If additional ordering mechanisms are required,
+          these are likely to be implemented at the DetNet Service Layer.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#4 Explicit routes (M)">
         <vspace blankLines="1"/>
 
-	  MPLS supports explicit routes based on how LSPs are established,
-	  e.g., via TE explicit routes <xref target="RFC3209"/>.
-	  Additional, but not required, additional capabilities are being
-	  defined as part of Segment Routing (SR)
-	  <xref target="I-D.ietf-spring-segment-routing"/>. 
+          MPLS supports explicit routes based on how LSPs are established,
+          e.g., via TE explicit routes <xref target="RFC3209"/>.
+          Additional, but not required, additional capabilities are being
+          defined as part of Segment Routing (SR)
+          <xref target="I-D.ietf-spring-segment-routing"/>. 
       <vspace blankLines="1"/>
      </t>
      <t hangText="#5 Packet replication and deletion (M/W)">
         <vspace blankLines="1"/>
 
-	  At the MPLS LSP level, there are mechanisms defined to provide
-	  1+1 protection.  The current definitions
-	  <xref target="RFC6378"/> and <xref target="RFC7271"/> use OAM
-	  mechanisms to support and coordinate protection switching and
-	  packet loss is possible during a switch.  While such this level
-	  of protection may be sufficient for man DetNet applications,
-	  when truly hitless (i.e., zero loss) switching is required
-	  additional mechanisms will be needed.  It is expected that these
-	  additional mechanisms will be defined at the DetNet Service
-	  Layer.
+          At the MPLS LSP level, there are mechanisms defined to provide
+          1+1 protection.  The current definitions
+          <xref target="RFC6378"/> and <xref target="RFC7271"/> use OAM
+          mechanisms to support and coordinate protection switching and
+          packet loss is possible during a switch.  While such this level
+          of protection may be sufficient for man DetNet applications,
+          when truly hitless (i.e., zero loss) switching is required
+          additional mechanisms will be needed.  It is expected that these
+          additional mechanisms will be defined at the DetNet Service
+          Layer.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#6 Operations, Administration and Maintenance (M)">
         <vspace blankLines="1"/>
 
-	  MPLS already includes a rich set of OAM functions at both the
-	  Service and Transport Layers. This includes LSP ping [ref] and
-	  those enabled via the MPLS Generic Associated Channel
-	  <xref target="RFC5586"/> and registered by 
-	  <eref target="http://www.iana.org/assignments/g-ach-parameters/g-ach-parameters.xhtml">
-	  IANA</eref>.
+          MPLS already includes a rich set of OAM functions at both the
+          Service and Transport Layers. This includes LSP ping [ref] and
+          those enabled via the MPLS Generic Associated Channel
+          <xref target="RFC5586"/> and registered by 
+          <eref target="http://www.iana.org/assignments/g-ach-parameters/g-ach-parameters.xhtml">
+          IANA</eref>.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#7 Time synchronization (M/W)">
         <vspace blankLines="1"/>
 
-	  MPLS itself does not provide any time synchronization service.
-	  The expectations is that the actual time-based scheduling will
-	  be provided by the sub-network layer, e.g., by
-	  <xref target="TSNTG"/>, and that the DetNet transport layer will
-	  merely need to facilitate time synchronization (with hardware
-	  support) across multiple sub-network domains and technologies.
-	  Work is in progress
-	  <xref target="I-D.ietf-mpls-residence-time"/> that may satisfy,
-	  or serve as a building block for, DetNet time synchronization.
+          MPLS itself does not provide any time synchronization service.
+          The expectations is that the actual time-based scheduling will
+          be provided by the sub-network layer, e.g., by
+          <xref target="TSNTG"/>, and that the DetNet transport layer will
+          merely need to facilitate time synchronization (with hardware
+          support) across multiple sub-network domains and technologies.
+          Work is in progress
+          <xref target="I-D.ietf-mpls-residence-time"/> that may satisfy,
+          or serve as a building block for, DetNet time synchronization.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#8 Class and quality of service capabilities (M/W)">
@@ -1282,31 +1283,32 @@ title="MPLS-based Services">
       As previously mentioned, Data plane Quality of Service
       capabilities are included in the MPLS in the form of Traffic
       Engineered (TE) LSPs <xref target="RFC3209"/> and the MPLS
-	  Differentiated Services (DiffServ) architecture
-	  <xref target="RFC3270"/>.  Both E-LSP and L-LSP MPLS DiffServ
-	  modes are defined.  The Traffic Class field (formerly the EXP
-	  field) of an MPLS label follows the definition of
-	  <xref target="RFC5462"/> and <xref target="RFC3270"/>.  One
-	  potential open area of work is synchronized, time based
-	  scheduling. 
+          Differentiated Services (DiffServ) architecture
+          <xref target="RFC3270"/>.  Both E-LSP and L-LSP MPLS DiffServ
+          modes are defined.  The Traffic Class field (formerly the EXP
+          field) of an MPLS label follows the definition of
+          <xref target="RFC5462"/> and <xref target="RFC3270"/>.  One
+          potential open area of work is synchronized, time based
+          scheduling. 
+
       <vspace blankLines="1"/>
      </t>
      <t hangText="#9 Packet traceability (M)">
         <vspace blankLines="1"/>
-	
+        
       MPLS supports multiple tracing mechanisms.  A control based one
-	  is defined in  <xref target="RFC3209"/>.  An OAM based mechanism
-	  is defined in MPLS On-Demand Connectivity Verification and Route
-	  Tracing  <xref target="RFC6426"/>.
+          is defined in  <xref target="RFC3209"/>.  An OAM based mechanism
+          is defined in MPLS On-Demand Connectivity Verification and Route
+          Tracing  <xref target="RFC6426"/>.
       <vspace blankLines="1"/>
      </t>
      <t hangText="#10 Technical maturity (M)">
         <vspace blankLines="1"/> 
 
-	  MPLS as a mature technology that has been widely deployed in
-	  many networks for many years.  Numerous vendor products and
-	  multiple generations of MPLS hardware have been built and
-	  deployed.
+          MPLS as a mature technology that has been widely deployed in
+          many networks for many years.  Numerous vendor products and
+          multiple generations of MPLS hardware have been built and
+          deployed.
       <vspace blankLines="1"/>
      </t>
      </list>
@@ -1316,12 +1318,12 @@ title="MPLS-based Services">
 
    <section title="Summary">
     <t>
-     MPLS LSPs support a significant portion of the identified DetNet
-     data plane criteria today.  MPLS as a mature technology that has
-     been widely deployed.  Numerous vendor products and multiple
-     generations of MPLS hardware have been built and deployed.  There
-     are aspects of the DetNet data plane that are not fully supported,
-     but these can be incrementally added.
+      MPLS is a mature technology that has been widely deployed.
+      Numerous vendor products and multiple generations of MPLS hardware
+      have been built and deployed.  MPLS LSPs support a significant
+      portion of the identified DetNet data plane criteria
+      today. Aspects of the DetNet data plane that are not fully
+      supported can be incrementally added.
     </t>
    </section>
   </section>
@@ -1492,53 +1494,179 @@ title="MPLS-based Services">
   <section title="MPLS-based Services" anchor="sec_alt_mpls_svc">
 
     <t>
-      [LB: this probably be an umbrella for EVPN and PWE3]
+      [LB: this may be an umbrella for EVPN and PWE3]
     </t>
-    <section title="Solution description">
+    <section title="Solution description">      
+    <t>
+      MPLS supports the equivalent of both the DetNet Service and DetNet
+      Transport layers.  This, as well as a general overview of MPLS, is
+      covered above in <xref target="sec_alt_mpls"/>. This section will
+      focus on the DetNet Service Layer it provides client service
+      adaption, via Pseudowires <xref format="counter"
+      target="sec_alt_pwe"/> and via native and other label-like
+      mechanisms such as EPVN <xref format="counter"
+      target="sec_alt_evpn"/>.  A representation of these options was
+      previously discussed and is shown in
+      <xref target="fig_mpls_clients"/>.
+    </t>  
     </section>
  
-    <section title="Analysis and Discussion">   
+    <section title="Analysis and Discussion"> 
       <t><list style="hanging">
-	  <t hangText="#? DetNet Service Interface ">
+          <t hangText="#? DetNet Service Interface (M)">
             <vspace blankLines="1"/> 
-	  </t>
-	  <t hangText="#1 Encapsulation and overhead">
+
+            The following text is adapted from <xref target="RFC5921"/>:
+
+            <vspace blankLines="1"/> 
+
+            The MPLS native service adaptation functions interface the client
+            layer network service to MPLS.  For Pseudowires, these adaptation
+            functions are the payload encapsulation described in Section 4.4
+            of <xref target="RFC3985"/> and Section 6 of
+            <xref target="RFC5659"/>.  For network layer client services, the
+            adaptation function uses the MPLS encapsulation format as defined
+            in <xref target="RFC3032"/>.
+
+            <vspace blankLines="1"/> 
+
+            The purpose of this encapsulation is to abstract the data plane of
+            the client layer network from the MPLS data plane, thus
+            contributing to the independent operation of the MPLS network.
+            
+            <vspace blankLines="1"/> 
+
+            MPLS may itself be a client of an underlying server layer.  MPLS
+            can thus also bounded by a set of adaptation functions to this
+            server layer network, which may itself be MPLS.  These adaptation
+            functions provide encapsulation of the MPLS frames and for the
+            transparent transport of those frames over the server layer
+            network.  
+
+            <vspace blankLines="1"/> 
+
+            While MPLS service can provided on and true end-system to
+            end-system basis, it's more likely that DetNet service will
+            be provided over Pseudowires 
+            <xref format="counter" target="sec_alt_pwe"/> or via an EPVN-based service 
+            <xref format="counter" target="sec_alt_evpn"/> .
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#1 Encapsulation and overhead (M)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#2 Flow identification">
+
+            MPLS labels in the label stack may be used to identify
+            transport paths, see <xref target="sec_alt_mpls"/>, or as
+            service identifiers.  Typically a single label is used for
+            service identification.  Additional details on how
+            client adaptation makes use of such labels is part of actual
+            client-related adaptation processing see 
+            <xref format="counter" target="sec_alt_pwe"/> and 
+            <xref format="counter" target="sec_alt_evpn"/>.
+            
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#2 Flow identification (M)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#3 Packet sequencing">
+
+            This is basically the same as MPLS at the DetNet transport layer.
+            MPLS label stacks provide highly flexible ways to identify
+            flows.  Basically, they enable the complete separation of
+            traffic classification from traffic treatment and thereby
+            enable arbitrary combinations of both.  Typically a separate
+            label will be added per service being supported by a node.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#3 Packet sequencing (M)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#4 Explicit routes">
+
+            This is the same as MPLS at the DetNet transport layer.  If
+            additional ordering mechanisms are required, these will be
+            needed (and added) in client-related adaptation processing see 
+            <xref format="counter" target="sec_alt_pwe"/> and 
+            <xref format="counter" target="sec_alt_evpn"/>.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#4 Explicit routes (N/A)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#5 Packet replication and deletion">
+
+            Explicit routes are part of the DetNet transport layer,
+            <xref format="counter" target="sec_alt_evpn"/>, or as part
+            of multi-segment PWEs,  <xref format="counter" target="sec_alt_pwe"/>.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#5 Packet replication and deletion (M/W)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#6 Operations, Administration and Maintenance">
+
+            This is the same as MPLS at the DetNet transport layer.
+            Additional capability may also be provided as part of
+            client-related adaptation processing see
+            <xref format="counter" target="sec_alt_pwe"/>.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#6 Operations, Administration and Maintenance (M)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#7 Time synchronization">
+
+            This is the same as MPLS at the DetNet transport layer.
+            Additional capability may also be provided as part of
+            client-related adaptation processing.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#7 Time synchronization (TBD)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#8 Class and quality of service capabilities">
+
+            It's unclear at this time if any additional capability is
+            needed at this level.
+            
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#8 Class and quality of service capabilities (M/W)">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#9 Packet traceability">
+
+            The MPLS client inherits its Quality of Service (QoS) from
+            the MPLS transport layer, which in turn inherits its QoS from the
+            server (sub-network) layer.  The server layer therefore
+            needs to provide the necessary QoS to ensure that the MPLS
+            client QoS commitments can be satisfied.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#9 Packet traceability (M)">
             <vspace blankLines="1"/>
-	    
-	  </t>
-	  <t hangText="#10 Technical maturity">
+
+            This is the same as MPLS at the DetNet transport layer.
+
+            <vspace blankLines="1"/> 
+            
+          </t>
+          <t hangText="#10 Technical maturity (M)">
             <vspace blankLines="1"/>
-	  </t>
-	</list>
+
+            This is the same as MPLS at the DetNet transport layer.
+
+            <vspace blankLines="1"/> 
+          </t>
+        </list>
       </t>
 
     </section>
  
     <section title="Summary">
+      <t>
+        This is the same as MPLS at the DetNet transport layer.
+        MPLS is a mature technology that has been widely deployed.
+        Numerous vendor products and multiple generations of MPLS hardware
+        have been built and deployed.  MPLS LSPs support a significant
+        portion of the identified DetNet data plane criteria
+        today. Aspects of the DetNet data plane that are not fully
+        supported can be incrementally added.
+    </t>
     </section>
    </section>
 
@@ -1660,7 +1788,7 @@ title="MPLS-based Services">
       MPLS can be used to signal explicit label switched paths (LSP) <xref
       target="RFC5921"/> <xref target="RFC2702"/><xref target="RFC3209"/>.
       Furthermore, the PSN may also use segment routing (SR) to provide explicit
-      routes <xref target="I-D.ietf-spring-segment-routing"/>. Segmement routing
+      routes <xref target="I-D.ietf-spring-segment-routing"/>. Segment routing
       based solution would also be available for IPv6 PSN <xref
       target="I-D.ietf-6man-segment-routing-header"/>.
      <vspace blankLines="1"/></t-->
@@ -1693,7 +1821,7 @@ title="MPLS-based Services">
       encapsulation layer (see for example <xref target="RFC5087"/>). Whether
       the timing precision is enough for all deterministic networking use cases
       vary, and it is possible existing mechanisms are not adequate for all use
-      cases. IP PSNs have already demonstarted the use of time synchronization 
+      cases. IP PSNs have already demonstrated the use of time synchronization 
       as a part of PWE3  <xref target="RFC5086"/>.
      <vspace blankLines="1"/></t>
      
@@ -1760,41 +1888,74 @@ title="MPLS-based Services">
  
     <section title="Analysis and Discussion">
       <t><list style="hanging">
-	  <t hangText="#? DetNet Service Interface ">
+          <t hangText="#? DetNet Service Interface ">
             <vspace blankLines="1"/> 
-	  </t>
-	  <t hangText="#1 Encapsulation and overhead">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#1 Encapsulation and overhead">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#2 Flow identification">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#2 Flow identification">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#3 Packet sequencing">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#3 Packet sequencing">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#4 Explicit routes">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#4 Explicit routes">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#5 Packet replication and deletion">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#5 Packet replication and deletion">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#6 Operations, Administration and Maintenance">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#6 Operations, Administration and Maintenance">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#7 Time synchronization">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#7 Time synchronization">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#8 Class and quality of service capabilities">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#8 Class and quality of service capabilities">
             <vspace blankLines="1"/>
-	  </t>
-	  <t hangText="#9 Packet traceability">
+
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#9 Packet traceability">
             <vspace blankLines="1"/>
-	    
-	  </t>
-	  <t hangText="#10 Technical maturity">
+
+
+            <vspace blankLines="1"/> 
+            
+          </t>
+          <t hangText="#10 Technical maturity">
             <vspace blankLines="1"/>
-	  </t>
-	</list>
+
+
+            <vspace blankLines="1"/> 
+          </t>
+        </list>
       </t>
 
     </section>
@@ -1811,7 +1972,7 @@ title="MPLS-based Services">
    header includes a bitmap that explicitly signals the listeners that are
    intended for a particular packet, which means that 1) the sender is aware of
    the individual listeners and 2) the BIER control plane is a simple extension 
-   of the unicast routing as opposed to a dedicated multicast dataplane, which 
+   of the unicast routing as opposed to a dedicated multicast data plane, which 
    represents a considerable reduction in OPEX. For this reason, the technology
    faces a lot of traction from Service Providers. <xref target="sec_alt_bier"/>
    discusses the applicability of BIER for replication in the DetNet. 
@@ -1931,7 +2092,7 @@ title="DetNet in BIER domain">
   </t>
 
   <t>
-   DetNet node A sends DetNet into red and purple BIER sub-domains. DettNet node
+   DetNet node A sends DetNet into red and purple BIER sub-domains. DetNet node
    E receives DetNet packet and sends into green sub-domain while terminating
    duplicates and those that deemed too-late.
   </t>
@@ -1981,7 +2142,7 @@ title="DetNet in BIER domain">
       From the BIER-TE architecture, the key differences over BIER are:
       <list style="symbols">
       <t>BIER-TE replaces in-network autonomous path calculation by
-         explicit paths calculated offpath by the BIER-TE controller host.
+         explicit paths calculated off path by the BIER-TE controller host.
       </t>
       <t>In BIER-TE every BitPosition of the BitString of a BIER-TE packet
          indicates one or more adjacencies - instead of a BFER as in BIER.
@@ -2436,6 +2597,7 @@ title="Enabled Adjacencies">
    &rfc5440;
    &rfc5462;
    &rfc5586;
+   &rfc5659;
    &rfc5921;
    &rfc5960;
    &rfc6073;
@@ -2522,11 +2684,11 @@ title="Enabled Adjacencies">
    </reference>
 
    <reference anchor="IEEE802.1Qbv"
-	      target="http://www.ieee802.org/1/files/private/bv-drafts/">
+              target="http://www.ieee802.org/1/files/private/bv-drafts/">
      <front>
        <title>Enhancements for Scheduled Traffic</title>
        <author>
-	 <organization>IEEE</organization>
+         <organization>IEEE</organization>
        </author>
        <date year="2016" />
      </front>
@@ -2546,11 +2708,11 @@ title="Enabled Adjacencies">
    </reference>
    
    <reference anchor="IEEE802.1Qch"
-	      target="http://www.ieee802.org/1/files/private/ch-drafts/">
+              target="http://www.ieee802.org/1/files/private/ch-drafts/">
      <front>
        <title>Cyclic Queuing and Forwarding</title>
        <author>
-	 <organization>IEEE</organization>
+         <organization>IEEE</organization>
        </author>
        <date year="2016" />
      </front>
