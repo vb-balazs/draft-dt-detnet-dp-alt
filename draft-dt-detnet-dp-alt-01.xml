@@ -1,0 +1,2815 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc0791 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.0791.xml">
+<!ENTITY rfc1122 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1122.xml">
+<!ENTITY rfc1393 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1393.xml">
+<!ENTITY rfc1700 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1700.xml">
+<!ENTITY rfc2119 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY rfc2205 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2205.xml">
+<!ENTITY rfc2460 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
+<!ENTITY rfc2474 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2474.xml">
+<!ENTITY rfc2702 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2702.xml">
+<!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
+<!ENTITY rfc2784 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2784.xml">
+<!ENTITY rfc2890 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2890.xml">
+<!ENTITY rfc3031 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3031.xml">
+<!ENTITY rfc3032 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3032.xml">
+<!ENTITY rfc3168 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3168.xml">
+<!ENTITY rfc3209 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3209.xml">
+<!ENTITY rfc3270 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3270.xml">
+<!ENTITY rfc3443 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3443.xml">
+<!ENTITY rfc3473 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3473.xml">
+<!ENTITY rfc3550 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3550.xml">
+<!ENTITY rfc3931 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3931.xml">
+<!ENTITY rfc3985 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3985.xml">
+<!ENTITY rfc4023 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4023.xml">
+<!ENTITY rfc4385 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4385.xml">
+<!ENTITY rfc4446 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4446.xml">
+<!ENTITY rfc4447 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4447.xml">
+<!ENTITY rfc4448 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4448.xml">
+<!ENTITY rfc4664 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4664.xml">
+<!ENTITY rfc4817 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4817.xml">
+<!ENTITY rfc4875 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4875.xml">
+<!ENTITY rfc5086 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5086.xml">
+<!ENTITY rfc5087 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5087.xml">
+<!ENTITY rfc5129 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5129.xml">
+<!ENTITY rfc5305 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5305.xml">
+<!ENTITY rfc5331 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5331.xml">
+<!ENTITY rfc5332 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5332.xml">
+<!ENTITY rfc5440 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5440.xml">
+<!ENTITY rfc5462 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5462.xml">
+<!ENTITY rfc5586 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5586.xml">
+<!ENTITY rfc5659 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5659.xml">
+<!ENTITY rfc5921 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5921.xml">
+<!ENTITY rfc5960 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5960.xml">
+<!ENTITY rfc6073 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6073.xml">
+<!ENTITY rfc6275 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6275.xml">
+<!ENTITY rfc6371 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6371.xml">
+<!ENTITY rfc6373 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6373.xml">
+<!ENTITY rfc6378 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6378.xml">
+<!ENTITY rfc6426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6426.xml">
+<!ENTITY rfc6437 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6437.xml">
+<!ENTITY rfc6540 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6540.xml">
+<!ENTITY rfc6564 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6564.xml">
+<!ENTITY rfc6621 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6621.xml">
+<!ENTITY rfc6658 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6658.xml">
+<!ENTITY rfc6718 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6718.xml">
+<!ENTITY rfc6733 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6733.xml">
+<!ENTITY rfc6790 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6790.xml">
+<!ENTITY rfc6814 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6814.xml">
+<!ENTITY rfc6864 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6864.xml">
+<!ENTITY rfc7045 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7045.xml">
+<!ENTITY rfc7167 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7167.xml">
+<!ENTITY rfc7209 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7209.xml">
+<!ENTITY rfc7271 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7271.xml">
+<!ENTITY rfc7348 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7348.xml">
+<!ENTITY rfc7399 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7399.xml">
+<!ENTITY rfc7426 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7426.xml">
+<!ENTITY rfc7432 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7432.xml">
+<!ENTITY rfc7510 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7510.xml">
+<!ENTITY rfc7637 PUBLIC "" "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7637.xml">
+
+<!ENTITY I-D.finn-detnet-problem-statement PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-problem-statement-04.xml">
+<!ENTITY I-D.finn-detnet-architecture PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-finn-detnet-architecture-02.xml">
+<!ENTITY I-D.ietf-isis-pcr SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-isis-pcr.xml">
+<!ENTITY I-D.ietf-6man-segment-routing-header SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-segment-routing-header.xml">
+<!ENTITY I-D.ietf-spring-segment-routing SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-spring-segment-routing.xml">
+<!ENTITY I-D.ietf-v6ops-ipv6-ehs-in-real-world SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-v6ops-ipv6-ehs-in-real-world.xml">
+<!ENTITY I-D.ietf-sunset4-gapanalysis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-sunset4-gapanalysis.xml">
+<!ENTITY I-D.ietf-bier-architecture SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-bier-architecture.xml">
+<!ENTITY I-D.eckert-bier-te-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.eckert-bier-te-arch.xml">
+<!ENTITY I-D.ietf-intarea-gre-ipv6 SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-intarea-gre-ipv6.xml">
+<!ENTITY I-D.ietf-6man-rfc2460bis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-6man-rfc2460bis.xml">
+<!ENTITY I-D.ietf-idr-ls-distribution SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-idr-ls-distribution.xml">
+<!ENTITY I-D.ietf-mpls-residence-time SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-mpls-residence-time">
+
+]>
+
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc toc="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc iprnotified="no"?>
+<?rfc strict="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="yes"?>
+<rfc category="info"
+     docName="draft-dt-detnet-dp-alt-01"
+         ipr="trust200902"
+         submissionType="IETF">
+  <front>
+    <title abbrev="DetNet data plane alternatives">
+     DetNet Data Plane Protocol and Solution Alternatives</title>
+
+  <author role="editor" fullname="Jouni Korhonen" initials="J." surname="Korhonen">
+   <organization abbrev="Broadcom">Broadcom</organization>
+   <address>
+    <postal>
+     <street>3151 Zanker Road</street>
+     <city>San Jose</city>
+     <code>95134</code>
+     <region>CA</region>
+     <country>USA</country>
+    </postal>
+    <email>jouni.nospam@gmail.com</email>
+   </address>
+  </author>
+
+  <author fullname="J&aacute;nos Farkas" initials="J." surname="Farkas">
+   <organization abbrev="Ericsson">Ericsson</organization>
+   <address>
+    <postal>
+     <street>Konyves K&aacute;lm&aacute;n krt. 11/B</street>
+     <city>Budapest</city>
+     <country>Hungary</country>
+     <code>1097</code>
+    </postal>
+    <email>janos.farkas@ericsson.com</email>
+   </address>
+  </author>
+  
+  <!-- author fullname="Norman Finn" initials="N." surname="Finn">
+   <organization abbrev="Cisco">Cisco</organization>
+   <address>
+    <email>nfinn@cisco.com</email>
+   </address>
+  </author -->
+  
+  <!-- author fullname="Olivier Marce" initials="O." surname="Marce">
+   <organization abbrev="Nokia Bell Labs">Nokia Bell Labs</organization>
+   <address>
+    <email>Olivier.Marce@nokia.com</email>
+   </address>
+  </author -->
+  
+  <author fullname="Gregory Mirsky" initials="G." surname="Mirsky">
+   <organization abbrev="Ericsson">Ericsson</organization>
+   <address>
+    <email>gregory.mirsky@ericsson.com</email>
+   </address>
+  </author>
+  
+  <author fullname="Pascal Thubert" initials="P." surname="Thubert">
+   <organization abbrev="Cisco">Cisco</organization>
+   <address>
+    <email>pthubert@cisco.com</email>
+   </address>
+  </author>
+  
+  <author fullname="Yan Zhuang" initials="Y." surname="Zhuang">
+   <organization abbrev="Huawei">Huawei</organization>
+   <address>
+    <email>zhuangyan.zhuang@huawei.com</email>
+   </address>
+  </author>
+  
+  <author initials='L.' surname="Berger" fullname='Lou Berger'>
+    <organization abbrev="LabN">LabN Consulting, L.L.C.</organization>
+    <address>
+      <email>lberger@labn.net</email>
+    </address>
+  </author>
+  <date />
+  <workgroup>DetNet</workgroup>
+
+  <abstract>
+  <t>
+   This document identifies existing IP and MPLS, and other encapsulations
+   that run over IP and/or MPLS data plane technologies that can be considered
+   as the base line solution for deterministic networking data
+   plane definition.
+  </t>
+  </abstract>
+
+  
+  </front>
+
+ <middle>
+ <section title="Introduction">
+  <t>
+    Deterministic Networking (DetNet) <xref
+    target="I-D.finn-detnet-problem-statement"/> provides a capability to carry
+    unicast or multicast data flows for real-time applications with extremely
+    low data loss rates and known upper bound maximum latency <xref
+    target="I-D.finn-detnet-architecture"/>. The deterministic networking
+    Quality of Service (QoS) is expressed as 1) the maximum end-to-end latency
+    from sender (talker) to receiver (listener), and 2) probability of loss of a
+    packet.  Only the worst-case values for the mentioned parameters are
+    concerned.
+  </t>
+  <t>
+    There are three techniques to achieve the QoS required by deterministic
+    networks:
+     <list style="symbols">
+      <t>zero congestion loss,</t>
+      <t>explicit routes,</t>
+      <t>packet replication and deletion.</t>
+     </list>
+   This document identifies existing IP and Multiprotocol Label Switching (MPLS)
+   <xref target="RFC3031"/>, layer-2 or layer-3 encapsulations and transport
+   protocols  that could be considered as foundations for a
+   deterministic networking data plane.  The full scope of the deterministic
+   networking data plane solution is considered including, as appropriate:
+   quality of service (QoS); Operations, Administration and Maintenance (OAM); and time
+   synchronization among other criteria described in <xref target="sec_crit"/>.
+  </t>
+  <t>
+   This document does not select a deterministic networking data
+   plane protocol.  It does, however, elaborate what it would
+   require to adapt and use a specific protocol as the
+   deterministic networking data plane solution.  This document is
+   only concerned with data plane considerations and,
+   specifically, with topics that potentially impact potential
+   deterministic networking aware data plane hardware.  
+   Control plane considerations are out of scope of this document.
+  </t>
+  <!--t>
+   [Editor's note: add text to 1) set the context, 2) scope of the document, and 3)
+   prepare reader to realize the potential impact on the DetNet aware hardware].
+  </t-->
+ </section>
+
+ <!--section title="Terminology">
+  <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in <xref
+   target="RFC2119"></xref>.</t>
+ </section-->
+
+
+<section title="DetNet Data Plane Overview" anchor="sec_dt_dp">
+ <t>
+  [Editor's note: all/portions of the following may be moved to
+  the DetNet Architecture document at some future point.]
+ </t>
+ <t>
+   A "Deterministic Network" will be composed of DetNet enabled "End Systems",
+   DetNet enabled "Edge Nodes", and DetNet enabled "Network Nodes".  DetNet
+   enabled nodes will provide a DetNet service to attached DetNet End Systems.
+   All DetNet enabled systems and nodes will be interconnected by sub-networks.
+   These sub-networks will provide DetNet compatible service for support of
+   DetNet traffic.  Examples of sub-networks include 802.1TSN and a
+   point-to-point OTN link.  Of course, multi-layer DetNet systems may be
+   possible too, where one DetNet appears as a sub-network, and provides service
+   to, a higher layer DetNet system. A simple DetNet is shown in <xref
+   target="fig_detnet"/>.
+ </t>
+<figure anchor="fig_detnet" align="center"
+title="A Simple DetNet Enabled Network">
+<artwork align="center"><![CDATA[
+
++------+                                                +------+
+| End  |<-------------Deterministic flow--------------->| End  |
+|System|                                                |System|
++--+---+                                                +-+----+
+   |      <--------------DetNet flow----------------->    |
+   |                                                  ,+-''''--.
+   |                                                  [   Sub   ]
+   |Link                                              [ Network ]
+   |                                                   +-....--'
+   |                                                      |
+   |    +------+     +-------+   ,-'''-.   +-------+  +------+
+   |    | Edge |Link |Network|--[  Sub  ]--|Network|--| Edge |
+   +----| Node |-----|  Node |  [Network]  |  Node |  | Node |
+        +------+     +-------+   +-...-'   +-------+  +------+
+]]></artwork>
+</figure>
+
+
+ <t>
+   
+ </t>
+
+
+ <t>
+  This DetNet data plane is logically divided into two layers:
+   <list style="symbols">
+    <t>
+     The DetNet Service layer provides adaptation of DetNet services.  It is
+     composed of a shim layer to carry DetNet flow specific attributes, which
+     are needed during forwarding. End systems originate and terminate the 
+     DetNet Service layer and are peers at the DetNet Service layer.
+    </t>
+    <t>
+     The DetNet Transport layer is supported by all DetNet aware systems and
+     nodes.  It operates below the DetNet Service layer. The DetNet Transport
+     layer is used to relay traffic end to end across a DetNet domain.
+    </t>
+   </list>
+  Distinguishing the function of these two DetNet data plane
+  layers helps to explore and evaluate various combinations of the
+  data plane solutions available.  This separation of DetNet
+  layers, while helpful, should not be considered as formal
+  requirement.  For example, some technologies may violate these
+  strict layers and still be able to deliver a DetNet service.
+ </t>
+ 
+ <t>
+  A number of data plane technology candidates are discussed later in this
+  document. They can be mapped to the two layers as shown in
+  <xref target="fig_adaptation"/>.
+ </t>
+
+<figure anchor="fig_adaptation" align="center"
+title="DetNet adaptation to data plane">
+<artwork align="center"><![CDATA[
+    .
+    .
+    .
++-----------+
+|  Service  | PW, RTP, UDP, GRE, L2TP, VXLAN
+~~~~~~~~~~~~~
+| Transport | IPv6, IPv4, MPLS LSPs, BIER, BIER-TE
++-----------+
+    .
+    .
+]]></artwork>
+</figure>
+
+ <t>
+  Both the DetNet Service and the DetNet Transport layers are provided by a
+  single technology in some solutions, e.g. the DetNet Service layer is PW and the DetNet
+  Transport layer is MPLS in case of PW over MPLS. Nonetheless, both the DetNet Service and
+  the DetNet Transport layers can include multiple technology layers in other
+  solutions in order to provide the capabilities needed for DetNet flows. For
+  instance, the DetNet Transport layer can comprise MPLS-in-GRE (<xref
+  target="sec_alt_pwe"/>) in one solution. In another solution, the DetNet Service layer
+  can include, e.g.,  RTP in UDP (<xref target="sec_alt_higher"/>).
+ </t>
+  
+ <t>
+  [Editor's note: I'm not sure if the remainder of this section says
+  anything not present in the next section. Will need to revisit
+  as part of the pre-pub review.]
+ </t>
+
+ <t>
+  There are many valid options to create a data plane solution for DetNet
+  traffic by selecting a technology approach for the DetNet Service layer and also
+  selecting a technology approach for the DetNet Transport layer. There are a
+  high number of valid combinations. Therefore, not the combinations but the
+  different technologies are evaluated along the criteria collected in <xref
+  target="sec_crit"/>. Different criteria apply for the DetNet Service layer and the DetNet
+  Transport layer, however, some of the criteria are valid for both layers.
+ </t> 
+
+
+ <t>
+  The criteria for the DetNet Service layer:
+   <list style="nosymbols">
+    <t>#1 Encapsulation and overhead</t>
+    <t>#2 Flow identification (Flow ID part of the DetNet flows)</t>
+    <t>#3 Packet sequencing (sequence number)</t>
+    <t>#5 Packet replication and deletion (note: only the packet deletion for
+       seamless redundancy)</t>
+    <t>#6 Operations, Administration and Maintenance (capabilities)</t>
+    <t>#7 Time synchronization (e.g., time stamping)</t>
+    <t>#8 Class and quality of service capabilities (DetNet Service specific)</t>
+    <t>#10 Technical maturity</t>
+   </list>  
+ </t> 
+ 
+ <t>
+  The criteria for the DetNet Transport layer:
+   <list style="nosymbols">
+    <t>#1 Encapsulation and overhead</t>
+    <t>#2 Flow identification</t>
+    <t>#4 Explicit routes (network path)</t>
+    <t>#5 Packet replication and deletion (note: only the packet replication
+       for seamless redundancy)</t>
+    <t>#6 Operations, Administration and Maintenance (capabilities)</t>
+    <t>#7 Time synchronization (time/phase sync of nodes)</t>
+    <t>#8 Class and quality of service capabilities (DetNet Transport specific)</t>
+    <t>#9 Packet traceability (verification purposes)</t>
+    <t>#10 Technical maturity</t>
+   </list> 
+   <list style="nosymbols">
+    <t>
+     [Editor's note: #7 is more of OAM feature.]
+    </t>
+   </list> 
+ </t> 
+ 
+ <t>
+  Some of the criteria are relevant for both the DetNet Service and DetNet
+  Transport layers. The two layers provide together what is needed to meet
+  certain criteria, e.g., flow identification. Different aspects are valid for
+  the two different layers for other criteria, e.g., time synchronization.
+  Furthermore, technical maturity is a criteria valid for both layers.
+ </t> 
+<!-- 
+ <t>
+  The Stream ID is compound of a Flow ID and an Egress ID in order to provide a
+  unique ID for a DetNet flow. The Egress ID belongs to the DetNet Transport
+  layer as it is required for routing the flow. On top of that, the Flow ID
+  provides the identification in the DetNet Service layer. Taking PW over MPLS as an
+  example, the LSP label of the egress node is the Egress ID, and the PW label
+  is the Flow ID on top.
+ </t>  
+ 
+ <t>
+  Class and quality of service capabilities are typically provided by the
+  technologies available at the DetNet Transport layer, as well as the ones
+  available at the DetNet Service layer. However, both the DetNet Service and
+  DetNet Transport layers have their own specific aspects. For instance, the TC
+  field of the PW label belongs to the DetNet Service layer whereas the TC field
+  of the LSP labels belongs to the DetNet Transport layer. Mapping between the
+  QoS parameters of the two different layers is possible depending on the
+  network scenario.
+ </t>  
+
+ <t>
+  Different aspects of time synchronization are provided by the two different
+  layers. The DetNet Service layer provides timing information for the
+  applications using DetNet flows, e.g., via time stamps. The DetNet Transport
+  layer provides time and/or phase synchronization among network nodes, e.g.,
+  using IEEE 1588 or one of its Profiles.
+ </t>
+-->
+</section>
+
+<section title="Criteria for data plane solution alternatives" anchor="sec_crit">
+ <t>
+   This section provides criteria to help to evaluate potential options.  The
+   criteria can be broken down based on layer.  That is if the criteria is
+   focused on delivering DetNet service adaptation, i.e., is concerned with the
+   DetNet Service layer, or if the criteria is focused on transporting flows
+   across an end to end DetNet domain. [Editor's note: which is TBD.]
+ </t>
+  
+  <t>
+   Each deterministic networking data plane solution alternative is described
+   and evaluated using the criteria described in this section. The used criteria
+   enumerated in this section are selected so that they highlight the existence
+   or lack of features that are expected or seen important to a solution
+   alternative for the data plane solution. 
+  </t>
+ 
+
+  <section title="#? DetNet Service Interface" anchor="sec_crit_svc">
+    <t>
+     [Editor's note: this criteria needs a bit more discussion.]
+    </t>
+    <t>
+      One of the most fundamental differences between different potential
+      data plane options is the basic addressing and headers used by DetNet
+      clients.  For example, is the basic service a Layer 2 (e.g., Ethernet) or
+      Layer 3 (i.e., IP) service. This decision impacts how DetNet end points
+      are addressed, and the basic forwarding logic of the DetNet Service layer.
+    </t>
+  </section>
+
+  <section title="#1 Encapsulation and overhead" anchor="sec_crit_encap">
+    <t>
+      Encapsulation and overhead is related to how the DetNet data plane
+      carries DetNet user traffic.  In several cases a deterministic flow has to
+      be encapsulated inside other protocols, for example, when transporting a
+      layer-2 Ethernet frame over an IP transport network. In some cases a
+      former tunneling like encapsulation can be avoided by underlying transport
+      protocol translation, for example, translating layer-2 Ethernet frame
+      including addressing and flow identification into native IP traffic. Last
+      it is possible that talkers and listeners handle deterministic flows
+      natively in layer-3.  This criteria concerns what is the encapsulation
+      method the solution alternative support: tunneling like encapsulation,
+      protocol translation or native layer-3 transport. In addition to the
+      encapsulation mechanism this criteria is also concerned of the processing
+      and specifically the encapsulate header overhead.
+    </t>
+  </section>
+
+  <section title="#2 Flow identification" anchor="sec_crit_streamid">
+    <t>
+     The solution alternative has to provide means to identify specific
+     deterministic flows. The flow identification can, for example,
+     be explicit field in the data plane encapsulation header or implicitly
+     encoded into the addressing scheme of the used data plane protocol or their
+     combination. This criteria concerns the availability and details of 
+     deterministic flow identification the data plane protocol alternative has.
+    </t>
+  </section>
+
+  <section title="#3 Packet sequencing" anchor="sec_crit_seq">
+    <t>
+      [Editor's note: is in order delivery a strict requirement?  if so, it
+      should be stated as such and separately from any other requirement. There
+      are multiple ways to solve this criteria.]
+    </t>
+    <t>
+     The solution alternative has to provide means for end systems to number
+     packets sequentially and transport that sequencing information along with
+     the sent packets. In addition to possible reordering packets one of the
+     important uses for sequencing is detecting duplicates. In a case of
+     intentional packet duplication a combination of flow identification and
+     packet sequencing allows for detecting and discarding duplicates at the
+     receiver (see <xref target="sec_crit_repdup"/> for more details).  This
+     criteria concerns the availability and details of the packet sequencing
+     capabilities the data plane protocol alternative has.
+    </t>
+  </section>
+  
+  
+  <section title="#4 Explicit routes" anchor="sec_crit_explicit">
+    <t>
+     The solution alternative has to provide a mechanism(s) for establishing
+     explicit routes that all packets belonging to a deterministic flow
+     will follow. The explicit route can be seen as a form of source
+     routing or a pre-reserved path e.g., using some network management
+     procedure. It should be noted that the explicit route does not need to be
+     detailed to a level where every possible intermediate node along the path
+     is part of the named explicit route. RSVP-TE <xref target="RFC3209"/> 
+     supports explicit routes, and typically provides pinned data paths
+     for established LSPs. At Layer-2, the IEEE 802.1Qca <xref 
+     target="IEEE8021Qca"/> specification defines how to do explicit path
+     control in a bridged network and its IETF counter part is defined in 
+     <xref target="I-D.ietf-isis-pcr"/>. This criteria concerns the
+     available mechanisms for explicit routes for the data plane protocol
+     alternative.
+    </t>
+  </section>
+
+  <section title="#5 Packet replication and deletion" anchor="sec_crit_repdup">
+    <t>
+      The objective for supporting packet replication and deletion is to
+      enable hitless (or lossless) 1+1 protection, which is also called
+      Seamless redundancy in <xref target="I-D.finn-detnet-architecture"/>.
+      Data plane solutions need to meet this objective independent of
+      the particular solution used.  In other words, a packet
+      replication and deletion is one identified method for a data plane
+      solution to provide seamless redundancy and other methods, if so
+      identified, are permissible. 
+    </t>
+    <t>
+     The solution alternative has to provide means for end systems and/or relay
+     systems to be able to replicate packets, and later eliminate all but one of
+     the replicas, at multiple points in the network in order to ensure that one
+     (or more) equipment failure event(s) still leave at least one path intact
+     for a deterministic networking flow. The goal is to enable hitless 1+1
+         protection in a way that no packet gets lost or there is no ramp up
+         time when either one of the paths fails for one reason or another.
+    </t>
+    <t>
+     Another concern regarding packet replication is how to enforce
+     replicated packets to take different route while the final
+     destination still remains the same.  With strict source routing,
+     all the intermediate hops are listed and paths can be guaranteed
+     to be non-overlapping.  Loose source routing only signals some of
+     the intermediate hops and it takes additional knowledge to ensure
+     that there is no single point of failure.
+      <vspace blankLines="1"/>
+      [Editor's note: at the DetNet Transport layer this criteria does not
+      concern packet deletion, only the packet replication. The packet deletion
+      belongs to the DetNet Service layer] 
+      <!-- vspace blankLines="1"/>
+      The implementation of this functionality largely depends on the
+      packet sequencing and flow identification approaches. The above
+      discussion on the potential use of new Options for packet sequencing and
+      flow identification approaches, as well as source routing and IP
+      tunnels to signal explicit paths, also applies here. -->
+      <vspace blankLines="1"/>
+
+    </t>
+    <t>
+     The IEEE 802.1CB <xref target="IEEE8021CB"/> is an example of
+     Ethernet-based solution that defines packet sequence numbering, packet
+     replication, and duplicate packet identification and deletion. The
+     deterministic networking data plane solution alternative at layer-3 has to
+     provide equivalent functionality. This criteria concerns the available
+     mechanisms for packet replication and duplicate deletion the data plane
+     protocol alternative has.
+    </t>
+  </section>
+
+  <section title="#6 Operations, Administration and Maintenance" anchor="sec_crit_oam" >
+    <t>
+     The solution alternative should demonstrate an availability of
+     appropriate standardized OAM tools that can be extended for
+     deterministic networking purposes with a reasonable effort, when
+     required. The OAM tools do not necessarily need to be specific to
+     the data plane protocol as it could be the case, for example, with
+     MPLS-based data planes. But any OAM-related implications or
+     requirements on data plane hardware must be considered.
+    </t>
+  </section>
+
+  <section title="#7 Time synchronization" anchor="sec_crit_sync">
+    <t>
+      Time synchronization between DetNet systems and nodes can be used
+      to enable fine grain scheduling of traffic along an end-to-end
+      data path.  Such scheduling can be used to deliver very low jitter
+      and latency.  [DetNet-ARCH] refers to a synchronization target of
+      less than 1 microsecond.  Meeting such time synchronization
+      objectives is likely to require specific hardware support, both at
+      the synchronization protocol level and at the (time synchronized)
+      packet scheduling level. It is worth noting that certain aspects
+      of time synchronization and packet scheduling may be provided by
+      the underlying sub-net technology, e.g.,
+      <xref target="IEEE802.1Qbv"/> and <xref target="IEEE802.1Qch"/>.
+    </t>
+  </section>
+
+  <section title="#8 Class and quality of service capabilities"
+      anchor="sec_crit_qos">
+    <t>
+      Class and quality of service, i.e., CoS and QoS, are terms that
+      are often used interchangeably and confused.  In the context of
+      DetNet, CoS is used to refer to mechanisms that provide traffic
+      forwarding treatment based on aggregate group basis and QoS is
+      used to refer to mechanisms that provide traffic forwarding
+      treatment based on a specific DetNet flow basis.  Examples of CoS
+      mechanisms include DiffServ which is enabled by IP header
+      differentiated services code point (DSCP) field
+      <xref target="RFC2474"/> and MPLS label traffic class field
+      <xref target="RFC5462"/>, and at Layer-2, by IEEE 802.1p priority
+      code point (PCP).
+    </t>
+    <t>
+     Quality of Service (QoS) mechanisms for flow specific traffic
+     treatment typically includes a guarantee/agreement for the
+     service, and allocation of resources to support the service.
+     Example QoS mechanisms include discrete resource allocation,
+     admission control, flow identification and isolation, and sometimes
+     path control, traffic protection, shaping, policing and
+     remarking. Example protocols that support QoS control
+     include <xref target="RFC2205">Resource ReSerVation Protocol</xref>
+     (RSVP) and RSVP-TE <xref target="RFC3209"/> and <xref target="RFC3473"/>.
+    </t>
+    <t>
+      A critical DetNet service enabled by QoS (and perhaps CoS) is
+      delivering zero congestion loss. There are different mechanisms that
+      maybe used separately or in combination to deliver a zero
+      congestion loss service.  The key aspect of this objective is that
+      DetNet packets are not discarded due to congestion at any point in a
+      DetNet aware network.
+    </t>
+    <t>
+     In the context of the data plane solution there should be
+     means for flow identification, which then can be used to map a
+     flow against specific resources and treatment in a node enforcing
+     the QoS.  Hereto, certain aspects of CoS and QoS may be provided by
+     the underlying sub-net technology, e.g., actual queuing or IEEE 802.3x
+     priority flow control (PFC).
+    </t>
+  </section>
+  <section title="#9 Packet traceability" anchor="sec_crit_trace">
+    <t>
+     For the network management and specifically for tracing 
+     implementation or network configuration errors any means to find out
+     whether a packet is a replica, which node performed replication, and
+     which path was intended for the replica, can be very useful.
+     This criteria concerns the availability of solutions for
+     tracing packets in the context of data plane protocol
+     alternative. Packet trace is a form of OAM.
+    </t>
+  </section>
+  <section title="#10 Technical maturity" anchor="sec_crit_matu">
+    <t>
+     The technical maturity of the data plane solution alternative is crucial,
+     since it  basically defines the effort, time line and risks involved for
+     the use of the solution in deployments. For example, the maturity level
+     can be categorized as available immediately, available with small
+     extensions, available with repurposing/redefining portions of the protocol
+     or its header fields.  Yet another important measure for maturity is the
+     deployment experience. This criteria concerns the maturity of the data
+     plane protocol alternative as the solution alternative.  This
+     criteria is particularly important given, as previously noted, that
+     the DetNet data plane solution is expected to impact, i.e., be
+     supported in, hardware.
+    </t>
+  </section>
+</section>
+
+
+<!-- ================================================================= -->
+
+<section title="Data plane solution alternatives">
+ <t>
+  The following sections describe and rate deterministic data plane solution
+  alternatives. In "Analysis and Discussion" section each alternative is
+  evaluated against the criteria given in <xref target="sec_crit"/> and rated
+  using the following: (M)eets the criteria, (W)ork needed, and (N)ot suitable
+  or too much work envisioned.
+ </t>
+
+ <section title="DetNet Transport layer technologies" anchor="sec_net">
+  <section title="Native IPv6 transport" anchor="sec_alt_ipv6">
+   <section title="Solution description">
+    <t>
+     This section investigates the application of native IPv6 <xref
+     target="RFC2460"/> as the data plane for deterministic networking along the
+     criteria collected in <xref target="sec_crit"/>.
+    </t>
+    <t>
+     The application of higher OSI layer headers, i.e., headers deeper in the
+     packet, can be considered. Two aspects have to be taken into account for
+     such solutions. (i) Those header fields can be encrypted. (ii) Those
+     header fields are deeper in the packet, therefore, routers have to apply
+     deep packet inspection. See further details in
+     <xref target="sec_alt_higher"/>.
+    </t>
+   </section>
+  
+   <section title="Analysis and Discussion" anchor="sec_alt_ipv6_ana">
+    <t><list style="hanging">
+     <t hangText="Encapsulation and overhead (M/W)">
+      <vspace blankLines="1"/>
+      The DetNet Service layer encapsulated DetNet flows are assumed to be 
+      handled natively at layer-3 by IPv6 at the first place. The fixed header 
+      of an IPv6 packet is 40 bytes <xref target="RFC2460"/>. This overhead is 
+      bigger if any Extension Header is used, and a generic behaviour for host 
+      and forwarding nodes is specified in <xref target="RFC7045"/>.
+      However, the exact overhead (<xref target="sec_crit_encap"/>)
+      depends on what solution is actually used to provide DetNet features,
+      e.g., explicit routing or seamless redundancy if any of these is applied.     
+      <vspace blankLines="1"/>
+      IPv6 has two types of Extension Headers that are processed by intermediate
+      routers between the source and the final destination and may be of interest
+      for the data plane signaling, the Routing Header that is used to direct the
+      traffic via intermediate routers in a strict or loose source routing way,
+      and the Hop-by-Hop Options Header that carries optional information that
+      must be examined by every node along a packet's delivery path. The 
+      Hop-by-Hop Options Header, when present, must immediately follow the IPv6
+      Header and it is not possible to limit its processing to the end points of
+      Source Routed segments. 
+      <vspace blankLines="1"/>
+      IPv6 also provides a Destination Options Header that is used to carry
+      optional information to be examined only by a packet's destination node(s).
+      The encoding of the options used in the Hop-by-Hop and in the Destination
+      Options Header indicates the expected behavior when a processing IPv6 node
+      does not recognize the Option Type, e.g. skip or drop; it should be noted
+      that due to performance restrictions nodes may ignore the Hop-by-Hop Option
+      Header, drop packets containing a Hop-by-Hop Option Header, or assign
+      packets containing a Hop-by-Hop Option Header to a slow processing path
+      <xref target="I-D.ietf-6man-rfc2460bis"/> (e.g. punt packets from hardware
+      to software forwarding which is highly detrimental to the performance).
+      <vspace blankLines="1"/>
+      The creation of new Extension Headers that would need to be processed by
+      intermediate nodes is strongly discouraged. In particular, new Extension
+      Header(s) having hop-by-hop behavior must not be created or specified.
+      New options for the existing Hop-by-Hop Header should not be created or
+      specified unless no alternative solution is feasible
+       <xref target="RFC6564"/>.
+   
+      <vspace blankLines="1"/>
+      </t>
+    
+     <t hangText="Flow identification (M/W)">
+      <vspace blankLines="1"/>
+      The 20-bit flow label field of the fixed IPv6 header is suitable to
+      distinguish different deterministic flows. But guidance on the use
+      of the flow label provided by <xref target="RFC6437"/> places restrictions
+      on how the flow label can be used. In particular, labels should be chosen
+      from an approximation to a discrete uniform distribution. Additionally,
+      existing implementations generally do not open APIs to control the flow
+      label from the upper layers.
+      <vspace blankLines="1"/>
+      Alternatively, the Flow identification could
+      be transported in a new option in the Hop-by-Hop Options Header. 
+     <vspace blankLines="1"/></t>
+     
+     <!-- t hangText="Packet sequencing (W/N)">
+      <vspace blankLines="1"/>
+      Packet sequencing would require a new option in an IPv6 Extension Header.
+      One approach could  be to encapsulate the packets in IP-in-IP tunnels that
+      would terminate at the elimination points. In that case, the sequence
+      number is only useful to the destination of the outer IPv6 header, and it
+      could be placed in a new option in the Destination Options Header in the
+      encapsulation.
+      <vspace blankLines="1"/>
+      Alternatively, the sequence number could also be transported in another new
+      option in the Hop-by-Hop Options Header. 
+     <vspace blankLines="1"/></t -->
+     
+     <t hangText="Explicit routes (W)">
+      <vspace blankLines="1"/>
+      The general assumption is that a Software-Defined Networking (SDN)
+      <xref target="RFC7426"/> based approach is applied to compute, establish
+      and manage the explicit routes, leveraging Traffic Engineering (TE)
+      extensions to routing protocols <xref target="RFC5305"/>
+      <xref target="I-D.ietf-idr-ls-distribution"/> and evolving to the
+      Path Computation Element (PCE) Architecture <xref target="RFC5440"/>, 
+      though a number of issues remain to be solved <xref target="RFC7399"/>.
+      <vspace blankLines="1"/>
+      Segment Routing (SR) <xref target="I-D.ietf-spring-segment-routing"/> is a
+      new initiative to equip IPv6 with explicit routing capabilities.
+      The idea for the DetNet data plane would be to apply SR to IPv6 with the
+      addition of a new type of routing extension header <xref
+      target="I-D.ietf-6man-segment-routing-header"/> to explicitly signal the
+      path in the data plane between the source and the destination, and/or
+      between replication points and elimination points if this functionality
+      is used. 
+      <vspace blankLines="1"/>
+      Another concern regarding packet replication is how to enforce 
+      replicated packets to take different route while the final destination 
+      still remains the same.
+      With strict source routing, all the intermediate hops are listed and paths
+      can be guaranteed to be non-overlapping. Loose source routing only signals
+      some of the intermediate hops and it takes additional knowledge to ensure
+      that there is no single point of failure.
+        <vspace blankLines="1"/>
+     </t>
+     
+     <t hangText="Packet replication (W)">
+      The functionality of replicating a packet exists in IPv6 but is limited
+      to multicast flows.
+      <vspace blankLines="1"/>
+      In order to enforce replicated packets to take different routes, 
+      IP-in-IP encapsulation and Segment Routing could be leveraged to signal
+      a segment in a packet. 
+      A replication point would insert a different routing header in each copy it
+      makes, the routing header providing explicitly the hops to the elimination
+      point for that particular replica of the packet, in a strict or in a loose
+      source routing fashion.
+      An elimination point would pop the routing headers from the various copies
+      it gets and forward or receive the packet if it is the final destination.
+      <vspace blankLines="1"/>
+      </t>
+     
+     <t hangText="Operations, Administration and Maintenance (M/W)">
+      <vspace blankLines="1"/>
+      IPv6 enjoys the existing toolbox for generic IP network management.
+      However, IPv6 specific management features are still not at the level of
+      that IPv4 has. This specifically concerns the areas that are IPv6 specific,
+      for example, related to neighbor discovery protocol (ND), stateless address
+      autoconfiguration (SLAAC), subscriber identification, and security.
+      While the standards are already mostly in place the implementations in
+      deployed equipment can be lacking or inadequate for commercial
+      deployments. This is largely only an issue with old existing equipment.
+    <vspace blankLines="1"/></t>
+    
+     <!-- t hangText="Time synchronization (W/N)">
+      <vspace blankLines="1"/>
+      IPv6 has no existing supporting mechanisms for anything time
+      synchronization. A new extension header would be needed for this purpose,
+      if such functionality is required.
+     <vspace blankLines="1"/></t -->
+    
+     <t hangText="Class and quality of service capabilities (M)">
+      <vspace blankLines="1"/>
+      The traffic class field of the fixed IPv6 header is designed for this purpose.
+     <vspace blankLines="1"/></t>
+    
+     <t hangText="Packet traceability (M/W/N)">
+      <vspace blankLines="1"/>
+      The traceability of replicated packets involves the capability to resolve
+      which replication point issued a particular copy of a packet, which segment
+      was intended for that replica, and which particular packet of which
+      particular flow this is. Sequence also depends on the sequencing
+      mechanism. As an example, the replication point may be indicated as the source of the
+      packet if IP-in-IP encapsulation is used to forward along segments.
+      Another alternate to IP-in-IP tunneling along segments would be to protect the
+      original source address in a destination option similar to the Home Address
+      option <xref target="RFC6275"/> and then use the address of the replication
+      point as source in the IP header.
+      <vspace blankLines="1"/>
+      The traceability also involves the capability to determine if a particular
+      segment is operational. While IPv6 as such has no support for reversing a
+      path, it appears source route extensions such as the one defined for
+      segment routing could be used for tracing purposes. Though it is not a 
+      usual practice, IPv6 <xref target="RFC2460"/> expects that a Source Route
+      path may be reversed, and the standard insists that a node must not include
+      the reverse of a Routing Header in the response unless the received Routing
+      Header was authenticated.
+      <vspace blankLines="1"/></t>
+    
+     <t hangText="Technical maturity (M/W)">
+      <vspace blankLines="1"/>
+      IPv6 has been around about 20 years. However, large scale global and
+      commercial IPv6 deployments are rather new dating only few years back to
+      around 2012. While IPv6 has proven itself there are number of small issues
+      to work on as they show up once operations experience grows. 
+      
+     <vspace blankLines="1"/>
+      The <eref target="http://6lab.cisco.com/stats/">Cisco 6Lab site</eref>
+      provides information on IPv6 deployment per country, indicating figures
+      for prefixes, transit AS, content and users. Per this site, many
+          countries, including Canada, Brazil, the USA, Germany, France, Japan,
+          Portugal, Sweden, Finland, Norway, Greece, and Ecuador, achieve a
+          deployment ratio above 30 percent, and the overall adoption reported
+          by <eref
+          target="https://www.google.com/intl/en/ipv6/statistics.html">Google
+          Statistics</eref> is now above 10 percent.      
+      <!--     A good meter
+      is the number of basic IPv6 related documents in IETF V6OPS, V6MAN and
+      other use case specific working groups. -->
+     <vspace blankLines="1"/></t>
+    </list></t>
+   </section>
+
+ 
+   <section title="Summary">
+    <t>
+     TBD.
+    </t>
+   </section>
+  </section>
+ 
+  <section title="Native IPv4 transport" anchor="sec_alt_ipv4">
+   <section title="Solution description">
+    <t>
+     IPv4 <xref target="RFC0791"/> is in principle the same as IPv6, except that
+     it has a smaller address space. However, IPv6 was designed around the fact
+     that extension headers are an integral part of the protocol and operation
+     from the beginning, although the practice may some times prove differently
+     <xref target="I-D.ietf-v6ops-ipv6-ehs-in-real-world"/>. IPv4 never really
+     needed any extension headers to work properly, thus support for IPv4 options
+     outside closed networks cannot typically be guaranteed. In the context of
+     deterministic networking data plane solutions the major difference between
+     IPv4 and IPv6 seems to be the practical support for header extensibility.
+     Anything below and above the IP header independent of the version is
+     practically the same. 
+    </t>
+   </section>
+
+   <section title="Analysis and Discussion" anchor="sec_alt_ipv4_ana">
+    <t><list style="hanging">
+     <t hangText="Encapsulation and overhead (M)">
+      <vspace blankLines="1"/> The fixed header of an IPv4 packet is 20 bytes
+      <xref target="RFC0791"/>. IP options add overhead and the maximum IPv4
+      header size if 60 octets leaving only 40 octets for possible options.
+      <vspace blankLines="1"/></t>
+     
+     <t hangText="Flow identification (W/N)">
+      <vspace blankLines="1"/>
+      The IPv4 header has a 16-bit identification field that was originally
+      intended for assisting fragmentation and reassembly of IPv4 packets as
+      described in <xref target="RFC0791"/>. The identification field has also
+      been proposed to be used for actually identifying flows between two
+      IP addresses and a given protocol for detecting and removing duplicate
+      packets <xref target="RFC1122"/>. However, recent update <xref
+      target="RFC6864"/> to both <xref target="RFC0791"/> and <xref
+      target="RFC1122"/> restricts the use of IPv4 identification field only to
+      fragmentation purposes. 
+      <vspace blankLines="1"/>
+      The IPv4 also has a stream identifier option <xref target="RFC0791"/>,
+      which contains a 16-bit SATNET stream identifier. However, the option has
+      been deprecated <xref target="RFC6814"/>.  The conclusion is that stream
+      identification does not work nicely with IPv4 header alone and a
+      traditional 5-tuple identification might not also be enough in a case of a
+      flow duplication. For a working solution upper layer protocol
+      headers such as the RTP are required for unambiguous flow
+      identification.
+     <vspace blankLines="1"/></t>
+     
+     <!-- t hangText="Packet sequencing (W/N)">
+      <vspace blankLines="1"/>
+      IPv4 has no inbuilt support for packet sequencing. Upper layer protocol
+      header support such as the RTP is required.
+     <vspace blankLines="1"/></t-->
+     
+     <t hangText="Explicit routes (M/W)">
+      <vspace blankLines="1"/>
+      IPv4 has two source routing option specified: the loose source and record
+      route option (LSRR), and the strict source and record route option (SSRR)
+      <xref target="RFC0791"/>. The support of these options in the Internet is
+      questionable but within a closed network the support may be assumed.
+     <vspace blankLines="1"/></t>
+    
+     <t hangText="Packet replication (W/N)">
+      <vspace blankLines="1"/>
+      The functionality of replicating a packet exists in IPv4 but is limited to
+      multicast flows.  In general the issue regarding the IPv6 packet
+      replication also applies to IPv4.  Duplicate packet detection for IPv4 is
+      studied in <xref target="RFC6621"/> to a great detail in the context of
+      simplified multicast forwarding. 
+      <vspace blankLines="1"/></t>
+    
+     <t hangText="Operations, Administration and Maintenance (M)">
+      <vspace blankLines="1"/>
+      IPv4 enjoys the extensive and "complete" existing toolbox for generic IP
+      network management.
+    <vspace blankLines="1"/></t>
+    
+     <!--t hangText="Time synchronization (W/N)">
+      <vspace blankLines="1"/>
+      IPv4 has an existing option for transporting "Internet Timestamp" <xref
+      target="RFC0791"/> with the accuracy of 1ms. The support and usability of
+      this option is unknown in the context of determnistic networking data
+      plane. Similarly to IPv6 new work would be needed to introduce sense of
+      time to IPv4 or rely on upper layer protocol such as the RTP to provide the
+      required functionality.
+     <vspace blankLines="1"/></t-->
+    
+     <t hangText="Class and quality of service capabilities (M)">
+      <vspace blankLines="1"/>
+      The type of service (TOS) field of the fixed IPv4 header is designed for this purpose.
+     <vspace blankLines="1"/></t>
+    
+     <t hangText="Packet traceability (W/N)">
+      <vspace blankLines="1"/>
+      The IPv4 has a traceroute option <xref target="RFC1393"/> that could be used
+      to record the route the packet took. However, the option has been
+      deprecated <xref target="RFC6814"/>. Similarly to IPv6 new work would be
+      needed to allow better traceability of IPv4 packets.
+      <vspace blankLines="1"/></t>
+    
+     <t hangText="Technical maturity (M/W)">
+      <vspace blankLines="1"/>
+      IPv4 can be considered mature technology with over 30 years of
+      implementation, deployment and operations experience. However, no new IPv4
+      standards development is "allowed" anymore <xref target="RFC6540"/><xref
+      target="I-D.ietf-sunset4-gapanalysis"/>.
+     <vspace blankLines="1"/></t>
+    </list></t>
+   </section>
+
+   <section title="Summary">
+    <t>
+     TBD.
+    </t>
+   </section>
+  </section>
+ 
+  <section title="Multiprotocol Label Switching (MPLS)" anchor="sec_alt_mpls">
+   <section title="Solution description">
+     
+    <t>
+      Multiprotocol Label Switching Architecture (MPLS) <xref target="RFC3031"/>
+      and its variants, MPLS with Traffic Engineering (MPLS-TE) <xref
+      target="RFC3209"/> and <xref target="RFC3473"/>, and MPLS Transport
+      Profile (MPLS-TP) <xref target="RFC5921"/> is a widely deployed technology
+      that switches traffic based on MPLS label stacks <xref target="RFC3032"/>
+      and <xref target="RFC5960"/>.  MPLS is the foundation for Pseudowire-based
+      services <xref target="sec_alt_pwe"/> and emerging technologies such as
+      Bit-Indexed Explicit Replication (BIER) <xref target="sec_alt_bier"/> and
+      <eref target="https://datatracker.ietf.org/wg/spring/charter/"> Source
+      Packet Routing</eref>.
+    </t>
+    <t>
+      MPLS supports the equivalent of both the DetNet Service and DetNet
+      Transport layers, and provides a very rich set of mechanisms that can be
+      reused directly, and perhaps augmented in certain cases, to deliver DetNet
+      services. At the DetNet Transport layer, MPLS provides forwarding,
+      protection and OAM services.  At the DetNet Service Layer it provides
+      client service adaption, directly, via Pseudowires <xref
+      target="sec_alt_pwe"/> and via other label-like mechanisms such as EPVN
+      <xref target="sec_alt_evpn"/>.  A representation of these options are
+      shown in <xref target="fig_mpls_clients"/>.
+    </t>
+<figure anchor="fig_mpls_clients" align="center"
+title="MPLS-based Services">
+<artwork align="center"><![CDATA[
+   PW-Based               EVPN Labeled                 IP
+   Services                  Services                Transport
+ |------------|  |-----------------------------|  |------------|
+
+   Emulated       EVPN over LSP   EVPN w/ ESI ID        IP
+   Service
+                                  +------------+
+                                  |  Payload   |
+ +------------+   +------------+  +------------+             (Service)
+ | PW Payload |   |  Payload   |  |ESI Lbl(S=1)|
+ +------------+   +------------+  +------------+  +------------+
+ |PW Lbl(S=1) |   |VPN Lbl(S=1)|  |VPN Lbl(S=0)|  |     IP     |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ |LSP Lbl(S=0)|   |LSP Lbl(S=0)|  |LSP Lbl(S=0)|  |LSP Lbl(S=1)|
+ +------------+   +------------+  +------------+  +------------+
+       .                .               .               .
+       .                .               .               .    (Transport)
+       .                .               .               .
+
+~~~~~~~~~~~ denotes DetNet Service <-> DetNet Transport layer boundary
+]]></artwork>
+</figure>
+<!---
+    <t>
+      The basic header used in MPLS is the MPLS label stack,
+      <xref target="RFC3032"/>.  A good overview of the MPLS data plane
+      can be found in <xref target="RFC5960"/>, notably Section 3.1.
+      Important MPLS data plane behaviors are defined in combination
+      with the associated control plane mechanisms.  This includes MPLS
+      Traffic Engineering (MPLS-TE), <xref target="RFC3209"/> and
+      <xref target="RFC3473"/>.  Point-to-Multipoint TE Label Switched
+      Paths (LSPs), <xref target="RFC4875"/>. Linear Protection,
+      <xref target="RFC6378"/> and  <xref target="RFC7271"/>. And the in
+      progress work on MPLS support for time synchronization
+      <xref target="I-D.ietf-mpls-residence-time"/>. 
+    </t>
+-->
+    <t>
+      MPLS can be controlled in a number of ways including via a control
+      plane, via the management plane, or via centralized controller
+      (SDN) based approaches. MPLS also provides standard control plane
+      reference points.  Additional information on MPLS architecture and
+      control can be found in <xref target="RFC5921"/>.  A summary of
+      MPLS control plane related functions can be found in
+      <xref target="RFC6373"/>. The remainder of this section will focus
+      <xref target="RFC6373"/>. The remainder of this section will focus
+      on the MPLS transport data plane, additional information on the
+      MPLS service data plane can be found below in
+      <xref target="sec_alt_mpls_svc"/>.
+    </t>
+    <t>
+      The following is a work in progress and draws
+      heavily from <xref target="RFC5960"/> and may be updated, replaced
+      or removed.
+    </t>
+    <t>
+      Encapsulation and forwarding of packets traversing MPLS LSPs
+      follows standard MPLS packet encapsulation and forwarding as
+      defined in <xref target="RFC3031"/>, <xref target="RFC3032"/>,
+      <xref target="RFC5331"/>, and <xref target="RFC5332"/>.
+    </t>
+    <t>
+      Data plane Quality of Service capabilities are included in the
+      MPLS in the form of Traffic Engineered (TE) LSPs
+      <xref target="RFC3209"/> and the MPLS Differentiated Services
+      (DiffServ) architecture <xref target="RFC3270"/>.  Both E-LSP and
+      L-LSP MPLS DiffServ modes are defined.  The Traffic Class field
+      (formerly the EXP field) of an MPLS label follows the definition
+      of <xref target="RFC5462"/> and <xref target="RFC3270"/>.
+    </t>
+    <t>
+      Except for transient packet reordering that may occur, for example,
+      during fault conditions, packets are delivered in order on L-LSPs,
+      and on E-LSPs within a specific ordered aggregate.
+    </t>
+    <t>
+      The Uniform, Pipe, and Short Pipe DiffServ tunneling and TTL
+      processing models are described in <xref target="RFC3270"/> and
+      <xref target="RFC3443"/> and may be used for MPLS LSPs.  
+    </t>
+    <t>
+      Equal-Cost Multi-Path (ECMP) load-balancing is possible with MPLS
+      LSPs and can be avoided using a number of techniques. The same
+      holds for Penultimate Hop Popping (PHP).
+    </t>
+    <t>
+      MPLS includes the following LSP types:
+    </t>
+    <t>
+      o  Point-to-point unidirectional
+    </t>
+    <t>
+      o  Point-to-point associated bidirectional
+    </t>
+    <t>
+      o  Point-to-point co-routed bidirectional
+    </t>
+    <t>
+      o  Point-to-multipoint unidirectional
+    </t>
+    <t>
+      Point-to-point unidirectional LSPs are supported by the basic MPLS
+      architecture <xref target="RFC3031"/>.
+    </t>
+    <t>
+      A point-to-point associated bidirectional LSP between LSRs A and B
+      consists of two unidirectional point-to-point LSPs, one from A to
+      B and the other from B to A, which are regarded as a pair
+      providing a single logical bidirectional transport path.
+    </t>
+    <t>
+      A point-to-point co-routed bidirectional LSP is a point-to-point
+      associated bidirectional LSP with the additional constraint that
+      its two unidirectional component LSPs in each direction follow the
+      same path (in terms of both nodes and links).  An important
+      property of co-routed bidirectional LSPs is that their
+      unidirectional component LSPs share fate.
+    </t>
+    <t>
+      A point-to-multipoint unidirectional LSP functions in the same
+      manner in the data plane, with respect to basic label processing
+      and packet-switching operations, as a point-to-point
+      unidirectional LSP, with one difference: an LSR may have more than
+      one (egress interface, outgoing label) pair associated with the
+      LSP, and any packet it transmits on the LSP is transmitted out all
+      associated egress interfaces.  Point-to-multipoint LSPs are
+      described in <xref target="RFC4875"/> and
+      <xref target="RFC5332"/>.  TTL processing and exception handling
+      for point-to- multipoint LSPs is the same as for point-to-point
+      LSPs.
+    </t>
+    <t>
+      Additional data plane capabilities include Linear Protection,
+      <xref target="RFC6378"/> and <xref target="RFC7271"/>. And the in
+      progress work on MPLS support for time synchronization
+      <xref target="I-D.ietf-mpls-residence-time"/>.
+    </t>
+   </section>
+
+   <section title="Analysis and Discussion">
+
+    <t><list style="hanging">
+     <t hangText="#? DetNet Service Interface (M)">
+        <vspace blankLines="1"/> The DetNet service interface is enabled through
+        the DetNet Service Layer it provides client service adaption, directly,
+        via Pseudowires <xref target="sec_alt_pwe"/> and via other label-like
+        mechanisms such as EPVN <xref target="sec_alt_evpn"/>.
+      <vspace blankLines="1"/> </t>
+     <t hangText="#1 Encapsulation and overhead (M)">
+      <vspace blankLines="1"/> 
+          There are two perspectives to consider when looking at
+          encapsulation.  The first is encapsulation to support services.
+          These considerations are part of the DetNet service layer and
+          are covered below, see Sections <xref format="counter"
+          target="sec_alt_pwe"/> and <xref format="counter"
+          target="sec_alt_evpn"/>.
+
+          <vspace blankLines="1"/> 
+
+          The second perspective relates to encapsulation, if any, is
+          needed to transport packets across network.  In this case, the
+          MPLS label stack, <xref target="RFC3032"/> is used to identify
+          flows across a network.  MPLS labels are compact and highly
+          flexible.  They can be stacked to support client adaptation,
+          protection, network layering, source routing, etc.
+      <vspace blankLines="1"/> </t>
+     <t hangText="#2 Flow identification (M)">
+        <vspace blankLines="1"/>
+
+          MPLS label stacks provide highly flexible ways to identify
+          flows.  Basically, they enable the complete separation of
+          traffic classification from traffic treatment and thereby enable
+          arbitrary combinations of both.
+      <vspace blankLines="1"/> </t>
+     <t hangText="#3 Packet sequencing (M)">
+        <vspace blankLines="1"/>
+
+          Packet ordering in MPLS is generally similar to packet ordering
+          in Ethernet. MPLS implementations can also support ECMP for
+          certain types of traffic which can to lead to out of order
+          delivery.  There are defined techniques to avoid ECMP and
+          ensure in order delivery during normal operation. Out of order
+          delivery is still possible in certain MPLS protection
+          scenarios.  If additional ordering mechanisms are required,
+          these are likely to be implemented at the DetNet Service Layer.
+      <vspace blankLines="1"/> </t>
+     <t hangText="#4 Explicit routes (M)">
+        <vspace blankLines="1"/>
+
+          MPLS supports explicit routes based on how LSPs are established,
+          e.g., via TE explicit routes <xref target="RFC3209"/>.
+          Additional, but not required, additional capabilities are being
+          defined as part of Segment Routing (SR)
+          <xref target="I-D.ietf-spring-segment-routing"/>. 
+      <vspace blankLines="1"/> </t>
+     <t hangText="#5 Packet replication and deletion (M/W)">
+        <vspace blankLines="1"/>
+
+          At the MPLS LSP level, there are mechanisms defined to provide
+          1+1 protection.  The current definitions
+          <xref target="RFC6378"/> and <xref target="RFC7271"/> use OAM
+          mechanisms to support and coordinate protection switching and
+          packet loss is possible during a switch.  While such this level
+          of protection may be sufficient for man DetNet applications,
+          when truly hitless (i.e., zero loss) switching is required
+          additional mechanisms will be needed.  It is expected that these
+          additional mechanisms will be defined at the DetNet Service
+          Layer.
+      <vspace blankLines="1"/> </t>
+     <t hangText="#6 Operations, Administration and Maintenance (M)">
+        <vspace blankLines="1"/>
+
+          MPLS already includes a rich set of OAM functions at both the
+          Service and Transport Layers. This includes LSP ping [ref] and
+          those enabled via the MPLS Generic Associated Channel
+          <xref target="RFC5586"/> and registered by 
+          <eref target="http://www.iana.org/assignments/g-ach-parameters/g-ach-parameters.xhtml">
+          IANA</eref>.
+      <vspace blankLines="1"/> </t>
+     <t hangText="#7 Time synchronization (M/W)">
+        <vspace blankLines="1"/>
+
+          MPLS itself does not provide any time synchronization service.
+          The expectations is that the actual time-based scheduling will
+          be provided by the sub-network layer, e.g., by
+          <xref target="TSNTG"/>, and that the DetNet transport layer will
+          merely need to facilitate time synchronization (with hardware
+          support) across multiple sub-network domains and technologies.
+          Work is in progress
+          <xref target="I-D.ietf-mpls-residence-time"/> that may satisfy,
+          or serve as a building block for, DetNet time synchronization.
+      <vspace blankLines="1"/>
+     </t>
+     <t hangText="#8 Class and quality of service capabilities (M/W)">
+        <vspace blankLines="1"/>
+
+      As previously mentioned, Data plane Quality of Service
+      capabilities are included in the MPLS in the form of Traffic
+      Engineered (TE) LSPs <xref target="RFC3209"/> and the MPLS
+          Differentiated Services (DiffServ) architecture
+          <xref target="RFC3270"/>.  Both E-LSP and L-LSP MPLS DiffServ
+          modes are defined.  The Traffic Class field (formerly the EXP
+          field) of an MPLS label follows the definition of
+          <xref target="RFC5462"/> and <xref target="RFC3270"/>.  One
+          potential open area of work is synchronized, time based
+          scheduling. 
+
+      <vspace blankLines="1"/>
+     </t>
+     <t hangText="#9 Packet traceability (M)">
+        <vspace blankLines="1"/>
+        
+      MPLS supports multiple tracing mechanisms.  A control based one
+          is defined in  <xref target="RFC3209"/>.  An OAM based mechanism
+          is defined in MPLS On-Demand Connectivity Verification and Route
+          Tracing  <xref target="RFC6426"/>.
+      <vspace blankLines="1"/>
+     </t>
+     <t hangText="#10 Technical maturity (M)">
+        <vspace blankLines="1"/> 
+
+          MPLS as a mature technology that has been widely deployed in
+          many networks for many years.  Numerous vendor products and
+          multiple generations of MPLS hardware have been built and
+          deployed.
+      <vspace blankLines="1"/>
+     </t>
+     </list>
+     </t>
+
+   </section>
+
+   <section title="Summary">
+    <t>
+      MPLS is a mature technology that has been widely deployed.
+      Numerous vendor products and multiple generations of MPLS hardware
+      have been built and deployed.  MPLS LSPs support a significant
+      portion of the identified DetNet data plane criteria
+      today. Aspects of the DetNet data plane that are not fully
+      supported can be incrementally added.
+    </t>
+   </section>
+  </section>
+
+
+ <section title="Bit Indexed Explicit Replication (BIER)">
+  <t>
+   <xref target="I-D.ietf-bier-architecture">Bit Indexed Explicit Replication
+   </xref> (BIER) is a network plane replication technique that was initially
+   intended as a new method for multicast distribution. In a nutshell, a BIER
+   header includes a bitmap that explicitly signals the listeners that are
+   intended for a particular packet, which means that 1) the sender is aware of
+   the individual listeners and 2) the BIER control plane is a simple extension 
+   of the unicast routing as opposed to a dedicated multicast data plane, which 
+   represents a considerable reduction in OPEX. For this reason, the technology
+   faces a lot of traction from Service Providers. <xref target="sec_alt_bier"/>
+   discusses the applicability of BIER for replication in the DetNet. 
+  </t>
+  <t>
+   The simplicity of the BIER technology makes it very versatile as a network
+   plane signaling protocol. Already, a new Traffic Engineering variation is
+   emerging that uses bits to signal segments along a TE path. While the more
+   classical BIER is mainly a multicast technology that typically leverages a
+   unicast distributed control plane through IGP extensions, BIER-TE is mainly
+   a unicast technology that leverages a central computation to setup path,
+   compute segments and install the mapping in the intermediate nodes.
+   <xref target="sec_alt_bier_te"/>
+   discusses the applicability of BIER-TE for replication, traceability and 
+   OAM operations in DetNet. 
+  </t>
+
+
+  <section title="Base BIER" anchor="sec_alt_bier">
+
+  <t>
+   Bit-Indexed Explicit Replication (BIER) layer may be considered to be
+   included into Deterministic Networking data plane solution. Encapsulation of
+   a BIER packet in MPLS network presented in <xref target="fig_BIER_MPLS"/>
+  </t>
+  
+<figure anchor="fig_BIER_MPLS" align="center"
+title="BIER packet in MPLS encapsulation">
+<artwork align="center"><![CDATA[
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Label Stack Element                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Label Stack Element                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|              BIER-MPLS label          |     |1|               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|0 1 0 1|  Ver  |  Len  |              Entropy                  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                BitString  (first 32 bits)                     ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~                                                               ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~                BitString  (last 32 bits)                      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|OAM|     Reserved      | Proto |            BFIR-id            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+]]></artwork>
+</figure>
+
+  <section title="Solution description">
+  <t>  
+   The DetNet may be presented in BIER as distinctive payload type with its own 
+   Proto(col) ID. Then it is likely that DetNet will have the header that would 
+   identify:
+   <list style="symbols">
+    <t>Version;</t>
+    <t>Sequence Number;</t>
+    <t>Timestamp;</t>
+    <t>Payload type, e.g. data vs. OAM.</t>
+   </list>
+   DetNet node, collocated with BFIR, may use multiple BIER sub-domains to
+   create replicated flows. Downstream DetNet nodes, collocated with BFER, would
+   terminate redundant flows based on Sequence Number and/or Timestamp
+   information. Such DetNet may be BFER in one BIER sub-domain and BFIR in
+   another. Thus DetNet flow would traverse several BIER sub-domains.
+  </t>
+   
+<figure anchor="fig_BIER_DetNet" align="center"
+title="DetNet in BIER domain">
+<artwork align="center"><![CDATA[
+                   +-----+
+                   |  A  |
+                   +-----+
+                    /   \
+                   .     .
+                  /       .
+                 .         \
+                /           .
+               .             .
+              /               \
+         +-----+             +-----+
+         |  B  |             |  C  |
+         +-----+             +-----+
+          /   \               /   \
+         .     .             .     .
+        /       \           .       .
+       .         .         /         \
+      /           \       .           .
+     .             .     .             .
+    /               \   /               \
++-----+            +-----+           +-----+
+|  D  |            |  E  |           |  F  |
++-----+            +-----+           +-----+
+   \                .  .               /
+    .              .    .             .
+     \            .      .           .
+      .          .        .         / 
+       \        .          .       .
+         .     .            .     .
+          \   .              .   / 
+         +-----+            +-----+
+         |  G  |            |  H  |
+         +-----+            +-----+
+]]></artwork>
+</figure>
+
+  <t>
+   Consider DetNet flow that must traverse BIER enabled domain from A to G and H.
+   DetNet may use three BIER subdomains:
+   <list style="symbols">
+    <t>A-B-D-E-G (dash-dot): A is BFIR, E and G are BFERs,</t>
+    <t>A-C-E-F-H (dash-double-dot): A is BFIR, E and H are BFERs,</t>
+    <t>E-G-H (dotted): E is BFIR, G and H are BFERs.</t>
+   </list>
+  </t>
+
+  <t>
+   DetNet node A sends DetNet into red and purple BIER sub-domains. DetNet node
+   E receives DetNet packet and sends into green sub-domain while terminating
+   duplicates and those that deemed too-late.
+  </t>
+
+  <t>
+   DetNet nodes G and H receive DetNet flows, terminate duplicates and those
+   that are too-late.
+  </t>
+  </section>
+
+  <section title="Analysis and Discussion">
+  </section>
+
+  <section title="Summary">
+  </section>
+ </section>  <!-- "Base BIER" -->
+
+
+ <section title="BIER - Traffic Engineering"
+          anchor="sec_alt_bier_te">
+
+
+  <t>
+   An alternate use of Bit-Indexed Explicit Replication (BIER) uses bits in the
+   BitString to represent adjacencies as opposed to destinations, as discussed in
+   <xref target="I-D.eckert-bier-te-arch"> BIER Traffic Engineering (TE)</xref>.
+   </t><t>
+   The proposed function of BIER-TE in the DetNet data plane is to control the
+   process of replication and elimination, as opposed to the identification of
+   the flows or and the sequencing of packets within a flow.
+   </t><t>
+   At the path ingress, BIER-TE identifies the adjacencies that are activated
+   for this packet (under the rule of the controller). At the egress, BIER-TE is 
+   used to identify the adjacencies where transmission failed. This information
+   is passed to the controller, which in turn can modify the active adjacencies
+   for the next packets.
+   </t><t>
+   The value is that the replication can be controlled and monitored with the
+   granularity of a packet and a adjacency in a control loops that involves an
+   external controller.
+  </t>
+  <!--section title="On BIER-TE">
+  <t>
+   BIER-TE supports traffic engineering by explicit hop-by-hop forwarding
+   and loose hop forwarding of packets. 
+     </t><t>
+      From the BIER-TE architecture, the key differences over BIER are:
+      <list style="symbols">
+      <t>BIER-TE replaces in-network autonomous path calculation by
+         explicit paths calculated off path by the BIER-TE controller host.
+      </t>
+      <t>In BIER-TE every BitPosition of the BitString of a BIER-TE packet
+         indicates one or more adjacencies - instead of a BFER as in BIER.
+      </t>
+      <t>BIER-TE in each BFR has no routing table but only a BIER-TE
+         Forwarding Table (BIFT) indexed by SI:BitPosition and populated
+         with only those adjacencies to which the BFR should replicate
+         packets to.
+      </t>
+      </list>        
+   The generic view of an adjacency can be over a link, a tunnel or along a
+   path segment. 
+  </t><t>
+   With <xref target="I-D.ietf-spring-segment-routing">Segment Routing</xref> a
+   segment can be signaled as an MPLS label, or an IPv6 routing header .  A
+   segment may be loosely of strictly source routed, depending on the need for
+   full non-congruence and the confidence that loose routing may still achieve
+   that need. 
+  </t>
+ </section-->
+  <section title="Solution description">
+  <t>
+   BIER-TE enables to activate the replication and elimination functions in a
+   manner that is abstract to the data plane forwarding information.  An
+   adjacency, which is represented by a bit in the BIER header, can correspond
+   in the data plane to an Ethernet hop, a Label Switched Path, or it can
+   correspond to an IPv6 loose or strict source routed path. 
+     </t><t>
+   In a nutshell, BIER-TE is used as follows:
+     <list style="symbols">
+     <t>
+     A controller computes a complex path, sometimes called a track, which takes
+     the general form of a ladder. The steps and the side rails between them
+     are the adjacencies that can be activated on demand on a per-packet basis
+     using bits in the BIER header. 
+     </t>
+     </list>
+     </t>
+<figure anchor="fig_ladder" align="center"
+title="Ladder Shape with Replication and Elimination Points">
+<artwork align="center"><![CDATA[
+ 
+                 ===> (A) ====> (C) ==== 
+               //     ^ |       ^ |     \\
+   ingress (I)        | |       | |       (E) egress
+               \\     | v       | v     //
+                 ===> (B) ====> (D) ==== 
+ 
+]]></artwork>
+</figure>
+     <t>      
+     <list style="symbols">
+     <t>      
+     The controller assigns a BIER domain, and inside that domain, assigns bits
+     to the adjacencies. The controller assigns each bit to a replication node
+     that sends towards the adjacency, for instance the ingress router into a
+     segment that will insert a routing header in the packet. A single bit may
+     be used for a step in the ladder, indicating the other end of the step in
+     both directions.
+     </t>
+     </list>
+     </t>
+<figure anchor="fig_track" align="center"
+title="Assigning Bits">
+<artwork align="center"><![CDATA[
+ 
+                 ===> (A) ====> (C) ==== 
+               // 1   ^ |  4    ^ |   7 \\
+   ingress (I)        |2|       |6|       (E) egress
+               \\ 3   | v  5    | v   8 //    
+                 ===> (B) ====> (D) ==== 
+ 
+]]></artwork>
+</figure>
+     <t>      
+     <list style="symbols">
+     <t>     
+     The controller activates the replication by deciding the setting of the
+     bits associated with the adjacencies. This decision can be modified at any
+     time, but takes the latency of a controller round trip to effectively take
+     place. Below is an example that uses Replication and Elimination to protect
+     the A->C adjacency.
+     </t>
+     </list>
+     </t>
+      
+<texttable anchor="table_bit" title="Controlling Replication">
+    <ttcol align='center'>Bit #</ttcol>
+    <ttcol align='center'>Adjacency</ttcol>
+    <ttcol align='center'>Owner</ttcol>
+    <ttcol align='center'>Example Bit Setting</ttcol>
+    
+    <c>1</c>
+    <c>I->A</c>
+    <c>I</c>
+    <c>1</c>
+    
+    <c>2</c>
+    <c>A->B</c>
+    <c>A</c>
+    <c>1</c>
+    
+    <c></c>
+    <c>B->A</c>
+    <c>B</c>
+    <c></c>
+    
+    <c>3</c>
+    <c>I->C</c>
+    <c>I</c>
+    <c>0</c>
+    
+    <c>4</c>
+    <c>A->C</c>
+    <c>A</c>
+    <c>1</c>
+    
+    <c>5</c>
+    <c>B->D</c>
+    <c>B</c>
+    <c>1</c>
+    
+    <c>6</c>
+    <c>C->D</c>
+    <c>C</c>
+    <c>1</c>
+    
+    <c></c>
+    <c>D->C</c>
+    <c>D</c>
+    <c></c>
+    
+    <c>7</c>
+    <c>C->E</c>
+    <c>C</c>
+    <c>1</c>
+    
+    <c>8</c>
+    <c>D->E</c>
+    <c>D</c>
+    <c>0</c>
+    
+    <postamble>Replication and Elimination Protecting A->C</postamble>
+</texttable>
+
+     <t>
+     <list style="symbols">
+     <t> 
+     The BIER header with the controlling BitString is injected in the packet by
+     the ingress node of the deterministic path. That node may act as a
+     replication point, in which case it may issue multiple copies of the packet
+     </t>
+     </list>
+     </t>
+<figure anchor="fig_track_prot" align="center"
+title="Enabled Adjacencies">
+<artwork align="center"><![CDATA[
+ 
+              ====>  Repl ===> Elim ==== 
+           //         |         ^        \\
+   ingress            |         |           egress
+                      v         |             
+                     Fwd ====> Fwd      
+ 
+]]></artwork>
+</figure>
+     <t>      
+     <list style="symbols">
+     <t>
+     For each of its bits that is set in the BIER header, the owner replication
+     point resets the bit and transmits towards the associated adjacency;
+     to achieve this, the replication point copies the packet and inserts the
+     relevant data plane information, such as a source route header, towards the
+     adjacency that corresponds to the bit 
+     </t>
+     </list>
+     </t>
+<texttable anchor="table_bit2" title="BIER-TE in Action">
+    <ttcol align='center'>Adjacency</ttcol>
+    <ttcol align='center'>BIER BitString</ttcol>
+    
+    <c>I->A</c>
+    <c>01011110</c>
+    <c>A->B</c>
+    <c>00011110</c>
+    <c>B->D</c>
+    <c>00010110</c>
+    <c>D->C</c>
+    <c>00010010</c>
+    <c>A->C</c>
+    <c>01001110</c>
+    <postamble>BitString in BIER Header as Packet Progresses</postamble>
+</texttable>
+
+     <t>
+     <list style="symbols">
+     <t> 
+     Adversely, an elimination node on the way strips the data plane information
+     and performs a bitwise AND on the BitStrings from the various copies of the
+     packet that it has received, before it forwards the packet with the
+     resulting BitString. 
+     </t>
+     </list>
+     </t>
+<texttable anchor="table_bit3" title="BIER-TE in Action (cont.)">
+    <ttcol align='center'>Operation</ttcol>
+    <ttcol align='center'>BIER BitString</ttcol>
+    <c>D->C</c>
+    <c>00010010</c>
+    <c>A->C</c>
+    <c>01001110</c>
+    <c> </c>
+    <c>--------</c>
+    <c>AND in C</c>
+    <c>00000010</c>
+    <c> </c>
+    <c> </c>
+    <c>C->E</c>
+    <c>00000000</c>
+    <postamble>BitString Processing at Elimination Point C</postamble>
+</texttable>
+     <t>
+     <list style="symbols">
+     <t> 
+     In this example, all the transmissions succeeded and the BitString at
+     arrival has all the bits reset - note that the egress may be an Elimination
+     Point in which case this is evaluated after this node has performed its AND
+     operation on the received BitStrings).
+     </t>
+     </list>
+     </t>
+<texttable anchor="table_bit4" title="BIER-TE in Action (cont.)">
+    <ttcol align='center'>Failing Adjacency</ttcol>
+    <ttcol align='center'>Egress BIER BitString</ttcol>
+    <c>I->A</c>
+    <c>Frame Lost</c>
+    <c>I->B</c>
+    <c>Not Tried</c>
+    <c>A->C</c>
+    <c>00010000</c>
+    <c>A->B</c>
+    <c>01001100</c>
+    <c>B->D</c>
+    <c>01001100</c>
+    <c>D->C</c>
+    <c>01001100</c>
+    <c>C->E</c>
+    <c>Frame Lost</c>
+    <c>D->E</c>
+    <c>Not Tried</c>
+    <postamble>BitString indicating failures</postamble>
+</texttable>
+     <t>
+     <list style="symbols">
+     <t> 
+     But if a transmission failed along the way, one (or more) bit is never
+     cleared. <xref target="table_bit4"/> provides the possible outcomes of a 
+     transmission. If the frame is lost, then it is probably due to a failure in
+     either I->A or C->E, and the controller should enable I->B and D->E to
+     find out. A BitString of 00010000 indicates unequivocally a transmission
+     error on the A->C adjacency, and a BitString of 01001100 indicates a loss
+     in either A->B, B->D or D->C; enabling D->E on the next packets may provide
+     more information to sort things out.
+     </t>
+     </list>
+     </t>
+<t>In more details:   
+  </t><t>   
+   The BIER header is of variable size, and a DetNet network of a limited size
+   can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
+   deployment may be able to signal up to 256 adjacencies for use 
+   in very complex paths. <xref target="fig_BIER_MPLS"/> illustrates a BIER 
+   header as encapsulated within MPLS. The format of this header is common to
+   BIER and BIER-TE.
+  </t>
+ <t>
+   For the DetNet data plane, a replication point is an ingress point for more
+   than one adjacency, and an elimination point is an egress point for more than
+   one adjacency.
+   </t><t>   
+   A pre-populated state in a replication node indicates which bits are
+   served by this node and to which adjacency each of these bits corresponds.
+   With DetNet, the state is typically installed by a controller entity such as
+   a PCE. 
+   The way the adjacency is signaled in the packet is fully abstracted in the
+   bit representation and must be provisioned to the replication nodes and 
+   maintained as a local state, together with the timing or shaping information
+   for the associated flow.
+  </t><t>
+   The DetNet data plane uses BIER-TE to control which adjacencies are used
+   for a given packet. This is signaled from the path ingress, which sets the
+   appropriate bits in the BIER BitString to indicate which replication must
+   happen.
+  </t><t>
+   The replication point clears the bit associated to the adjacency where the
+   replica is placed, and the elimination points perform a logical AND of the
+   BitStrings of the copies that it gets before forwarding.   
+  </t><t>     
+   As is apparent in the examples above, clearing the bits enables to trace a
+   packet to the replication points that made any particular copy. BIER-TE also
+   enables to detect the failing adjacencies or sequences of adjacencies along a
+   path and to activate additional replications to counter balance the failures.
+    </t><t>
+   Finally, using the same BIER-TE bit for both directions of the steps of the
+   ladder enables to avoid replication in both directions along the crossing
+   adjacencies. At the time of sending along the step of the ladder, the bit may
+   have been already reset by performing the AND operation with the copy from
+   the other side, in which case the transmission is not needed and does not
+   occur (since the control bit is now off).
+  </t>
+
+  </section>
+  </section> <!-- BIER-TE -->
+  </section> <!-- BIER    -->
+
+
+</section> <!-- Net layer technolofes -->
+
+ <!-- ============================================================ -->
+
+  <section title="DetNet Service layer technologies" anchor="sec_det">
+
+  <!--section title="Layer-2 tunneling over IP"-->
+   <section title="Generic Routing Encapsulation (GRE)" anchor="sec_alt_gre">
+    <section title="Solution description">
+     <t>
+      Generic Routing Encapsulation (GRE) <xref target="RFC2784"/> provides an
+      encapsulation of an arbitrary network layer protocol over another arbitrary
+      network layer protocol. The encapsulation of a GRE packet can be found in
+      <xref target="fig_gre_encap"/>. 
+     </t>
+     <figure anchor="fig_gre_encap" title="Encapsulation of a GRE packet">
+     <artwork align="center"><![CDATA[
++-------------------------------+
+|                               |
+|        Delivery Header        |
+|                               |
++-------------------------------+
+|                               |
+|          GRE Header           |
+|                               |
++-------------------------------+
+|                               |
+|         Payload packet        |
+|                               |
++-------------------------------+
+    ]]></artwork></figure>
+
+     <t>
+      Based on RFC2784, <xref target="RFC2890"/> further includes sequencing
+      number and Key in optional fields of the GRE header, which may help to
+      transport DetNet traffic flows over IP networks. The format of a GRE header
+      is presented in <xref target="fig_gre_hdr"/>.
+     </t>
+     <figure title="Format of a GRE header" anchor="fig_gre_hdr">
+     <artwork align="center"><![CDATA[
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |C| |K|S|  Reserved0      | Ver |          Protocol Type          |
+ +-----------------------------------------------------------------+
+ |      Checksum (optional)      |        Reserved1 (Optional)     |
+ +-----------------------------------------------------------------+
+ |                        Key (optional)                           |
+ +-----------------------------------------------------------------+
+ |                  Sequence Number (optional)                     |
+ +-----------------------------------------------------------------+
+ ]]></artwork></figure>
+    </section>
+    <section title="Analysis and Discussion">
+     <t><list style="hanging">
+     <t hangText="Encapsulation and overhead (M)">
+      <vspace blankLines="1"/>
+      GRE provides encapsulation for a network layer protocol over anther
+      network layer protocol. A new protocol type for DetNet traffics should be
+      allocated as an "Ether Type" in <xref target="RFC1700"/> and in <eref
+      target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers">IANA
+      Ethernet Numbers.</eref> The fixed header of a GRE packet is 4 octets
+      while the maximum header is 16 octets with optional fields in <xref
+          target="fig_gre_hdr"/>.
+      <vspace blankLines="1"/></t>
+     
+     <t hangText="Flow identification (W)">
+      <vspace blankLines="1"/>
+      There is no flow identification field in GRE header. However, it can rely
+      on the flow identification mechanism applied in the delivery protocols,
+      such as flow identification stated in IP Sections <xref format="counter"
+      target="sec_alt_ipv6"/> and <xref format="counter" target="sec_alt_ipv4"/>
+      when the delivery protocols are IPv6 and IPv4 respectively.
+      Alternatively, the Key field can also be extended to carry the flow
+      identification. The size of Key field is 4 octets.
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Packet sequencing (M)">
+      <vspace blankLines="1"/>
+      As stated in <xref target="sec_alt_gre"/>, GRE provides an optional
+      sequencing number in its header to provide sequencing services for
+      packets. The size of the sequencing number is 32 bits.
+     <vspace blankLines="1"/></t>
+     
+     <!--t hangText="Explicit routes (W/N)">
+      <vspace blankLines="1"/>
+      GRE has no packet replication and deletion currently in its header and
+         should be extended or rely on delivery protocols.
+     <vspace blankLines="1"/></t-->
+     
+     <t hangText="Duplicate packet deletion (N)">
+      <vspace blankLines="1"/>
+      GRE has no packet replication and deletion currently in its header and
+      should be extended or rely on delivery protocols.
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Operations, Administration and Maintenance (W/N)">
+      <vspace blankLines="1"/>
+      [note: rely on the delivery protocol] GRE has no packet replication and
+      deletion currently and should be relied on delivery protocols.
+      <vspace blankLines="1"/></t>
+     
+     <t hangText="Time synchronization (W/N)">
+      <vspace blankLines="1"/>
+      [note: rely on the delivery protocol] GRE has no packet replication and
+      deletion currently and should be relied on delivery protocols.
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Class and quality of service capabilities (W/N)">
+      <vspace blankLines="1"/>
+      [note: rely on the delivery protocol] GRE has no packet replication and
+      deletion currently and should be relied on delivery protocols. For the
+      class of service capability, an optional code point field to indicate CoS
+      of a traffic can be extended in GRE header.
+     <vspace blankLines="1"/></t>
+     
+     <!--t hangText="Packet traceability (W/N)">
+      <vspace blankLines="1"/>
+      [note: rely on the delivery protocol] GRE has no packet replication and
+      deletion currently and should be relied on delivery protocols.
+      <vspace blankLines="1"/></t-->
+     
+     <t hangText="Technical maturity (M)">
+      <vspace blankLines="1"/>
+      GRE has been developed over 20 years. The delivery protocol mostly used is
+      IPv4, while the IPv6 support for GRE is to be standardized now in IETF as
+      <xref target="I-D.ietf-intarea-gre-ipv6"/>. Due to its good extensibility,
+      GRE is also extended to support network virtualization in Data Center,
+      which is NVGRE <xref target="RFC7637"/>.
+      <vspace blankLines="1"/></t>
+     </list></t>
+    </section>
+
+    <section title="Summary">
+     <t>
+      TBD.
+     </t>
+    </section>
+   </section>
+    
+   <section title="Layer-2 Tunneling Protocol (L2TP)" anchor="sec_alt_l2tp">
+    <t>
+    [Editor's note: L2TPv3 <xref target="RFC3931"/> content to be provided later, if needed]
+    </t>
+    <!-- section title="Solution description">
+    </section>
+ 
+    <section title="Analysis and Discussion">
+    </section>
+ 
+    <section title="Summary">
+     <t>
+      TBD.
+    </section-->
+   </section>
+
+   <section title="Virtual Extensible LAN (VXLAN)" anchor="sec_alt_vxlan">
+    <t>
+    [Editor's note: VXLAN <xref target="RFC7348"/> content to be provided later, if needed]
+    </t>
+    <!-- section title="Solution description">
+    </section>
+ 
+    <section title="Analysis and Discussion">
+    </section>
+ 
+    <section title="Summary">
+     <t>
+      TBD.
+    </section-->
+   </section>
+  
+  <section title="MPLS-based Services" anchor="sec_alt_mpls_svc">
+    <section title="Solution description">      
+    <t>
+      MPLS supports the equivalent of both the DetNet Service and DetNet
+      Transport layers.  This, as well as a general overview of MPLS, is
+      covered above in <xref target="sec_alt_mpls"/>. This section will
+      focus on the DetNet Service Layer it provides client service
+      adaption, via Pseudowires in <xref 
+      target="sec_alt_pwe"/> and via native and other label-like
+      mechanisms such as EPVN in <xref 
+      target="sec_alt_evpn"/>.  A representation of these options was
+      previously discussed and is shown in
+      <xref target="fig_mpls_clients"/>.
+    </t>  
+    </section>
+ 
+    <section title="Analysis and Discussion"> 
+      <t><list style="hanging">
+          <t hangText="#? DetNet Service Interface (M)">
+            <vspace blankLines="1"/> 
+
+            The following text is adapted from <xref target="RFC5921"/>:
+
+            <vspace blankLines="1"/> 
+
+            The MPLS native service adaptation functions interface the client
+            layer network service to MPLS.  For Pseudowires, these adaptation
+            functions are the payload encapsulation described in Section 4.4
+            of <xref target="RFC3985"/> and Section 6 of
+            <xref target="RFC5659"/>.  For network layer client services, the
+            adaptation function uses the MPLS encapsulation format as defined
+            in <xref target="RFC3032"/>.
+
+            <vspace blankLines="1"/> 
+
+            The purpose of this encapsulation is to abstract the data plane of
+            the client layer network from the MPLS data plane, thus
+            contributing to the independent operation of the MPLS network.
+            
+            <vspace blankLines="1"/> 
+
+            MPLS may itself be a client of an underlying server layer.  MPLS
+            can thus also bounded by a set of adaptation functions to this
+            server layer network, which may itself be MPLS.  These adaptation
+            functions provide encapsulation of the MPLS frames and for the
+            transparent transport of those frames over the server layer
+            network.  
+
+            <vspace blankLines="1"/> 
+
+            While MPLS service can provided on and true end-system to end-system
+            basis, it's more likely that DetNet service will be provided over
+            Pseudowires as described in <xref target="sec_alt_pwe"/> or via an
+            EPVN-based service described in <xref target="sec_alt_evpn"/> .
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#1 Encapsulation and overhead (M)">
+            <vspace blankLines="1"/>
+
+            MPLS labels in the label stack may be used to identify
+            transport paths, see <xref target="sec_alt_mpls"/>, or as
+            service identifiers.  Typically a single label is used for
+            service identification.  Additional details on how
+            client adaptation makes use of such labels is part of actual
+            client-related adaptation processing, see Sections
+            <xref format="counter" target="sec_alt_pwe"/> and 
+            <xref format="counter" target="sec_alt_evpn"/>.
+            
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#2 Flow identification (M)">
+            <vspace blankLines="1"/>
+            This is basically the same as MPLS at the DetNet transport layer.
+            MPLS label stacks provide highly flexible ways to identify
+            flows.  Basically, they enable the complete separation of
+            traffic classification from traffic treatment and thereby
+            enable arbitrary combinations of both.  Typically a separate
+            label will be added per service being supported by a node.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#3 Packet sequencing (M)">
+            <vspace blankLines="1"/>
+            This is the same as MPLS at the DetNet transport layer.  If
+            additional ordering mechanisms are required, these will be needed
+            (and added) in client-related adaptation processing, see Sections
+            <xref format="counter" target="sec_alt_pwe"/> and <xref
+            format="counter" target="sec_alt_evpn"/>.
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#4 Explicit routes (N/A)">
+            <vspace blankLines="1"/>
+
+            Explicit routes are part of the DetNet transport layer, see
+            <xref target="sec_alt_evpn"/>, or as part
+            of multi-segment PWEs,  <xref target="sec_alt_pwe"/>.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#5 Packet replication and deletion (M/W)">
+            <vspace blankLines="1"/>
+
+            This is the same as MPLS at the DetNet transport layer.
+            Additional capability may also be provided as part of
+            client-related adaptation processing see
+            <xref target="sec_alt_pwe"/>.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#6 Operations, Administration and Maintenance (M)">
+            <vspace blankLines="1"/>
+
+            This is the same as MPLS at the DetNet transport layer.
+            Additional capability may also be provided as part of
+            client-related adaptation processing.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#7 Time synchronization (TBD)">
+            <vspace blankLines="1"/>
+
+            It's unclear at this time if any additional capability is
+            needed at this level.
+            
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#8 Class and quality of service capabilities (M/W)">
+            <vspace blankLines="1"/>
+
+            The MPLS client inherits its Quality of Service (QoS) from
+            the MPLS transport layer, which in turn inherits its QoS from the
+            server (sub-network) layer.  The server layer therefore
+            needs to provide the necessary QoS to ensure that the MPLS
+            client QoS commitments can be satisfied.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#9 Packet traceability (M)">
+            <vspace blankLines="1"/>
+
+            This is the same as MPLS at the DetNet transport layer.
+
+            <vspace blankLines="1"/> 
+            
+          </t>
+          <t hangText="#10 Technical maturity (M)">
+            <vspace blankLines="1"/>
+
+            This is the same as MPLS at the DetNet transport layer.
+
+            <vspace blankLines="1"/> 
+          </t>
+        </list>
+      </t>
+
+    </section>
+ 
+    <section title="Summary">
+      <t>
+        This is the same as MPLS at the DetNet transport layer.
+        MPLS is a mature technology that has been widely deployed.
+        Numerous vendor products and multiple generations of MPLS hardware
+        have been built and deployed.  MPLS LSPs support a significant
+        portion of the identified DetNet data plane criteria
+        today. Aspects of the DetNet data plane that are not fully
+        supported can be incrementally added.
+    </t>
+    </section>
+   </section>
+
+  <section title="Pseudo Wire Emulation Edge-to-Edge (PWE3)" anchor="sec_alt_pwe">
+   <section title="Solution description">
+    <t>
+     PSeudo Wire Emulation Edge-to-Edge (PWE3) <xref target="RFC3985"/> or
+     simply PseudoWires (PW) provide means of emulating the essential attributes
+     and behaviour of a telecommunications service over a packet switched
+     network (PSN) using IP or MPLS transport.  In addition to traditional
+     telecommunications services such as T1 line or Frame Relay, PWs also
+     provide transport for Ethernet service <xref target="RFC4448"/> and for
+     generic packet service <xref target="RFC6658"/>.  <xref target="fig_pwe3_stack"/>
+     illustrate the reference PWE3 stack model.
+    </t>
+    <figure title="PWE3 protocol stack reference model" anchor="fig_pwe3_stack">
+    <artwork align="center"><![CDATA[
++----------------+                      +----------------+
+|Emulated Service|                      |Emulated Service|
+|(e.g., Eth, ...)|<= Emulated Service =>|(e.g., Eth, ...)|
++----------------+                      +----------------+
+|    Payload     |                      |    Payload     | CW,
+|  Encapsulation |<=== Pseudo Wire ====>|  Encapsulation | Timing,
+|                |                      |                | Seq., ..
++----------------+                      +----------------+
+|PW Demultiplexer|                      |PW Demultiplexer|
+|   PSN Tunnel,  |<==== PSN Tunnel ====>|  PSN Tunnel,   | MPLS.
+| PSN & Physical |                      | PSN & Physical | L2TP,
+|     Layers     |                      |    Layers      | IP, ..
++-------+--------+     ___________      +---------+------+
+        |             /           \               |
+        +============/     PSN     \==============+
+                     \             /
+                      \___________/
+   ]]>
+    </artwork></figure>
+    <t>
+     PWs appear as a good data plane solution alternative for a number of
+     reasons. PWs are a proven and deployed technology with a rich OAM
+     control plane <xref target="RFC4447"/>, and enjoy the toolbox developed for
+     MPLS networks. Furthermore, PWs may have an optional Control Word (CW) as
+     part of the payload encapsulation between the PSN and the emulated service
+     that is, for example, capable of frame sequencing and duplicate detection.
+     The encapsulation layer may also provide timing  <xref target="RFC5087"/>.
+    </t>
+    <t>
+     PWs can be also used if the PSN is IP, which enables the application of PWs
+     in networks that do not have MPLS enabled in their core routers. One
+     approach to provide PWs over IP is to provide MPLS over IP in some way and 
+     then leverage what is available for PWs over MPLS. The following standard
+     solutions are available both for IPv4 and IPv6 to follow this approach. The
+     different solutions have different overhead as discussed in the following 
+     subsection. The MPLS-in-IP encapsulation is specified by
+     <xref target="RFC4023"/>. The IPv4 Protocol Number field or the IPv6 Next 
+     Header field is set to 137, which indicates an MPLS unicast packet. (The use
+     of the MPLS-in-IP encapsulation for MPLS multicast packets is not supported.)
+     The MPLS-in-GRE encapsulation is specified in <xref target="RFC4023"/>, 
+     where the IP header (either IPv4 or IPv6) is followed by a GRE header, which
+     is followed by an MPLS label stack. The protocol type field in the GRE
+     header is set to MPLS Unicast (0x8847) or Multicast (0x8848). MPLS over
+     L2TPv3 over IP encapsulation is specified by <xref target="RFC4817"/>. The
+     MPLS-in-UDP encapsulation is specified by <xref target="RFC7510"/>, where 
+     the UDP Destination Port indicates tunneled MPLS packet and the UDP Source 
+     Port is an entropy value that is generated by the encapsulator to uniquely
+     identify a flow. MPLS-in-UDP encapsulation can be applied to enable
+     UDP-based ECMP (Equal-Cost Multipath) or Link Aggregation. All these
+     solutions can be secured with IPSec.
+    </t>
+   </section>
+ 
+   <section title="Analysis and Discussion">
+    <t><list style="hanging">
+     <t hangText="Encapsulation and overhead (M)">
+      <vspace blankLines="1"/>
+      PWs offer encapsulation services practically for any types of payloads
+      over any PSN.  New PW types need a code point allocation <xref
+      target="RFC4446"/> and in some cases an emulated service specific
+      document.
+      <vspace blankLines="1"/>
+      Specifically in the case of the MPLS PSN the PW encapsulation overhead is
+      minimal. Typically minimum two labels and a CW is needed, which totals to
+      12 octets. PW type specific handling might, however, allow optimizations
+      on the emulated service in the provider edge (PE) device's native service
+      processing (NSP) / forwarder function. These optimizations could be used,
+      for example, to reduce header overhead. Ethernet PWs already have rather
+      low overhead <xref target="RFC4448"/>. Without a CW and VLAN tags the
+      Ethernet header gets reduced to 14 octets (minimum Ethernet header
+      overhead is 26).
+      <vspace blankLines="1"/>
+      The overhead is somewhat bigger in case of IP PSN if an MPLS over IP 
+      solution is applied to provide PWs. IP adds at least 20 (IPv4) or 40 (IPv6)
+      bytes overhead to the PW over MPLS overhead; furthermore, the GRE, L2TPv3,
+      or UDP header has to be taken into account if any of these further 
+      encapsulations is used.
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Flow identification (M)">
+      <vspace blankLines="1"/>
+      [Editor's note: this criteria has not been checked against the latest
+      view of flow identification after the separation of transport and service
+      layers.]
+      <vspace blankLines="1"/>
+      PWs provide multiple layers of flow identification, especially in the case
+      of the MPLS PSN. The PWs are typically prepended with a PW label that can be
+      used to identify a specific PW. Furthermore, the PSN also uses one or more
+      labels to transport packets over a specific label switched paths (that then
+      would carry PWs). IP (and other) PSNs may need other mechanisms, such as, 
+      UDP port numbers, upper layer protocol header (like RTP) or some IP extension
+      header to provide required flow identification.
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Packet sequencing (M)">
+      <vspace blankLines="1"/>
+      As mentioned earlier PWs may contain an optional CW that is able to provide
+      sequencing services. The size of the sequence number in the generic CW is
+      16 bits, which might be, depending on the used link and DetNet flow speed 
+      be too little.
+     <vspace blankLines="1"/></t>
+     
+     <!--t hangText="Explicit routes (M)">
+      <vspace blankLines="1"/>
+      In a case of the MPLS PSN the traffic engineering toolbox developed for
+      MPLS can be used to signal explicit label switched paths (LSP) <xref
+      target="RFC5921"/> <xref target="RFC2702"/><xref target="RFC3209"/>.
+      Furthermore, the PSN may also use segment routing (SR) to provide explicit
+      routes <xref target="I-D.ietf-spring-segment-routing"/>. Segment routing
+      based solution would also be available for IPv6 PSN <xref
+      target="I-D.ietf-6man-segment-routing-header"/>.
+     <vspace blankLines="1"/></t-->
+     
+     <t hangText="Duplicate packet deletion (W)">
+      <vspace blankLines="1"/>
+      <!--The 1+1 PW/LSP protection / redundancy mechanisms  <xref
+      target="RFC6718"/> could provide tools for packet replication. However,
+      these solutions are not really intended for sourcing multiple simultaneous
+      packet flows. The solutions have one active and other standby flow.-->
+      The PW duplicate detection mechanism also exists in theory <xref
+      target="RFC3985"/> but no emulated service makes use of it currently.  
+      <!--For
+      IP PSN refer to the discussion in  <xref target="sec_alt_ipv6_ana"/> and
+      <xref target="sec_alt_ipv4_ana"/>.--> 
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Operations, Administration and Maintenance (M/W)">
+      <vspace blankLines="1"/>
+      PWs have rich control plane for OAM and in a case of the MPLS PSN enjoy
+      the full control plane toolbox developed for MPLS network OAM likewise
+      IP PSN have the full toolbox of IP network  OAM tools. There could be,
+      however, need for deterministic networking specific extensions for the
+      mentioned control planes.
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Time synchronization (M/W)">
+      <vspace blankLines="1"/>
+      It is possible to carry time synchronization information as part of the PW
+      encapsulation layer (see for example <xref target="RFC5087"/>). Whether
+      the timing precision is enough for all deterministic networking use cases
+      vary, and it is possible existing mechanisms are not adequate for all use
+      cases. IP PSNs have already demonstrated the use of time synchronization 
+      as a part of PWE3  <xref target="RFC5086"/>.
+     <vspace blankLines="1"/></t>
+     
+     <t hangText="Class and quality of service capabilities (M)">
+      <vspace blankLines="1"/>
+      In a case of IP PSN the 6-bit differentiated services code point (DSCP)
+      field can be used for indicating the class of service <xref
+      target="RFC2474"/> and 2-bit field reserved for the explicit congestion
+      notification (ECN) <xref target="RFC3168"/>. Similarly, in a case of MPLS
+      PSN, there are 3-bit traffic class field (TC) <xref target="RFC5462"/> in
+      the label reserved for for both  Explicitly TC-encoded-PSC LSPs (E-LSP)
+      <xref target="RFC3270"/> and ECN <xref target="RFC5129"/>.  Due to the
+      limited number of bits in the TC field, their use for QoS and ECN
+      functions restricted and intended to be flexible. Although the QoS/CoS
+      mechanism is already in place some clarifications may be required in the
+      context of deterministic networking flows, for example, if some
+      specific mapping between bit fields have to be done.
+     <vspace blankLines="1"/></t>
+     
+     <!--t hangText="Packet traceability (M/W)">
+      <vspace blankLines="1"/>
+      In a case of MPLS PSN and an approach where PWs are prepended with a PSN
+      layer outer label (or more labels in a stack) help tracing the explicit
+      reverse path of the packet using the outer label(s) as the key. Even if the
+      PW labels of the duplicated packets were the same the outer labels should
+      be different. However, even this approach is not "perfect" since the
+      intermediate node identities are not recorded into the packet hop-by-hop
+      basis as some protocol do (for example, Diameter protocol loop detection
+      <xref target="RFC6733"/>).
+     <vspace blankLines="1"/></t-->
+     
+     <t hangText="Technical maturity (M)">
+      <vspace blankLines="1"/>
+      PWs, IP and MPLS are proven technologies with wide variety of deployments
+      and years of operational experience. Furthermore, the estimated work for
+      missing functionality (packet replication and deletion) does not appear to
+      be extensive, since the existing protection mechanism already get close to
+      what is needed from the deterministic networking data plane solution.
+     <vspace blankLines="1"/></t>
+    </list></t>
+   </section>
+ 
+   <section title="Summary">
+    <t>
+     PseudoWires appear to be a strong candidate as the deterministic networking
+     data plane solution alternative for the DetNet Service layer. The strong 
+     points are the technical maturity and the extensive control plane for OAM. 
+     This holds specifically for MPLS-based PSN.
+    </t>
+    <t>
+     Extensions are required to realize the packet replication and duplicate
+     detection features of the deterministic networking data plane.
+    </t>
+   </section>
+  </section>
+
+  <section title="MPLS-Based Ethernet VPN (EVPN)" anchor="sec_alt_evpn">
+    <section title="Solution description">
+    <t>
+      MPLS-Based Ethernet VPN (EVPN), in the form documented in
+      <xref target="RFC7432"/> and <xref target="RFC7209"/>, is an
+      increasingly popular approach to delivering MPLS-based Ethernet
+      services and is designed to be the successor to Virtual Private LAN
+      Service (VPLS), <xref target="RFC4664"/>. 
+    </t>
+    <t>
+      EVPN provides client adaptation and reuses the MPLS data plane
+      discussed above in <xref target="sec_alt_mpls_svc"/>.  In certain
+      special cases, it also uses the PW MPLS Control Word.  EVPN
+      control is via BGP, <xref target="RFC7432"/>, and may use TE-LSPs,
+      e.g., controlled via <xref target="RFC3209"/> for MPLS transport.
+      Additional EVPN related RFCs and in progress drafts are being
+      developed by the <eref target="https://tools.ietf.org/wg/bess/">
+	BGP Enabled Services Working Group</eref>.
+    </t>
+    </section>
+ 
+    <section title="Analysis and Discussion">
+      <t><list style="hanging">
+          <t hangText="#? DetNet Service Interface (M/W)">
+            <vspace blankLines="1"/> 
+
+	    The service supported by EVPN is a layer 2 Ethernet virtual
+	    private network.  While EVPN is typically envisioned to be
+	    deployed on provider edge systems, it is also possible to
+	    extent the EVPN service to a DetNet end or edge system if
+	    such service is needed.
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#1 Encapsulation and overhead (M)">
+            <vspace blankLines="1"/>
+
+	    EVPN generally uses a single MPLS label stack entry to
+	    support its client adaptation service.  The optional
+	    addition of a second label is also supported. In certain
+	    cases PW Control Word may also be used.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#2 Flow identification (W)">
+            <vspace blankLines="1"/>
+
+	    EVPN currently uses labels to identify flows per  
+	    {Ethernet Segment Identifier, VLAN} or per MAC
+	    level. Additional definition will be needed to standardize
+	    identification of finer granularity DetNet flows.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#3 Packet sequencing (M/W)">
+            <vspace blankLines="1"/>
+
+	    Like MPLS, EVPN generally orders packets similar to
+	    Ethernet. Reordering is possible primarily during path
+	    changes and protection switching.  In order to avoid
+	    misordering due to ECMP, EVPN uses the "Preferred PW MPLS
+	    Control Word" <xref target="RFC4385"/> or the entropy labels
+	    <xref target="RFC6790"/>.
+
+            <vspace blankLines="1"/> 
+
+	    If additional ordering mechanisms are required, such
+	    mechanisms will need to be defined.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#4 Explicit routes (M)">
+            <vspace blankLines="1"/>
+
+	    EVPN itself doesn't offer support for explicit routes as it
+	    is simply an adaptation function.  Explicit routes for EVPN at
+	    the DetNet transport layer would be provided via MPLS.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#5 Packet replication and deletion (M/W)">
+            <vspace blankLines="1"/>
+	    
+	    EVPN relies on the MPLS layer for all protection functions.
+	    See <xref target="sec_alt_mpls"/> and
+	    <xref target="sec_alt_mpls_svc"/>.  Some extensions, either
+	    at the EVPN or MPLS levels, will be need to support those
+	    DetNet applications which require true hitless (i.e., zero
+	    loss) 1+1 protection switching.  (Network coding may be an
+	    interesting alternative to investigate to delivering such
+	    hitless loss protection capability.)
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#6 Operations, Administration and Maintenance (M/W)">
+            <vspace blankLines="1"/>
+
+	    Nodes supporting EVPN may participate in either or both
+	    Ethernet level and MPLS level OAM.  It is likely that it may
+	    make sense to map or adapt the OAM functions at the
+	    different levels, but such has yet to be defined.
+	    <xref target="RFC6371"/> provides some useful background on
+	    this topic.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#7 Time synchronization (W)">
+            <vspace blankLines="1"/>
+
+	    The interface to the DetNet time synchronization service is
+	    still to be determined.  If the service is accessed by end
+	    systems via IEEE defined mechanisms, then those mechanisms
+	    will need to be mapped to the MPLS provided mechanisms
+	    discussed in <xref target="sec_alt_mpls"/>.
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#8 Class and quality of service capabilities (M/W)">
+            <vspace blankLines="1"/>
+
+	    EVPN is largely silent on the topics of CoS and QoS, but  the
+	    existing Ethernet and MPLS mechanisms can be directly used.
+	    While an implementation may support such mappings today,
+	    standardized mappings do not (yet) exist. 	    
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#9 Packet traceability (M)">
+            <vspace blankLines="1"/>
+
+	    EVPN nodes can utilize MPLS layers tracing mechanisms.
+
+            <vspace blankLines="1"/> 
+            
+          </t>
+          <t hangText="#10 Technical maturity">
+            <vspace blankLines="1"/>
+
+	    EVPN is a second (or third) generation MPLS-based L2VPN
+	    service standard.  From a data plane standpoint it makes
+	    uses of existing MPLS data plane mechanisms.  The mechanisms
+	    have been widely implemented and deployed.
+	    
+            <vspace blankLines="1"/> 
+          </t>
+        </list>
+      </t>
+
+    </section>
+ 
+    <section title="Summary">
+      <t>
+	EVPN is the emerging successor to VPLS.  EVPN is standardized,
+	implemented and deployed.  It makes use of the mature MPLS data
+	plane.  While offering a mature and very comprehensive set of
+	features, certain DetNet required features are not
+	fully/directly supported and additional standardization in these
+	areas are needed.  Examples include: mapping CoS and QoS; use of
+	labels per DetNet flow, and hitless 1+1 protection.  
+      </t>
+    </section>
+   </section>
+
+
+   <section title="Higher layer header fields" anchor="sec_alt_higher">
+    <t>
+      Fields of headers belonging to higher OSI layers can be used to implement 
+      functionality that is not provided e.g., by the IPv6 or IPv4 header fields. 
+      However, this approach cannot be always applied, e.g., due to encryption. 
+      Furthermore, even if this approach is applicable, it requires deep packet 
+      inspection from the routers and switches. There are implementation 
+      dependent limits how far into the packet the lookup can be done 
+      efficiently in the fast path. In general a safe bet is between 128 and 256 
+      octets for the maximum lookup depth. Various higher layer protocols can be 
+      applied. Some examples are provided here for the sequence numbering feature 
+      (<xref target="sec_crit_seq"/>).
+    </t>
+    
+    <section title="TCP">
+    <t>
+      The TCP header includes a sequence number parameter, which can be applied
+      to detect and eliminate duplicate packets if seamless redundancy is used.
+      As the TCP header is right after the IP header, it does not require very 
+      deep packet inspection; the 4-byte sequence number is conveyed by bits 32
+      through 63 of the TCP header.  In addition to sequencing, the TCP header
+      also contain source and destination port information that can be used for
+      assisting the flow identification.
+    </t>
+    </section> 
+    
+    <section title="RTP">
+    <t>
+      RTP is often used to deliver time critical traffic in IP networks. RTP is
+      is carried on top of IP and UDP <xref target="RFC3550"/>. The RTP header
+      includes a 2-byte sequence number, which can be used to detect and
+      eliminate duplicate packets if seamless redundancy is used. The sequence
+      number is conveyed by bits 16 through 31 of the RTP header. In addition to
+      the sequence number the RTP header has also timestamp field (bits 32
+      through 63) that can be useful for time synchronization purposes.
+      Furthermore, the RTP header has also one or more synchronization sources
+      (bits starting from 64) that can potentially be useful for flow
+      identification purposes.
+    </t>
+    </section>
+ </section>  <!-- Det layer technologies -->
+
+</section>
+</section>
+
+<!-- ===================================================================== -->
+
+<section title="Summary of data plane alternatives">
+  <t>TBD.
+  </t>
+   
+  <!--texttable anchor="tab_all_summary" title="PseudoWire criteria summary">
+   <ttcol align="left">Alternative</ttcol>
+   <ttcol align="left">Comments</ttcol>
+   <c>Native IPv4</c>
+   <c>..</c>
+   <c>Native IPv6</c>
+   <c>..</c>
+   <c>GRE</c>
+   <c>..</c>
+   <c>L2TP</c>
+   <c>..</c>
+   <c>MPLS</c>
+   <c>..</c>
+   <c>PWE</c>
+   <c>..</c>
+   <c>BIER</c>
+   <c>..</c>
+  </texttable-->
+</section>
+
+
+<section title="Security considerations">
+  <t>TBD.
+  </t>
+</section>
+
+
+<section anchor="iana" title="IANA Considerations">
+  <t>This document has no IANA considerations.
+  </t>
+</section>
+
+<section anchor="acks" title="Acknowledgements">
+  <t>The author(s) ACK and NACK.
+  </t>
+  <t> The following people were part of the DetNet Data Plane Design Team:
+  <list style="bullets">
+   <t>Jouni Korhonen</t>
+   <t>J&aacute;nos Farkas</t>
+   <t>Norman Finn</t>
+   <t>Olivier Marce</t>
+   <t>Gregory Mirsky</t>
+   <t>Pascal Thubert</t>
+   <t>Zhuangyan Zhuang</t>
+  </list></t>
+  <t>
+   The DetNet chairs serving during the DetNet Data Plane Design Team:
+   <list style="bullets">
+    <t>Lou Berger</t>
+    <t>Pat Thaler</t>
+   </list></t>
+</section>
+</middle>
+
+<back>
+  <!--references title="Normative References">
+   &rfc2119;
+  </references-->
+  <references title="Informative References">
+   &rfc0791;
+   &rfc1122;
+   &rfc1393;
+   &rfc1700;
+   &rfc2205;
+   &rfc2460;
+   &rfc2474;
+   &rfc2702;
+   &rfc2784;
+   &rfc2890;
+   &rfc3031;
+   &rfc3032;
+   &rfc3168;
+   &rfc3209;
+   &rfc3270;
+   &rfc3443;
+   &rfc3473;
+   &rfc3550;
+   &rfc3931;
+   &rfc3985;
+   &rfc4023;
+   &rfc4385;
+   &rfc4446;
+   &rfc4447;
+   &rfc4448;
+   &rfc4664;
+   &rfc4817;
+   &rfc4875;
+   &rfc5086;
+   &rfc5087;
+   &rfc5129;
+   &rfc5305;
+   &rfc5331;
+   &rfc5332;
+   &rfc5440;
+   &rfc5462;
+   &rfc5586;
+   &rfc5659;
+   &rfc5921;
+   &rfc5960;
+   &rfc6073;
+   &rfc6275;
+   &rfc6371;
+   &rfc6373;
+   &rfc6378;
+   &rfc6426;
+   &rfc6437;
+   &rfc6540;
+   &rfc6564;
+   &rfc6621;
+   &rfc6658;
+   &rfc6718;
+   &rfc6733;
+   &rfc6790;
+   &rfc6814;
+   &rfc6864;
+   &rfc7045;
+   &rfc7167;
+   &rfc7209;
+   &rfc7271;
+   &rfc7348;
+   &rfc7399;
+   &rfc7426;
+   &rfc7432;
+   &rfc7510;
+   &rfc7637;
+   &I-D.finn-detnet-architecture;
+   &I-D.finn-detnet-problem-statement;
+   &I-D.ietf-6man-rfc2460bis;
+   &I-D.ietf-6man-segment-routing-header;
+   &I-D.ietf-bier-architecture;
+   &I-D.ietf-idr-ls-distribution;
+   &I-D.ietf-intarea-gre-ipv6;
+   &I-D.ietf-isis-pcr;
+   &I-D.ietf-mpls-residence-time;
+   &I-D.ietf-spring-segment-routing;
+   &I-D.ietf-sunset4-gapanalysis;
+   &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
+   &I-D.eckert-bier-te-arch;
+
+   
+   <reference anchor="ST20227"
+     target="https://www.smpte.org/digital-library">
+    <front>
+     <title>Seamless Protection Switching of SMPTE ST 2022 IP Datagrams</title>
+     <author>
+      <organization>SMPTE 2022</organization>
+     </author>
+     <date year="2013"/>
+    </front>
+    <seriesInfo name="ST" value="2022-7:2013"/>
+   </reference>
+      
+   <reference anchor="TSNTG"
+    target="http://www.IEEE802.org/1/pages/avbridges.html">
+    <front>
+     <title>IEEE 802.1 Time-Sensitive Networks Task Group</title>
+     <author>
+      <organization>IEEE Standards Association</organization>
+     </author>
+     <date year="2013" />
+    </front>
+   </reference>
+  
+   <reference anchor="IEEE8021CB"
+     target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-1.pdf">
+    <front>
+     <title>Draft Standard for Local and metropolitan area networks - Seamless Redundancy</title>
+     <author initials="N. F." surname="Finn" fullname="Norman Finn">
+      <organization>IEEE 802.1</organization>
+     </author>
+     <date month="December" year="2015"/>
+    </front>
+    <seriesInfo name="IEEE P802.1CB /D2.1" value="P802.1CB"/>
+    <format type="PDF" target="http://www.ieee802.org/1/files/private/cb-drafts/d2/802-1CB-d2-1.pdf"/>
+   </reference>
+
+   <reference anchor="IEEE802.1Qbv"
+              target="http://www.ieee802.org/1/files/private/bv-drafts/">
+     <front>
+       <title>Enhancements for Scheduled Traffic</title>
+       <author>
+         <organization>IEEE</organization>
+       </author>
+       <date year="2016" />
+     </front>
+   </reference>
+   
+   <reference anchor="IEEE8021Qca"
+     target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf">
+    <front>
+     <title>IEEE 802.1Qca Bridges and Bridged Networks - Amendment 24: Path Control and Reservation</title>
+     <author>
+      <organization>IEEE 802.1</organization>
+     </author>
+     <date month="June" year="2015"/>
+    </front>
+    <seriesInfo name="IEEE P802.1Qca/D2.1" value="P802.1Qca"/>
+    <format type="PDF" target="http://www.ieee802.org/1/files/private/ca-drafts/d2/802-1Qca-d2-1.pdf"/>
+   </reference>
+   
+   <reference anchor="IEEE802.1Qch"
+              target="http://www.ieee802.org/1/files/private/ch-drafts/">
+     <front>
+       <title>Cyclic Queuing and Forwarding</title>
+       <author>
+         <organization>IEEE</organization>
+       </author>
+       <date year="2016" />
+     </front>
+   </reference>
+
+  </references>
+ <section title="Examples of combined DetNet Service and Transport layers" anchor="sec_comb">
+ </section>
+ </back>
+</rfc>
+
