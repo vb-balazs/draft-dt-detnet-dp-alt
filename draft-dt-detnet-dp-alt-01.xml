@@ -343,6 +343,10 @@ title="DetNet adaptation to data plane">
   as part of the pre-pub review.]
  </t>
 
+<t>
+  [Janos: I think the text is useful here for clarification.]
+</t>
+ 
  <t>
   There are many valid options to create a data plane solution for DetNet
   traffic by selecting a technology approach for the DetNet Service layer and also
@@ -359,6 +363,9 @@ title="DetNet adaptation to data plane">
    <list style="nosymbols">
     <t>#1 Encapsulation and overhead</t>
     <t>#2 Flow identification (Flow ID part of the DetNet flows)</t>
+<t>
+  [Janos: "Flow ID part" should be replaced with "Service ID".]
+</t>
     <t>#3 Packet sequencing (sequence number)</t>
     <t>#5 Packet replication and deletion (note: only the packet deletion for
        seamless redundancy)</t>
@@ -387,6 +394,9 @@ title="DetNet adaptation to data plane">
     <t>
      [Editor's note: #7 is more of OAM feature.]
     </t>
+<t>
+  [Janos: I guess #9 is meant as more of OAM feature.]
+</t>
    </list> 
  </t> 
  
@@ -494,11 +504,18 @@ title="DetNet adaptation to data plane">
       should be stated as such and separately from any other requirement. There
       are multiple ways to solve this criteria.]
     </t>
+    
     <t>
      The solution alternative has to provide means for end systems to number
      packets sequentially and transport that sequencing information along with
      the sent packets. In addition to possible reordering packets one of the
-     important uses for sequencing is detecting duplicates. In a case of
+     important uses for sequencing is detecting duplicates. 
+    </t>
+<t>
+  [Janos: Provides loss detection as well.]
+</t>     
+     <t>    
+     In a case of
      intentional packet duplication a combination of flow identification and
      packet sequencing allows for detecting and discarding duplicates at the
      receiver (see <xref target="sec_crit_repdup"/> for more details).  This
@@ -798,6 +815,7 @@ title="DetNet adaptation to data plane">
       between replication points and elimination points if this functionality
       is used. 
       <vspace blankLines="1"/>
+     <!-- t this text has been moved to earlier
       Another concern regarding packet replication is how to enforce 
       replicated packets to take different route while the final destination 
       still remains the same.
@@ -805,7 +823,7 @@ title="DetNet adaptation to data plane">
       can be guaranteed to be non-overlapping. Loose source routing only signals
       some of the intermediate hops and it takes additional knowledge to ensure
       that there is no single point of failure.
-        <vspace blankLines="1"/>
+        <vspace blankLines="1"/></t -->
      </t>
      
      <t hangText="Packet replication (W)">
@@ -848,7 +866,7 @@ title="DetNet adaptation to data plane">
       The traffic class field of the fixed IPv6 header is designed for this purpose.
      <vspace blankLines="1"/></t>
     
-     <t hangText="Packet traceability (M/W/N)">
+     <t hangText="Packet traceability (M/W)">
       <vspace blankLines="1"/>
       The traceability of replicated packets involves the capability to resolve
       which replication point issued a particular copy of a packet, which segment
@@ -898,7 +916,11 @@ title="DetNet adaptation to data plane">
  
    <section title="Summary">
     <t>
-     TBD.
+     IPv6 supports a significant portion of the identified DetNet data plane
+     criteria today. There are aspects of the DetNet data plane that are not
+     fully supported, but these can be incrementally added. IPv6 can be a choice
+     as the DetNet Transport layer in networks where the network operator does
+     not intend to pay the tax of the MPLS control plane.
     </t>
    </section>
   </section>
@@ -1221,10 +1243,21 @@ title="MPLS-based Services">
           flows.  Basically, they enable the complete separation of
           traffic classification from traffic treatment and thereby enable
           arbitrary combinations of both.
+
+
+[Janos: Well, it is true if all kinds of fetarures are considered to be part of
+MPLS, e.g. PWs, which is an understandable argument. However, MPLS here is ment
+as transport, i.e. we are at the DetNet Transport layer, hence it is more 
+about LSPs only here.]
+  
+          
       <vspace blankLines="1"/> </t>
      <t hangText="#3 Packet sequencing (M)">
         <vspace blankLines="1"/>
 
+[Janos: Well, packet sequencing is part of the DetNet Service layer. Why do we 
+have it here? (MPLS is DetNet Transport layer.)]
+      
           Packet ordering in MPLS is generally similar to packet ordering
           in Ethernet. MPLS implementations can also support ECMP for
           certain types of traffic which can to lead to out of order
@@ -1260,6 +1293,10 @@ title="MPLS-based Services">
      <t hangText="#6 Operations, Administration and Maintenance (M)">
         <vspace blankLines="1"/>
 
+
+[Janos: All OAM features needed for DetNet availvable? If not, then it is M/W.]
+       
+      
           MPLS already includes a rich set of OAM functions at both the
           Service and Transport Layers. This includes LSP ping [ref] and
           those enabled via the MPLS Generic Associated Channel
@@ -1299,7 +1336,12 @@ title="MPLS-based Services">
      </t>
      <t hangText="#9 Packet traceability (M)">
         <vspace blankLines="1"/>
-        
+  
+
+[Janos: All packet traceability features needed for DetNet availvable? If not, 
+then it is M/W.]
+
+       
       MPLS supports multiple tracing mechanisms.  A control based one
           is defined in  <xref target="RFC3209"/>.  An OAM based mechanism
           is defined in MPLS On-Demand Connectivity Verification and Route
