@@ -317,7 +317,7 @@ title="DetNet adaptation to data plane">
     .
     .
 +-----------+
-|  Service  | PW, RTP, UDP, GRE, L2TP, VXLAN
+|  Service  | PW, RTP, UDP, GRE
 ~~~~~~~~~~~~~
 | Transport | IPv6, IPv4, MPLS LSPs, BIER, BIER-TE
 +-----------+
@@ -362,9 +362,9 @@ title="DetNet adaptation to data plane">
   The criteria for the DetNet Service layer:
    <list style="nosymbols">
     <t>#1 Encapsulation and overhead</t>
-    <t>#2 Flow identification (Flow ID part of the DetNet flows)</t>
+    <t>#2 Flow identification (Service ID part of the DetNet flows)</t>
 <t>
-  [Janos: "Flow ID part" should be replaced with "Service ID".]
+  [Janos: "Flow ID part" should be replaced with "Service ID". JiK: Done]
 </t>
     <t>#3 Packet sequencing (sequence number)</t>
     <t>#5 Packet replication and deletion (note: only the packet deletion for
@@ -373,7 +373,8 @@ title="DetNet adaptation to data plane">
     <t>#7 Time synchronization (e.g., time stamping)</t>
     <t>#8 Class and quality of service capabilities (DetNet Service specific)</t>
     <t>#10 Technical maturity</t>
-   </list>  
+    <t>[JiK: Time synchronization should probably be "Clock Synchronization"]</t>
+  </list>  
  </t> 
  
  <t>
@@ -395,7 +396,7 @@ title="DetNet adaptation to data plane">
      [Editor's note: #7 is more of OAM feature.]
     </t>
 <t>
-  [Janos: I guess #9 is meant as more of OAM feature.]
+  [Janos: I guess #9 is meant as more of OAM feature. JiK: I guess so.]
 </t>
    </list> 
  </t> 
@@ -508,11 +509,11 @@ title="DetNet adaptation to data plane">
     <t>
      The solution alternative has to provide means for end systems to number
      packets sequentially and transport that sequencing information along with
-     the sent packets. In addition to possible reordering packets one of the
-     important uses for sequencing is detecting duplicates. 
+     the sent packets. In addition to possible reordering packets other
+     important uses for sequencing are detecting duplicates and lost packets. 
     </t>
 <t>
-  [Janos: Provides loss detection as well.]
+  [Janos: Provides loss detection as well. JiK: Done]
 </t>     
      <t>    
      In a case of
@@ -548,12 +549,12 @@ title="DetNet adaptation to data plane">
     <t>
       The objective for supporting packet replication and deletion is to
       enable hitless (or lossless) 1+1 protection, which is also called
-      Seamless redundancy in <xref target="I-D.finn-detnet-architecture"/>.
+      Seamless Redundancy in <xref target="I-D.finn-detnet-architecture"/>.
       Data plane solutions need to meet this objective independent of
-      the particular solution used.  In other words, a packet
+      the used solution.  In other words, a packet
       replication and deletion is one identified method for a data plane
-      solution to provide seamless redundancy and other methods, if so
-      identified, are permissible. 
+      solution to provide seamless redundancy. Other methods, if so
+      identified, are also permissible. 
     </t>
     <t>
      The solution alternative has to provide means for end systems and/or relay
@@ -561,12 +562,12 @@ title="DetNet adaptation to data plane">
      the replicas, at multiple points in the network in order to ensure that one
      (or more) equipment failure event(s) still leave at least one path intact
      for a deterministic networking flow. The goal is to enable hitless 1+1
-         protection in a way that no packet gets lost or there is no ramp up
-         time when either one of the paths fails for one reason or another.
+     protection in a way that no packet gets lost or there is no ramp up
+     time when either one of the paths fails for one reason or another.
     </t>
     <t>
      Another concern regarding packet replication is how to enforce
-     replicated packets to take different route while the final
+     replicated packets to take different route or path while the final
      destination still remains the same.  With strict source routing,
      all the intermediate hops are listed and paths can be guaranteed
      to be non-overlapping.  Loose source routing only signals some of
@@ -621,6 +622,10 @@ title="DetNet adaptation to data plane">
       of time synchronization and packet scheduling may be provided by
       the underlying sub-net technology, e.g.,
       <xref target="IEEE802.1Qbv"/> and <xref target="IEEE802.1Qch"/>.
+    </t>
+    <t>
+     [Editor's note: This text should be modified to reflect the fact
+      that in most cases OAM is meant..]
     </t>
   </section>
 
@@ -906,9 +911,6 @@ title="DetNet adaptation to data plane">
           by <eref
           target="https://www.google.com/intl/en/ipv6/statistics.html">Google
           Statistics</eref> is now above 10 percent.      
-      <!--     A good meter
-      is the number of basic IPv6 related documents in IETF V6OPS, V6MAN and
-      other use case specific working groups. -->
      <vspace blankLines="1"/></t>
     </list></t>
    </section>
@@ -972,7 +974,7 @@ title="DetNet adaptation to data plane">
       identification.
      <vspace blankLines="1"/></t>
      
-     <!-- t hangText="Packet sequencing (W/N)">
+     <!--t hangText="Packet sequencing (W/N)">
       <vspace blankLines="1"/>
       IPv4 has no inbuilt support for packet sequencing. Upper layer protocol
       header support such as the RTP is required.
@@ -986,13 +988,15 @@ title="DetNet adaptation to data plane">
       questionable but within a closed network the support may be assumed.
      <vspace blankLines="1"/></t>
     
-     <t hangText="Packet replication (W/N)">
+     <t hangText="Packet replication and deletion (W/N)">
       <vspace blankLines="1"/>
       The functionality of replicating a packet exists in IPv4 but is limited to
       multicast flows.  In general the issue regarding the IPv6 packet
       replication also applies to IPv4.  Duplicate packet detection for IPv4 is
       studied in <xref target="RFC6621"/> to a great detail in the context of
-      simplified multicast forwarding. 
+      simplified multicast forwarding. In general there is no good way to detect
+      duplicated packets for IPv4 without additional upper layer
+      protocol support.
       <vspace blankLines="1"/></t>
     
      <t hangText="Operations, Administration and Maintenance (M)">
@@ -1006,9 +1010,7 @@ title="DetNet adaptation to data plane">
       IPv4 has an existing option for transporting "Internet Timestamp" <xref
       target="RFC0791"/> with the accuracy of 1ms. The support and usability of
       this option is unknown in the context of determnistic networking data
-      plane. Similarly to IPv6 new work would be needed to introduce sense of
-      time to IPv4 or rely on upper layer protocol such as the RTP to provide the
-      required functionality.
+      plane.
      <vspace blankLines="1"/></t-->
     
      <t hangText="Class and quality of service capabilities (M)">
@@ -1018,10 +1020,11 @@ title="DetNet adaptation to data plane">
     
      <t hangText="Packet traceability (W/N)">
       <vspace blankLines="1"/>
+      The IPv4 has similar needs and requirements for traceability as IPv6 (see
+      <xref target="sec_alt_ipv6_ana"/>).
       The IPv4 has a traceroute option <xref target="RFC1393"/> that could be used
       to record the route the packet took. However, the option has been
-      deprecated <xref target="RFC6814"/>. Similarly to IPv6 new work would be
-      needed to allow better traceability of IPv4 packets.
+      deprecated <xref target="RFC6814"/>.
       <vspace blankLines="1"/></t>
     
      <t hangText="Technical maturity (M/W)">
@@ -1036,7 +1039,15 @@ title="DetNet adaptation to data plane">
 
    <section title="Summary">
     <t>
-     TBD.
+      The IPv4 has specifications to support most of the identified DetNet data
+      plane criteria today. However, several of those have already been
+      deprecated or their wide support is not quaranteed. The DetNet data plane
+      criteria that are not fully supported could be incrementally added.
+      Unfortunately, the IPv4 has had limited success getting its extensions
+      deployed at large. However, introducing new extensions might have a better
+      success in closed networks (like DetNet) than in Internet.  Due to the
+      popularity of the IPv4, it should be considered as a potential choice for
+      the DetNet Transport layer.
     </t>
    </section>
   </section>
