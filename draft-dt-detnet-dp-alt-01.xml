@@ -2009,38 +2009,6 @@ title="Enabled Adjacencies">
     </section>
    </section>
     
-   <section title="Layer-2 Tunneling Protocol (L2TP)" anchor="sec_alt_l2tp">
-    <t>
-    [Editor's note: L2TPv3 <xref target="RFC3931"/> content to be provided later, if needed]
-    </t>
-    <!-- section title="Solution description">
-    </section>
- 
-    <section title="Analysis and Discussion">
-    </section>
- 
-    <section title="Summary">
-     <t>
-      TBD.
-    </section-->
-   </section>
-
-   <section title="Virtual Extensible LAN (VXLAN)" anchor="sec_alt_vxlan">
-    <t>
-    [Editor's note: VXLAN <xref target="RFC7348"/> content to be provided later, if needed]
-    </t>
-    <!-- section title="Solution description">
-    </section>
- 
-    <section title="Analysis and Discussion">
-    </section>
- 
-    <section title="Summary">
-     <t>
-      TBD.
-    </section-->
-   </section>
-  
   <section title="MPLS-based Services" anchor="sec_alt_mpls_svc">
     <section title="Solution description">      
     <t>
@@ -2715,7 +2683,6 @@ title="Enabled Adjacencies">
    &rfc3443;
    &rfc3473;
    &rfc3550;
-   &rfc3931;
    &rfc3985;
    &rfc4023;
    &rfc4385;
@@ -2757,7 +2724,6 @@ title="Enabled Adjacencies">
    &rfc7167;
    &rfc7209;
    &rfc7271;
-   &rfc7348;
    &rfc7399;
    &rfc7426;
    &rfc7432;
