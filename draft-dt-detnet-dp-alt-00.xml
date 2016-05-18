@@ -2549,7 +2549,7 @@ title="Enabled Adjacencies">
             To be defined
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#1 Encapsulation and overhead (M)">
+          <t hangText="#1 Encapsulation and overhead (W/M)">
             <vspace blankLines="1"/>
             The size of the BIER header depends on the number of segments in the
             particular path. It is very concise considering the amount of
@@ -2573,7 +2573,6 @@ title="Enabled Adjacencies">
             form of tag by the route setup protocol. This procedure requires
             more work and is separate from the dataplane method that is
             described here.
-
             <vspace blankLines="1"/> 
           </t>
           <t hangText="#5 Packet replication and deletion (M/W)">
@@ -2589,7 +2588,10 @@ title="Enabled Adjacencies">
             <vspace blankLines="1"/>
             The setting of the bits at arrival enables to determine which
             adjacencies worked and which did not, enabling a dynamic control of
-            the replication and elimination process.
+            the replication and elimination process. This is a form of OAM that
+            is in-band with the data stream as opposed to leveraging separate 
+            packets, which is a more accurate information on the reliability of
+            the link for the user.
             <vspace blankLines="1"/> 
           </t>
           <t hangText="#7 Time synchronization (N)">
@@ -2605,15 +2607,16 @@ title="Enabled Adjacencies">
           <t hangText="#9 Packet traceability (W)">
             <vspace blankLines="1"/>
             This is a strong point of the solution. The solution enables to
-            determine which segment a given packet is expected to traverse, even
-            in the case of Replication and Elimination.
+            determine which is the current segment that a given packet is
+            expected to traverse, which node performed the replication and 
+            which should perform the elimination if any
             <vspace blankLines="1"/> 
             
           </t>
           <t hangText="#10 Technical maturity (W/N)">
             <vspace blankLines="1"/>
             Some components of the technology are already proven, e.g. segment
-            routing an BIER. Yet, the overall solution has never been deployed
+            routing and BIER. Yet, the overall solution has never been deployed
             in Service Provider networks.             
             <vspace blankLines="1"/> 
           </t>
@@ -2624,7 +2627,18 @@ title="Enabled Adjacencies">
  
     <section title="Summary">
       <t>
- 
+      BIER-TE occupies a particular position in the DetNet dataplane. In the one
+      hand it is optional, and only useful if replication and elimination is
+      taking place. In the other hand, it has unique capabilities to:
+      <list style="symbols">
+      <t>control which replication take place on a per packet basis, so that
+      replication points can be configured but not actually utilized</t>
+      <t>trace the replication activity and determine which node replicated a
+      particular packet</t>
+      <t>measure the quality of transmission of the actual data packet along
+      the replication segments and use that in a control loop to adapt the
+      setting of the bits and maintain the reliability.</t>
+      </list>
       </t>
     </section>
   </section> <!-- BIER-TE -->
