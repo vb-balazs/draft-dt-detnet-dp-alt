@@ -1525,10 +1525,79 @@ title="DetNet in BIER domain">
   </t>
   </section>
 
-  <section title="Analysis and Discussion">
-  </section>
+  <section title="Analysis and Discussion" anchor="sec_alt_bier_ana">
+   <t><list style="hanging">
+    <t hangText="Encapsulation and overhead (M)">
+     <vspace blankLines="1"/>
+     BIER over MPLS network encapsulation (will refer as "BIER over MPLS"
+     further for short), <xref target="fig_BIER_MPLS"/>, is well defined [I-D.
+     ietf-bier-mpls-encapsulation].
+     <vspace blankLines="1"/></t>
+    
+    <t hangText="Flow identification (M)">
+     <vspace blankLines="1"/>
+     Flow identification and separation can be achieved through use of BIER
+     domains and/or Entropy value in the BIER over MPLS, <xref
+     target="fig_BIER_MPLS"/>.
+     <vspace blankLines="1"/></t>
+    
+    <t hangText="Explicit routes (M)">
+     <vspace blankLines="1"/>
+     Explicit routes may be used as underlay for BIER domain. BIER underlay may
+     be calculated using PCE and instantiated using any southbound mechanism.
+     <vspace blankLines="1"/></t>
 
+    <t hangText="Packet replication and deletion (M/W)">
+     <vspace blankLines="1"/>
+     Packet replication, as indicated by its name, is core function of the
+     Bit-Indexed Explicit Replication. Elimination of the duplicates and/or
+     too-late packets cannot be done within BIER sub-domain but may be done at
+     DetNet overlay at the edge of the BIER sub-domain.
+     <vspace blankLines="1"/></t>
+
+    <t hangText="Operations, Administration and Maintenance (M/W)">
+     <vspace blankLines="1"/>
+     BIER over MPLS guarantees that OAM is fate-sharing, i.e. in-band with a
+     data flow being monitored or measured. Additionally, BIER over MPLS enables
+     passive performance measurement, e.g. with the marking method [I-D.
+     mirsky-bier-pmmm-oam]. Some OAM protocols, e.g. can be applied and used in
+     BIER over MPLS as demonstrated [I-D. ooamdt-rtgwg-oam-gap-analysis], while
+     new protocols being worked on, e.g. ping/traceroute [I-D.
+     kumarzheng-bier-ping] or Path MTU Discovery [I-D.
+     mirsky-bier-path-mtu-discovery].
+     <vspace blankLines="1"/></t>
+
+    <t hangText="Class and quality of service capabilities (M)">
+     <vspace blankLines="1"/>
+     Class of Service can be inherited from the underlay of the particular BIER
+     sub-domain. Quality of Service, i.e. scheduling and bandwidth reservations
+     can be used among other constrains in calculating explicit path for the
+     BIER sub-domain's underlay.
+     <vspace blankLines="1"/></t>
+
+    <t hangText="Packet traceability (M)">
+     <vspace blankLines="1"/>
+     Ability to do passive performance measurement by using OAM field of the
+     BIER over MPLS, <xref target="fig_BIER_MPLS"/>, is unmatched and significantly simplifies truly
+     passive tracing of selected flows and packets within them.
+     <vspace blankLines="1"/></t>
+
+    <t hangText="Technical maturity (M)">
+     <vspace blankLines="1"/>BIER over MPLS is well defined and several
+     experimental implementations are expected later this year.
+    </t>
+   </list></t>
+  </section>
+  
   <section title="Summary">
+   <t>
+      BIER over MPLS supports a significant portion of the identified DetNet
+      data plane requirements, including controlled packet replication, traffic
+      engineering, while some requirements, e.g. duplicate and too-late packet
+      elimination may be realized as function of the DetNet overlay. BIER over
+      MPLS can be a natural choice as the DetNet Transport layer in MPLS
+      networks.
+   </t>
   </section>
  </section>  <!-- "Base BIER" -->
 
