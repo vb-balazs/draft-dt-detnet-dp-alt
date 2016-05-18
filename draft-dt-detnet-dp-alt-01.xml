@@ -83,6 +83,14 @@
 <!ENTITY I-D.ietf-idr-ls-distribution SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-idr-ls-distribution.xml">
 <!ENTITY I-D.ietf-mpls-residence-time SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-mpls-residence-time">
 
+<!ENTITY I-D.mirsky-bier-pmmm-oam SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.mirsky-bier-pmmm-oam.xml">
+<!ENTITY I-D.ooamdt-rtgwg-oam-gap-analysis SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ooamdt-rtgwg-oam-gap-analysis.xml">
+<!ENTITY I-D.kumarzheng-bier-ping SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.kumarzheng-bier-ping.xml">
+<!ENTITY I-D.mirsky-bier-path-mtu-discovery SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.mirsky-bier-path-mtu-discovery.xml">
+<!ENTITY I-D.ooamdt-rtgwg-ooam-requirement SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ooamdt-rtgwg-ooam-requirement.xml">
+
+
+
 ]>
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -363,9 +371,6 @@ title="DetNet adaptation to data plane">
    <list style="nosymbols">
     <t>#1 Encapsulation and overhead</t>
     <t>#2 Flow identification (Service ID part of the DetNet flows)</t>
-<t>
-  [Janos: "Flow ID part" should be replaced with "Service ID". JiK: Done]
-</t>
     <t>#3 Packet sequencing (sequence number)</t>
     <t>#5 Packet replication and deletion (note: only the packet deletion for
        seamless redundancy)</t>
@@ -373,7 +378,6 @@ title="DetNet adaptation to data plane">
     <t>#7 Time synchronization (e.g., time stamping)</t>
     <t>#8 Class and quality of service capabilities (DetNet Service specific)</t>
     <t>#10 Technical maturity</t>
-    <t>[JiK: Time synchronization should probably be "Clock Synchronization"]</t>
   </list>  
  </t> 
  
@@ -385,19 +389,10 @@ title="DetNet adaptation to data plane">
     <t>#4 Explicit routes (network path)</t>
     <t>#5 Packet replication and deletion (note: only the packet replication
        for seamless redundancy)</t>
-    <t>#6 Operations, Administration and Maintenance (capabilities)</t>
-    <t>#7 Time synchronization (time/phase sync of nodes)</t>
+    <t>#6 Operations, Administration and Maintenance (capabilities,
+          performance management, packet traceability)</t>
     <t>#8 Class and quality of service capabilities (DetNet Transport specific)</t>
-    <t>#9 Packet traceability (verification purposes)</t>
     <t>#10 Technical maturity</t>
-   </list> 
-   <list style="nosymbols">
-    <t>
-     [Editor's note: #7 is more of OAM feature.]
-    </t>
-<t>
-  [Janos: I guess #9 is meant as more of OAM feature. JiK: I guess so.]
-</t>
    </list> 
  </t> 
  
@@ -512,9 +507,6 @@ title="DetNet adaptation to data plane">
      the sent packets. In addition to possible reordering packets other
      important uses for sequencing are detecting duplicates and lost packets. 
     </t>
-<t>
-  [Janos: Provides loss detection as well. JiK: Done]
-</t>     
      <t>    
      In a case of
      intentional packet duplication a combination of flow identification and
@@ -607,6 +599,12 @@ title="DetNet adaptation to data plane">
      MPLS-based data planes. But any OAM-related implications or
      requirements on data plane hardware must be considered.
     </t>
+    <t>
+     The OAM includes but is not limited to tools listed in the
+     requirements for overlay networks <xref target="I-D.ooamdt-rtgwg-ooam-requirement"/>.
+     Specifically, the performance management requirements are of 
+     interest at both service and transport layers.
+    </t>
   </section>
 
   <section title="#7 Time synchronization" anchor="sec_crit_sync">
@@ -624,8 +622,12 @@ title="DetNet adaptation to data plane">
       <xref target="IEEE802.1Qbv"/> and <xref target="IEEE802.1Qch"/>.
     </t>
     <t>
-     [Editor's note: This text should be modified to reflect the fact
-      that in most cases OAM is meant..]
+      This criteria is not about clock distribution or time synchronization
+      between networking nodes per se. Rather whether the DetNet dataplane
+      alternative has any support for primitives that would help, for
+      example, the service layer flows have a sense of time. One example
+      being timestamps in the payload data units of the transport
+      protocol.
     </t>
   </section>
 
@@ -1559,12 +1561,12 @@ title="DetNet in BIER domain">
      <vspace blankLines="1"/>
      BIER over MPLS guarantees that OAM is fate-sharing, i.e. in-band with a
      data flow being monitored or measured. Additionally, BIER over MPLS enables
-     passive performance measurement, e.g. with the marking method [I-D.
-     mirsky-bier-pmmm-oam]. Some OAM protocols, e.g. can be applied and used in
-     BIER over MPLS as demonstrated [I-D. ooamdt-rtgwg-oam-gap-analysis], while
-     new protocols being worked on, e.g. ping/traceroute [I-D.
-     kumarzheng-bier-ping] or Path MTU Discovery [I-D.
-     mirsky-bier-path-mtu-discovery].
+     passive performance measurement, e.g. with the marking method <xref
+     target="I-D.mirsky-bier-pmmm-oam"/>. Some OAM protocols, e.g. can be applied and used in
+     BIER over MPLS as demonstrated <xref target="I-D.ooamdt-rtgwg-oam-gap-analysis"/>, while
+     new protocols being worked on, e.g. ping/traceroute 
+     <xref target="I-D.kumarzheng-bier-ping"/> or Path MTU Discovery 
+     <xref target="I-D.mirsky-bier-path-mtu-discovery"/>.
      <vspace blankLines="1"/></t>
 
     <t hangText="Class and quality of service capabilities (M)">
@@ -2732,6 +2734,12 @@ title="Enabled Adjacencies">
    <t>Zhuangyan Zhuang</t>
   </list></t>
   <t>
+   Substantial contributions were received from:
+   <list style="bullets">
+    <t>Balazs Varga (service model)</t>
+   </list>
+  </t>
+  <t>
    The DetNet chairs serving during the DetNet Data Plane Design Team:
    <list style="bullets">
     <t>Lou Berger</t>
@@ -2822,6 +2830,11 @@ title="Enabled Adjacencies">
    &I-D.ietf-sunset4-gapanalysis;
    &I-D.ietf-v6ops-ipv6-ehs-in-real-world;
    &I-D.eckert-bier-te-arch;
+   &I-D.mirsky-bier-pmmm-oam;
+   &I-D.ooamdt-rtgwg-oam-gap-analysis;
+   &I-D.kumarzheng-bier-ping;
+   &I-D.mirsky-bier-path-mtu-discovery;
+   &I-D.ooamdt-rtgwg-ooam-requirement;
 
    
    <reference anchor="ST20227"
