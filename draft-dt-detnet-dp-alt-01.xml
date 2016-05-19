@@ -2008,11 +2008,12 @@ title="Enabled Adjacencies">
      <t><list style="hanging">
      <t hangText="Encapsulation and overhead (M)">
       <vspace blankLines="1"/>
-      GRE provides encapsulation for a network layer protocol over anther
-      network layer protocol. A new protocol type for DetNet traffics should be
+
+      GRE can provide encapsulation at the service layer over the transport
+      layer. A new protocol type for DetNet traffic should be
       allocated as an "Ether Type" in <xref target="RFC1700"/> and in <eref
       target="http://ftp.isi.edu/in-notes/iana/assignments/ethernet-numbers">IANA
-      Ethernet Numbers.</eref> The fixed header of a GRE packet is 4 octets
+      Ethernet Numbers</eref>. The fixed header of a GRE packet is 4 octets
       while the maximum header is 16 octets with optional fields in <xref
           target="fig_gre_hdr"/>.
       <vspace blankLines="1"/></t>
@@ -2035,43 +2036,39 @@ title="Enabled Adjacencies">
       packets. The size of the sequencing number is 32 bits.
      <vspace blankLines="1"/></t>
      
-     <!--t hangText="Explicit routes (W/N)">
+     <t hangText="Duplicate packet deletion (W/N)">
       <vspace blankLines="1"/>
-      GRE has no packet replication and deletion currently in its header and
-         should be extended or rely on delivery protocols.
-     <vspace blankLines="1"/></t-->
-     
-     <t hangText="Duplicate packet deletion (N)">
-      <vspace blankLines="1"/>
-      GRE has no packet replication and deletion currently in its header and
-      should be extended or rely on delivery protocols.
+       GRE has no packet replication and deletion in its header. It can use the
+       transport IPv4/IPv6 protocols at the transport layer to replicate the
+       packets and take the different routes as discussed
+       in <xref target="sec_alt_ipv6"/> and <xref target="sec_alt_ipv4"/>.
+       Besides, the GRE header can be extended to indicate the duplicated
+       packets by defining a flag in reserved fields or using the sequencing
+       number of a flow.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Operations, Administration and Maintenance (W/N)">
+     <t hangText="Operations, Administration and Maintenance (M)">
       <vspace blankLines="1"/>
-      [note: rely on the delivery protocol] GRE has no packet replication and
-      deletion currently and should be relied on delivery protocols.
+       GRE uses the network management provided by the IP protocols as
+       transport layer.
       <vspace blankLines="1"/></t>
      
      <t hangText="Time synchronization (W/N)">
       <vspace blankLines="1"/>
-      [note: rely on the delivery protocol] GRE has no packet replication and
-      deletion currently and should be relied on delivery protocols.
+      It is possible to carry time synchronization information by extending
+      the optional fields of the GRE encapsulation. However, the available
+      lenght in the header is limited.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Class and quality of service capabilities (W/N)">
+     <t hangText="Class and quality of service capabilities (W">
       <vspace blankLines="1"/>
-      [note: rely on the delivery protocol] GRE has no packet replication and
-      deletion currently and should be relied on delivery protocols. For the
-      class of service capability, an optional code point field to indicate CoS
-      of a traffic can be extended in GRE header.
-     <vspace blankLines="1"/></t>
+       For the class of service capability, an optional code point field to
+       indicate CoS of the traffic could be added into the GRE header. Otherwise,
+       GRE can reuse the class and quality of service of delivery protocols
+       at ansport layer such as IPv6 and IPv4 stated in 
+       <xref target="sec_alt_ipv6"/> and <xref target="sec_alt_ipv4"/>.
      
-     <!--t hangText="Packet traceability (W/N)">
-      <vspace blankLines="1"/>
-      [note: rely on the delivery protocol] GRE has no packet replication and
-      deletion currently and should be relied on delivery protocols.
-      <vspace blankLines="1"/></t-->
+      <vspace blankLines="1"/></t>
      
      <t hangText="Technical maturity (M)">
       <vspace blankLines="1"/>
@@ -2080,13 +2077,21 @@ title="Enabled Adjacencies">
       <xref target="I-D.ietf-intarea-gre-ipv6"/>. Due to its good extensibility,
       GRE is also extended to support network virtualization in Data Center,
       which is NVGRE <xref target="RFC7637"/>.
-      <vspace blankLines="1"/></t>
+      </t>
      </list></t>
     </section>
 
     <section title="Summary">
      <t>
-      TBD.
+      As a tunneling protocol, GRE can encapsulate a wide variety of
+      network layer protocols over another network layer, which can
+      naturally serve as the service layer protocol for DetNet.
+      Currently, it supports a portion of the Detnet service layer
+      criteria, and still some are not fully supported but can be
+      incrementally added or supported by delivery protocols at as the
+      transport layer. In general, GRE can be a choice as the DetNet
+      service layer and can work well with IPv6 and IPv4 as the DetNet
+      Transport layer.
      </t>
     </section>
    </section>
