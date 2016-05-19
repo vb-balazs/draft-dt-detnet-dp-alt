@@ -1714,7 +1714,9 @@ Internet-Draft       DetNet data plane alternatives             May 2016
 
    Generic Routing Encapsulation (GRE) [RFC2784] provides an
    encapsulation of an arbitrary network layer protocol over another
-   arbitrary network layer protocol.  The encapsulation of a GRE packet
+   arbitrary network layer protocol,which can serve as the DetNet 
+   service layer while using delivery protocols such as IPv6 and IPv4
+   as the DetNet transport layer. The encapsulation of a GRE packet
    can be found in Figure 9.
 
 
@@ -1776,12 +1778,11 @@ Internet-Draft       DetNet data plane alternatives             May 2016
 
    Encapsulation and overhead (M)
 
-      GRE provides encapsulation for a network layer protocol over
-      anther network layer protocol.  A new protocol type for DetNet
-      traffics should be allocated as an "Ether Type" in [RFC1700] and
-      in IANA Ethernet Numbers. [5] The fixed header of a GRE packet is
-      4 octets while the maximum header is 16 octets with optional
-      fields in Figure 10.
+      GRE can provide encapsulation at the service layer over the 
+      transport layer. A new protocol type for DetNet traffics should
+      be allocated as an "Ether Type" in [RFC1700] and in IANA Ethernet 
+      Numbers[5]. The fixed header of a GRE packet is 4 octets while 
+      the maximum header is 16 octets with optional fields in Figure 10.
 
    Flow identification (W)
 
@@ -1796,42 +1797,44 @@ Internet-Draft       DetNet data plane alternatives             May 2016
 
       There is no flow identification field in GRE header.  However, it
       can rely on the flow identification mechanism applied in the
-      delivery protocols, such as flow identification stated in IP
-      Sections 4.1.1 and 4.1.2 when the delivery protocols are IPv6 and
-      IPv4 respectively.  Alternatively, the Key field can also be
-      extended to carry the flow identification.  The size of Key field
-      is 4 octets.
+      delivery protocols at transport layer, such as flow identification
+      of IPv6 statied above in Section 4.1.1 and that of IPv4 in Section
+      4.1.2. Alternatively, the Key field can also be extended to carry 
+      the flow identification.  The size of Key field is 4 octets.
 
    Packet sequencing (M)
 
-      As stated in Section 4.2.1, GRE provides an optional sequencing
+      As stated in Section 4.2.1.1, GRE provides an optional sequencing
       number in its header to provide sequencing services for packets.
       The size of the sequencing number is 32 bits.
 
-   Duplicate packet deletion (N)
+   Duplicate packet deletion (N/W)
 
-      GRE has no packet replication and deletion currently in its header
-      and should be extended or rely on delivery protocols.
+      GRE has no packet replication and deletion in its header. It can 
+      use the transportIPv4/IPv6 protocols at the transport layer to 
+      replicate the packets and take the different routes as IPv6 and 
+      IPv4 doseas discussed in Section 4.1.1 and Section 4.1.2. Besides, 
+      the GRE header can be extended to indicate the duplicated packets 
+      by defining a flag in reserved fields or using the sequencing 
+      number of a flow.
+      
 
-   Operations, Administration and Maintenance (W/N)
+   Operations, Administration and Maintenance (M)
 
-      [note: rely on the delivery protocol] GRE has no packet
-      replication and deletion currently and should be relied on
-      delivery protocols.
+     GRE uses the network management provided by the IP protocols as
+     transport layer.
 
-   Time synchronization (W/N)
+   Time synchronization (W)
 
-      [note: rely on the delivery protocol] GRE has no packet
-      replication and deletion currently and should be relied on
-      delivery protocols.
+     It is possible to carry time synchronization information by extended
+     the ptional fields of the GRE encapsulation. But the lenght is limited.
 
-   Class and quality of service capabilities (W/N)
+   Class and quality of service capabilities (W)
 
-      [note: rely on the delivery protocol] GRE has no packet
-      replication and deletion currently and should be relied on
-      delivery protocols.  For the class of service capability, an
-      optional code point field to indicate CoS of a traffic can be
-      extended in GRE header.
+      For the class of service capability, an optional code point field to 
+      indicate CoS of a traffic can be extended in GRE header. Otherwise, 
+      it can reuse the class and quality of service of delivery protocols
+      at ansport layer such as IPv6 and IPv4 stated in 4.1.1 and 4.1.2.
 
    Technical maturity (M)
 
@@ -1852,7 +1855,15 @@ Internet-Draft       DetNet data plane alternatives             May 2016
 
 4.2.1.3.  Summary
 
-   TBD.
+      As a tunneling protocol, GRE can encapsulate a wide variety of 
+      network layer protocols over another network layer, which can 
+      naturally serve as the service layer protocol for DetNet. 
+      Currently, it supports a portion of the Detnet service layer 
+      criteria, and still some are not fully supported but can be 
+      incrementally added or supported by delivery protocols at as the
+      transport layer. In general, GRE can be a choice as the DetNet
+      service layer and can work well with IPv6 and IPv4 as the DetNet 
+      Transport layer. 
 
 4.2.2.  MPLS-based Services
 
