@@ -231,10 +231,6 @@
    deterministic networking aware data plane hardware.  
    Control plane considerations are out of scope of this document.
   </t>
-  <!--t>
-   [Editor's note: add text to 1) set the context, 2) scope of the document, and 3)
-   prepare reader to realize the potential impact on the DetNet aware hardware].
-  </t-->
  </section>
 
  <!--section title="Terminology">
@@ -907,12 +903,12 @@ title="DetNet adaptation to data plane">
       The <eref target="http://6lab.cisco.com/stats/">Cisco 6Lab site</eref>
       provides information on IPv6 deployment per country, indicating figures
       for prefixes, transit AS, content and users. Per this site, many
-          countries, including Canada, Brazil, the USA, Germany, France, Japan,
-          Portugal, Sweden, Finland, Norway, Greece, and Ecuador, achieve a
-          deployment ratio above 30 percent, and the overall adoption reported
-          by <eref
-          target="https://www.google.com/intl/en/ipv6/statistics.html">Google
-          Statistics</eref> is now above 10 percent.      
+      countries, including Canada, Brazil, the USA, Germany, France, Japan,
+      Portugal, Sweden, Finland, Norway, Greece, and Ecuador, achieve a
+      deployment ratio above 30 percent, and the overall adoption reported
+      by <eref
+      target="https://www.google.com/intl/en/ipv6/statistics.html">Google
+      Statistics</eref> is now above 10 percent.      
      <vspace blankLines="1"/></t>
     </list></t>
    </section>
@@ -1902,51 +1898,66 @@ title="Enabled Adjacencies">
      </t>
      </list>
      </t>
-<t>In more details:   
-  </t><t>   
-   The BIER header is of variable size, and a DetNet network of a limited size
-   can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
-   deployment may be able to signal up to 256 adjacencies for use 
-   in very complex paths. <xref target="fig_BIER_MPLS"/> illustrates a BIER 
-   header as encapsulated within MPLS. The format of this header is common to
-   BIER and BIER-TE.
-  </t>
- <t>
-   For the DetNet data plane, a replication point is an ingress point for more
-   than one adjacency, and an elimination point is an egress point for more than
-   one adjacency.
-   </t><t>   
-   A pre-populated state in a replication node indicates which bits are
-   served by this node and to which adjacency each of these bits corresponds.
-   With DetNet, the state is typically installed by a controller entity such as
-   a PCE. 
-   The way the adjacency is signaled in the packet is fully abstracted in the
-   bit representation and must be provisioned to the replication nodes and 
-   maintained as a local state, together with the timing or shaping information
-   for the associated flow.
-  </t><t>
-   The DetNet data plane uses BIER-TE to control which adjacencies are used
-   for a given packet. This is signaled from the path ingress, which sets the
-   appropriate bits in the BIER BitString to indicate which replication must
-   happen.
-  </t><t>
-   The replication point clears the bit associated to the adjacency where the
-   replica is placed, and the elimination points perform a logical AND of the
-   BitStrings of the copies that it gets before forwarding.   
-  </t><t>     
-   As is apparent in the examples above, clearing the bits enables to trace a
-   packet to the replication points that made any particular copy. BIER-TE also
-   enables to detect the failing adjacencies or sequences of adjacencies along a
-   path and to activate additional replications to counter balance the failures.
-    </t><t>
-   Finally, using the same BIER-TE bit for both directions of the steps of the
-   ladder enables to avoid replication in both directions along the crossing
-   adjacencies. At the time of sending along the step of the ladder, the bit may
-   have been already reset by performing the AND operation with the copy from
-   the other side, in which case the transmission is not needed and does not
-   occur (since the control bit is now off).
-  </t>
-
+   </section>
+   <section title="Analysis and Discussion">
+  <t>   
+   <list style="hanging">
+    <t hangText="Encapsulation and overhead (M)">
+     <vspace blankLines="1"/>
+     The BIER header is of variable size, and a DetNet network of a limited size
+     can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
+     deployment may be able to signal up to 256 adjacencies for use in very
+     complex paths. <xref target="fig_BIER_MPLS"/> illustrates a BIER header as
+     encapsulated within MPLS. The format of this header is common to BIER and
+     BIER-TE.
+     <vspace blankLines="1"/></t>
+   <t hangText="Packet replication and deletion (M/W)">
+    <vspace blankLines="1"/>
+    For the DetNet data plane, a replication point is an ingress point for more
+    than one adjacency, and an elimination point is an egress point for more than
+    one adjacency.
+    <vspace blankLines="1"/>
+    A pre-populated state in a replication node indicates which bits are
+    served by this node and to which adjacency each of these bits corresponds.
+    With DetNet, the state is typically installed by a controller entity such as
+    a PCE. 
+    The way the adjacency is signaled in the packet is fully abstracted in the
+    bit representation and must be provisioned to the replication nodes and 
+    maintained as a local state, together with the timing or shaping information
+    for the associated flow.
+   <vspace blankLines="1"/>
+    The DetNet data plane uses BIER-TE to control which adjacencies are used
+    for a given packet. This is signaled from the path ingress, which sets the
+    appropriate bits in the BIER BitString to indicate which replication must
+    happen.
+    <vspace blankLines="1"/>
+    The replication point clears the bit associated to the adjacency where the
+    replica is placed, and the elimination points perform a logical AND of the
+    BitStrings of the copies that it gets before forwarding.   
+    <vspace blankLines="1"/></t>
+   <t hangText="Packet traceability (M)">     
+    <vspace blankLines="1"/>
+    As is apparent in the examples above, clearing the bits enables to trace a
+    packet to the replication points that made any particular copy. BIER-TE also
+    enables to detect the failing adjacencies or sequences of adjacencies along a
+    path and to activate additional replications to counter balance the failures.
+    <vspace blankLines="1"/></t>
+   <t hangText="..">
+    <vspace blankLines="1"/>
+    Finally, using the same BIER-TE bit for both directions of the steps of the
+    ladder enables to avoid replication in both directions along the crossing
+    adjacencies. At the time of sending along the step of the ladder, the bit may
+    have been already reset by performing the AND operation with the copy from
+    the other side, in which case the transmission is not needed and does not
+    occur (since the control bit is now off).
+    </t>
+   </list>
+   </t>
+  </section> <!-- analysis -->
+  <section title="Summary">
+   <t>
+    TBD.
+   </t>
   </section>
   </section> <!-- BIER-TE -->
   </section> <!-- BIER    -->
