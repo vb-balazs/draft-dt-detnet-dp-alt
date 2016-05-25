@@ -261,37 +261,69 @@
 <figure anchor="fig_detnet" align="center"
 title="A Simple DetNet Enabled Network">
 <artwork align="center"><![CDATA[
+   _   Det-SAP (O)                                          Det-SAP (O) _ 
+  / \    |                                                        |    / \
+ /App\   |  +----DetNet-SAP (X)                 DetNet-SAP (X)    |   /App\
+/--O--\<-+  |                                       |             +->/--O--\
+| NIC |     v         ________                      |                | NIC |
++--+--+     _____    /        \              +------+--+---------+   +--+--+
+   |       /     \__/          \             |         |         |      |
+   |      / +----+    +----+    \_____       v         |         |      |
+   |     /  |    |    |    |          \_______         |         |      |
+   +--------X PE +----+ P  +----+             \        v     _   v      |
+         |  |    |    |    |    |              |         ___/ \         |
+         |  +--+-+    +----+    |       +----+ |        /      \_       |
+         \     |                |       |    | |       /         \      |
+          \    |   +----+    +--+-+  +--+ PE X---------X         X------+
+           \   |   |    |    |    |  |  |    | |       \_      _/       
+            \  +---+ P  +----+ P  +--+  +----+ |         \____/       
+             \___  |    |    |    |     Domain-1          Domain-2    
+                 \ +----+__  +----+     ______/                            
+   |              \_____/  \___________/                                |
+   |                                                                    |
+   |                                                                    |
+   |        |     Det-Service (Det-Flow)     |         |         |      |
+   <-------------------------------------------------------------------->
+   |        |                                |         |         |      |
+   |        |   DetNet-Service (DetNet-Flow) |         |         |      |
+   |        <-------------------------------->         <--------->      |
+   |        <---------------------------------------------------->      |
+   |        |                                |         |         |      |
 
-+------+                                                +------+
-| End  |<-------------Deterministic flow--------------->| End  |
-|System|                                                |System|
-+--+---+                                                +-+----+
-   |      <--------------DetNet flow----------------->    |
-   |                                                  ,+-''''--.
-   |                                                  [   Sub   ]
-   |Link                                              [ Network ]
-   |                                                   +-....--'
-   |                                                      |
-   |    +------+     +-------+   ,-'''-.   +-------+  +------+
-   |    | Edge |Link |Network|--[  Sub  ]--|Network|--| Edge |
-   +----| Node |-----|  Node |  [Network]  |  Node |  | Node |
-        +------+     +-------+   +-...-'   +-------+  +------+
 ]]></artwork>
 </figure>
 
-
- <t>
-   
- </t>
-
+	<t>
+     From service model perspective a fundamental question is the location of
+     the Service Access Points (SAP), i.e., where the service starts or ends.
+     Two reference points can be distinguished for all DetNet use-cases: (i)
+     Det-SAP is an end-system's internal reference point; (ii) DetNet-SAP is the
+     edge node User-Network Interface (UNI). A Det-SAP (depicted as "O" in <xref
+     target="fig_detnet"/>) is providing access to deterministic transport for
+     the native data flow (Det-Flow). A DetNet-SAP (depicted as "X" in <xref
+     target="fig_detnet"/>) is assumed in this document to be a packet/frame
+     based reference point and provides connectivity over the packet network. A
+     DetNet-SAP may add networking technology (data plane) specific
+     encapsulation to the Det-Flow and transport it as a DetNet-Flow over the
+     network. 
+	</t>
+	
+	<t>
+     Based on these SAPs two major service scenarios can be created: (i)
+     Det-Service: defined between Det-SAPs, it reaches out to final source/sink
+     nodes, so it is an end-to-end service between application hosting devices
+     (end-systems); (ii) DetNet-Service: defined between DetNet-SAPs and
+     connects networking islands, so it is a service between the borders of
+     network domain(s).
+	</t>
 
  <t>
   This DetNet data plane is logically divided into two layers:
    <list style="symbols">
     <t>
      The DetNet Service layer provides adaptation of DetNet services.  It is
-     composed of a shim layer to carry DetNet flow specific attributes, which
-     are needed during forwarding. End systems originate and terminate the 
+     composed of a shim layer to carry deterministic  flow specific attributes,
+     which are needed during forwarding. End systems originate and terminate the
      DetNet Service layer and are peers at the DetNet Service layer.
     </t>
     <t>
@@ -300,19 +332,24 @@ title="A Simple DetNet Enabled Network">
      layer is used to relay traffic end to end across a DetNet domain.
     </t>
    </list>
-  Distinguishing the function of these two DetNet data plane
-  layers helps to explore and evaluate various combinations of the
-  data plane solutions available.  This separation of DetNet
-  layers, while helpful, should not be considered as formal
-  requirement.  For example, some technologies may violate these
-  strict layers and still be able to deliver a DetNet service.
- </t>
+   Distinguishing the function of these two DetNet data plane layers helps to
+   explore and evaluate various combinations of the data plane solutions
+   available.  This separation of DetNet layers, while helpful, should not be
+   considered as formal requirement.  For example, some technologies may violate
+   these strict layers and still be able to deliver a DetNet service.
+  </t>
+  <t>
+   Data plane of the Det-SAP and DetNet-SAP may or may not differ. This document
+   evaluates data plane options independent from which SAP is considered. As
+   also shown in <xref target="fig_detnet"/> same type of SAPs peer with each
+   other.
+  </t>
  
- <t>
-  A number of data plane technology candidates are discussed later in this
-  document. They can be mapped to the two layers as shown in
-  <xref target="fig_adaptation"/>.
- </t>
+  <t>
+   A number of data plane technology candidates are discussed later in this
+   document. They can be mapped to the two layers as shown in
+   <xref target="fig_adaptation"/>.
+  </t>
 
 <figure anchor="fig_adaptation" align="center"
 title="DetNet adaptation to data plane">
@@ -332,16 +369,17 @@ title="DetNet adaptation to data plane">
 
  <t>
   Both the DetNet Service and the DetNet Transport layers are provided by a
-  single technology in some solutions, e.g. the DetNet Service layer is PW and the DetNet
-  Transport layer is MPLS in case of PW over MPLS. Nonetheless, both the DetNet Service and
-  the DetNet Transport layers can include multiple technology layers in other
-  solutions in order to provide the capabilities needed for DetNet flows. For
-  instance, the DetNet Transport layer can comprise MPLS-in-GRE (<xref
-  target="sec_alt_pwe"/>) in one solution. In another solution, the DetNet Service layer
-  can include, e.g.,  RTP in UDP (<xref target="sec_alt_higher"/>).
+  single technology in some solutions, e.g. the DetNet Service layer is PW and
+  the DetNet Transport layer is MPLS in case of PW over MPLS. Nonetheless, both
+  the DetNet Service and the DetNet Transport layers can include multiple
+  technology layers in other solutions in order to provide the capabilities
+  needed for DetNet flows. For instance, the DetNet Transport layer can comprise
+  MPLS-in-GRE (<xref target="sec_alt_pwe"/>) in one solution. In another
+  solution, the DetNet Service layer can include, e.g.,  RTP in UDP (<xref
+  target="sec_alt_higher"/>).
  </t>
   
- <t>
+ <!-- t>
   [Editor's note: I'm not sure if the remainder of this section says
   anything not present in the next section. Will need to revisit
   as part of the pre-pub review.]
@@ -349,46 +387,47 @@ title="DetNet adaptation to data plane">
 
 <t>
   [Janos: I think the text is useful here for clarification.]
-</t>
+</t -->
  
  <t>
   There are many valid options to create a data plane solution for DetNet
-  traffic by selecting a technology approach for the DetNet Service layer and also
-  selecting a technology approach for the DetNet Transport layer. There are a
-  high number of valid combinations. Therefore, not the combinations but the
+  traffic by selecting a technology approach for the DetNet Service layer and
+  also selecting a technology approach for the DetNet Transport layer. There are
+  a high number of valid combinations. Therefore, not the combinations but the
   different technologies are evaluated along the criteria collected in <xref
-  target="sec_crit"/>. Different criteria apply for the DetNet Service layer and the DetNet
-  Transport layer, however, some of the criteria are valid for both layers.
+  target="sec_crit"/>. Different criteria apply for the DetNet Service layer and
+  the DetNet Transport layer, however, some of the criteria are valid for both
+  layers.
  </t> 
 
 
  <t>
   The criteria for the DetNet Service layer:
-   <list style="nosymbols">
-    <t>#1 Encapsulation and overhead</t>
-    <t>#2 Flow identification (Service ID part of the DetNet flows)</t>
-    <t>#3 Packet sequencing (sequence number)</t>
-    <t>#5 Packet replication and deletion (note: only the packet deletion for
+   <list style="hanging">
+    <t hangText="#1"> Encapsulation and overhead</t>
+    <t hangText="#2"> Flow identification (Service ID part of the DetNet flows)</t>
+    <t hangText="#3"> Packet sequencing (sequence number)</t>
+    <t hangText="#5"> Packet replication and deletion (note: only the packet deletion for
        seamless redundancy)</t>
-    <t>#6 Operations, Administration and Maintenance (capabilities)</t>
-    <t>#7 Time synchronization (e.g., time stamping)</t>
-    <t>#8 Class and quality of service capabilities (DetNet Service specific)</t>
-    <t>#10 Technical maturity</t>
+    <t hangText="#6"> Operations, Administration and Maintenance (capabilities)</t>
+    <t hangText="#7"> Time synchronization (e.g., time stamping)</t>
+    <t hangText="#8"> Class and quality of service capabilities (DetNet Service specific)</t>
+    <t hangText="#10"> Technical maturity</t>
   </list>  
  </t> 
  
  <t>
   The criteria for the DetNet Transport layer:
-   <list style="nosymbols">
-    <t>#1 Encapsulation and overhead</t>
-    <t>#2 Flow identification</t>
-    <t>#4 Explicit routes (network path)</t>
-    <t>#5 Packet replication and deletion (note: only the packet replication
+   <list style="hanging">
+    <t hangText="#1"> Encapsulation and overhead</t>
+    <t hangText="#2"> Flow identification</t>
+    <t hangText="#4"> Explicit routes (network path)</t>
+    <t hangText="#5"> Packet replication and deletion (note: only the packet replication
        for seamless redundancy)</t>
-    <t>#6 Operations, Administration and Maintenance (capabilities,
+    <t hangText="#6"> Operations, Administration and Maintenance (capabilities,
           performance management, packet traceability)</t>
-    <t>#8 Class and quality of service capabilities (DetNet Transport specific)</t>
-    <t>#10 Technical maturity</t>
+    <t hangText="#8"> Class and quality of service capabilities (DetNet Transport specific)</t>
+    <t hangText="#10"> Technical maturity</t>
    </list> 
  </t> 
  
