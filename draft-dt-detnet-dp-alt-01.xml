@@ -316,6 +316,15 @@ title="A Simple DetNet Enabled Network">
      connects networking islands, so it is a service between the borders of
      network domain(s).
 	</t>
+    <t>
+     In some networking scenarios Det-Flow and DetNet-Flow formats might be
+     identical. For example, the end-system provides an encapsulation, which
+     contains all information needed by DetNet functionalities (e.g., RTP based
+     Det-Flow trasported over a native IP network). In other scenarios the
+     encapsulation formats might differ significantly. As an example, a CPRI IQ
+     data mapped directly to Ethernet frames may have to be transported over an
+     MPLS based packet switched network (PSN).
+    </t>
 
  <t>
   This DetNet data plane is logically divided into two layers:
@@ -379,16 +388,6 @@ title="DetNet adaptation to data plane">
   target="sec_alt_higher"/>).
  </t>
   
- <!-- t>
-  [Editor's note: I'm not sure if the remainder of this section says
-  anything not present in the next section. Will need to revisit
-  as part of the pre-pub review.]
- </t>
-
-<t>
-  [Janos: I think the text is useful here for clarification.]
-</t -->
- 
  <t>
   There are many valid options to create a data plane solution for DetNet
   traffic by selecting a technology approach for the DetNet Service layer and
@@ -427,6 +426,7 @@ title="DetNet adaptation to data plane">
     <t hangText="#6"> Operations, Administration and Maintenance (capabilities,
           performance management, packet traceability)</t>
     <t hangText="#8"> Class and quality of service capabilities (DetNet Transport specific)</t>
+    <t hangText="#9"> Packet traceability (can be part of OAM)</t>
     <t hangText="#10"> Technical maturity</t>
    </list> 
  </t> 
@@ -717,7 +717,7 @@ title="DetNet adaptation to data plane">
      which path was intended for the replica, can be very useful.
      This criteria concerns the availability of solutions for
      tracing packets in the context of data plane protocol
-     alternative. Packet trace is a form of OAM.
+     alternative. Packet traceability can also be part of OAM.
     </t>
   </section>
   <section title="#10 Technical maturity" anchor="sec_crit_matu">
@@ -769,7 +769,7 @@ title="DetNet adaptation to data plane">
   
    <section title="Analysis and Discussion" anchor="sec_alt_ipv6_ana">
     <t><list style="hanging">
-     <t hangText="Encapsulation and overhead (M/W)">
+     <t hangText="#1 Encapsulation and overhead (M/W)">
       <vspace blankLines="1"/>
       The DetNet Service layer encapsulated DetNet flows are assumed to be 
       handled natively at layer-3 by IPv6 at the first place. The fixed header 
@@ -811,7 +811,7 @@ title="DetNet adaptation to data plane">
       <vspace blankLines="1"/>
       </t>
     
-     <t hangText="Flow identification (M/W)">
+     <t hangText="#2 Flow identification (M/W)">
       <vspace blankLines="1"/>
       The 20-bit flow label field of the fixed IPv6 header is suitable to
       distinguish different deterministic flows. But guidance on the use
@@ -838,7 +838,7 @@ title="DetNet adaptation to data plane">
       option in the Hop-by-Hop Options Header. 
      <vspace blankLines="1"/></t -->
      
-     <t hangText="Explicit routes (W)">
+     <t hangText="#4 Explicit routes (W)">
       <vspace blankLines="1"/>
       The general assumption is that a Software-Defined Networking (SDN)
       <xref target="RFC7426"/> based approach is applied to compute, establish
@@ -868,7 +868,7 @@ title="DetNet adaptation to data plane">
         <vspace blankLines="1"/></t -->
      </t>
      
-     <t hangText="Packet replication (W)">
+     <t hangText="#5 Packet replication and deletion (W)">
       The functionality of replicating a packet exists in IPv6 but is limited
       to multicast flows.
       <vspace blankLines="1"/>
@@ -884,7 +884,7 @@ title="DetNet adaptation to data plane">
       <vspace blankLines="1"/>
       </t>
      
-     <t hangText="Operations, Administration and Maintenance (M/W)">
+     <t hangText="#6 Operations, Administration and Maintenance (M/W)">
       <vspace blankLines="1"/>
       IPv6 enjoys the existing toolbox for generic IP network management.
       However, IPv6 specific management features are still not at the level of
@@ -903,12 +903,12 @@ title="DetNet adaptation to data plane">
       if such functionality is required.
      <vspace blankLines="1"/></t -->
     
-     <t hangText="Class and quality of service capabilities (M)">
+     <t hangText="#8 Class and quality of service capabilities (M)">
       <vspace blankLines="1"/>
       The traffic class field of the fixed IPv6 header is designed for this purpose.
      <vspace blankLines="1"/></t>
     
-     <t hangText="Packet traceability (M/W)">
+     <t hangText="#9 Packet traceability (M/W)">
       <vspace blankLines="1"/>
       The traceability of replicated packets involves the capability to resolve
       which replication point issued a particular copy of a packet, which segment
@@ -931,7 +931,7 @@ title="DetNet adaptation to data plane">
       Header was authenticated.
       <vspace blankLines="1"/></t>
     
-     <t hangText="Technical maturity (M/W)">
+     <t hangText="#10 Technical maturity (M/W)">
       <vspace blankLines="1"/>
       IPv6 has been around about 20 years. However, large scale global and
       commercial IPv6 deployments are rather new dating only few years back to
@@ -983,13 +983,13 @@ title="DetNet adaptation to data plane">
 
    <section title="Analysis and Discussion" anchor="sec_alt_ipv4_ana">
     <t><list style="hanging">
-     <t hangText="Encapsulation and overhead (M)">
+     <t hangText="#1 Encapsulation and overhead (M)">
       <vspace blankLines="1"/> The fixed header of an IPv4 packet is 20 bytes
       <xref target="RFC0791"/>. IP options add overhead and the maximum IPv4
       header size if 60 octets leaving only 40 octets for possible options.
       <vspace blankLines="1"/></t>
      
-     <t hangText="Flow identification (W/N)">
+     <t hangText="#2 Flow identification (W/N)">
       <vspace blankLines="1"/>
       The IPv4 header has a 16-bit identification field that was originally
       intended for assisting fragmentation and reassembly of IPv4 packets as
@@ -1017,7 +1017,7 @@ title="DetNet adaptation to data plane">
       header support such as the RTP is required.
      <vspace blankLines="1"/></t-->
      
-     <t hangText="Explicit routes (M/W)">
+     <t hangText="#4 Explicit routes (M/W)">
       <vspace blankLines="1"/>
       IPv4 has two source routing option specified: the loose source and record
       route option (LSRR), and the strict source and record route option (SSRR)
@@ -1025,7 +1025,7 @@ title="DetNet adaptation to data plane">
       questionable but within a closed network the support may be assumed.
      <vspace blankLines="1"/></t>
     
-     <t hangText="Packet replication and deletion (W/N)">
+     <t hangText="#5 Packet replication and deletion (W/N)">
       <vspace blankLines="1"/>
       The functionality of replicating a packet exists in IPv4 but is limited to
       multicast flows.  In general the issue regarding the IPv6 packet
@@ -1036,7 +1036,7 @@ title="DetNet adaptation to data plane">
       protocol support.
       <vspace blankLines="1"/></t>
     
-     <t hangText="Operations, Administration and Maintenance (M)">
+     <t hangText="#6 Operations, Administration and Maintenance (M)">
       <vspace blankLines="1"/>
       IPv4 enjoys the extensive and "complete" existing toolbox for generic IP
       network management.
@@ -1050,12 +1050,12 @@ title="DetNet adaptation to data plane">
       plane.
      <vspace blankLines="1"/></t-->
     
-     <t hangText="Class and quality of service capabilities (M)">
+     <t hangText="#8 Class and quality of service capabilities (M)">
       <vspace blankLines="1"/>
       The type of service (TOS) field of the fixed IPv4 header is designed for this purpose.
      <vspace blankLines="1"/></t>
     
-     <t hangText="Packet traceability (W/N)">
+     <t hangText="#9 Packet traceability (W/N)">
       <vspace blankLines="1"/>
       The IPv4 has similar needs and requirements for traceability as IPv6 (see
       <xref target="sec_alt_ipv6_ana"/>).
@@ -1064,7 +1064,7 @@ title="DetNet adaptation to data plane">
       deprecated <xref target="RFC6814"/>.
       <vspace blankLines="1"/></t>
     
-     <t hangText="Technical maturity (M/W)">
+     <t hangText="#10 Technical maturity (M/W)">
       <vspace blankLines="1"/>
       IPv4 can be considered mature technology with over 30 years of
       implementation, deployment and operations experience. However, no new IPv4
@@ -1206,18 +1206,12 @@ title="MPLS-based Services">
     <t>
       MPLS includes the following LSP types:
     </t>
-    <t>
-      o  Point-to-point unidirectional
-    </t>
-    <t>
-      o  Point-to-point associated bidirectional
-    </t>
-    <t>
-      o  Point-to-point co-routed bidirectional
-    </t>
-    <t>
-      o  Point-to-multipoint unidirectional
-    </t>
+    <t><list style="symbols">
+     <t>Point-to-point unidirectional</t>
+     <t>Point-to-point associated bidirectional</t>
+     <t>Point-to-point co-routed bidirectional</t>
+     <t>Point-to-multipoint unidirectional</t>
+    </list></t>
     <t>
       Point-to-point unidirectional LSPs are supported by the basic MPLS
       architecture <xref target="RFC3031"/>.
@@ -1338,13 +1332,8 @@ have it here? (MPLS is DetNet Transport layer.)]
           additional mechanisms will be defined at the DetNet Service
           Layer.
       <vspace blankLines="1"/> </t>
-     <t hangText="#6 Operations, Administration and Maintenance (M)">
+     <t hangText="#6 Operations, Administration and Maintenance (M/W)">
         <vspace blankLines="1"/>
-
-
-[Janos: All OAM features needed for DetNet availvable? If not, then it is M/W.]
-       
-      
           MPLS already includes a rich set of OAM functions at both the
           Service and Transport Layers. This includes LSP ping [ref] and
           those enabled via the MPLS Generic Associated Channel
@@ -1403,7 +1392,6 @@ then it is M/W.]
           many networks for many years.  Numerous vendor products and
           multiple generations of MPLS hardware have been built and
           deployed.
-      <vspace blankLines="1"/>
      </t>
      </list>
      </t>
@@ -1423,7 +1411,7 @@ then it is M/W.]
   </section>
 
 
- <section title="Bit Indexed Explicit Replication (BIER)">
+ <section title="Bit Indexed Explicit Replication (BIER)" anchor="sec_alt_bier">
   <t>
    <xref target="I-D.ietf-bier-architecture">Bit Indexed Explicit Replication
    </xref> (BIER) is a network plane replication technique that was initially
@@ -1448,9 +1436,6 @@ then it is M/W.]
    discusses the applicability of BIER-TE for replication, traceability and 
    OAM operations in DetNet. 
   </t>
-
-
-  <section title="Base BIER" anchor="sec_alt_bier">
 
   <t>
    Bit-Indexed Explicit Replication (BIER) layer may be considered to be
@@ -1564,27 +1549,27 @@ title="DetNet in BIER domain">
 
   <section title="Analysis and Discussion" anchor="sec_alt_bier_ana">
    <t><list style="hanging">
-    <t hangText="Encapsulation and overhead (M)">
+    <t hangText="#1 Encapsulation and overhead (M)">
      <vspace blankLines="1"/>
      BIER over MPLS network encapsulation (will refer as "BIER over MPLS"
      further for short), <xref target="fig_BIER_MPLS"/>, is well defined [I-D.
      ietf-bier-mpls-encapsulation].
      <vspace blankLines="1"/></t>
     
-    <t hangText="Flow identification (M)">
+    <t hangText="#2 Flow identification (M)">
      <vspace blankLines="1"/>
      Flow identification and separation can be achieved through use of BIER
      domains and/or Entropy value in the BIER over MPLS, <xref
      target="fig_BIER_MPLS"/>.
      <vspace blankLines="1"/></t>
     
-    <t hangText="Explicit routes (M)">
+    <t hangText="#4 Explicit routes (M)">
      <vspace blankLines="1"/>
      Explicit routes may be used as underlay for BIER domain. BIER underlay may
      be calculated using PCE and instantiated using any southbound mechanism.
      <vspace blankLines="1"/></t>
 
-    <t hangText="Packet replication and deletion (M/W)">
+    <t hangText="#5 Packet replication and deletion (M/W)">
      <vspace blankLines="1"/>
      Packet replication, as indicated by its name, is core function of the
      Bit-Indexed Explicit Replication. Elimination of the duplicates and/or
@@ -1592,7 +1577,7 @@ title="DetNet in BIER domain">
      DetNet overlay at the edge of the BIER sub-domain.
      <vspace blankLines="1"/></t>
 
-    <t hangText="Operations, Administration and Maintenance (M/W)">
+    <t hangText="#6 Operations, Administration and Maintenance (M/W)">
      <vspace blankLines="1"/>
      BIER over MPLS guarantees that OAM is fate-sharing, i.e. in-band with a
      data flow being monitored or measured. Additionally, BIER over MPLS enables
@@ -1604,7 +1589,7 @@ title="DetNet in BIER domain">
      <xref target="I-D.mirsky-bier-path-mtu-discovery"/>.
      <vspace blankLines="1"/></t>
 
-    <t hangText="Class and quality of service capabilities (M)">
+    <t hangText="#8 Class and quality of service capabilities (M)">
      <vspace blankLines="1"/>
      Class of Service can be inherited from the underlay of the particular BIER
      sub-domain. Quality of Service, i.e. scheduling and bandwidth reservations
@@ -1612,14 +1597,14 @@ title="DetNet in BIER domain">
      BIER sub-domain's underlay.
      <vspace blankLines="1"/></t>
 
-    <t hangText="Packet traceability (M)">
+    <t hangText="#9 Packet traceability (M)">
      <vspace blankLines="1"/>
      Ability to do passive performance measurement by using OAM field of the
      BIER over MPLS, <xref target="fig_BIER_MPLS"/>, is unmatched and significantly simplifies truly
      passive tracing of selected flows and packets within them.
      <vspace blankLines="1"/></t>
 
-    <t hangText="Technical maturity (M)">
+    <t hangText="#10 Technical maturity (M)">
      <vspace blankLines="1"/>BIER over MPLS is well defined and several
      experimental implementations are expected later this year.
     </t>
@@ -1636,13 +1621,10 @@ title="DetNet in BIER domain">
       networks.
    </t>
   </section>
- </section>  <!-- "Base BIER" -->
+  </section>
 
 
- <section title="BIER - Traffic Engineering"
-          anchor="sec_alt_bier_te">
-
-
+ <section title="BIER - Traffic Engineering (BIER-TE)" anchor="sec_alt_bier_te">
   <t>
    An alternate use of Bit-Indexed Explicit Replication (BIER) uses bits in the
    BitString to represent adjacencies as opposed to destinations, as discussed in
@@ -1662,35 +1644,7 @@ title="DetNet in BIER domain">
    granularity of a packet and a adjacency in a control loops that involves an
    external controller.
   </t>
-  <!--section title="On BIER-TE">
-  <t>
-   BIER-TE supports traffic engineering by explicit hop-by-hop forwarding
-   and loose hop forwarding of packets. 
-     </t><t>
-      From the BIER-TE architecture, the key differences over BIER are:
-      <list style="symbols">
-      <t>BIER-TE replaces in-network autonomous path calculation by
-         explicit paths calculated off path by the BIER-TE controller host.
-      </t>
-      <t>In BIER-TE every BitPosition of the BitString of a BIER-TE packet
-         indicates one or more adjacencies - instead of a BFER as in BIER.
-      </t>
-      <t>BIER-TE in each BFR has no routing table but only a BIER-TE
-         Forwarding Table (BIFT) indexed by SI:BitPosition and populated
-         with only those adjacencies to which the BFR should replicate
-         packets to.
-      </t>
-      </list>        
-   The generic view of an adjacency can be over a link, a tunnel or along a
-   path segment. 
-  </t><t>
-   With <xref target="I-D.ietf-spring-segment-routing">Segment Routing</xref> a
-   segment can be signaled as an MPLS label, or an IPv6 routing header .  A
-   segment may be loosely of strictly source routed, depending on the need for
-   full non-congruence and the confidence that loose routing may still achieve
-   that need. 
-  </t>
- </section-->
+  
   <section title="Solution description">
   <t>
    BIER-TE enables to activate the replication and elimination functions in a
@@ -1937,69 +1891,153 @@ title="Enabled Adjacencies">
      </t>
      </list>
      </t>
+<t>In more details:   
+  </t><t>   
+   The BIER header is of variable size, and a DetNet network of a limited size
+   can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
+   deployment may be able to signal up to 256 adjacencies for use 
+   in very complex paths. <xref target="fig_BIER_MPLS"/> illustrates a BIER 
+   header as encapsulated within MPLS. The format of this header is common to
+   BIER and BIER-TE.
+  </t>
+ <t>
+   For the DetNet data plane, a replication point is an ingress point for more
+   than one adjacency, and an elimination point is an egress point for more than
+   one adjacency.
+   </t><t>   
+   A pre-populated state in a replication node indicates which bits are
+   served by this node and to which adjacency each of these bits corresponds.
+   With DetNet, the state is typically installed by a controller entity such as
+   a PCE. 
+   The way the adjacency is signaled in the packet is fully abstracted in the
+   bit representation and must be provisioned to the replication nodes and 
+   maintained as a local state, together with the timing or shaping information
+   for the associated flow.
+  </t><t>
+   The DetNet data plane uses BIER-TE to control which adjacencies are used
+   for a given packet. This is signaled from the path ingress, which sets the
+   appropriate bits in the BIER BitString to indicate which replication must
+   happen.
+  </t><t>
+   The replication point clears the bit associated to the adjacency where the
+   replica is placed, and the elimination points perform a logical AND of the
+   BitStrings of the copies that it gets before forwarding.   
+  </t><t>     
+   As is apparent in the examples above, clearing the bits enables to trace a
+   packet to the replication points that made any particular copy. BIER-TE also
+   enables to detect the failing adjacencies or sequences of adjacencies along a
+   path and to activate additional replications to counter balance the failures.
+    </t><t>
+   Finally, using the same BIER-TE bit for both directions of the steps of the
+   ladder enables to avoid replication in both directions along the crossing
+   adjacencies. At the time of sending along the step of the ladder, the bit may
+   have been already reset by performing the AND operation with the copy from
+   the other side, in which case the transmission is not needed and does not
+   occur (since the control bit is now off).
+  </t>
+
    </section>
-   <section title="Analysis and Discussion">
-  <t>   
-   <list style="hanging">
-    <t hangText="Encapsulation and overhead (M)">
-     <vspace blankLines="1"/>
-     The BIER header is of variable size, and a DetNet network of a limited size
-     can use a model with 64 bits if 64 adjacencies are enough, whereas a larger
-     deployment may be able to signal up to 256 adjacencies for use in very
-     complex paths. <xref target="fig_BIER_MPLS"/> illustrates a BIER header as
-     encapsulated within MPLS. The format of this header is common to BIER and
-     BIER-TE.
-     <vspace blankLines="1"/></t>
-   <t hangText="Packet replication and deletion (M/W)">
-    <vspace blankLines="1"/>
-    For the DetNet data plane, a replication point is an ingress point for more
-    than one adjacency, and an elimination point is an egress point for more than
-    one adjacency.
-    <vspace blankLines="1"/>
-    A pre-populated state in a replication node indicates which bits are
-    served by this node and to which adjacency each of these bits corresponds.
-    With DetNet, the state is typically installed by a controller entity such as
-    a PCE. 
-    The way the adjacency is signaled in the packet is fully abstracted in the
-    bit representation and must be provisioned to the replication nodes and 
-    maintained as a local state, together with the timing or shaping information
-    for the associated flow.
-   <vspace blankLines="1"/>
-    The DetNet data plane uses BIER-TE to control which adjacencies are used
-    for a given packet. This is signaled from the path ingress, which sets the
-    appropriate bits in the BIER BitString to indicate which replication must
-    happen.
-    <vspace blankLines="1"/>
-    The replication point clears the bit associated to the adjacency where the
-    replica is placed, and the elimination points perform a logical AND of the
-    BitStrings of the copies that it gets before forwarding.   
-    <vspace blankLines="1"/></t>
-   <t hangText="Packet traceability (M)">     
-    <vspace blankLines="1"/>
-    As is apparent in the examples above, clearing the bits enables to trace a
-    packet to the replication points that made any particular copy. BIER-TE also
-    enables to detect the failing adjacencies or sequences of adjacencies along a
-    path and to activate additional replications to counter balance the failures.
-    <vspace blankLines="1"/></t>
-   <t hangText="..">
-    <vspace blankLines="1"/>
-    Finally, using the same BIER-TE bit for both directions of the steps of the
-    ladder enables to avoid replication in both directions along the crossing
-    adjacencies. At the time of sending along the step of the ladder, the bit may
-    have been already reset by performing the AND operation with the copy from
-    the other side, in which case the transmission is not needed and does not
-    occur (since the control bit is now off).
-    </t>
-   </list>
-   </t>
-  </section> <!-- analysis -->
+  
+    <section title="Analysis and Discussion">
+      <t><list style="hanging">
+          <t hangText="#? DetNet Service Interface (M)">
+            <vspace blankLines="1"/> 
+            To be defined
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#1 Encapsulation and overhead (W/M)">
+            <vspace blankLines="1"/>
+            The size of the BIER header depends on the number of segments in the
+            particular path. It is very concise considering the amount of
+            information that is carried (control of replication, traceability,
+            and measurement of the reliability of the segments).
+
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#2 Flow identification (N)">
+            <vspace blankLines="1"/>
+           Some fields in the BIER header could be used to identify the flows
+           but they are not the primary purpose, so it's probably not a good
+           idea.
+            <vspace blankLines="1"/> 
+          </t>
+
+          <t hangText="#4 Explicit routes (N)">
+            <vspace blankLines="1"/>
+            A separate procedure must be used to set up the paths and allocate
+            the bits for the adjacencies. The bits should be distributed as a
+            form of tag by the route setup protocol. This procedure requires
+            more work and is separate from the dataplane method that is
+            described here.
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#5 Packet replication and deletion (M/W)">
+            <vspace blankLines="1"/>
+            The bitmap expresses in a very concise fashion which replication and
+            elimination should take place for a given packet . It also enables
+            to control that process on a per packet basis, depending on the loss
+            that it enables to measure. The net result is that a complex path
+            may be installed with all the possibilities and that the decision of
+            which possibilities are used is controlled in the dataplane.
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#6 Operations, Administration and Maintenance (W)">
+            <vspace blankLines="1"/>
+            The setting of the bits at arrival enables to determine which
+            adjacencies worked and which did not, enabling a dynamic control of
+            the replication and elimination process. This is a form of OAM that
+            is in-band with the data stream as opposed to leveraging separate 
+            packets, which is a more accurate information on the reliability of
+            the link for the user.
+            <vspace blankLines="1"/> 
+          </t>
+          <!--t hangText="#7 Time synchronization (N)">
+            <vspace blankLines="1"/>
+            Not provided
+            <vspace blankLines="1"/> 
+          </t-->
+          <t hangText="#8 Class and quality of service capabilities (N)">
+            <vspace blankLines="1"/>
+            BIER-TE does not signal that explicitly.
+            <vspace blankLines="1"/> 
+          </t>
+          <t hangText="#9 Packet traceability (W)">
+            <vspace blankLines="1"/>
+            This is a strong point of the solution. The solution enables to
+            determine which is the current segment that a given packet is
+            expected to traverse, which node performed the replication and 
+            which should perform the elimination if any
+            <vspace blankLines="1"/> 
+            
+          </t>
+          <t hangText="#10 Technical maturity (W/N)">
+            <vspace blankLines="1"/>
+            Some components of the technology are already proven, e.g. segment
+            routing and BIER. Yet, the overall solution has never been deployed
+            in Service Provider networks.             
+          </t>
+        </list>
+      </t>
+
+    </section>
+  
   <section title="Summary">
    <t>
-    TBD.
+      BIER-TE occupies a particular position in the DetNet dataplane. In the one
+      hand it is optional, and only useful if replication and elimination is
+      taking place. In the other hand, it has unique capabilities to:
+      <list style="symbols">
+      <t>control which replication take place on a per packet basis, so that
+      replication points can be configured but not actually utilized</t>
+      <t>trace the replication activity and determine which node replicated a
+      particular packet</t>
+      <t>measure the quality of transmission of the actual data packet along
+      the replication segments and use that in a control loop to adapt the
+      setting of the bits and maintain the reliability.</t>
+      </list>
    </t>
   </section>
   </section> <!-- BIER-TE -->
-  </section> <!-- BIER    -->
 
 
 </section> <!-- Net layer technolofes -->
@@ -2056,7 +2094,7 @@ title="Enabled Adjacencies">
     </section>
     <section title="Analysis and Discussion">
      <t><list style="hanging">
-     <t hangText="Encapsulation and overhead (M)">
+     <t hangText="#1 Encapsulation and overhead (M)">
       <vspace blankLines="1"/>
 
       GRE can provide encapsulation at the service layer over the transport
@@ -2068,7 +2106,7 @@ title="Enabled Adjacencies">
           target="fig_gre_hdr"/>.
       <vspace blankLines="1"/></t>
      
-     <t hangText="Flow identification (W)">
+     <t hangText="#2 Flow identification (W)">
       <vspace blankLines="1"/>
       There is no flow identification field in GRE header. However, it can rely
       on the flow identification mechanism applied in the delivery protocols,
@@ -2079,14 +2117,14 @@ title="Enabled Adjacencies">
       identification. The size of Key field is 4 octets.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Packet sequencing (M)">
+     <t hangText="#3 Packet sequencing (M)">
       <vspace blankLines="1"/>
       As stated in <xref target="sec_alt_gre"/>, GRE provides an optional
       sequencing number in its header to provide sequencing services for
       packets. The size of the sequencing number is 32 bits.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Duplicate packet deletion (W/N)">
+     <t hangText="#5 Packet replication and deletion (W/N)">
       <vspace blankLines="1"/>
        GRE has no packet replication and deletion in its header. It can use the
        transport IPv4/IPv6 protocols at the transport layer to replicate the
@@ -2097,20 +2135,20 @@ title="Enabled Adjacencies">
        number of a flow.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Operations, Administration and Maintenance (M)">
+     <t hangText="#6 Operations, Administration and Maintenance (M)">
       <vspace blankLines="1"/>
        GRE uses the network management provided by the IP protocols as
        transport layer.
       <vspace blankLines="1"/></t>
      
-     <t hangText="Time synchronization (W/N)">
+     <t hangText="#7 Time synchronization (W/N)">
       <vspace blankLines="1"/>
       It is possible to carry time synchronization information by extending
       the optional fields of the GRE encapsulation. However, the available
       lenght in the header is limited.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Class and quality of service capabilities (W">
+     <t hangText="#8 Class and quality of service capabilities (W">
       <vspace blankLines="1"/>
        For the class of service capability, an optional code point field to
        indicate CoS of the traffic could be added into the GRE header. Otherwise,
@@ -2120,7 +2158,7 @@ title="Enabled Adjacencies">
      
       <vspace blankLines="1"/></t>
      
-     <t hangText="Technical maturity (M)">
+     <t hangText="#10 Technical maturity (M)">
       <vspace blankLines="1"/>
       GRE has been developed over 20 years. The delivery protocol mostly used is
       IPv4, while the IPv6 support for GRE is to be standardized now in IETF as
@@ -2297,7 +2335,6 @@ title="Enabled Adjacencies">
 
             This is the same as MPLS at the DetNet transport layer.
 
-            <vspace blankLines="1"/> 
           </t>
         </list>
       </t>
@@ -2386,7 +2423,7 @@ title="Enabled Adjacencies">
  
    <section title="Analysis and Discussion">
     <t><list style="hanging">
-     <t hangText="Encapsulation and overhead (M)">
+     <t hangText="#1 Encapsulation and overhead (M)">
       <vspace blankLines="1"/>
       PWs offer encapsulation services practically for any types of payloads
       over any PSN.  New PW types need a code point allocation <xref
@@ -2410,7 +2447,7 @@ title="Enabled Adjacencies">
       encapsulations is used.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Flow identification (M)">
+     <t hangText="#2 Flow identification (M)">
       <vspace blankLines="1"/>
       [Editor's note: this criteria has not been checked against the latest
       view of flow identification after the separation of transport and service
@@ -2425,7 +2462,7 @@ title="Enabled Adjacencies">
       header to provide required flow identification.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Packet sequencing (M)">
+     <t hangText="#3 Packet sequencing (M)">
       <vspace blankLines="1"/>
       As mentioned earlier PWs may contain an optional CW that is able to provide
       sequencing services. The size of the sequence number in the generic CW is
@@ -2444,7 +2481,7 @@ title="Enabled Adjacencies">
       target="I-D.ietf-6man-segment-routing-header"/>.
      <vspace blankLines="1"/></t-->
      
-     <t hangText="Duplicate packet deletion (W)">
+     <t hangText="#5 Packet replication and deletion (W)">
       <vspace blankLines="1"/>
       <!--The 1+1 PW/LSP protection / redundancy mechanisms  <xref
       target="RFC6718"/> could provide tools for packet replication. However,
@@ -2457,7 +2494,7 @@ title="Enabled Adjacencies">
       <xref target="sec_alt_ipv4_ana"/>.--> 
      <vspace blankLines="1"/></t>
      
-     <t hangText="Operations, Administration and Maintenance (M/W)">
+     <t hangText="#6 Operations, Administration and Maintenance (M/W)">
       <vspace blankLines="1"/>
       PWs have rich control plane for OAM and in a case of the MPLS PSN enjoy
       the full control plane toolbox developed for MPLS network OAM likewise
@@ -2466,7 +2503,7 @@ title="Enabled Adjacencies">
       mentioned control planes.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Time synchronization (M/W)">
+     <t hangText="#7 Time synchronization (M/W)">
       <vspace blankLines="1"/>
       It is possible to carry time synchronization information as part of the PW
       encapsulation layer (see for example <xref target="RFC5087"/>). Whether
@@ -2476,7 +2513,7 @@ title="Enabled Adjacencies">
       as a part of PWE3  <xref target="RFC5086"/>.
      <vspace blankLines="1"/></t>
      
-     <t hangText="Class and quality of service capabilities (M)">
+     <t hangText="#8 Class and quality of service capabilities (M)">
       <vspace blankLines="1"/>
       In a case of IP PSN the 6-bit differentiated services code point (DSCP)
       field can be used for indicating the class of service <xref
@@ -2671,7 +2708,6 @@ title="Enabled Adjacencies">
 	    uses of existing MPLS data plane mechanisms.  The mechanisms
 	    have been widely implemented and deployed.
 	    
-            <vspace blankLines="1"/> 
           </t>
         </list>
       </t>
