@@ -211,7 +211,7 @@
      <list style="symbols">
       <t>zero congestion loss,</t>
       <t>explicit routes,</t>
-      <t>packet replication and deletion.</t>
+      <t>packet replication and elimination.</t>
      </list>
    This document identifies existing IP and Multiprotocol Label Switching (MPLS)
    <xref target="RFC3031"/>, layer-2 or layer-3 encapsulations and transport
@@ -406,7 +406,7 @@ title="DetNet adaptation to data plane">
     <t hangText="#1"> Encapsulation and overhead</t>
     <t hangText="#2"> Flow identification (Service ID part of the DetNet flows)</t>
     <t hangText="#3"> Packet sequencing (sequence number)</t>
-    <t hangText="#5"> Packet replication and deletion (note: only the packet deletion for
+    <t hangText="#5"> Packet replication and elimination (note: only the packet deletion for
        seamless redundancy)</t>
     <t hangText="#6"> Operations, Administration and Maintenance (capabilities)</t>
     <t hangText="#7"> Time synchronization (e.g., time stamping)</t>
@@ -421,7 +421,7 @@ title="DetNet adaptation to data plane">
     <t hangText="#1"> Encapsulation and overhead</t>
     <t hangText="#2"> Flow identification</t>
     <t hangText="#4"> Explicit routes (network path)</t>
-    <t hangText="#5"> Packet replication and deletion (note: only the packet replication
+    <t hangText="#5"> Packet replication and elimination (note: only the packet replication
        for seamless redundancy)</t>
     <t hangText="#6"> Operations, Administration and Maintenance (capabilities,
           performance management, packet traceability)</t>
@@ -572,14 +572,14 @@ title="DetNet adaptation to data plane">
     </t>
   </section>
 
-  <section title="#5 Packet replication and deletion" anchor="sec_crit_repdup">
+  <section title="#5 Packet replication and elimination" anchor="sec_crit_repdup">
     <t>
-      The objective for supporting packet replication and deletion is to
+      The objective for supporting packet replication and elimination is to
       enable hitless (or lossless) 1+1 protection, which is also called
       Seamless Redundancy in <xref target="I-D.finn-detnet-architecture"/>.
       Data plane solutions need to meet this objective independent of
       the used solution.  In other words, a packet
-      replication and deletion is one identified method for a data plane
+      replication and elimination is one identified method for a data plane
       solution to provide seamless redundancy. Other methods, if so
       identified, are also permissible. 
     </t>
@@ -868,10 +868,10 @@ title="DetNet adaptation to data plane">
         <vspace blankLines="1"/></t -->
      </t>
      
-     <t hangText="#5 Packet replication and deletion (W)">
+     <t hangText="#5 Packet replication and elimination (W)">
+      <vspace blankLines="1"/>
       The functionality of replicating a packet exists in IPv6 but is limited
       to multicast flows.
-      <vspace blankLines="1"/>
       In order to enforce replicated packets to take different routes, 
       IP-in-IP encapsulation and Segment Routing could be leveraged to signal
       a segment in a packet. 
@@ -1025,7 +1025,7 @@ title="DetNet adaptation to data plane">
       questionable but within a closed network the support may be assumed.
      <vspace blankLines="1"/></t>
     
-     <t hangText="#5 Packet replication and deletion (W/N)">
+     <t hangText="#5 Packet replication and elimination (W/N)">
       <vspace blankLines="1"/>
       The functionality of replicating a packet exists in IPv4 but is limited to
       multicast flows.  In general the issue regarding the IPv6 packet
@@ -1318,7 +1318,7 @@ have it here? (MPLS is DetNet Transport layer.)]
           defined as part of Segment Routing (SR)
           <xref target="I-D.ietf-spring-segment-routing"/>. 
       <vspace blankLines="1"/> </t>
-     <t hangText="#5 Packet replication and deletion (M/W)">
+     <t hangText="#5 Packet replication and elimination (M/W)">
         <vspace blankLines="1"/>
 
           At the MPLS LSP level, there are mechanisms defined to provide
@@ -1569,7 +1569,7 @@ title="DetNet in BIER domain">
      be calculated using PCE and instantiated using any southbound mechanism.
      <vspace blankLines="1"/></t>
 
-    <t hangText="#5 Packet replication and deletion (M/W)">
+    <t hangText="#5 Packet replication and elimination (M/W)">
      <vspace blankLines="1"/>
      Packet replication, as indicated by its name, is core function of the
      Bit-Indexed Explicit Replication. Elimination of the duplicates and/or
@@ -1664,7 +1664,7 @@ title="DetNet in BIER domain">
      </list>
      </t>
 <figure anchor="fig_ladder" align="center"
-title="Ladder Shape with Replication and Elimination Points">
+title="Ladder Shape with replication and elimination Points">
 <artwork align="center"><![CDATA[
  
                  ===> (A) ====> (C) ==== 
@@ -1705,7 +1705,7 @@ title="Assigning Bits">
      The controller activates the replication by deciding the setting of the
      bits associated with the adjacencies. This decision can be modified at any
      time, but takes the latency of a controller round trip to effectively take
-     place. Below is an example that uses Replication and Elimination to protect
+     place. Below is an example that uses replication and elimination to protect
      the A->C adjacency.
      </t>
      </list>
@@ -1767,7 +1767,7 @@ title="Assigning Bits">
     <c>D</c>
     <c>0</c>
     
-    <postamble>Replication and Elimination Protecting A->C</postamble>
+    <postamble>replication and elimination Protecting A->C</postamble>
 </texttable>
 
      <t>
@@ -1971,7 +1971,7 @@ title="Enabled Adjacencies">
             described here.
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#5 Packet replication and deletion (M/W)">
+          <t hangText="#5 Packet replication and elimination (M/W)">
             <vspace blankLines="1"/>
             The bitmap expresses in a very concise fashion which replication and
             elimination should take place for a given packet . It also enables
@@ -2010,7 +2010,7 @@ title="Enabled Adjacencies">
             <vspace blankLines="1"/> 
             
           </t>
-          <t hangText="#10 Technical maturity (W/N)">
+          <t hangText="#10 Technical maturity (M)">
             <vspace blankLines="1"/>
             Some components of the technology are already proven, e.g. segment
             routing and BIER. Yet, the overall solution has never been deployed
@@ -2124,9 +2124,9 @@ title="Enabled Adjacencies">
       packets. The size of the sequencing number is 32 bits.
      <vspace blankLines="1"/></t>
      
-     <t hangText="#5 Packet replication and deletion (W/N)">
+     <t hangText="#5 Packet replication and elimination (W/N)">
       <vspace blankLines="1"/>
-       GRE has no packet replication and deletion in its header. It can use the
+       GRE has no packet replication and elimination in its header. It can use the
        transport IPv4/IPv6 protocols at the transport layer to replicate the
        packets and take the different routes as discussed
        in <xref target="sec_alt_ipv6"/> and <xref target="sec_alt_ipv4"/>.
@@ -2148,7 +2148,7 @@ title="Enabled Adjacencies">
       lenght in the header is limited.
      <vspace blankLines="1"/></t>
      
-     <t hangText="#8 Class and quality of service capabilities (W">
+     <t hangText="#8 Class and quality of service capabilities (W) ">
       <vspace blankLines="1"/>
        For the class of service capability, an optional code point field to
        indicate CoS of the traffic could be added into the GRE header. Otherwise,
@@ -2284,7 +2284,7 @@ title="Enabled Adjacencies">
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#5 Packet replication and deletion (M/W)">
+          <t hangText="#5 Packet replication and elimination (M/W)">
             <vspace blankLines="1"/>
 
             This is the same as MPLS at the DetNet transport layer.
@@ -2481,7 +2481,7 @@ title="Enabled Adjacencies">
       target="I-D.ietf-6man-segment-routing-header"/>.
      <vspace blankLines="1"/></t-->
      
-     <t hangText="#5 Packet replication and deletion (W)">
+     <t hangText="#5 Packet replication and elimination (W)">
       <vspace blankLines="1"/>
       <!--The 1+1 PW/LSP protection / redundancy mechanisms  <xref
       target="RFC6718"/> could provide tools for packet replication. However,
@@ -2541,11 +2541,11 @@ title="Enabled Adjacencies">
       <xref target="RFC6733"/>).
      <vspace blankLines="1"/></t-->
      
-     <t hangText="Technical maturity (M)">
+     <t hangText="#10 Technical maturity (M)">
       <vspace blankLines="1"/>
       PWs, IP and MPLS are proven technologies with wide variety of deployments
       and years of operational experience. Furthermore, the estimated work for
-      missing functionality (packet replication and deletion) does not appear to
+      missing functionality (packet replication and elimination) does not appear to
       be extensive, since the existing protection mechanism already get close to
       what is needed from the deterministic networking data plane solution.
      <vspace blankLines="1"/></t>
@@ -2645,7 +2645,7 @@ title="Enabled Adjacencies">
 
             <vspace blankLines="1"/> 
           </t>
-          <t hangText="#5 Packet replication and deletion (M/W)">
+          <t hangText="#5 Packet replication and elimination (M/W)">
             <vspace blankLines="1"/>
 	    
 	    EVPN relies on the MPLS layer for all protection functions.
@@ -2700,7 +2700,7 @@ title="Enabled Adjacencies">
             <vspace blankLines="1"/> 
             
           </t>
-          <t hangText="#10 Technical maturity">
+          <t hangText="#10 Technical maturity (W)">
             <vspace blankLines="1"/>
 
 	    EVPN is a second (or third) generation MPLS-based L2VPN
@@ -2773,6 +2773,8 @@ title="Enabled Adjacencies">
 </section>
 </section>
 
+
+
 <!-- ===================================================================== -->
 
 <section title="Summary of data plane alternatives">
@@ -2797,6 +2799,188 @@ title="Enabled Adjacencies">
    <c>BIER</c>
    <c>..</c>
   </texttable-->
+  
+  
+  
+ <texttable anchor="Items" title="Evaluation items">
+          <preamble>Applicability per Alternative</preamble>
+
+          <ttcol align="center">Item #</ttcol>
+          <ttcol align="center">Meaning</ttcol>
+          
+          <c> #1</c><c>Encapsulation and overhead</c>
+          <c> #2</c><c>Flow identification</c>
+          <c> #3</c><c>Packet sequencing</c> 
+          <c> #4</c><c>Explicit routes</c>
+          <c> #5</c><c>Packet replication and elimination</c> 
+          <c> #6</c><c>Operations, Administration and Maintenance</c>
+          <c> #7</c><c>Time synchronization</c>
+          <c> #8</c><c>Class and quality of service capabilities</c>
+          <c> #9</c><c>Packet traceability</c>
+          <c>#10</c><c>Technical maturity</c>
+          
+        </texttable>
+  
+ <texttable anchor="SumDTL" title="DetNet Transport Layer">
+          <preamble>Applicability per Alternative</preamble>
+
+          <ttcol align="center">Solution</ttcol>
+
+          <ttcol align="left"> #1</ttcol>
+          <ttcol align="left"> #2</ttcol>
+          <ttcol align="left"> #3</ttcol>
+          <ttcol align="left"> #4</ttcol>
+          <ttcol align="left"> #5</ttcol>
+          <ttcol align="left"> #6</ttcol>
+          <ttcol align="left"> #7</ttcol>
+          <ttcol align="left"> #8</ttcol>
+          <ttcol align="left"> #9</ttcol>
+          <ttcol align="left">#10</ttcol>
+
+          <c>IPv6</c> 
+          <!-- 1--> <c>M/W</c>
+          <!-- 2--> <c>M/W</c>
+          <!-- 3--> <c></c>
+          <!-- 4--> <c>W</c>
+          <!-- 5--> <c>W</c>
+          <!-- 6--> <c>M/W</c>
+          <!-- 7--> <c></c>
+          <!-- 8--> <c>M</c>
+          <!-- 9--> <c>M/W</c>
+          <!--10--> <c>M/W</c>
+          
+          
+          <c>IPv4</c> 
+          <!-- 1--> <c>M</c>
+          <!-- 2--> <c>W/N</c>
+          <!-- 3--> <c></c>
+          <!-- 4--> <c>M/W</c>
+          <!-- 5--> <c>W/N</c>
+          <!-- 6--> <c>M</c>
+          <!-- 7--> <c></c>
+          <!-- 8--> <c>M</c>
+          <!-- 9--> <c>W/N</c>
+          <!--10--> <c>M/W</c>
+          
+          
+
+          <c>MPLS</c>
+          <!-- 1--> <c>M</c>
+          <!-- 2--> <c>M</c>
+          <!-- 3--> <c>?</c>
+          <!-- 4--> <c>M</c>
+          <!-- 5--> <c>M/W</c>
+          <!-- 6--> <c>M/W</c>
+          <!-- 7--> <c>?</c>
+          <!-- 8--> <c>M/W</c>
+          <!-- 9--> <c>M</c>
+          <!--10--> <c>M</c>
+          
+          
+
+          <c>BIER</c> 
+          <!-- 1--> <c>M</c>
+          <!-- 2--> <c>M</c>
+          <!-- 3--> <c></c>
+          <!-- 4--> <c>M</c>
+          <!-- 5--> <c>M/W</c>
+          <!-- 6--> <c>M/W</c>
+          <!-- 7--> <c></c>
+          <!-- 8--> <c>M</c>
+          <!-- 9--> <c>M</c>
+          <!--10--> <c>M</c>
+          
+          <c>BIER-TE</c> 
+          <!-- 1--> <c>M/W</c>
+          <!-- 2--> <c>N</c>
+          <!-- 3--> <c></c>
+          <!-- 4--> <c>N</c>
+          <!-- 5--> <c>M/W</c>
+          <!-- 6--> <c>W</c>
+          <!-- 7--> <c></c>
+          <!-- 8--> <c>M</c>
+          <!-- 9--> <c>W</c>
+          <!--10--> <c>M</c>
+          
+          
+
+          <postamble>Summarizing capabilities
+          </postamble>
+        </texttable>
+    
+ <texttable anchor="SumDSL" title="DetNet Service Layer">
+          <preamble>Applicability per Alternative</preamble>
+
+          <ttcol align="center">Solution</ttcol>
+
+          <ttcol align="left"> #1</ttcol>
+          <ttcol align="left"> #2</ttcol>
+          <ttcol align="left"> #3</ttcol>
+          <ttcol align="left"> #4</ttcol>
+          <ttcol align="left"> #5</ttcol>
+          <ttcol align="left"> #6</ttcol>
+          <ttcol align="left"> #7</ttcol>
+          <ttcol align="left"> #8</ttcol>
+          <ttcol align="left"> #9</ttcol>
+          <ttcol align="left">#10</ttcol>
+
+          <c>GRE</c> 
+          <!-- 1--> <c>M</c>
+          <!-- 2--> <c>W</c>
+          <!-- 3--> <c>M</c>
+          <!-- 4--> <c></c>
+          <!-- 5--> <c>W/N</c>
+          <!-- 6--> <c>M</c>
+          <!-- 7--> <c>W/N</c>
+          <!-- 8--> <c>W</c>
+          <!-- 9--> <c></c>
+          <!--10--> <c>M</c>
+          
+          
+          <c>MPLS</c> 
+          <!-- 1--> <c>M</c>
+          <!-- 2--> <c>M</c>
+          <!-- 3--> <c>M</c>
+          <!-- 4--> <c></c>
+          <!-- 5--> <c>M/W</c>
+          <!-- 6--> <c>M</c>
+          <!-- 7--> <c>TBD</c>
+          <!-- 8--> <c>M/W</c>
+          <!-- 9--> <c>?</c>
+          <!--10--> <c>M</c>
+          
+          
+          <c>PWE3</c> 
+          <!-- 1--> <c>M</c>
+          <!-- 2--> <c>M</c>
+          <!-- 3--> <c>M</c>
+          <!-- 4--> <c></c>
+          <!-- 5--> <c>W</c>
+          <!-- 6--> <c>M/W</c>
+          <!-- 7--> <c>M/W</c>
+          <!-- 8--> <c>M</c>
+          <!-- 9--> <c></c>
+          <!--10--> <c>M</c>
+          
+          
+          <c>EVPN</c> 
+          <!-- 1--> <c>M</c>
+          <!-- 2--> <c>W</c>
+          <!-- 3--> <c>M/W</c>
+          <!-- 4--> <c>?</c>
+          <!-- 5--> <c>M/W</c>
+          <!-- 6--> <c>M/W</c>
+          <!-- 7--> <c>W</c>
+          <!-- 8--> <c>M/W</c>
+          <!-- 9--> <c>?</c>
+          <!--10--> <c>W</c>
+          
+          
+
+          <postamble>Summarizing capabilities
+          </postamble>
+        </texttable>
+  
 </section>
 
 
