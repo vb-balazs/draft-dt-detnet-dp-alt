@@ -198,38 +198,37 @@
     Deterministic Networking (DetNet) <xref
     target="I-D.finn-detnet-problem-statement"/> provides a capability to carry
     unicast or multicast data flows for real-time applications with extremely
-    low data loss rates and known upper bound maximum latency <xref
-    target="I-D.finn-detnet-architecture"/>. The deterministic networking
-    Quality of Service (QoS) is expressed as 1) the maximum end-to-end latency
-    from sender (talker) to receiver (listener), and 2) probability of loss of a
-    packet.  Only the worst-case values for the mentioned parameters are
-    concerned.
+    low data loss rates, timely delivery and bounded packet delay variation
+    <xref target="I-D.finn-detnet-architecture"/>. The deterministic networking
+    Quality of Service (QoS) is expressed as 1) the minimum and the maximum
+    end-to-end latency from sender (talker) to receiver (listener), and 2)
+    probability of loss of a packet.  Only the worst-case values for the
+    mentioned parameters are concerned.
   </t>
   <t>
     There are three techniques to achieve the QoS required by deterministic
     networks:
      <list style="symbols">
-      <t>zero congestion loss,</t>
+      <t>Bandwidth reservation and enforcement,</t>
       <t>explicit routes,</t>
       <t>packet replication and elimination.</t>
      </list>
    This document identifies existing IP and Multiprotocol Label Switching (MPLS)
    <xref target="RFC3031"/>, layer-2 or layer-3 encapsulations and transport
-   protocols  that could be considered as foundations for a
-   deterministic networking data plane.  The full scope of the deterministic
-   networking data plane solution is considered including, as appropriate:
-   quality of service (QoS); Operations, Administration and Maintenance (OAM); and time
+   protocols  that could be considered as foundations for a deterministic
+   networking data plane.  The full scope of the deterministic networking data
+   plane solution is considered including, as appropriate: quality of service
+   (QoS); Operations, Administration and Maintenance (OAM); and time
    synchronization among other criteria described in <xref target="sec_crit"/>.
   </t>
   <t>
-   This document does not select a deterministic networking data
-   plane protocol.  It does, however, elaborate what it would
-   require to adapt and use a specific protocol as the
-   deterministic networking data plane solution.  This document is
-   only concerned with data plane considerations and,
-   specifically, with topics that potentially impact potential
-   deterministic networking aware data plane hardware.  
-   Control plane considerations are out of scope of this document.
+   This document does not select a deterministic networking data plane protocol.
+   It does, however, elaborate what it would require to adapt and use a specific
+   protocol as the deterministic networking data plane solution.  This document
+   is only concerned with data plane considerations and, specifically, with
+   topics that potentially impact potential deterministic networking aware data
+   plane hardware.  Control plane considerations are out of scope of this
+   document.
   </t>
  </section>
 
@@ -242,10 +241,6 @@
 
 
 <section title="DetNet Data Plane Overview" anchor="sec_dt_dp">
- <t>
-  [Editor's note: all/portions of the following may be moved to
-  the DetNet Architecture document at some future point.]
- </t>
  <t>
    A "Deterministic Network" will be composed of DetNet enabled "End Systems",
    DetNet enabled "Edge Nodes", and DetNet enabled "Network Nodes".  DetNet
@@ -326,7 +321,12 @@ title="A Simple DetNet Enabled Network">
      MPLS based packet switched network (PSN).
     </t>
 
- <t>
+  <t>
+   [Editor's note: add here some references to DetNet architecture and its stack
+   model. Make clear that the stack model is competible with the DataPlane
+   document's service and network layering.]
+  </t>
+  <t>
   This DetNet data plane is logically divided into two layers:
    <list style="symbols">
     <t>
@@ -399,7 +399,10 @@ title="DetNet adaptation to data plane">
   layers.
  </t> 
 
-
+ <t>
+  [Editor's note: align the criteria with architecture document and when needed
+  drop some of the existing criteria - time sync is one candidate to go..]
+ </t>
  <t>
   The criteria for the DetNet Service layer:
    <list style="hanging">
@@ -438,35 +441,6 @@ title="DetNet adaptation to data plane">
   the two different layers for other criteria, e.g., time synchronization.
   Furthermore, technical maturity is a criteria valid for both layers.
  </t> 
-<!-- 
- <t>
-  The Stream ID is compound of a Flow ID and an Egress ID in order to provide a
-  unique ID for a DetNet flow. The Egress ID belongs to the DetNet Transport
-  layer as it is required for routing the flow. On top of that, the Flow ID
-  provides the identification in the DetNet Service layer. Taking PW over MPLS as an
-  example, the LSP label of the egress node is the Egress ID, and the PW label
-  is the Flow ID on top.
- </t>  
- 
- <t>
-  Class and quality of service capabilities are typically provided by the
-  technologies available at the DetNet Transport layer, as well as the ones
-  available at the DetNet Service layer. However, both the DetNet Service and
-  DetNet Transport layers have their own specific aspects. For instance, the TC
-  field of the PW label belongs to the DetNet Service layer whereas the TC field
-  of the LSP labels belongs to the DetNet Transport layer. Mapping between the
-  QoS parameters of the two different layers is possible depending on the
-  network scenario.
- </t>  
-
- <t>
-  Different aspects of time synchronization are provided by the two different
-  layers. The DetNet Service layer provides timing information for the
-  applications using DetNet flows, e.g., via time stamps. The DetNet Transport
-  layer provides time and/or phase synchronization among network nodes, e.g.,
-  using IEEE 1588 or one of its Profiles.
- </t>
--->
 </section>
 
 <section title="Criteria for data plane solution alternatives" anchor="sec_crit">
@@ -604,12 +578,6 @@ title="DetNet adaptation to data plane">
       [Editor's note: at the DetNet Transport layer this criteria does not
       concern packet deletion, only the packet replication. The packet deletion
       belongs to the DetNet Service layer] 
-      <!-- vspace blankLines="1"/>
-      The implementation of this functionality largely depends on the
-      packet sequencing and flow identification approaches. The above
-      discussion on the potential use of new Options for packet sequencing and
-      flow identification approaches, as well as source routing and IP
-      tunnels to signal explicit paths, also applies here. -->
       <vspace blankLines="1"/>
 
     </t>
@@ -825,18 +793,6 @@ title="DetNet adaptation to data plane">
       be transported in a new option in the Hop-by-Hop Options Header. 
      <vspace blankLines="1"/></t>
      
-     <!-- t hangText="Packet sequencing (W/N)">
-      <vspace blankLines="1"/>
-      Packet sequencing would require a new option in an IPv6 Extension Header.
-      One approach could  be to encapsulate the packets in IP-in-IP tunnels that
-      would terminate at the elimination points. In that case, the sequence
-      number is only useful to the destination of the outer IPv6 header, and it
-      could be placed in a new option in the Destination Options Header in the
-      encapsulation.
-      <vspace blankLines="1"/>
-      Alternatively, the sequence number could also be transported in another new
-      option in the Hop-by-Hop Options Header. 
-     <vspace blankLines="1"/></t -->
      
      <t hangText="#4 Explicit routes (W)">
       <vspace blankLines="1"/>
@@ -857,15 +813,6 @@ title="DetNet adaptation to data plane">
       between replication points and elimination points if this functionality
       is used. 
       <vspace blankLines="1"/>
-     <!-- t this text has been moved to earlier
-      Another concern regarding packet replication is how to enforce 
-      replicated packets to take different route while the final destination 
-      still remains the same.
-      With strict source routing, all the intermediate hops are listed and paths
-      can be guaranteed to be non-overlapping. Loose source routing only signals
-      some of the intermediate hops and it takes additional knowledge to ensure
-      that there is no single point of failure.
-        <vspace blankLines="1"/></t -->
      </t>
      
      <t hangText="#5 Packet replication and elimination (W)">
@@ -896,12 +843,6 @@ title="DetNet adaptation to data plane">
       deployments. This is largely only an issue with old existing equipment.
     <vspace blankLines="1"/></t>
     
-     <!-- t hangText="Time synchronization (W/N)">
-      <vspace blankLines="1"/>
-      IPv6 has no existing supporting mechanisms for anything time
-      synchronization. A new extension header would be needed for this purpose,
-      if such functionality is required.
-     <vspace blankLines="1"/></t -->
     
      <t hangText="#8 Class and quality of service capabilities (M)">
       <vspace blankLines="1"/>
@@ -1011,11 +952,6 @@ title="DetNet adaptation to data plane">
       identification.
      <vspace blankLines="1"/></t>
      
-     <!--t hangText="Packet sequencing (W/N)">
-      <vspace blankLines="1"/>
-      IPv4 has no inbuilt support for packet sequencing. Upper layer protocol
-      header support such as the RTP is required.
-     <vspace blankLines="1"/></t-->
      
      <t hangText="#4 Explicit routes (M/W)">
       <vspace blankLines="1"/>
@@ -1042,13 +978,6 @@ title="DetNet adaptation to data plane">
       network management.
     <vspace blankLines="1"/></t>
     
-     <!--t hangText="Time synchronization (W/N)">
-      <vspace blankLines="1"/>
-      IPv4 has an existing option for transporting "Internet Timestamp" <xref
-      target="RFC0791"/> with the accuracy of 1ms. The support and usability of
-      this option is unknown in the context of determnistic networking data
-      plane.
-     <vspace blankLines="1"/></t-->
     
      <t hangText="#8 Class and quality of service capabilities (M)">
       <vspace blankLines="1"/>
@@ -1140,21 +1069,6 @@ title="MPLS-based Services">
 ~~~~~~~~~~~ denotes DetNet Service <-> DetNet Transport layer boundary
 ]]></artwork>
 </figure>
-<!---
-    <t>
-      The basic header used in MPLS is the MPLS label stack,
-      <xref target="RFC3032"/>.  A good overview of the MPLS data plane
-      can be found in <xref target="RFC5960"/>, notably Section 3.1.
-      Important MPLS data plane behaviors are defined in combination
-      with the associated control plane mechanisms.  This includes MPLS
-      Traffic Engineering (MPLS-TE), <xref target="RFC3209"/> and
-      <xref target="RFC3473"/>.  Point-to-Multipoint TE Label Switched
-      Paths (LSPs), <xref target="RFC4875"/>. Linear Protection,
-      <xref target="RFC6378"/> and  <xref target="RFC7271"/>. And the in
-      progress work on MPLS support for time synchronization
-      <xref target="I-D.ietf-mpls-residence-time"/>. 
-    </t>
--->
     <t>
       MPLS can be controlled in a number of ways including via a control
       plane, via the management plane, or via centralized controller
@@ -2470,28 +2384,11 @@ title="Enabled Adjacencies">
       be too little.
      <vspace blankLines="1"/></t>
      
-     <!--t hangText="Explicit routes (M)">
-      <vspace blankLines="1"/>
-      In a case of the MPLS PSN the traffic engineering toolbox developed for
-      MPLS can be used to signal explicit label switched paths (LSP) <xref
-      target="RFC5921"/> <xref target="RFC2702"/><xref target="RFC3209"/>.
-      Furthermore, the PSN may also use segment routing (SR) to provide explicit
-      routes <xref target="I-D.ietf-spring-segment-routing"/>. Segment routing
-      based solution would also be available for IPv6 PSN <xref
-      target="I-D.ietf-6man-segment-routing-header"/>.
-     <vspace blankLines="1"/></t-->
      
      <t hangText="#5 Packet replication and elimination (W)">
       <vspace blankLines="1"/>
-      <!--The 1+1 PW/LSP protection / redundancy mechanisms  <xref
-      target="RFC6718"/> could provide tools for packet replication. However,
-      these solutions are not really intended for sourcing multiple simultaneous
-      packet flows. The solutions have one active and other standby flow.-->
       The PW duplicate detection mechanism also exists in theory <xref
       target="RFC3985"/> but no emulated service makes use of it currently.  
-      <!--For
-      IP PSN refer to the discussion in  <xref target="sec_alt_ipv6_ana"/> and
-      <xref target="sec_alt_ipv4_ana"/>.--> 
      <vspace blankLines="1"/></t>
      
      <t hangText="#6 Operations, Administration and Maintenance (M/W)">
@@ -2529,17 +2426,6 @@ title="Enabled Adjacencies">
       specific mapping between bit fields have to be done.
      <vspace blankLines="1"/></t>
      
-     <!--t hangText="Packet traceability (M/W)">
-      <vspace blankLines="1"/>
-      In a case of MPLS PSN and an approach where PWs are prepended with a PSN
-      layer outer label (or more labels in a stack) help tracing the explicit
-      reverse path of the packet using the outer label(s) as the key. Even if the
-      PW labels of the duplicated packets were the same the outer labels should
-      be different. However, even this approach is not "perfect" since the
-      intermediate node identities are not recorded into the packet hop-by-hop
-      basis as some protocol do (for example, Diameter protocol loop detection
-      <xref target="RFC6733"/>).
-     <vspace blankLines="1"/></t-->
      
      <t hangText="#10 Technical maturity (M)">
       <vspace blankLines="1"/>
